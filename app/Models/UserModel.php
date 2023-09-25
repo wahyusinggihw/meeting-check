@@ -45,17 +45,4 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function register()
-    {
-
-        $data = [
-            'role' => 'admin',
-            'username' => 'admin',
-            'password' => password_hash('admin', PASSWORD_DEFAULT),
-            'created_at' => date('Y-m-d H:i:s'),
-        ];
-
-        $this->db->table('users')->insert($data);
-    }
 }

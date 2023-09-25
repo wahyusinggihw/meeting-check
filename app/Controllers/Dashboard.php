@@ -6,6 +6,11 @@ class Dashboard extends BaseController
 {
     public function index(): string
     {
-        return view('dashboard/dashboard_view');
+        return view('dashboard/home');
+    }
+
+    public function agenda(): string
+    {
+        return view('dashboard/agenda_rapat');
     }
 }
