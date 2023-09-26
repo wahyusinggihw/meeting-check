@@ -8,7 +8,7 @@ class Auth extends BaseController
 {
     public function login(): string
     {
-        return view('admin\login_view');
+        return view('Auth/login_view');
     }
 
     public function register()
