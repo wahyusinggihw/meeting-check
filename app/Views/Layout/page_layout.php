@@ -21,17 +21,18 @@
   <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
   <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
   <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" />
-     <!-- Bootstrap core CSS -->
-     <link href="<?php echo base_url () ?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="<?php echo base_url() ?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
-<!-- Additional CSS Files -->
-<link rel="stylesheet" href="<?= base_url('assets/css/fontawesome.css') ?>">
-<link rel="stylesheet" href="<?= base_url('assets/css/templatemo-liberty-market.css') ?>">
-<link rel="stylesheet" href="<?= base_url('assets/css/owl.css') ?>">
-<link rel="stylesheet" href="<?= base_url('assets/css/animate.css') ?>">
-<link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="<?= base_url('assets/css/fontawesome.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/templatemo-liberty-market.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/owl.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/animate.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/agendarapat.css') ?>">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -954,16 +955,16 @@
     });
     // @formatter:on
   </script>
-    <!-- Scripts -->
+  <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="<?php echo base_url () ?>/vendor/jquery/jquery.min.js"></script>
-  <script src="<?php echo base_url () ?>/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url() ?>/vendor/jquery/jquery.min.js"></script>
+  <script src="<?php echo base_url() ?>/vendor/bootstrap/js/bootstrap.min.js"></script>
 
   <script src="<?= base_url('assets/js/isotope.min.js') ?>"></script>
   <script src="<?= base_url('assets/js/owl-carousel.js') ?>"></script>
 
   <script src="<?= base_url('assets/js/tabs.js') ?>"></script>
-  <script src="<?= base_url ('assets/js/popup.js') ?>"></script>
+  <script src="<?= base_url('assets/js/popup.js') ?>"></script>
   <script src="<?= base_url('assets/js/custom.js') ?>"></script>
 </body>
 

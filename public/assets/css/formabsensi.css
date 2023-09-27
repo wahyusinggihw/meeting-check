@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#signaturePad {
+    border: 1px solid #ccc;
+    width: 300px;
+    height: 150px;
+}
+
+button {
+    margin-top: 10px;
+}
