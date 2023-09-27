@@ -7,7 +7,6 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-$routes->get('/auth', 'Auth::index');
-$routes->post('/auth/login', 'Auth::login');
+$routes->match(['GET', 'POST'], '/auth/login', 'Auth::login');
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/dashboard/agenda-rapat', 'Dashboard::agenda');
