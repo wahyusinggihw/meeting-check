@@ -8,12 +8,9 @@ class Home extends BaseController
     {
         return view('home');
     }
-}
 
-class Login extends BaseController
-{
-    public function index(): string
+    public function formAbsensi()
     {
-        return view('login');
+        return view('form_absensi');
     }
 }

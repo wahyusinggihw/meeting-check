@@ -5,20 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In Page</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/login.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/login.css'); ?>">
 </head>
 
 <body>
-    <?= form_open('/auth/login') ?>
-    <form class="form" method="POST">
+    <form class="form" method="POST" action="">
         <div class="container">
             <!-- <div class="lg-atas">
                 <img src="<?php echo base_url('assets/img/1.1.png'); ?>" width="150px">
             </div> -->
             <div class="input-grup">
                 <i class="fa-solid fa-user"></i>
-                <input type="username" name="Username" placeholder="Username" id="username" checked>
-                <input type="password" name="Password" placeholder="Password" id="password" checked>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
             <button class="btn" type="submit" name="submit">Log In</button>
             <!-- <div class="input-grup"> -->
@@ -29,8 +28,6 @@
             <!-- </div> -->
         </div>
     </form>
-
-    <?= form_close() ?>
 
     <div class="overlay"></div>
 
