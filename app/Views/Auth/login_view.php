@@ -9,26 +9,28 @@
 </head>
 
 <body>
-    <form class="form" action="<?php echo base_url('dashboard/'); ?>">
+    <?= form_open('/auth/login') ?>
+    <form class="form" method="POST">
         <div class="container">
             <div class="lg-atas">
                 <img src="<?php echo base_url('assets/img/1.1.png'); ?>" width="150px">
             </div>
             <div class="input-grup">
-
                 <i class="fa-solid fa-user"></i>
                 <input type="username" name="Username" placeholder="Username" id="username" checked>
                 <input type="password" name="Password" placeholder="Password" id="password" checked>
             </div>
-            <button class="btn">Log In</button>
-            <div class="input-grup">
-                <!-- <div class="bwh">
+            <button class="btn" type="submit" name="submit">Log In</button>
+            <!-- <div class="input-grup"> -->
+            <!-- <div class="bwh">
                     <p>Tidak Punya Akun ?</p>
                     <a href="regist.html">Sign up</a>
                 </div> -->
-            </div>
+            <!-- </div> -->
         </div>
     </form>
+
+    <?= form_close() ?>
 
     <div class="overlay"></div>
 
