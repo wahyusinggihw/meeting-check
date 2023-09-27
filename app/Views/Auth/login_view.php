@@ -11,9 +11,9 @@
 <body>
     <form class="form" action="<?php echo base_url('dashboard/'); ?>">
         <div class="container">
-            <div class="lg-atas">
+            <!-- <div class="lg-atas">
                 <img src="<?php echo base_url('assets/img/1.1.png'); ?>" width="150px">
-            </div>
+            </div> -->
             <div class="input-grup">
 
                 <i class="fa-solid fa-user"></i>

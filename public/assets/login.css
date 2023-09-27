@@ -25,6 +25,7 @@ body {
 .form {
     -webkit-animation: scale-in-tl 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: scale-in-tl 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    margin-top: 50px;
 }
 
 p {
@@ -102,7 +103,7 @@ h3 {
     -webkit-animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     margin: 0 25px;
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 
