@@ -12,7 +12,7 @@ class Home extends BaseController
 
 class Login extends BaseController
 {
-    public function index(): string
+    public function about(): string
     {
         return view('login');
     }
