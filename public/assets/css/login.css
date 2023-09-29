@@ -22,7 +22,7 @@ body {
     pointer-events: none;
 }
 
-.form {
+/* .form {
     -webkit-animation: scale-in-tl 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: scale-in-tl 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     margin-top: 50px;
@@ -96,6 +96,57 @@ h3 {
     margin-top: 8px;
     display: flex;
     margin-left: 100px;
+} */
+
+.login-form {
+    -webkit-animation: scale-in-tl 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: scale-in-tl 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+    margin-left: 300px;
+    margin-top: 180px;
+}
+
+.login-form h1 {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+.logo
+{
+    margin-left: 100px;
 }
 
 .logo img
@@ -103,7 +154,14 @@ h3 {
     -webkit-animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     margin: 0 25px;
-    margin-top: 150px;
+    margin-top: 230px;
+}
+
+.logo-2 img {
+    -webkit-animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    margin: 0 25px;
+    margin-top: 230px;
 }
 
 
