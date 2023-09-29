@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AgendaRapat extends Migration
+class PesertaUmum extends Migration
 {
     public function up()
     {
@@ -13,43 +13,38 @@ class AgendaRapat extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            // autoincrement kode rapat
-            'kode_rapat' => [
+            'NIK' => [
+                'type' => 'VARCHAR',
+                'constraint' => 16,
+            ],
+            'nama' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'judul_rapat' => [
+            'alamat' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'tempat' => [
+            'no_hp' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'tanggal' => [
+            'asal_instansi' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'jam' => [
-                'type' =>  'TIME',
-                'constraint' => 6,
-            ],
-            'agenda' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
-            'link_rapat' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
             ],
         ]);
-
         $this->forge->addKey('id', true);
-        $this->forge->createTable('agendarapats');
+        $this->forge->createTable('pesertaumums');
     }
 
     public function down()
     {
-        $this->forge->dropTable('agendarapats');
+        //
+        $this->forge->dropTable('pesertaumums');
     }
 }

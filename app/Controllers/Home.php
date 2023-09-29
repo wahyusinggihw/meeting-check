@@ -6,14 +6,10 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('home');
-    }
-}
+        $data = [
+            'title' => 'Home'
+        ];
 
-class Login extends BaseController
-{
-    public function about(): string
-    {
-        return view('form_absensi');
+        return view('home', $data);
     }
 }

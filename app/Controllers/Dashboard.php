@@ -11,25 +11,32 @@ class Dashboard extends BaseController
     //     $this->$agendaRapat = new AgendaRapat();
     // }
 
-    public function index(): string
+    public function index()
     {
-        return view('dashboard/homedash');
+        $data = [
+            'title' => 'Home'
+        ];
+
+        return view('dashboard/home_dashboard', $data);
     }
 
     public function agenda()
     {
         $agendaRapat = new AgendaRapatModel();
-        $data = $agendaRapat->findAll();
-        return view('dashboard/agenda_rapat', ['data' => $data]);
+        $data = [
+            'title' => 'Agenda Rapat',
+            'agenda' => $agendaRapat->findAll(),
+        ];
+
+        return view('dashboard/agenda_rapat', $data);
     }
 
-    public function daftarpeserta(): string
+    public function daftarPeserta(): string
     {
-        return view('dashboard/daftar_peserta');
-    }
+        $data = [
+            'title' => 'Daftar Peserta Rapat'
+        ];
 
-    public function formagenda(): string
-    {
-        return view('dashboard/formagenda');
+        return view('dashboard/daftar_peserta', $data);
     }
 }

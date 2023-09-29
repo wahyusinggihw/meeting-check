@@ -3,13 +3,13 @@
 <?= $this->section('content') ?>
 
 <body>
-    <a href="<?= base_url('/dashboard/form-agenda') ?>" class="download-button">Tambah Agenda</a>
-
+    <a href="/dashboard/tambah-agenda" class="btn btn-primary mb-2">Tambah Agenda</a>
     <div class="table-container">
         <table class="participant-table">
             <thead>
                 <tr>
                     <th>id</th>
+                    <th>Kode Rapat</th>
                     <th>Nama</th>
                     <th>Tempat</th>
                     <th>Tanggal</th>
@@ -18,9 +18,10 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data as $item) : ?>
+                <?php foreach ($agenda as $item) : ?>
                     <tr>
                         <td><?= $item['id'] ?></td>
+                        <td><?= $item['kode_rapat'] ?></td>
                         <td><?= $item['judul_rapat'] ?></td>
                         <td><?= $item['tempat'] ?></td>
                         <td><?= $item['tanggal'] ?></td>
@@ -36,6 +37,7 @@
                 <?php endforeach ?>
                 <!-- Add more rows as needed -->
             </tbody>
+
         </table>
     </div>
 </body>

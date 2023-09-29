@@ -14,9 +14,13 @@ class AgendaRapatModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'judul_rapat',
+        'kode_rapat',
         'tempat',
         'tanggal',
+        'agenda',
+        'jam',
         'link_rapat'
     ];
 
