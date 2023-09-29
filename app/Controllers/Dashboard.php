@@ -13,4 +13,9 @@ class Dashboard extends BaseController
     {
         return view('dashboard/agenda_rapat');
     }
+
+    public function daftarpeserta(): string
+    {
+        return view('dashboard/daftar_peserta');
+    }
 }

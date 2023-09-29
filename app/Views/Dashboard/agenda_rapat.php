@@ -3,22 +3,30 @@
 <?= $this->section('content') ?>
 
 <body>
-    <div class="agenda-form">
-        <h1>Form Agenda Rapat</h1>
-        <form>
-            <label for="time">Judul Rapat:</label>
-            <input type="text" id="text" name="text" placeholder="Judul Rapat" required><br><br>
+    <div class="agenda-container">
+        <h1>Daftar Agenda Rapat</h1>
+        <table class="agenda-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Agenda</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="agenda-list">
+                <!-- Agenda items will be displayed here -->
+            </tbody>
+        </table>
+        <button onclick="showForm()">Tambah Agenda</button>
+    </div>
 
-            <label for="time">Tanggal/Hari:</label>
-            <input type="date" id="date" name="date" placeholder="Tanggal dan Hari" required><br><br>
-
-            <label for="time">Waktu:</label>
-            <input type="text" id="time" name="time" placeholder="Contoh: 09:00 AM" required><br><br>
-
-            <label for="item">Agenda Rapat:</label>
-            <textarea id="item" name="item" placeholder="Masukkan agenda rapat" required></textarea><br><br>
-
-            <button type="submit">Tambah Agenda</button>
+    <div id="agendaForm" class="form-popup">
+        <form id="addAgendaForm">
+            <h2>Tambah Agenda Rapat</h2>
+            <label for="agendaItem">Agenda:</label>
+            <input type="text" id="agendaItem" required>
+            <button type="submit">Simpan</button>
+            <button type="button" onclick="closeForm()">Batal</button>
         </form>
     </div>
 </body>
