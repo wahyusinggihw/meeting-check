@@ -3,31 +3,45 @@
 <?= $this->section('content') ?>
 
 <body>
-    <div class="agenda-container">
-        <h1>Daftar Agenda Rapat</h1>
-        <table class="agenda-table">
+    <a href="" class="download-button">Tambah Agenda</a>
+
+    <div class="table-container">
+        <table class="participant-table">
             <thead>
                 <tr>
-                    <th>No.</th>
-                    <th>Agenda</th>
+                    <th>Nama</th>
+                    <th>Posisi</th>
+                    <th>Departemen</th>
+                    <th>Alamat</th>
+                    <th>Nomer HP</th>
+                    <th>TTD</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
-            <tbody id="agenda-list">
-                <!-- Agenda items will be displayed here -->
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>Manager</td>
+                    <td>Keuangan</td>
+                    <td>jln. A AYANI</td>
+                    <td>084722612936</td>
+                    <td>File</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>Supervisor</td>
+                    <td>SDM</td>
+                    <td>jln. A AYANI</td>
+                    <td>084722612936</td>
+                    <td>File</td>
+                </tr>
+                <tr>
+                    <i class="fa-solid fa-pen"></i>
+
+                </tr>
+                <!-- Add more rows as needed -->
             </tbody>
         </table>
-        <button onclick="showForm()">Tambah Agenda</button>
-    </div>
-
-    <div id="agendaForm" class="form-popup">
-        <form id="addAgendaForm">
-            <h2>Tambah Agenda Rapat</h2>
-            <label for="agendaItem">Agenda:</label>
-            <input type="text" id="agendaItem" required>
-            <button type="submit">Simpan</button>
-            <button type="button" onclick="closeForm()">Batal</button>
-        </form>
     </div>
 </body>
 
