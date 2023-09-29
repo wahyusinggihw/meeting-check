@@ -3,15 +3,15 @@
 <?= $this->section('content') ?>
 
 <body>
-    <a href="" download class="download-button">Download File</a>
+    <a href="#" download class="download-button">Download File</a>
 
     <div class="table-container">
         <table class="participant-table">
             <thead>
                 <tr>
                     <th>Nama</th>
-                    <th>Posisi</th>
-                    <th>Departemen</th>
+                    <th>Jabatan</th>
+                    <th>Instansi</th>
                     <th>Alamat</th>
                     <th>Nomer HP</th>
                     <th>TTD</th>

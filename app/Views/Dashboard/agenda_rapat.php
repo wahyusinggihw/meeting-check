@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <body>
-    <a href="" class="download-button">Tambah Agenda</a>
+    <a href="<?= base_url('/dashboard/form-agenda') ?>" class="download-button">Tambah Agenda</a>
 
     <div class="table-container">
         <table class="participant-table">

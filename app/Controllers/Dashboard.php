@@ -18,4 +18,9 @@ class Dashboard extends BaseController
     {
         return view('dashboard/daftar_peserta');
     }
+
+    public function formagenda(): string
+    {
+        return view('dashboard/formagenda');
+    }
 }
