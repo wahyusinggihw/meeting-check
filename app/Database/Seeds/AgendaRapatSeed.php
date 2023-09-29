@@ -9,47 +9,49 @@ class AgendaRapatSeed extends Seeder
 {
     public function run()
     {
-        $uuid = Uuid::uuid4();
+        $uuid = Uuid::uuid4()->toString();
+        $uuid2 = Uuid::uuid4()->toString();
 
         $data = [
             [
-                'id' => $uuid->toString(),
+                'id' => $uuid,
                 'judul_rapat' => 'Rapat Koordinasi',
                 'tempat' => 'Zoom',
                 'tanggal' => '2021-10-01',
                 'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
             ],
             [
-                'id' => '2',
-                'judul_rapat'    => 'Rapat Koordinasi',
+                'id' => $uuid2,
+                'judul_rapat' => 'Rapat Koordinasi',
                 'tempat' => 'Zoom',
-                'tanggal' => '2021-10-02',
+                'tanggal' => '2021-10-01',
                 'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
             ],
-            [
-                'id' => '3',
-                'judul_rapat'    => 'Rapat Koordinasi',
-                'tempat' => 'Zoom',
-                'tanggal' => '2021-10-03',
-                'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
-            ],
-            [
-                'id' => '4',
-                'judul_rapat'    => 'Rapat Koordinasi',
-                'tempat' => 'Zoom',
-                'tanggal' => '2021-10-04',
-                'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
-            ],
-            [
-                'id' => '5',
-                'judul_rapat'    => 'Rapat Koordinasi',
-                'tempat' => 'Zoom',
-                'tanggal' => '2021-10-05',
-                'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
-            ],
+            // [
+            //     'id' => $uuid,
+            //     'judul_rapat' => 'Rapat Koordinasi',
+            //     'tempat' => 'Zoom',
+            //     'tanggal' => '2021-10-01',
+            //     'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
+            // ],
+            // [
+            //     'id' => $uuid,
+            //     'judul_rapat' => 'Rapat Koordinasi',
+            //     'tempat' => 'Zoom',
+            //     'tanggal' => '2021-10-01',
+            //     'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
+            // ],
+            // [
+            //     'id' => $uuid,
+            //     'judul_rapat' => 'Rapat Koordinasi',
+            //     'tempat' => 'Zoom',
+            //     'tanggal' => '2021-10-01',
+            //     'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
+            // ],
         ];
 
         // Using Query Builder
+        $this->forge->addKey('id', true);
         $this->db->table('agendarapats')->insertBatch($data);
     }
 }

@@ -2,16 +2,25 @@
 
 namespace App\Controllers;
 
+use App\Models\AgendaRapatModel;
+
 class Dashboard extends BaseController
 {
+    // public function __construct()
+    // {
+    //     $this->$agendaRapat = new AgendaRapat();
+    // }
+
     public function index(): string
     {
         return view('dashboard/homedash');
     }
 
-    public function agenda(): string
+    public function agenda()
     {
-        return view('dashboard/agenda_rapat');
+        $agendaRapat = new AgendaRapatModel();
+        $data = $agendaRapat->findAll();
+        return view('dashboard/agenda_rapat', ['data' => $data]);
     }
 
     public function daftarpeserta(): string

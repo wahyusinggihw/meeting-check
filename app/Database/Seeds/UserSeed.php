@@ -16,6 +16,9 @@ class UserSeed extends Seeder
             'username' => 'admin',
             'password' => password_hash('admin', PASSWORD_DEFAULT),
         ];
+
+
+        $this->forge->addKey('user_id', true);
         $this->db->table('users')->insert($data);
 
         // uuid
