@@ -2,6 +2,5 @@
 
 <?= $this->section('content') ?>
 
-<p>agenda rapat</p>
 
 <?= $this->endSection() ?>

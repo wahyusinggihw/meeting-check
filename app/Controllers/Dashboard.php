@@ -13,4 +13,10 @@ class Dashboard extends BaseController
     {
         return view('dashboard/agenda_rapat');
     }
+
+    public function saveAgenda()
+    {
+
+        return view('dashboard/agenda_rapat');
+    }
 }

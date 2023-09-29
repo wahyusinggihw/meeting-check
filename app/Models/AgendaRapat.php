@@ -4,22 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class AgendaRapat extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'users';
+    protected $table            = 'agendarapats';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = false;
+    // protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'role',
-        'username',
-        'password',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'judul_rapat',
+        'tempat',
+        'tanggal',
+        'link_rapat'
     ];
 
     // Dates
