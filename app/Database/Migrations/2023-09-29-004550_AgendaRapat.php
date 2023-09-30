@@ -31,7 +31,7 @@ class AgendaRapat extends Migration
                 'constraint' => 255,
             ],
             'jam' => [
-                'type' =>  'TIME',
+                'type' =>  'VARCHAR',
                 'constraint' => 6,
             ],
             'agenda' => [

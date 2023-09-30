@@ -27,7 +27,7 @@
             <button type="submit">Tambah Agenda</button>
         </form> -->
     <div class="col-8 my-2">
-        <form action="tambah-agenda/store" method="post">
+        <form action="/dashboard/agenda-rapat/tambah-agenda/store" method="post">
             <?= csrf_field() ?>
             <div class="form-group row"></div>
             <label for="judul_rapat">Judul Rapat:</label>
@@ -52,7 +52,7 @@
             <br>
 
             <label for="jam">Waktu:</label>
-            <input class="form-control <?= ($validation->hasError('jam')) ? 'is-invalid' : '' ?>" type="text" id="jam" name="jam" placeholder="Contoh: 09:00 AM">
+            <input class="form-control <?= ($validation->hasError('jam')) ? 'is-invalid' : '' ?>" type="time" id="jam" name="jam" placeholder="Contoh: 09:00 AM">
             <div class="invalid-feedback">
                 <?= $validation->getError('jam') ?>
             </div>
@@ -64,7 +64,6 @@
             <button type="submit" class="btn btn-primary">Tambah Agenda</button>
         </form>
 
-    </div>
     </div>
 </body>
 
