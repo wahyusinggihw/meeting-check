@@ -10,7 +10,7 @@ class Users extends Migration
     {
         //users with role and uuid
         $this->forge->addField([
-            'user_id' => [
+            'id_user' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],

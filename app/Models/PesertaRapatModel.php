@@ -4,22 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PesertaUmumModel extends Model
+class PesertaRapatModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'pesertaumums';
-    protected $primaryKey       = 'id_peserta_umum';
+    protected $table            = 'pesertarapats';
+    protected $primaryKey       = 'id_peserta_rapat';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_peserta_umum',
-        'nik',
-        'nama',
-        'alamat',
-        'no_hp',
-        'asal_instansi',
+        'id_peserta_rapat',
+        'kode_rapat',
+        'NIK',
+        'created_at'
     ];
 
     // Dates

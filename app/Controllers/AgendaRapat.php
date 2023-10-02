@@ -47,14 +47,14 @@ class AgendaRapat extends BaseController
         }
 
         $this->agendaRapat->insert([
-            'id' => $uuid,
+            'id_agenda' => $uuid,
             'kode_rapat' => $kodeRapat,
             'judul_rapat' => $this->request->getVar('judul_rapat'),
             'tempat' => $this->request->getVar('tempat'),
             'tanggal' => $this->request->getVar('tanggal'),
             'jam' => $this->request->getVar('jam'),
             'agenda' => $this->request->getVar('agenda'),
-            'link_rapat' => 'https://meeting-check/?kode_rapat=' . $kodeRapat
+            'link_rapat' => base_url() . '?kode_rapat=' . $kodeRapat
         ]);
         //flash data
         session()->setFlashdata('Berhasil', 'Data berhasil ditambahkan.');

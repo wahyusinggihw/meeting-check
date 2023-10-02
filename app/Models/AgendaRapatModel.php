@@ -8,13 +8,13 @@ class AgendaRapatModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'agendarapats';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'id_agenda';
     // protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id',
+        'id_agenda',
         'judul_rapat',
         'kode_rapat',
         'tempat',

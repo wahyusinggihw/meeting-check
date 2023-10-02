@@ -9,7 +9,7 @@ class AgendaRapat extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id' => [
+            'id_agenda' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
@@ -44,7 +44,8 @@ class AgendaRapat extends Migration
             ],
         ]);
 
-        $this->forge->addKey('id', true);
+        $this->forge->addKey('id_agenda', true);
+        $this->forge->addUniqueKey('kode_rapat');
         $this->forge->createTable('agendarapats');
     }
 

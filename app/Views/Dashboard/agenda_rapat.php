@@ -22,7 +22,7 @@
             <tbody>
                 <?php foreach ($agenda as $item) : ?>
                     <tr>
-                        <!-- <td><?= $item['id'] ?></td> -->
+                        <!-- <td><?= $item['id_agenda'] ?></td> -->
                         <td><?= $item['kode_rapat'] ?></td>
                         <td><?= $item['judul_rapat'] ?></td>
                         <td><?= $item['agenda'] ?></td>
@@ -31,7 +31,7 @@
                         <td><?= $item['tanggal'] ?></td>
                         <td><?= $item['link_rapat'] ?></td>
                         <td>
-                            <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['id']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                            <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['id_agenda']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                            <form action="<?= base_url('dashboard/delete-agenda/' . $item['id']) ?>" method="post" class="d-inline">
+                                            <form action="<?= base_url('dashboard/delete-agenda/' . $item['id_agenda']) ?>" method="post" class="d-inline">
                                                 <button class="btn btn-danger">Delete</button>
                                             </form>
                                         </div>
