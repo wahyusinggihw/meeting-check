@@ -31,10 +31,16 @@
                         <td><?= $item['tanggal'] ?></td>
                         <td><?= $item['link_rapat'] ?></td>
                         <td>
-                            <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['id_agenda']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <a href="<?= base_url('dashboard/agenda-rapat/view-agenda/' . $item['id_agenda']) ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['id_agenda']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                            </div>
+                            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="fa-solid fa-trash"></i>
-                            </button>
+                            </button> -->
 
 
                             <!-- Modal -->

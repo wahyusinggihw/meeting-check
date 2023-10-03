@@ -15,6 +15,7 @@ class AgendaRapat extends BaseController
         $this->agendaRapat = new AgendaRapatModel();
     }
 
+
     public function tambahAgenda()
     {
 
@@ -24,6 +25,16 @@ class AgendaRapat extends BaseController
         ];
 
         return view('dashboard/tambah_agenda', $data);
+    }
+
+    public function view($id)
+    {
+        $data = [
+            'title' => 'View Agenda Rapat',
+            'data' => $this->agendaRapat->find($id),
+        ];
+
+        return view('dashboard/view_agenda', $data);
     }
 
     public function store()

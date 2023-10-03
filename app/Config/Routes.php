@@ -17,6 +17,8 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('agenda-rapat/tambah-agenda', 'AgendaRapat::tambahAgenda');
     $routes->post('agenda-rapat/tambah-agenda/store', 'AgendaRapat::store');
 
+    $routes->get('agenda-rapat/view-agenda/(:segment)', 'AgendaRapat::view/$1');
+
     $routes->get('agenda-rapat/edit-agenda/(:segment)', 'AgendaRapat::edit/$1');
     // $routes->match(['GET', 'POST'], 'edit-agenda/update', 'AgendaRapat::update');
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'AgendaRapat::update/$1');
