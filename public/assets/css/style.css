@@ -139,7 +139,8 @@ ul {
 }
 .landing-page .content .info h1 {
   color: #000000;
-  font-size: 44px;
+  font-size: 60px;
+  font-style: normal;
 }
 .landing-page .content .info p {
   margin: 0;
@@ -158,13 +159,25 @@ ul {
 }
 
 .landing-page .content .info input {
-  border: 0;
+  border: 0px;
   border-radius: 14px 0px 0px 14px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-color: #5d5d5d;
   padding: 12px 30px;
   margin-top: 30px;
   margin-right: 5px;
   cursor: pointer;
   color: #fff;
+}
+
+#inputAlphanumeric {
+  color: rgb(0, 0, 0);
+  /* Warna teks */
+  /* Jenis font */
+  font-size: 16px;
+  /* Ukuran font */
+  padding: 10px;
+  /* Padding untuk ruang di sekitar teks */
 }
 
 .landing-page .content .image img {

@@ -1,25 +1,5 @@
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        if (i === index) {
-            slide.style.display = 'block';
-        } else {
-            slide.style.display = 'none';
-        }
-    });
+function submitForm() {
+    const inputId = document.getElementById('inputAlphanumeric').value;
+    // Ganti 'halaman_tujuan.php' dengan halaman tujuan yang diinginkan
+    window.location.href = 'peran.php?id=' + inputId;
 }
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}
-
-function autoSlide() {
-    nextSlide();
-}
-
-setInterval(autoSlide, 3000);
-showSlide(currentSlide);
-

@@ -24,3 +24,4 @@ $routes->group('dashboard', function ($routes) {
 });
 
 $routes->get('/home/login', 'Auth::login');
+$routes->get('/home/peran', 'RapatController::peran');
