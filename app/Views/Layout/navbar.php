@@ -1,12 +1,17 @@
 <header>
     <div class="container">
-        <a href="#" class="logo">Your <b>Website</b></a>
+        <div class="logo">
+            <img src="<?php echo base_url('assets/img/pemkabori.png'); ?>" alt="Logo" width="350">
+        </div>
         <ul class="links">
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Work</li>
-            <li>Info</li>
-            <li>Get Started</li>
+            <li id="datetime">
+            </li>
+            <li>Hubungi Kami</li>
+            <li><a href=" <?= site_url('home/login') ?>" class="btn btn-primary">Masuk</a>
+            </li>
         </ul>
     </div>
 </header>
+
+
+<script src="<?php echo base_url('assets/js/date.js'); ?>"></script>
