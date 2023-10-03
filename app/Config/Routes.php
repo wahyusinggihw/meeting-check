@@ -24,3 +24,6 @@ $routes->group('dashboard', function ($routes) {
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'AgendaRapat::update/$1');
     $routes->post('delete-agenda/(:segment)', 'AgendaRapat::delete/$1');
 });
+
+$routes->get('/home/login', 'Auth::login');
+$routes->get('/home/peran', 'RapatController::peran');

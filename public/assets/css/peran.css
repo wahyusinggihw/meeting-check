@@ -1,0 +1,156 @@
+.content {
+    height: 720px;
+    background-color: #eff2f5;
+}
+
+.content .frame {
+    flex-direction: column;
+    gap: 45.85px;
+    top: 170px;
+    left: 56px;
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+.content .div-1 {
+    flex-direction: column;
+    gap: 17.19px;
+    margin-top: 20px;
+    margin-left: 20px;
+    position: relative;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+.content .pilih-status {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.15px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #0466ed;
+    font-size: 22.9px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.content .silahkan-pilih-anda {
+    position: relative;
+    width: 671px;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    font-size: 34.4px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.content .frame-2 {
+    gap: 10px;
+    position: absolute;
+    top: 270px;
+    left: 285px;
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+.content .what-we-do-card {
+    display: flex;
+    flex-direction: column;
+    width: 435px;
+    height: 475px;
+    align-items: flex-start;
+    gap: 49.29px;
+    padding: 57.31px 34.39px;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 34.39px;
+}
+
+.content .activity {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11.46px;
+    padding: 30px;
+    flex: 0 0 auto;
+    background-color: #0466ed;
+    border-radius: 22.93px;
+    margin-bottom: 20px;
+}
+
+.custom-icon-1{
+    font-size: 32px;
+}
+
+.custom-icon-2{
+    font-size: 32px;
+
+}
+
+.content .grow-your-business {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.15px;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    font-size: 27.5px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.content .we-help-identify-the {
+    position: relative;
+    width: 342.73px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 20.6px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.content .learn-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 11.46px;
+    padding: 17.19px 22.93px;
+    position: relative;
+    flex: 0 0 auto;
+    margin-bottom: -0.77px;
+    border-radius: 11.46px;
+}
+
+.content .learn-more {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.15px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 20.6px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.content .vector {
+    position: relative;
+    width: 20.63px;
+    height: 18.34px;
+    margin-right: -1.15px;
+}
+
+.content .heart {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 11.46px;
+    padding: 34.39px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #0466ed;
+    border-radius: 22.93px;
+}

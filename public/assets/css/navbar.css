@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #007BFF;
+    background-color: #ffffff;
     color: white;
     padding: 10px 0;
 }
@@ -35,12 +35,12 @@ nav li {
     margin-left: 20px;
 }
 
-nav a {
+nav li a {
     text-decoration: none;
     color: white;
     font-weight: bold;
 }
 
-nav a:hover {
+nav li a:hover {
     border-bottom: 2px solid white;
 }
