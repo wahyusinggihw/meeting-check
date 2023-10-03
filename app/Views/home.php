@@ -12,31 +12,8 @@
     </form>
 
   </div>
-
-  <!-- <div class="carousel">
-    <div class="slide">
-      <img class="carousel-icon" src="<?= base_url('assets/img/carousel.png') ?>" alt="Slide 1">
-    </div>
-    <div class="slide">
-      <img class="carousel-icon" src="<?= base_url('assets/img/pemkab.png') ?>" alt="Slide 2">
-    </div>
-    <div class="slide">
-      <img class="carousel-icon" src="<?= base_url('assets/img/pemkabori.png') ?>" alt="Slide 3">
-    </div>
-  </div> -->
-
-  <div class="col-lg-5 offset-lg-1">
-    <div class="owl-banner owl-carousel">
-      <div class="item">
-        <img class="carousel-icon" src="<?= base_url('assets/img/banner-01.png') ?>" alt="Slide 1">
-      </div>
-      <div class="item">
-        <img class="carousel-icon" src="<?= base_url('assets/img/banner-02.png') ?>" alt="Slide 2">
-      </div>
-    </div>
+  <div class="image">
+    <img class="carousel-icon" src="<?= base_url('assets/img/carousel.png') ?>">
   </div>
 </div>
-
-<script src="<?php echo base_url('assets/js/home.js'); ?>"></script>
-
 <?= $this->endSection() ?>
