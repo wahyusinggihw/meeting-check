@@ -4,7 +4,7 @@
 }
 body {
   font-family: "Open Sans", sans-serif;
-  background-color: #EFF2F5;
+  background-color: #eff2f5;
 }
 a {
   text-decoration: none;
@@ -102,7 +102,7 @@ ul {
   width: 100px;
   color: #000000;
   background-color: white;
-  outline: 2px solid #0466ED;
+  outline: 2px solid #0466ed;
   padding: 5px;
   display: inline-block;
   text-decoration: none;
@@ -110,11 +110,11 @@ ul {
   line-height: 39px;
   vertical-align: middle;
 }
-.landing-page header .links li a:hover{
-  background-color: #0466ED;
-    /* Warna latar belakang saat dihover */
+.landing-page header .links li a:hover {
+  background-color: #0466ed;
+  /* Warna latar belakang saat dihover */
   color: white;
-    /* Warna teks saat dihover */
+  /* Warna teks saat dihover */
 }
 .landing-page .content .container {
   display: flex;
@@ -153,9 +153,9 @@ ul {
   border-radius: 0px 14px 14px 0px;
   padding: 12px 30px;
   margin-top: 30px;
-  cursor: pointer;
+  /* cursor: pointer; */
   color: #fff;
-  background-color: #0466ED;
+  background-color: #0466ed;
 }
 
 .landing-page .content .info input {
@@ -166,7 +166,7 @@ ul {
   padding: 12px 30px;
   margin-top: 30px;
   margin-right: 5px;
-  cursor: pointer;
+  /* cursor: pointer; */
   color: #fff;
 }
 

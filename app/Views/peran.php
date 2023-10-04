@@ -6,7 +6,7 @@
     <div class="frame">
         <div class="div-1">
             <div class="pilih-status">PILIH STATUS</div>
-            <p class="silahkan-pilih-anda">Silahkan Pilih Anda Sebagai<br />Tamu Pemkab atau Pegawai Pemkab</p>
+            <p class="silahkan-pilih-anda"><?= $data['judul_rapat'] ?><br />Silahkan pilih status anda</p>
         </div>
     </div>
     <div class="frame-2">
@@ -18,9 +18,10 @@
                     <p class="we-help-identify-the">Pilih Jika Anda Berasal Dari Luar Pegawai Pemkab</p>
                 </div>
             </div>
-            <div class="learn-more-btn">
-                <div class="learn-more">Isi Form</div>
-                <img class="vector" src="img/vector.svg" />
+            <div class="learn-more-btn btn">
+                <a href="/submit-kode/form-absensi/<?= $data['kode_rapat'] ?>">
+                    <div class="learn-more">Isi Form <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
             </div>
         </div>
         <div class="what-we-do-card">
@@ -31,9 +32,10 @@
                     <p class="we-help-identify-the">Pilih Jika Anda Sebagai Pegawai Pemkab</p>
                 </div>
             </div>
-            <div class="learn-more-btn">
-                <div class="learn-more">Isi Form</div>
-                <img class="vector" src="img/image.svg" />
+            <div class="learn-more-btn btn">
+                <a href="/submit-kode/form-absensi/<?= $data['kode_rapat'] ?>">
+                    <div class="learn-more">Isi Form <i class="fa-solid fa-arrow-right"></i></div>
+                </a>
             </div>
         </div>
     </div>
