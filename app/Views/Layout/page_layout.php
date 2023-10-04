@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/css/carousel.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/peran.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/formabsensi.css') ?>">
 
 </head>
 

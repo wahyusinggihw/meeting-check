@@ -13,13 +13,22 @@ class RapatController extends BaseController
         return view('peran', $data);
     }
 
-    public function formAbsensi()
+    public function formPegawai()
     {
         $data = [
             'title' => 'Form Absensi'
         ];
 
-        return view('form_absensi', $data);
+        return view('form_pegawai', $data);
+    }
+
+    public function formTamu()
+    {
+        $data = [
+            'title' => 'Form Absensi'
+        ];
+
+        return view('form_tamu', $data);
     }
 
     public function store()
