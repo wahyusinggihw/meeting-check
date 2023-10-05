@@ -6,8 +6,8 @@
   <div class="info">
     <h1>Daftar Hadir Rapat <br> Pemkab Buleleng</h1>
     <p>Silahkan Masukan ID yang Telah Di Peroleh</p>
-    <form action="">
-      <input type="text" class="search" name="text" placeholder="Masukan Id">
+    <form action="/submit-kode" method="post">
+      <input type="text" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX">
       <button>Submit</button>
     </form>
 
