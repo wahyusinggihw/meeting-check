@@ -7,7 +7,7 @@
     <h1>Daftar Hadir Rapat <br> Pemkab Buleleng</h1>
     <p>Silahkan Masukan ID yang Telah Di Peroleh</p>
     <form action="/submit-kode" method="post">
-      <input type="text" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX">
+      <input type="text" name="text" class="search-input" placeholder="XXX-XXX">
       <button>Submit</button>
     </form>
 
