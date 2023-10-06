@@ -6,38 +6,42 @@
   <div class="info">
     <h1>Daftar Hadir Rapat <br> Pemkab Buleleng</h1>
     <p>Silahkan Masukan ID yang Telah Di Peroleh</p>
-    <form action="/submit-kode" method="post">
-      <input type="text" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX">
+    <form action="<?= base_url('/submit-kode') ?>" method="post">
+      <input class="<?= ($validation->hasError('inputAlphanumeric')) ? 'is-invalid' : '' ?>" type="text" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX">
+      <div class="invalid-feedback">
+        <?= $validation->getError('inputAlphanumeric') ?>
+      </div>
       <button>Submit</button>
     </form>
 
   </div>
   <div class="sliders">
     <div class="slider">
-    <div class="image">
-      <img class="carousel-icon" src="<?= base_url('assets/img/carousel-logo.png') ?>" alt="gambar 1">
+      <div class="image">
+        <img class="carousel-icon" src="<?= base_url('assets/img/carousel-logo.png') ?>" alt="gambar 1">
+      </div>
+      <div class="image">
+        <img class="carousel-icon" src="<?= base_url('assets/img/carousel-1.png') ?>" alt="gambar 2">
+      </div>
+      <div class="image">
+        <img class="carousel-icon" src="<?= base_url('assets/img/carousel-2.png') ?>" alt="gambar 3">
+      </div>
+      <div class="image">
+        <img class="carousel-icon" src="<?= base_url('assets/img/carousel-3.png') ?>" alt="gambar 4">
+      </div>
     </div>
-    <div class="image">
-      <img class="carousel-icon" src="<?= base_url('assets/img/carousel-1.png') ?>" alt="gambar 2">
-    </div>
-    <div class="image">
-      <img class="carousel-icon" src="<?= base_url('assets/img/carousel-2.png') ?>" alt="gambar 3">
-    </div>
-    <div class="image">
-      <img class="carousel-icon" src="<?= base_url('assets/img/carousel-3.png') ?>" alt="gambar 4">
-    </div>
-  </div>
     <!-- buttoon prev and next -->
-  <div class="buttons">
-    <button id="prev"><</button>
-    <button id="next">></button>
-  </div>
-  <ul class="dots">
-    <li class="active"></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
+    <div class="buttons">
+      <button id="prev">
+        << /button>
+          <button id="next">></button>
+    </div>
+    <ul class="dots">
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
   </div>
 
 

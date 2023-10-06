@@ -9,24 +9,33 @@ class Home extends BaseController
     public function index(): string
     {
         $data = [
-            'title' => 'Home'
+            'title' => 'Home',
+            'validation' => \Config\Services::validation()
         ];
+        // d($data['validation']);
 
         return view('home', $data);
     }
 
     public function submitKode()
     {
-        session();
         $agendaRapat = new AgendaRapatModel();
         $kode = $this->request->getVar('inputAlphanumeric');
-        $data = [
-            'title' => 'Submit Kode',
-            'data' => $agendaRapat->select()->where('kode_rapat', $kode)->first(),
-            'kode_rapat' => $kode
 
-        ];
+        if ($this->validate([
+            'inputAlphanumeric' => 'required'
+        ])) {
+            $data = [
+                'title' => 'Submit Kode',
+                'data' => $agendaRapat->select()->where('kode_rapat', $kode)->first(),
+                'kode_rapat' => $kode
+
+            ];
+            return view('peran', $data);
+        } else {
+            return view('home', ['validation' => $this->validator,]);
+        }
         // d($data['data']);
-        return view('peran', $data);
+        // return view('peran', $data);
     }
 }

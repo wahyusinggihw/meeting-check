@@ -12,12 +12,10 @@ $routes->group('auth', function ($routes) {
     $routes->get('logout', 'Auth::logout');
 });
 
-$routes->group('/', function ($routes) {
-    $routes->get('', 'Home::index');
-    $routes->post('submit-kode', 'Home::submitKode');
-    $routes->get('submit-kode/form-absensi/(:segment)', 'RapatController::formAbsensi/$1');
-    $routes->post('submit-kode/form-absensi/store', 'Rapat::store/$1');
-});
+$routes->get('/', 'Home::index');
+$routes->post('/submit-kode', 'Home::submitKode');
+$routes->get('/submit-kode/form-absensi/(:segment)', 'RapatController::formPegawai/$1');
+$routes->post('/submit-kode/form-absensi/store', 'Rapat::store/$1');
 
 // $routes->match(['GET', 'POST'], '/auth/login', 'Auth::login');
 
