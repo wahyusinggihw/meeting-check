@@ -67,7 +67,7 @@ class AgendaRapat extends BaseController
             'agenda' => $this->request->getVar('agenda'),
             'link_rapat' => base_url() . '?kode_rapat=' . $kodeRapat
         ]);
-        dd($this->request->getVar('judul_rapat'));
+        // dd($this->request->getVar('judul_rapat'));
         //flash data
         session()->setFlashdata('Berhasil', 'Data berhasil ditambahkan.');
         return redirect('dashboard/agenda-rapat');

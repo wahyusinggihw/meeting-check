@@ -7,11 +7,13 @@
     <h1>Daftar Hadir Rapat <br> Pemkab Buleleng</h1>
     <p>Silahkan Masukan ID yang Telah Di Peroleh</p>
     <form action="<?= base_url('/submit-kode') ?>" method="post">
-      <input class="<?= ($validation->hasError('inputAlphanumeric')) ? 'is-invalid' : '' ?>" type="text" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX">
+      <!-- <input class="<?= ($validation->hasError('inputAlphanumeric')) ? 'is-invalid' : '' ?> search-input" type="text" id="inputAlphanumeric" name="text" placeholder="XXX-XXX"> -->
+      <input type="text" class="form-control <?= ($validation->hasError('inputAlphanumeric')) ? 'is-invalid' : '' ?>" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX" required>
+      
+      <button>Submit</button>
       <div class="invalid-feedback">
         <?= $validation->getError('inputAlphanumeric') ?>
       </div>
-      <button>Submit</button>
     </form>
 
   </div>
