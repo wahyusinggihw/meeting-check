@@ -1,0 +1,128 @@
+
+/* ||============|| CSS FORM ABSENSI ||============|| */
+
+/* .content {
+    position: relative;
+    justify-content: center;
+    width: 1440px;
+    height: 932px;
+    background-color: #eff2f5;
+} */
+
+/* .content .judul-form {
+    position: absolute;
+    width: 675px;
+    height: 103px;
+    top: 54px;
+    left: 65px;
+} */
+
+/* .content .FORM-DAFTAR-HADIR {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #0466ed;
+    font-size: 22.9px;
+    letter-spacing: 0;
+    line-height: normal;
+} */
+
+/* .content .text-wrapper-2 {
+    position: absolute;
+    width: 671px;
+    top: 51px;
+    left: 0;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    font-size: 34.4px;
+    letter-spacing: 0;
+    line-height: normal;
+} */
+
+/* .konten {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+
+} */
+
+.wrapper {
+    /* margin: 0;
+    display: flex;
+    line-height: 1.5;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    padding: 20px;
+    border-radius: 35px;
+    margin: 0 auto;
+}
+
+.konten .judul-form h1 {
+    font-size: 23px;
+    padding-top: 20px;
+    padding-left: 140px;
+    color: #0466ED;
+}
+.konten .judul-form h2 {
+    padding-top: 0px;
+    padding-bottom: 20px;
+    padding-left: 140px;
+    font-size: 34px;
+    font-weight: bold;
+}
+.konten .wrapper h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+.konten .wrapper h4 {
+    font-size: 12px;
+}
+
+.submit {
+    background: #0466ED;
+    color: white;
+    /* font-weight: bold; */
+    width: 162px;
+    height: 48px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+
+}
+
+
+.konten .wrapper .form-group {
+    font-size: 14px;
+}
+
+/* responsif */
+@media screen and (min-width: 576px) {
+    .wrapper {
+        width: 65%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .wrapper {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .wrapper {
+        width: 30%;
+    }
+}
