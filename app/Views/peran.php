@@ -6,7 +6,7 @@
     <div class="frame">
         <div class="div-1">
             <div class="pilih-status">PILIH STATUS</div>
-            <p class="silahkan-pilih-anda"><?= $data['judul_rapat'] ?><br />Silahkan pilih status anda</p>
+            <p class="silahkan-pilih-anda"><?= $rapat['judul_rapat'] ?><br />Silahkan pilih status anda</p>
         </div>
     </div>
     <div class="frame-2">

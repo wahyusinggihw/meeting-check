@@ -19,23 +19,40 @@ class Home extends BaseController
 
     public function submitKode()
     {
+        helper('my_helper');
+
+        $dateNow = date('Y-m-d');
+        $timeNow = date('H:i:s');
+
         $agendaRapat = new AgendaRapatModel();
         $kode = $this->request->getVar('inputAlphanumeric');
 
-        if ($this->validate([
+        if (!$this->validate([
             'inputAlphanumeric' => 'required'
         ])) {
+
+            return view('home', ['validation' => $this->validator,]);
+        }
+
+        $rapat = $agendaRapat->select()->where('kode_rapat', $kode)->first();
+        // dd($rapat);
+        if ($rapat == null) {
+            return redirect()->to('/')->with('error', 'Kode Rapat Tidak Ditemukan');
+        } else {
+
+            $expiredTime = expiredTime($rapat['jam']);
+            if ($expiredTime < $timeNow) {
+                return redirect()->to('/')->with('error', 'Rapat Sudah Berakhir');
+            }
+
             $data = [
                 'title' => 'Submit Kode',
-                'data' => $agendaRapat->select()->where('kode_rapat', $kode)->first(),
+                'rapat' => $rapat,
                 'kode_rapat' => $kode
 
             ];
-            return view('peran', $data);
-        } else {
-            return view('home', ['validation' => $this->validator,]);
         }
-        // d($data['data']);
-        // return view('peran', $data);
+
+        return view('peran', $data);
     }
 }

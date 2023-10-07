@@ -50,7 +50,7 @@ class RapatController extends BaseController
 
 
 
-        return view('form_pegawai2', $data);
+        return view('form_pegawai', $data);
     }
 
     public function formPegawaiStore()
@@ -58,8 +58,8 @@ class RapatController extends BaseController
 
         $data = [
             'nama' => $this->request->getVar('nama'),
-            'nohp' => $this->request->getVar('nohp'),
-            'instansi' => $this->request->getVar('selectInstansi')
+            'nohp' => $this->request->getVar('no_hp'),
+            'instansi' => $this->request->getVar('asal_instansi'),
         ];
 
         dd($data);

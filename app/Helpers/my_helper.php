@@ -9,3 +9,20 @@ function kodeRapat()
     $kode = $segment1 . '-' . $segment2;
     return $kode;
 }
+
+function expiredTime($startTime)
+{
+    // $startTime = $rapat['jam']; // Your initial time
+    $interval = '1 hour'; // The interval you want to add
+
+    // Convert the time to a Unix timestamp
+    $timestamp = strtotime($startTime);
+
+    // Add the interval (1 hour) to the timestamp
+    $timestamp = strtotime('+' . $interval, $timestamp);
+
+    // Format the new time as HH:MM
+    $expiredTime = date('H:i', $timestamp);
+
+    return $expiredTime;
+}
