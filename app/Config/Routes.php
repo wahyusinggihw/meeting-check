@@ -42,3 +42,5 @@ $routes->get('/home/login', 'Auth::login');
 $routes->get('/home/peran', 'RapatController::peran');
 $routes->get('/formpegawai', 'RapatController::formPegawai');
 $routes->get('/formtamu', 'RapatController::formTamu');
+
+$routes->get('/berhasil', 'RapatController::berhasil');
