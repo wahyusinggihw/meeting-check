@@ -21,8 +21,8 @@ class AgendaRapatSeed extends Seeder
 
         $data = [
             [
-                'id' => $uuid,
-                'kode_rapat' => $randomString,
+                'id_agenda' => $uuid,
+                'kode_rapat' => kodeRapat(),
                 'judul_rapat' => 'Rapat Koordinasi',
                 'tempat' => 'Ruang Rapat',
                 'tanggal' => '2021-10-01',
@@ -31,8 +31,8 @@ class AgendaRapatSeed extends Seeder
                 'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=asdasdadqrqwe==',
             ],
             [
-                'id' => $uuid2,
-                'kode_rapat' => $randomString,
+                'id_agenda' => $uuid2,
+                'kode_rapat' => kodeRapat(),
                 'judul_rapat' => 'Rapat Koordinasi',
                 'tempat' => 'Lab Tata Kelola',
                 'tanggal' => '2022-12-02',

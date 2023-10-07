@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="learn-more-btn btn">
-                <a href="/submit-kode/form-absensi/<?= $data['kode_rapat'] ?>">
+                <a href="/submit-kode/form-absensi/tamu">
                     <div class="learn-more">Isi Form <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
             </div>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="learn-more-btn btn">
-                <a href="/submit-kode/form-absensi/<?= $data['kode_rapat'] ?>">
+                <a href="/submit-kode/form-absensi/pegawai">
                     <div class="learn-more">Isi Form <i class="fa-solid fa-arrow-right"></i></div>
                 </a>
             </div>

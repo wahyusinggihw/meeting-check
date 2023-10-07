@@ -9,7 +9,7 @@ class PesertaUmum extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_peserta' => [
+            'id_peserta_umum' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
@@ -38,7 +38,7 @@ class PesertaUmum extends Migration
                 'null' => true,
             ],
         ]);
-        $this->forge->addKey('id_peserta', true);
+        $this->forge->addKey('id_peserta_umum', true);
         $this->forge->addUniqueKey('NIK');
         $this->forge->createTable('pesertaumums');
     }

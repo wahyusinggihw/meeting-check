@@ -14,8 +14,11 @@ $routes->group('auth', function ($routes) {
 
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode', 'Home::submitKode');
-$routes->get('/submit-kode/form-absensi/(:segment)', 'RapatController::formPegawai/$1');
-$routes->post('/submit-kode/form-absensi/store', 'Rapat::store/$1');
+$routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu');
+$routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::formTamuStore');
+$routes->get('/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai');
+$routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::formPegawaiStore');
+$routes->get('berhasil', 'RapatController::berhasil');
 
 // $routes->match(['GET', 'POST'], '/auth/login', 'Auth::login');
 

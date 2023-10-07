@@ -9,7 +9,7 @@ class PesertaUmumModel extends Model
     protected $DBGroup          = 'default';
     protected $table            = 'pesertaumums';
     protected $primaryKey       = 'id_peserta_umum';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
