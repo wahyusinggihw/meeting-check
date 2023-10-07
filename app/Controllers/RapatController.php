@@ -72,7 +72,7 @@ class RapatController extends BaseController
             'validation' => \Config\Services::validation()
         ];
 
-        return view('form_tamu2', $data);
+        return view('form_tamu', $data);
     }
 
     public function formTamuStore()
@@ -90,7 +90,7 @@ class RapatController extends BaseController
         ])) {
             $validation = \Config\Services::validation();
             // return redirect()->to('dashboard/tambah-agenda')->withInput()->with('validation', $validation);
-            return view('form_tamu2', ['validation' => $this->validator,]);
+            return view('form_tamu', ['validation' => $this->validator,]);
         }
 
         $this->pesertaUmum->insert([
