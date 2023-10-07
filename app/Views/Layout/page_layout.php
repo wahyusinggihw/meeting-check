@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="<?= base_url('assets/css/peran.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/formabsensi.css') ?>">
-
+  <link rel="stylesheet" href="<?= base_url('assets/css/berhasil.css') ?>">
 </head>
 
 <body>
