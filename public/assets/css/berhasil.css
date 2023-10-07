@@ -46,6 +46,12 @@
     color: #0466ED;
 }
 
+.notifikasi .icon .gagal {
+    width: 115px;
+    height: 115px;
+    color: red;
+}
+
 .notifikasi .lanjut {
     font-size: 16px;
     width: 139px;
