@@ -2,7 +2,8 @@
 
 <?= $this->section('content') ?>
 
-<div class="container">
+<body>
+  <div class="container">
   <div class="info">
     <h1>Daftar Hadir Rapat <br> Pemkab Buleleng</h1>
     <p>Silahkan Masukan ID yang Telah Di Peroleh</p>
@@ -34,9 +35,8 @@
     </div>
     <!-- buttoon prev and next -->
     <div class="buttons">
-      <button id="prev">
-        << /button>
-          <button id="next">></button>
+      <button id="prev"><</button>
+      <button id="next">></button>
     </div>
     <ul class="dots">
       <li class="active"></li>
@@ -45,9 +45,9 @@
       <li></li>
     </ul>
   </div>
+  </div>
+
+</body>
 
 
-
-
-</div>
 <?= $this->endSection() ?>
