@@ -12,7 +12,6 @@ class Home extends BaseController
             'title' => 'Home',
             'validation' => \Config\Services::validation()
         ];
-        // d($data['validation']);
 
         return view('home', $data);
     }
@@ -22,7 +21,7 @@ class Home extends BaseController
         helper('my_helper');
 
         $dateNow = date('Y-m-d');
-        $timeNow = date('H:i:s');
+        $timeNow = date('H:i');
 
         $agendaRapat = new AgendaRapatModel();
         $kode = $this->request->getVar('inputAlphanumeric');
@@ -35,7 +34,6 @@ class Home extends BaseController
         }
 
         $rapat = $agendaRapat->select()->where('kode_rapat', $kode)->first();
-        // dd($rapat);
         if ($rapat == null) {
             return redirect()->to('/')->with('error', 'Kode Rapat Tidak Ditemukan');
         } else {
@@ -44,7 +42,6 @@ class Home extends BaseController
             if ($expiredTime < $timeNow) {
                 return redirect()->to('/')->with('error', 'Rapat Sudah Berakhir');
             }
-
             $data = [
                 'title' => 'Submit Kode',
                 'rapat' => $rapat,
