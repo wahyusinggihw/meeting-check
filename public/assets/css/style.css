@@ -87,7 +87,7 @@ ul {
 }
 .landing-page header .links li {
   margin-left: 30px;
-  color: #5d5d5d;
+  color: #000000;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -97,6 +97,13 @@ ul {
     margin-left: auto;
   }
 }
+
+.landing-page header .links li button{
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+}
+
 .landing-page header .links li a {
   height: 50px;
   width: 100px;

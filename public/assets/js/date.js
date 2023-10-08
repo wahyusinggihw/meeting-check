@@ -33,3 +33,12 @@ function formatDate(date) {
 // Panggil fungsi untuk menampilkan tanggal dan waktu saat halaman dimuat
 
 updateDateTime();
+
+function composeEmail() {
+    const emailAddress = 'cs.pemkab@buleleng.co.id';
+    const subject = 'Pertanyaan/Komentar untuk Customer Service';
+    const body = 'Tulis pesan Anda di sini...';
+
+    const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+}

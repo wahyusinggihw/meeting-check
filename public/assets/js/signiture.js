@@ -50,3 +50,7 @@ function saveSignature() {
     alert('Tanda tangan belum dibuat.');
   }
 }
+
+function clearSignature() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // Menghapus tanda tangan
+}
