@@ -40,8 +40,15 @@
 
                     </select>
                 </div>
+
+                <div class="signature-pad">
+                    <h1>Tempat Tanda Tangan</h1>
+                    <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+                    <input type="hidden" id="signatureData" name="signatureData">
+                </div>
+
                 <div class="form-group text-end">
-                    <button type="submit" class="submit">Submit</button>
+                    <button onclick="saveSignature()" type="submit" class="submit">Submit</button>
                 </div>
             </form>
         </div>
