@@ -43,7 +43,9 @@
 
                 <div class="signature-pad">
                     <h1>Tempat Tanda Tangan</h1>
-                    <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+                    <div class="signature-container">
+                        <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+                    </div>
                     <div class="button-container">
                         <button type="button" onclick="clearSignature()" class="signature-button">Clear</button>
                     </div>

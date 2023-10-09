@@ -6,7 +6,7 @@
         <ul class="links">
             <li id="datetime">
             </li>
-            <li><button class="hubungi-kami" onclick="composeEmail()">Hubungi Kami</button></li>
+            <li><button onclick="composeEmail()">Hubungi Kami</button></li>
             <li><a href=" <?= site_url('home/login') ?>" class="btn btn-primary">Masuk</a>
             </li>
         </ul>
