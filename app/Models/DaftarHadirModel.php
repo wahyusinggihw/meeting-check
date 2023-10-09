@@ -31,7 +31,35 @@ class DaftarHadirModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules      = [
+        'nip_nik' => [
+            'rules' => 'required|numeric',
+            'errors' => [
+                'required' => 'NIP/NIK harus diisi',
+                'numeric' => 'NIP/NIK harus berupa angka'
+            ]
+        ],
+        'nama' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Nama harus diisi'
+            ]
+        ],
+        'asal_instansi' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Asal Instansi harus diisi'
+            ]
+        ],
+        'ttd' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Tanda Tangan harus diisi'
+            ]
+        ]
+
+
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

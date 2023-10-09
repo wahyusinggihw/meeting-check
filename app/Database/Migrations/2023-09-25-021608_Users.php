@@ -16,7 +16,7 @@ class Users extends Migration
             ],
             'role' => [
                 'type' => 'enum',
-                'constraint' => ['admin', 'user'],
+                'constraint' => ['superadmin', 'admin'],
             ],
             'username' => [
                 'type' => 'VARCHAR',

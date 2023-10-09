@@ -10,6 +10,7 @@ use Ramsey\Uuid\Uuid;
 
 class RapatController extends BaseController
 {
+    protected $helpers = ['form'];
     protected $pesertaRapat;
     protected $pesertaUmum;
     protected $daftarHadir;
@@ -45,78 +46,94 @@ class RapatController extends BaseController
         return view('gagal', $data);
     }
 
-    public function formPegawai()
+    public function search()
     {
-        $instansi = $this->pesertaRapat->getInstansi();
-        $instansiDecode = json_decode($instansi);
-        $validationRules = $this->pesertaRapat->getValidationRules();
-        // dd($instansiDecode);
-
+        $nik = $this->request->getVar('nik');
+        $cek = $this->pesertaUmum->cekIfExist($nik);
         $data = [
-            'title' => 'Form Absensi',
-            'instansi' => $instansiDecode,
+            'title' => 'Search',
+            'data' => $cek
         ];
-
-
-
-        return view('form_pegawai', $data);
+        return view('search', $data);
     }
 
-    public function formPegawaiStore()
+    public function formPegawai()
     {
+        if ($this->request->is('post')) {
+            $rules = $this->pesertaUmum->getValidationRules();
+            $validate =  $this->validate($rules);
 
-        $data = [
-            'nama' => $this->request->getVar('nama'),
-            'nohp' => $this->request->getVar('no_hp'),
-            'instansi' => $this->request->getVar('asal_instansi'),
-        ];
+            if (!$validate) {
+                return redirect()->back()->withInput();
+            }
+            // return 'ini post';
+            $data = [
+                'nama' => $this->request->getVar('nama'),
+                'nohp' => $this->request->getVar('no_hp'),
+                'instansi' => $this->request->getVar('asal_instansi'),
+            ];
+        } else {
+            $instansi = $this->pesertaRapat->getInstansi();
+            $instansiDecode = json_decode($instansi);
 
-        dd($data);
+            $data = [
+                'title' => 'Form Absensi',
+                'instansi' => $instansiDecode,
+            ];
+            return view('form_pegawai', $data);
+        }
     }
 
     public function formTamu()
     {
-        $data = [
-            'title' => 'Form Absensi',
-            'validation' => \Config\Services::validation()
-        ];
 
-        return view('form_tamu', $data);
-    }
+        if ($this->request->is('post')) {
 
-    public function formTamuStore()
-    {
-        $uuid = Uuid::uuid4()->toString();
+            $uuid = Uuid::uuid4()->toString();
+            $rules = $this->pesertaUmum->getValidationRules();
+            $validate =  $this->validate($rules);
 
-        // dd($this->request->getVar('nik'));
-        if (!$this->validate($this->pesertaUmum->getValidationRules())) {
-            $validation = \Config\Services::validation();
-            // return redirect('submit-kode/form-absensi/tamu')->withInput()->with('validation', $validation);
-            return view('form_tamu', ['validation' => $this->validator]);
-        }
+            if (!$validate) {
+                return redirect()->back()->withInput();
+            }
+            $userExist = $this->pesertaUmum->cekIfExist($this->request->getVar('nik'));
+            // dd($cek);
 
-        $this->pesertaUmum->insert([
-            'id_peserta_umum' => $uuid,
-            'nik' => $this->request->getVar('nik'),
-            'nama' => $this->request->getVar('nama'),
-            'alamat' => $this->request->getVar('alamat'),
-            'no_hp' => $this->request->getVar('no_hp'),
-            'asal_instansi' => $this->request->getVar('asal_instansi'),
-        ]);
-        session()->setFlashdata('berhasil', true);
+            $this->pesertaUmum->save([
+                'id_peserta_umum' => $uuid,
+                'nik' => $this->request->getVar('nik'),
+                'nama' => $this->request->getVar('nama'),
+                'alamat' => $this->request->getVar('alamat'),
+                'no_hp' => $this->request->getVar('no_hp'),
+                'asal_instansi' => $this->request->getVar('asal_instansi'),
+            ]);
 
-        $data = [
-            'berhasil' => true
-        ];
+            $this->pesertaRapat->save([
+                'id_peserta_rapat' => Uuid::uuid4()->toString(),
+                'id_peserta_umum' => $uuid,
+                'id_agenda' => $this->request->getVar('id_agenda'),
+                'peran' => 'tamu',
+            ]);
 
-        return redirect('/berhasil', $data);
-    }
+            $this->daftarHadir->insert([
+                'id_daftar_hadir' => Uuid::uuid4()->toString(),
+                'id_peserta_umum' => $uuid,
+                'id_peserta_rapat' => $this->request->getVar('id_peserta_rapat'),
+                'tanda_tangan' => $this->request->getVar('tanda_tangan'),
+            ]);
 
-    public function store()
-    {
-        $input = $this->request->getPost();
-        if ($input = $this->request->getPost()) {
-            d($input);
+
+
+            session()->setFlashdata('berhasil', true);
+
+            return redirect('berhasil');
+        } else {
+            $data = [
+                'title' => 'Form Absensi',
+                'validation' => \Config\Services::validation()
+            ];
+
+            return view('form_tamu', $data);
         }
     }
 }

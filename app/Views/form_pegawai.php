@@ -11,7 +11,7 @@
         <div class="wrapper">
             <h3>Rapat Koordinasi</h3>
             <h4>Isi sesuai dengan data diri anda</h4>
-            <form action="/submit-kode/form-absensi/pegawai/store" method="post">
+            <form action="/submit-kode/form-absensi/pegawai" method="post">
                 <div class="form-group mb-2">
                     <label for="nip" class="form-label">NIP</label>
                     <input type="text" class="form-control" id="nip" name="nip" placeholder=" ">

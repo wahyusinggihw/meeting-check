@@ -47,5 +47,6 @@ class DaftarHadir extends Migration
     public function down()
     {
         //
+        $this->forge->dropTable('daftarhadirs');
     }
 }

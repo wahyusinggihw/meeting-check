@@ -3,23 +3,36 @@
 namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class UserSeed extends Seeder
 {
     public function run()
     {
+        $uuid = Uuid::uuid4()->toString();
+        $uuid2 = Uuid::uuid4()->toString();
         // user
 
         $data = [
-            'user_id' => '1',
-            'role' => 'admin',
-            'username' => 'admin',
-            'password' => password_hash('admin', PASSWORD_DEFAULT),
+            [
+                'id_user' => $uuid,
+                'role' => 'superadmin',
+                'username' => 'wahyusinggih',
+                'password' => password_hash('wahyusinggih', PASSWORD_DEFAULT),
+                'created_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'id_user' => $uuid2,
+                'role' => 'admin',
+                'username' => '2015',
+                'password' => password_hash('2015', PASSWORD_DEFAULT),
+                'created_at' => date('Y-m-d H:i:s'),
+            ],
         ];
 
 
-        $this->forge->addKey('user_id', true);
-        $this->db->table('users')->insert($data);
+        $this->forge->addKey('id_user', true);
+        $this->db->table('users')->insertBatch($data);
 
         // uuid
 

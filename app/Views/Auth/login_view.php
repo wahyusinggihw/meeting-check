@@ -4,39 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In Page</title>
+    <title>Meeting Check <?php isset($title) ? print('| ' . $title) : '' ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/login.css'); ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
-    <!-- <form class="form" method="POST" action="">
-        <div class="container">
-            <div class="lg-atas">
-                <img src="<?php echo base_url('assets/img/1.1.png'); ?>" width="150px">
-            </div>
-            <div class="input-grup">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="username" name="username" placeholder="Username" required>
-                <input type="password" id="password" name="password" placeholder="Password" required>
-            </div>
-            <button class="btn" type="submit" name="submit">Log In</button>
-            <div class="input-grup">
-                <div class="bwh">
-                    <p>Tidak Punya Akun ?</p>
-                    <a href="regist.html">Sign up</a>
-                </div>
-            </div>
-        </div>
-    </form> -->
+    <!-- modal -->
+    <?php if (session()->getFlashdata('error')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?= session()->getFlashdata('error') ?>',
+            })
+        </script>
+    <?php endif; ?>
 
     <div class="login-form">
-        <h1>Login</h1>
-        <form>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Masukkan username" required><br><br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Masukkan password" required><br><br>
+        <h1>Login</h1>
+        <form action="/auth/login" method="post">
+            <?= csrf_field() ?>
+            <div class="form-group mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= old('username') ?>" id="username" name="username" placeholder="Masukkan username">
+                <div class="invalid-feedback">
+                    <?= validation_show_error('username') ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="Masukkan password">
+                <div class="invalid-feedback">
+                    <?= validation_show_error('password') ?>
+                </div>
+            </div>
 
             <button type="submit">Login</button>
     </div>

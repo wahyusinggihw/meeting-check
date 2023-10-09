@@ -8,21 +8,23 @@ use CodeIgniter\Router\RouteCollection;
 
 
 $routes->group('auth', function ($routes) {
-    $routes->match(['GET', 'POST'], 'login', 'Auth::login');
+    $routes->match(['get', 'post'], 'login', 'Auth::login');
     $routes->get('logout', 'Auth::logout');
 });
 
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode', 'Home::submitKode');
-$routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu');
-$routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::formTamuStore');
-$routes->get('/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai');
-$routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::formPegawaiStore');
+// $routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu');
+// $routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::formTamuStore');
+$routes->match(['get', 'post'], '/submit-kode/form-absensi/tamu', 'RapatController::formTamu');
+$routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai');
+// $routes->get('/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai');
+// $routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::formPegawaiStore');
 $routes->get('berhasil', 'RapatController::berhasil');
 
 // $routes->match(['GET', 'POST'], '/auth/login', 'Auth::login');
 
-$routes->group('dashboard', function ($routes) {
+$routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->get('agenda-rapat', 'Dashboard::agenda');
     $routes->get('daftar-peserta', 'Dashboard::daftarpeserta');

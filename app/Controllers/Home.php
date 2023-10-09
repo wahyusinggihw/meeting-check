@@ -18,6 +18,7 @@ class Home extends BaseController
 
     public function submitKode()
     {
+        // session()->destroy();
         helper('my_helper');
 
         $dateNow = date('Y-m-d');
@@ -48,6 +49,9 @@ class Home extends BaseController
                 'kode_rapat' => $kode
 
             ];
+
+            session();
+            session()->setFlashdata('kode_valid', true);
         }
 
         return view('peran', $data);

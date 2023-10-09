@@ -83,6 +83,12 @@ class PesertaUmumModel extends Model
 
     ];
 
+    public function cekIfExist($nik)
+    {
+        $cek = $this->where('nik', $nik)->first();
+        return $cek;
+    }
+
     //transaction
     public function insertTransaction($data)
     {

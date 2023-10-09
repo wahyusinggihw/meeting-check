@@ -9,49 +9,45 @@
             <h2>Lengkapi data berikut</h2>
         </div>
         <div class="wrapper">
-            <?php if (session()->getFlashdata('error')) : ?>
-                <?= session()->getFlashdata('error') ?>
-            <?php endif; ?>
-
             <h3>Rapat Koordinasi</h3>
             <h4>Isi sesuai dengan data diri anda</h4>
-            <form action="/submit-kode/form-absensi/tamu/store" method="post">
+            <form action="/submit-kode/form-absensi/tamu" method="post">
+                <?php csrf_field() ?>
                 <div class="form-group mb-2">
                     <label for="nik" class="form-label">NIK</label>
-                    <input type="text" class="form-control <?= ($validation->hasError('nik')) ? 'is-invalid' : '' ?>" id="nik" name="nik" placeholder=" ">
+                    <input type="text" class="form-control <?= validation_show_error('nik') ? 'is-invalid' : '' ?>" value="<?= old('nik') ?>" id="nik" name="nik" placeholder=" ">
                     <div class="invalid-feedback">
-                        <?= $validation->getError('nik') ?>
+                        <?= validation_show_error('nik') ?>
                     </div>
                 </div>
                 <div class="form-group mb-2">
                     <label for="no_hp" class="form-label">No. Handphone</label>
-                    <input type="text" class="form-control <?= ($validation->hasError('no_hp')) ? 'is-invalid' : '' ?>" id="no_hp" name="no_hp" placeholder=" ">
+                    <input type="text" class="form-control <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" value="<?= old('no_hp') ?>" id="no_hp" name="no_hp" placeholder=" ">
                     <div class="invalid-feedback">
-                        <?= $validation->getError('no_hp') ?>
+                        <?= validation_show_error('no_hp') ?>
                     </div>
                 </div>
                 <div class="form-group mb-2">
                     <label for="nama" class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control  <?= ($validation->hasError('nama')) ? 'is-invalid' : '' ?>" id="nama" name="nama" placeholder=" ">
+                    <input type="text" class="form-control  <?= validation_show_error('nama') ? 'is-invalid' : '' ?>" value="<?= old('nama') ?>" id="nama" name="nama" placeholder=" ">
                     <div class="invalid-feedback">
-                        <?= $validation->getError('nama') ?>
+                        <?= validation_show_error('nama') ?>
                     </div>
                 </div>
                 <div class="form-group mb-2">
                     <label for="alamat" class="form-label">Alamat</label>
-                    <input type="text" class="form-control  <?= ($validation->hasError('alamat')) ? 'is-invalid' : '' ?>" id="alamat" name="alamat" placeholder=" ">
+                    <input type="text" class="form-control  <?= validation_show_error('alamat') ? 'is-invalid' : '' ?>" value="<?= old('alamat') ?>" id="alamat" name="alamat" placeholder=" ">
                     <div class="invalid-feedback">
-                        <?= $validation->getError('alamat') ?>
+                        <?= validation_show_error('alamat') ?>
                     </div>
                 </div>
                 <div class="form-group mb-3">
                     <label for="asal_instansi" class="form-label">Asal Instansi</label>
-                    <input type="text" class="form-control  <?= ($validation->hasError('asal_instansi')) ? 'is-invalid' : '' ?>" id="asal_instansi" name="asal_instansi" placeholder=" ">
+                    <input type="text" class="form-control  <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi" placeholder=" ">
                     <div class="invalid-feedback">
-                        <?= $validation->getError('asal_instansi') ?>
+                        <?= validation_show_error('asal_instansi') ?>
                     </div>
                 </div>
-
                 <div class="signature-pad">
                     <h1>Tempat Tanda Tangan</h1>
                     <canvas id="signatureCanvas" class="signature-canvas"></canvas>
@@ -59,6 +55,7 @@
                         <button type="button" onclick="clearSignature()" class="signature-button">Clear</button>
                     </div>
                 </div>
+
 
                 <div class="form-group text-end">
                     <button onclick="saveSignature()" type="submit" class="submit">Submit</button>
