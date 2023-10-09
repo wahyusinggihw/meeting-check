@@ -84,19 +84,10 @@
     font-size: 14px;
 }
 
-.signature-container {
-    width: 400px;
-    height: 200px;
-}
-
 .signature-canvas {
     border: 2px solid #6e6e6e;
     top: 0;
     left: 0;
-}
-
-.signature-button {
-    margin-top: 10px;
 }
 
 .signature-button {
@@ -105,6 +96,7 @@
     color: white;
     border: none;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 .signature-button:hover{
