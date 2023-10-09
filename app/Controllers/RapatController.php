@@ -49,6 +49,7 @@ class RapatController extends BaseController
     {
         $instansi = $this->pesertaRapat->getInstansi();
         $instansiDecode = json_decode($instansi);
+        $validationRules = $this->pesertaRapat->getValidationRules();
         // dd($instansiDecode);
 
         $data = [
@@ -88,17 +89,10 @@ class RapatController extends BaseController
         $uuid = Uuid::uuid4()->toString();
 
         // dd($this->request->getVar('nik'));
-        if (!$this->validate([
-            'nik' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-            'asal_instansi' => 'required',
-
-        ])) {
+        if (!$this->validate($this->pesertaUmum->getValidationRules())) {
             $validation = \Config\Services::validation();
-            // return redirect()->to('dashboard/tambah-agenda')->withInput()->with('validation', $validation);
-            return view('form_tamu', ['validation' => $this->validator,]);
+            // return redirect('submit-kode/form-absensi/tamu')->withInput()->with('validation', $validation);
+            return view('form_tamu', ['validation' => $this->validator]);
         }
 
         $this->pesertaUmum->insert([
@@ -115,7 +109,7 @@ class RapatController extends BaseController
             'berhasil' => true
         ];
 
-        return redirect('/', $data);
+        return redirect('/berhasil', $data);
     }
 
     public function store()

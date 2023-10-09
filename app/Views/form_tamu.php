@@ -9,6 +9,10 @@
             <h2>Lengkapi data berikut</h2>
         </div>
         <div class="wrapper">
+            <?php if (session()->getFlashdata('error')) : ?>
+                <?= session()->getFlashdata('error') ?>
+            <?php endif; ?>
+
             <h3>Rapat Koordinasi</h3>
             <h4>Isi sesuai dengan data diri anda</h4>
             <form action="/submit-kode/form-absensi/tamu/store" method="post">
