@@ -13,6 +13,10 @@ class AgendaRapat extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'slug' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             // autoincrement kode rapat
             'kode_rapat' => [
                 'type' => 'VARCHAR',

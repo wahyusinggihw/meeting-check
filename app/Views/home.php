@@ -6,12 +6,12 @@
   <!-- Modal -->
   <?php if (session()->getFlashdata('error')) : ?>
     <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: '<?= session()->getFlashdata('error') ?>',
-            })
-        </script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '<?= session()->getFlashdata('error') ?>',
+      })
+    </script>
 
   <?php endif; ?>
 
@@ -48,8 +48,9 @@
       </div>
       <!-- buttoon prev and next -->
       <div class="buttons">
-        <button id="prev"><</button>
-        <button id="next">></button>
+        <button id="prev">
+          << /button>
+            <button id="next">></button>
       </div>
       <ul class="dots">
         <li class="active"></li>

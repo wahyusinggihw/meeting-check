@@ -13,6 +13,10 @@ class PesertaUmum extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'slug' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'NIK' => [
                 'type' => 'VARCHAR',
                 'constraint' => 16,

@@ -15,6 +15,7 @@ class PesertaUmumModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'id_peserta_umum',
+        'slug',
         'nik',
         'nama',
         'alamat',

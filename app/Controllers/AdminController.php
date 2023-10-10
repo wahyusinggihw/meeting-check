@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\AdminModel;
 use Ramsey\Uuid\Uuid;
+use Cocur\Slugify\Slugify;
 
 class AdminController extends BaseController
 {
@@ -18,7 +19,7 @@ class AdminController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Agenda Rapat',
+            'title' => 'Kelola Admin',
             'admins' => $this->adminModel->findAll(),
         ];
 
@@ -55,10 +56,14 @@ class AdminController extends BaseController
                 return redirect()->back()->withInput();
             }
 
+            $slugify = new Slugify();
+
             $uuid = Uuid::uuid4()->toString();
+            $slug = $slugify->slugify($this->request->getVar('nama'));
 
             $data = [
                 'id_user' => $uuid,
+                'slug' => $slug,
                 'role' => 'admin',
                 'nama' => $this->request->getVar('nama'),
                 'username' => $this->request->getVar('username'),
@@ -76,6 +81,26 @@ class AdminController extends BaseController
                 'validation' => \Config\Services::validation()
             ];
             return view('dashboard/tambah_admin', $data);
+        }
+    }
+
+    public function edit($slug)
+    {
+        $data = [
+            'title' => 'Edit Admin',
+            'data' => $this->adminModel->where('slug', $slug)->first(),
+            // 'validation' => \Config\Services::validation(),
+        ];
+
+        return view('dashboard/edit_admin', $data);
+    }
+
+    public function delete($id)
+    {
+        $query = $this->adminModel->find($id);
+        if ($query) {
+            $this->adminModel->delete($id);
+            return redirect()->to('/dashboard/kelola-admin');
         }
     }
 }

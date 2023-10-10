@@ -5,7 +5,7 @@ namespace App\Database\Seeds;
 use CodeIgniter\Database\Seeder;
 use Ramsey\Uuid\Uuid;
 
-class UserSeed extends Seeder
+class AdminSeed extends Seeder
 {
     public function run()
     {
@@ -16,7 +16,7 @@ class UserSeed extends Seeder
         $data = [
             [
                 'id_user' => $uuid,
-                'nip' => '123',
+                // 'nip' => '123',
                 'role' => 'superadmin',
                 'username' => 'wahyusinggih',
                 'password' => password_hash('wahyusinggih', PASSWORD_DEFAULT),
@@ -24,7 +24,7 @@ class UserSeed extends Seeder
             ],
             [
                 'id_user' => $uuid2,
-                'nip' => '2015',
+                // 'nip' => '2015',
                 'role' => 'admin',
                 'username' => '2015',
                 'password' => password_hash('2015', PASSWORD_DEFAULT),
@@ -34,7 +34,7 @@ class UserSeed extends Seeder
 
 
         $this->forge->addKey('id_user', true);
-        $this->db->table('users')->insertBatch($data);
+        $this->db->table('admins')->insertBatch($data);
 
         // uuid
 

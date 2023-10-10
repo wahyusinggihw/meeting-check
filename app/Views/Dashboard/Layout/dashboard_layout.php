@@ -40,7 +40,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="<?= base_url('assets/img/1.1.png') ?>" alt="AdminLTELogo" height="100" width="100">
+      <img class="animation__shake" src="<?= base_url('assets/img/logo.png') ?>" alt="AdminLTELogo" width="100">
     </div>
 
     <?= $this->include('dashboard/Layout/navbar'); ?>

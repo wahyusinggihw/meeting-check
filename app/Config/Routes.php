@@ -6,23 +6,20 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-
+// auth
 $routes->group('auth', function ($routes) {
     $routes->match(['get', 'post'], 'login', 'Auth::login');
     $routes->get('logout', 'Auth::logout');
 });
 
+// Rapat
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode', 'Home::submitKode');
-// $routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu');
-// $routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::formTamuStore');
-$routes->match(['get', 'post'], '/submit-kode/form-absensi/tamu', 'RapatController::formTamu');
-$routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai');
-// $routes->get('/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai');
-// $routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::formPegawaiStore');
-$routes->get('berhasil', 'RapatController::berhasil');
+$routes->match(['get', 'post'], '/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
+$routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai', ['filter' => 'cekkode']);
 
-// $routes->match(['GET', 'POST'], '/auth/login', 'Auth::login');
+// validasi
+$routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);
 
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
@@ -35,12 +32,14 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('agenda-rapat/view-agenda/(:segment)', 'AgendaRapat::view/$1');
 
     $routes->get('agenda-rapat/edit-agenda/(:segment)', 'AgendaRapat::edit/$1');
-    // $routes->match(['GET', 'POST'], 'edit-agenda/update', 'AgendaRapat::update');
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'AgendaRapat::update/$1');
     $routes->post('delete-agenda/(:segment)', 'AgendaRapat::delete/$1');
 
     $routes->get('kelola-admin', 'AdminController::index');
     $routes->match(['get', 'post'], 'kelola-admin/tambah-admin', 'AdminController::tambahAdmin');
+    $routes->get('kelola-admin/edit-admin/(:segment)', 'AdminController::edit/$1');
+    $routes->post('kelola-admin/edit-admin/(:segment)/update', 'AdminController::update/$1');
+    $routes->post('delete-admin/(:segment)', 'AdminController::delete/$1');
 });
 
 $routes->get('/home/login', 'Auth::login');

@@ -15,6 +15,7 @@ class AgendaRapatModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'id_agenda',
+        'slug',
         'judul_rapat',
         'kode_rapat',
         'tempat',

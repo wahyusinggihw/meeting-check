@@ -13,6 +13,10 @@ class Admin extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'slug' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'role' => [
                 'type' => 'enum',
                 'constraint' => ['superadmin', 'admin'],
@@ -42,7 +46,7 @@ class Admin extends Migration
                 'null' => true,
             ],
         ]);
-        $this->forge->addKey('user_id', true);
+        $this->forge->addKey('id_user', true);
         $this->forge->createTable('admins');
     }
 

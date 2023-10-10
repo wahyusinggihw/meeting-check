@@ -15,6 +15,7 @@ class AdminModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'id_user',
+        'slug',
         'role',
         'nama',
         'username',

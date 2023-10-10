@@ -15,6 +15,7 @@ class PesertaRapatModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'id_peserta_rapat',
+        'slug',
         'kode_rapat',
         'NIK',
         'created_at'

@@ -12,6 +12,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "chillerlan/php-qrcode": "^4.3",
+        "cocur/slugify": "^4.5",
         "codeigniter4/framework": "^4.0",
         "ramsey/uuid": "^4.7"
     },

@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <body>
-    <a href="kelola-admin/tambah-admin" class="btn btn-primary mb-2">Kelola Admin</a>
+    <a href="kelola-admin/tambah-admin" class="btn btn-primary mb-2">Tambah Admin</a>
     <div class="table-container">
         <table class="participant-table">
             <thead>
@@ -27,8 +27,8 @@
                         <td>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a href="<?= base_url('dashboard/agenda-rapat/view-agenda/' . $item['id_user']) ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                                    <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['id_user']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                                    <!-- <a href="<?= base_url('dashboard/kelola-admin/view-agenda/' . $item['slug']) ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a> -->
+                                    <a href="<?= base_url('dashboard/kelola-admin/edit-admin/' . $item['slug']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                            <form action="<?= base_url('dashboard/delete-agenda/' . $item['id_user']) ?>" method="post" class="d-inline">
+                                            <form action="<?= base_url('dashboard/delete-admin/' . $item['id_user']) ?>" method="post" class="d-inline">
                                                 <button class="btn btn-danger">Delete</button>
                                             </form>
                                         </div>

@@ -15,6 +15,7 @@ class DaftarHadirModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'id_daftar_hadir',
+        'slug',
         'kode_rapat',
         'NIP_NIK',
         'nama',

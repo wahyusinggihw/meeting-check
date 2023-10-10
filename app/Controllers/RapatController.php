@@ -125,7 +125,7 @@ class RapatController extends BaseController
 
 
             session()->setFlashdata('berhasil', true);
-
+            session()->destroy('kode_valid');
             return redirect('berhasil');
         } else {
             $data = [
