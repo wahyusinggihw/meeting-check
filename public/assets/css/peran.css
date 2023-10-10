@@ -1,5 +1,7 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
 .content {
-    height: 720px;
     background-color: #eff2f5;
 }
 
