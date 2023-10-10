@@ -8,7 +8,6 @@
             <div class="pilih-status">PILIH STATUS</div>
             <p class="silahkan-pilih-anda"><?= $rapat['judul_rapat'] ?><br />Silahkan pilih status anda</p>
             <?php if (session()->getFlashdata('kode_valid')) : ?>
-                <h1><?= session()->getFlashdata('kode_valid') ?></h1>
             <?php endif; ?>
 
         </div>

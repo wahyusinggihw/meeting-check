@@ -27,7 +27,7 @@ class RapatController extends BaseController
             'title' => 'Pemilihan Peran'
         ];
 
-        return view('peran', $data);
+        return view('peran');
     }
 
     public function berhasil()
