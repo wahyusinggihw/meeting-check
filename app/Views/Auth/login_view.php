@@ -47,8 +47,6 @@
             <button type="submit">Login</button>
     </div>
 
-    <div class="overlay"></div>
-
     <div class="logo">
         <img src="<?php echo base_url('assets/img/pemkab.png'); ?>" alt="Logo" width="200">
     </div>
