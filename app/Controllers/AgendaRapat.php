@@ -6,14 +6,17 @@ use App\Controllers\BaseController;
 use App\Models\AgendaRapatModel;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
+use chillerlan\QRCode\{QRCode, QROptions};
 
 
 class AgendaRapat extends BaseController
 {
+    protected $helpers = ['form'];
     protected $agendaRapat;
     public function __construct()
     {
         $this->agendaRapat = new AgendaRapatModel();
+        helper('my_helper');
     }
 
 
@@ -31,8 +34,11 @@ class AgendaRapat extends BaseController
 
     public function view($slug)
     {
+        $kodeRapat = $this->agendaRapat->where('slug', $slug)->first()['kode_rapat'];
+
         $data = [
             'title' => 'View Agenda Rapat',
+            'qrCode' => generateQrCode($kodeRapat),
             'data' => $this->agendaRapat->where('slug', $slug)->first(),
         ];
 
@@ -42,9 +48,6 @@ class AgendaRapat extends BaseController
     public function store()
     {
         $slugify = new Slugify();
-
-        // helper(['form', 'url']);
-        helper('my_helper');
         $kodeRapat = kodeRapat();
         $uuid = Uuid::uuid4()->toString();
 
@@ -70,10 +73,14 @@ class AgendaRapat extends BaseController
             'tanggal' => $this->request->getVar('tanggal'),
             'jam' => $this->request->getVar('jam'),
             'agenda' => $this->request->getVar('agenda'),
-            'link_rapat' => base_url() . '?kode_rapat=' . $kodeRapat
+            'link_rapat' => base_url() . '?kode_rapat=' . $kodeRapat,
         ]);
-        // dd($this->request->getVar('judul_rapat'));
-        //flash data
+
+
+        // Save the link of the file in the database
+
+        // generateQrCode($kodeRapat, base_url() . '?kode_rapat=' . $kodeRapat);
+
         session()->setFlashdata('Berhasil', 'Data berhasil ditambahkan.');
         return redirect('dashboard/agenda-rapat');
     }

@@ -8,8 +8,8 @@ class DataSeeder extends Seeder
 {
     public function run()
     {
-        $this->call('AgendaRapatSeed');
-        $this->call('PesertaUmumSeed');
-        $this->call('userSeed');
+        // $this->call('AgendaRapatSeed');
+        // $this->call('PesertaUmumSeed');
+        $this->call('AdminSeed');
     }
 }

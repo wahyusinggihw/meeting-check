@@ -15,25 +15,27 @@ class AdminSeed extends Seeder
 
         $data = [
             [
-                'id_user' => $uuid,
-                // 'nip' => '123',
+                'id_admin' => $uuid,
+                'slug' => 'super-admin',
+                'name' => 'Super Admin',
                 'role' => 'superadmin',
-                'username' => 'wahyusinggih',
-                'password' => password_hash('wahyusinggih', PASSWORD_DEFAULT),
+                'username' => 'super',
+                'password' => password_hash('super', PASSWORD_DEFAULT),
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'id_user' => $uuid2,
-                // 'nip' => '2015',
+                'id_admin' => $uuid2,
+                'slug' => 'admin',
+                'name' => 'Admin',
                 'role' => 'admin',
-                'username' => '2015',
-                'password' => password_hash('2015', PASSWORD_DEFAULT),
+                'username' => 'admin',
+                'password' => password_hash('admin', PASSWORD_DEFAULT),
                 'created_at' => date('Y-m-d H:i:s'),
             ],
         ];
 
 
-        $this->forge->addKey('id_user', true);
+        $this->forge->addKey('id_admin', true);
         $this->db->table('admins')->insertBatch($data);
 
         // uuid

@@ -2,15 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\AdminModel;
 use App\Models\UserModel;
 
 class Auth extends BaseController
 {
-    protected $userModel;
+    protected $adminModel;
     protected $helpers = ['form'];
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->adminModel = new AdminModel();
     }
 
     // public function index()
@@ -32,7 +33,7 @@ class Auth extends BaseController
                 'password' => 'required',
             ];
 
-            $nip = $this->request->getVar('username');
+            $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
 
             $rules = [
@@ -44,15 +45,15 @@ class Auth extends BaseController
                 return redirect()->back()->withInput();
             }
 
-            $user = $this->userModel->where('username', $nip)->first();
+            $admin = $this->adminModel->where('username', $username)->first();
             // dd($user);
-            if (!$user) {
+            if (!$admin) {
                 return redirect()->to('/auth/login')->with('error', 'Username atau Password Salah');
             }
-            if (password_verify($password, $user['password'])) {
+            if (password_verify($password, $admin['password'])) {
                 $data = [
-                    'username' => $user['username'],
-                    'role' => $user['role'],
+                    'username' => $admin['username'],
+                    'role' => $admin['role'],
                     'logged_in' => TRUE
                 ];
                 session()->set($data);

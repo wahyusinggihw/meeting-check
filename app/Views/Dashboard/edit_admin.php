@@ -5,8 +5,11 @@
 <body>
 
     <div class="col-8 my-2">
-        <form action="/dashboard/kelola-admin/tambah-admin" method="post">
+        <form action="/dashboard/kelola-admin/edit-admin/<?= $data['id_admin'] ?>/update" method="post">
             <?= csrf_field() ?>
+
+            <input type="hidden" id="text" name="id" value="<?= $data['id_admin'] ?>"><br><br>
+
             <label for="nama">Nama Lengkap:</label>
             <input class="form-control <?= validation_show_error('nama') ? 'is-invalid' : '' ?>" value="<?= $data['nama'] ?>" type="text" id="nama" name="nama" placeholder="Masukkan nama" autofocus>
             <div class="invalid-feedback">

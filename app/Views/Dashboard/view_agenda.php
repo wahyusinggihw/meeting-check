@@ -5,8 +5,6 @@
 <body>
     <div class="container">
 
-
-
         <div class="row">
             <div class="col-sm-6 my-2">
                 <form action="#" method="#">
@@ -35,7 +33,7 @@
                     <label for="qr">Link Rapat:</label>
                     <br>
                     <div class="container mb-3">
-                        <img clas id="qr" width="100px" src="<?= base_url('assets/img/qr-code.png') ?>" alt="" class="src">
+                        <img id="qr" width="100px" src="<?= $qrCode ?>" alt="" class="">
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Cetak Agenda</button>

@@ -1,5 +1,8 @@
 <?php
 
+use chillerlan\QRCode\{QRCode, QROptions};
+
+
 function kodeRapat()
 {
     $length = 3; // Length of the random string
@@ -25,4 +28,11 @@ function expiredTime($startTime)
     $expiredTime = date('H:i', $timestamp);
 
     return $expiredTime;
+}
+
+function generateQrCode($linkRapat)
+{
+    $qr = new QRCode;
+    $result = $qr->render($linkRapat);
+    return $result;
 }

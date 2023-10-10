@@ -19,7 +19,7 @@
             <tbody>
                 <?php foreach ($admins as $item) : ?>
                     <tr>
-                        <td><?= $item['id_user'] ?></td>
+                        <td><?= $item['id_admin'] ?></td>
                         <td><?= $item['nama'] ?></td>
                         <td><?= $item['role'] ?></td>
                         <td><?= $item['username'] ?></td>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                            <form action="<?= base_url('dashboard/delete-admin/' . $item['id_user']) ?>" method="post" class="d-inline">
+                                            <form action="<?= base_url('dashboard/delete-admin/' . $item['id_admin']) ?>" method="post" class="d-inline">
                                                 <button class="btn btn-danger">Delete</button>
                                             </form>
                                         </div>
