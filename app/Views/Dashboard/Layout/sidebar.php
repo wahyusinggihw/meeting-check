@@ -46,6 +46,12 @@ use PhpParser\Node\Stmt\Echo_;
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Kelola Admin</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url('/dashboard/agenda-rapat') ?>" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>Agenda Rapat</p>

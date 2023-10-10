@@ -38,6 +38,9 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     // $routes->match(['GET', 'POST'], 'edit-agenda/update', 'AgendaRapat::update');
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'AgendaRapat::update/$1');
     $routes->post('delete-agenda/(:segment)', 'AgendaRapat::delete/$1');
+
+    $routes->get('kelola-admin', 'AdminController::index');
+    $routes->match(['get', 'post'], 'kelola-admin/tambah-admin', 'AdminController::tambahAdmin');
 });
 
 $routes->get('/home/login', 'Auth::login');

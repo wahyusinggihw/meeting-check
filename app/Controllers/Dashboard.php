@@ -19,7 +19,6 @@ class Dashboard extends BaseController
 
         return view('dashboard/home_dashboard', $data);
     }
-
     public function agenda()
     {
         $agendaRapat = new AgendaRapatModel();

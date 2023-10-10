@@ -31,17 +31,18 @@
             <div class="form-group mb-3">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= old('username') ?>" id="username" name="username" placeholder="Masukkan username">
-                <div class="invalid-feedback">
+                <div class="invalid-feedback text-start">
                     <?= validation_show_error('username') ?>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="form-label">Password:</label>
                 <input type="password" class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="Masukkan password">
-                <div class="invalid-feedback">
+                <div class="invalid-feedback text-start">
                     <?= validation_show_error('password') ?>
                 </div>
             </div>
+            <br>
 
             <button type="submit">Login</button>
     </div>
