@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/css/peran.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/formabsensi.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/berhasil.css') ?>">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

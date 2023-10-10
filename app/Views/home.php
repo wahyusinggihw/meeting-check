@@ -5,30 +5,13 @@
 <body>
   <!-- Modal -->
   <?php if (session()->getFlashdata('error')) : ?>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bs-danger">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Gagal</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <?= session()->getFlashdata('error') ?>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- show modal -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script>
-      $(document).ready(function() {
-        $('#exampleModal').modal('show');
-      });
-    </script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?= session()->getFlashdata('error') ?>',
+            })
+        </script>
 
   <?php endif; ?>
 
