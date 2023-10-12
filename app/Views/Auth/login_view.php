@@ -30,7 +30,7 @@
             <?= csrf_field() ?>
             <div class="form-group mb-3">
                 <label for="username" class="form-label">Username:</label>
-                <input type="text" class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= old('username') ?>" id="username" name="username" placeholder="Masukkan username">
+                <input type="text" class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= old('username') ?>" id="username" name="username" placeholder="Masukkan username" autofocus>
                 <div class="invalid-feedback text-start">
                     <?= validation_show_error('username') ?>
                 </div>

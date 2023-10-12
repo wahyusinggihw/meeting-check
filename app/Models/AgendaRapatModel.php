@@ -16,7 +16,7 @@ class AgendaRapatModel extends Model
     protected $allowedFields    = [
         'id_agenda',
         'slug',
-        'pembuat',
+        'id_admin',
         'judul_rapat',
         'kode_rapat',
         'tempat',
@@ -32,4 +32,13 @@ class AgendaRapatModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    public function getAgendaByRole()
+    {
+        if (session()->get('role') != 'superadmin') {
+            return $this->where('id_admin', session()->get('id_admin'))->paginate(5, 'agenda');
+        } else {
+            return $this->paginate(5, 'agenda');
+        }
+    }
 }

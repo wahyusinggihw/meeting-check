@@ -47,6 +47,7 @@ class Auth extends BaseController
             }
             if (password_verify($password, $admin['password'])) {
                 $data = [
+                    'id_admin' => $admin['id_admin'],
                     'username' => $admin['username'],
                     'nama' => $admin['nama'],
                     'role' => $admin['role'],

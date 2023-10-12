@@ -17,7 +17,7 @@ class AgendaRapat extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'pembuat' => [
+            'id_admin' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
@@ -53,7 +53,8 @@ class AgendaRapat extends Migration
 
         $this->forge->addKey('id_agenda', true);
         $this->forge->addUniqueKey('kode_rapat');
-        // $this->forge->addUniqueKey('pembuat');
+        // $this->forge->addUniqueKey('id_admin');
+        // $this->forge->addForeignKey('id_admin', 'admins', 'id_admin', 'CASCADE', 'CASCADE');
         $this->forge->createTable('agendarapats');
     }
 

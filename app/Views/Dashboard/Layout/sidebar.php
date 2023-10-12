@@ -61,7 +61,7 @@ use PhpParser\Node\Stmt\Echo_;
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('/dashboard/daftar-peserta') ?>" class="nav-link">
+                    <a href="<?= base_url('/dashboard/daftar-hadir') ?>" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>Daftar Peserta Rapat</p>
                     </a>

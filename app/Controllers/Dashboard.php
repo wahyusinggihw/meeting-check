@@ -3,13 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\AgendaRapatModel;
+use App\Models\DaftarHadirModel;
 
 class Dashboard extends BaseController
 {
-    // public function __construct()
-    // {
-    //     $this->$agendaRapat = new AgendaRapat();
-    // }
+    protected $agendaRapat;
+    protected $daftarhadir;
+    public function __construct()
+    {
+        $this->agendaRapat = new AgendaRapatModel();
+        $this->daftarhadir = new DaftarHadirModel();
+    }
 
     public function index()
     {
@@ -21,20 +25,22 @@ class Dashboard extends BaseController
     }
     public function agenda()
     {
-        $agendaRapat = new AgendaRapatModel();
         $data = [
             'title' => 'Agenda Rapat',
-            'agenda' => $agendaRapat->findAll(),
+            'agenda' => $this->agendaRapat->getAgendaByRole(),
+            'pager' => $this->agendaRapat->pager
         ];
 
         return view('dashboard/agenda_rapat', $data);
     }
 
-    public function daftarPeserta(): string
+    public function daftarHadir()
     {
         $data = [
-            'title' => 'Daftar Peserta Rapat'
+            'title' => 'Daftar Peserta Rapat',
+            'data' => $this->daftarhadir->getDaftarHadir()
         ];
+        // dd($data);
 
         return view('dashboard/daftar_peserta', $data);
     }

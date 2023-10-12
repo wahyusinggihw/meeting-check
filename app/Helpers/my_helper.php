@@ -49,3 +49,10 @@ function generateQrCode($linkRapat)
     $result = $qr->render($linkRapat);
     return $result;
 }
+
+function loopIteration($pager, $group)
+{
+    $counter = $pager->getDetails($group)['currentPage'] === 1 ? 1 : ($pager->getDetails($group)['currentPage'] - 1) * 5 + 1;
+
+    return $counter;
+}

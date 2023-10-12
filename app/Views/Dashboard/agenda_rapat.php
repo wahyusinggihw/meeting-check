@@ -9,6 +9,7 @@
             <thead>
                 <tr>
                     <!-- <th>id</th> -->
+                    <th>No</th>
                     <th>Kode Rapat</th>
                     <th>Nama</th>
                     <th>Agenda</th>
@@ -20,9 +21,10 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $counter = loopIteration($pager, 'agenda') ?>
                 <?php foreach ($agenda as $item) : ?>
                     <tr>
-                        <!-- <td><?= $item['id_agenda'] ?></td> -->
+                        <td><?= $counter++ ?></td>
                         <td><?= $item['kode_rapat'] ?></td>
                         <td><?= $item['judul_rapat'] ?></td>
                         <td><?= $item['agenda'] ?></td>
@@ -72,6 +74,8 @@
 
         </table>
     </div>
+    <!-- Pagination -->
+    <?= $pager->links('agenda', 'bs_simple') ?>
 </body>
 
 <?= $this->endSection() ?>

@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AgendaRapatModel;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
+use Config\Services\pager;
 
 
 class AgendaRapat extends BaseController
@@ -21,8 +22,6 @@ class AgendaRapat extends BaseController
 
     public function tambahAgenda()
     {
-
-
         $data = [
             'title' => 'Tambah Agenda Rapat',
             'validation' => \Config\Services::validation()
@@ -35,6 +34,8 @@ class AgendaRapat extends BaseController
     {
         $linkRapat = $this->agendaRapat->where('slug', $slug)->first()['link_rapat'];
 
+
+
         $data = [
             'title' => 'View Agenda Rapat',
             'qrCode' => generateQrCode($linkRapat),
@@ -46,6 +47,7 @@ class AgendaRapat extends BaseController
 
     public function store()
     {
+        // dd(session()->get('id_admin'));
         $slugify = new Slugify();
         $kodeRapat = kodeRapat();
         $uuid = Uuid::uuid4()->toString();
@@ -66,6 +68,7 @@ class AgendaRapat extends BaseController
         $this->agendaRapat->insert([
             'id_agenda' => $uuid,
             'slug' => $slugify->slugify($this->request->getVar('judul_rapat')),
+            'id_admin' => session()->get('id_admin'), // 'id_admin' => '1
             'kode_rapat' => $kodeRapat,
             'judul_rapat' => $this->request->getVar('judul_rapat'),
             'tempat' => $this->request->getVar('tempat'),

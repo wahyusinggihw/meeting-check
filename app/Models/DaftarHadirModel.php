@@ -75,4 +75,13 @@ class DaftarHadirModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function getDaftarHadir()
+    {
+        $builder = $this->table('daftarhadirs');
+        $builder->select('*');
+        $builder->join('agendarapats', 'agendarapats.kode_rapat = daftarhadirs.kode_rapat', 'inner');
+        $query = $builder->get()->getResultArray();
+        return $query;
+    }
 }

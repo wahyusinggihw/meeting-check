@@ -3,6 +3,17 @@
 <?= $this->section('content') ?>
 
 <body>
+    <div class="form-group mb-3">
+        <label for="asal_instansi" class="form-label">Asal Instansi</label>
+        <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
+        <select name="asal_instansi" id="asal_instansi" class="form-select">
+            <!-- foreach -->
+            <option value="">Pilih Agenda Rapat</option>
+            <?php foreach ($data as $i) : ?>
+                <option value="<?= $i['judul_rapat'] ?>"><?= $i['judul_rapat'] ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
     <a href="#" download class="download-button">Download File</a>
 
     <div class="table-container">

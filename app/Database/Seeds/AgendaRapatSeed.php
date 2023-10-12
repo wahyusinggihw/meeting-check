@@ -4,6 +4,8 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 use Ramsey\Uuid\Uuid;
+// fake
+use Faker\Factory;
 
 class AgendaRapatSeed extends Seeder
 {
@@ -12,34 +14,27 @@ class AgendaRapatSeed extends Seeder
     {
         $uuid = Uuid::uuid4()->toString();
         $uuid2 = Uuid::uuid4()->toString();
-
+        $faker = Factory::create();
         helper('my_helper');
 
-        $data = [
-            [
-                'id_agenda' => $uuid,
+        for ($i = 1; $i < 20; $i++) {
+            # code...
+            $data = [
+                'id_agenda' => $faker->uuid(),
+                'slug' => $faker->slug(),
+                'id_admin' => '8e6a28e3-6b1d-430e-86cd-cfa7435cd843',
                 'kode_rapat' => kodeRapat(),
-                'judul_rapat' => 'Rapat Koordinasi',
-                'tempat' => 'Ruang Rapat',
-                'tanggal' => '2021-10-01',
-                'jam' => '14:30',
-                'agenda' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod omnis incidunt error commodi porro sit doloribus nemo esse accusantium? Voluptatem?',
-                'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=asdasdadqrqwe==',
-            ],
-            [
-                'id_agenda' => $uuid2,
-                'kode_rapat' => kodeRapat(),
-                'judul_rapat' => 'Rapat Koordinasi',
-                'tempat' => 'Lab Tata Kelola',
-                'tanggal' => '2022-12-02',
-                'jam' => '14:00',
-                'agenda' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod omnis incidunt error commodi porro sit doloribus nemo esse accusantium? Voluptatem?',
-                'link_rapat' => 'https://us02web.zoom.us/j/88512345678?pwd=QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
-            ],
-        ];
+                'judul_rapat' => $faker->sentence(3),
+                'tempat' => $faker->address(),
+                'tanggal' => $faker->date(),
+                'jam' => $faker->time(),
+                'agenda' => $faker->sentence(10),
+                'link_rapat' => $faker->url(),
+            ];
+            $this->forge->addKey('id_agenda', true);
+            $this->db->table('agendarapats')->insertBatch($data);
+        }
 
         // Using Query Builder
-        $this->forge->addKey('id', true);
-        $this->db->table('agendarapats')->insertBatch($data);
     }
 }

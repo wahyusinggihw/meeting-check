@@ -27,7 +27,7 @@ $routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->get('agenda-rapat', 'Dashboard::agenda');
-    $routes->get('daftar-peserta', 'Dashboard::daftarpeserta');
+    $routes->get('daftar-hadir', 'Dashboard::daftarHadir');
 
     $routes->get('agenda-rapat/tambah-agenda', 'AgendaRapat::tambahAgenda');
     $routes->post('agenda-rapat/tambah-agenda/store', 'AgendaRapat::store');
