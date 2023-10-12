@@ -110,6 +110,15 @@ class RapatController extends BaseController
 
     public function tamuStore()
     {
+        $data = [
+            'nik' => $this->request->getVar('nik'),
+            'no_hp' => $this->request->getVar('no_hp'),
+            'nama' => $this->request->getVar('nama'),
+            'alamat' => $this->request->getVar('alamat'),
+            'asal_instansi' => $this->request->getVar('asal_instansi'),
+            'signature' => $this->request->getVar('signatureData'),
+        ];
+        dd($data);
 
         $uuid = Uuid::uuid4()->toString();
         $uuid2 = Uuid::uuid4()->toString();

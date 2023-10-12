@@ -36,6 +36,10 @@ function draw(e) {
   ctx.moveTo(x, y);
 }
 
+function clearSignature() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // Menghapus tanda tangan
+}
+
 function saveSignatureData() {
   const signatureData = canvas.toDataURL(); // Mendapatkan data tanda tangan dalam format base64
   document.getElementById('signatureData').value = signatureData;
@@ -49,8 +53,4 @@ function saveSignature() {
   } else {
     alert('Tanda tangan belum dibuat.');
   }
-}
-
-function clearSignature() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Menghapus tanda tangan
 }
