@@ -52,3 +52,4 @@ $routes->get('/formtamu', 'RapatController::formTamu');
 
 $routes->get('/berhasil', 'RapatController::berhasil');
 $routes->get('/gagal', 'RapatController::gagal');
+$routes->get('dashboard/agenda-kosong', 'Dashboard::agendaKosong');
