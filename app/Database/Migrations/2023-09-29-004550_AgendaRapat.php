@@ -17,7 +17,10 @@ class AgendaRapat extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            // autoincrement kode rapat
+            'pembuat' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'kode_rapat' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -50,6 +53,7 @@ class AgendaRapat extends Migration
 
         $this->forge->addKey('id_agenda', true);
         $this->forge->addUniqueKey('kode_rapat');
+        // $this->forge->addUniqueKey('pembuat');
         $this->forge->createTable('agendarapats');
     }
 

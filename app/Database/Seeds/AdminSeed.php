@@ -11,13 +11,14 @@ class AdminSeed extends Seeder
     {
         $uuid = Uuid::uuid4()->toString();
         $uuid2 = Uuid::uuid4()->toString();
+        $uuid3 = Uuid::uuid4()->toString();
         // user
 
         $data = [
             [
                 'id_admin' => $uuid,
                 'slug' => 'super-admin',
-                'name' => 'Super Admin',
+                'nama' => 'Super Admin',
                 'role' => 'superadmin',
                 'username' => 'super',
                 'password' => password_hash('super', PASSWORD_DEFAULT),
@@ -25,11 +26,20 @@ class AdminSeed extends Seeder
             ],
             [
                 'id_admin' => $uuid2,
-                'slug' => 'admin',
-                'name' => 'Admin',
+                'slug' => 'admin1',
+                'nama' => 'Admin Satu',
                 'role' => 'admin',
-                'username' => 'admin',
-                'password' => password_hash('admin', PASSWORD_DEFAULT),
+                'username' => 'admin1',
+                'password' => password_hash('admin1', PASSWORD_DEFAULT),
+                'created_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'id_admin' => $uuid3,
+                'slug' => 'admin2',
+                'nama' => 'Admin Dua',
+                'role' => 'admin',
+                'username' => 'admin2',
+                'password' => password_hash('admin2', PASSWORD_DEFAULT),
                 'created_at' => date('Y-m-d H:i:s'),
             ],
         ];

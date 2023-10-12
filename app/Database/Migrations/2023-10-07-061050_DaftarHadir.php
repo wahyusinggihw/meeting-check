@@ -21,7 +21,7 @@ class DaftarHadir extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'NIP_NIK' => [
+            'NIK' => [
                 'type' => 'VARCHAR',
                 'constraint' => 16,
             ],
@@ -44,7 +44,7 @@ class DaftarHadir extends Migration
         ]);
         $this->forge->addKey('id_daftar_hadir', true);
         $this->forge->addForeignKey('kode_rapat', 'agendarapats', 'kode_rapat', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('NIP_NIK', 'pesertaumums', 'NIK', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('NIK', 'pesertaumums', 'NIK', 'CASCADE', 'CASCADE');
         $this->forge->createTable('daftarhadirs');
     }
 

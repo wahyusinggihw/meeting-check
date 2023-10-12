@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\AgendaRapatModel;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
-use chillerlan\QRCode\{QRCode, QROptions};
 
 
 class AgendaRapat extends BaseController
@@ -34,11 +33,11 @@ class AgendaRapat extends BaseController
 
     public function view($slug)
     {
-        $kodeRapat = $this->agendaRapat->where('slug', $slug)->first()['kode_rapat'];
+        $linkRapat = $this->agendaRapat->where('slug', $slug)->first()['link_rapat'];
 
         $data = [
             'title' => 'View Agenda Rapat',
-            'qrCode' => generateQrCode($kodeRapat),
+            'qrCode' => generateQrCode($linkRapat),
             'data' => $this->agendaRapat->where('slug', $slug)->first(),
         ];
 

@@ -9,7 +9,7 @@ class DaftarHadirModel extends Model
     protected $DBGroup          = 'default';
     protected $table            = 'daftarhadirs';
     protected $primaryKey       = 'id_daftar_hadir';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
@@ -17,7 +17,7 @@ class DaftarHadirModel extends Model
         'id_daftar_hadir',
         'slug',
         'kode_rapat',
-        'NIP_NIK',
+        'NIK',
         'nama',
         'asal_instansi',
         'ttd',
@@ -33,7 +33,7 @@ class DaftarHadirModel extends Model
 
     // Validation
     protected $validationRules      = [
-        'nip_nik' => [
+        'NIK' => [
             'rules' => 'required|numeric',
             'errors' => [
                 'required' => 'NIP/NIK harus diisi',

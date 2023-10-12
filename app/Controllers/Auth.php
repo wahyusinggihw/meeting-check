@@ -29,17 +29,12 @@ class Auth extends BaseController
             // $password = $this->request->getVar('password');
             // dd($nip, $password);
             $rules = [
-                'nip' => 'required|numeric',
+                'username' => 'required',
                 'password' => 'required',
             ];
 
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
-
-            $rules = [
-                'username' => 'required',
-                'password' => 'required',
-            ];
 
             if (!$this->validate($rules)) {
                 return redirect()->back()->withInput();
@@ -53,6 +48,7 @@ class Auth extends BaseController
             if (password_verify($password, $admin['password'])) {
                 $data = [
                     'username' => $admin['username'],
+                    'nama' => $admin['nama'],
                     'role' => $admin['role'],
                     'logged_in' => TRUE
                 ];

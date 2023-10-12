@@ -14,8 +14,9 @@ use PhpParser\Node\Stmt\Echo_;
                 <img src="<?= base_url('assets/dist/img/user2-160x160.jpg') ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block" style="text-decoration: none;"><?= session()->get('nama') ?></a>
             </div>
+
         </div>
 
         <!-- SidebarSearch Form -->
@@ -41,12 +42,18 @@ use PhpParser\Node\Stmt\Echo_;
                         <p>Home</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Kelola Admin</p>
-                    </a>
-                </li>
+                <?php if (session()->get('role') != 'superadmin') : ?>
+                    <li class="nav-item">
+
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Kelola Admin</p>
+                        </a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a href="<?= base_url('/dashboard/agenda-rapat') ?>" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>

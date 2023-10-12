@@ -11,8 +11,11 @@
         <div class="wrapper">
             <h3>Rapat Koordinasi</h3>
             <h4>Isi sesuai dengan data diri anda</h4>
-            <form action="/submit-kode/form-absensi/tamu" method="post">
+            <form action="/submit-kode/form-absensi/tamu/store" method="post">
                 <?php csrf_field() ?>
+                <!--   hidden input -->
+                <input type="hidden" name="kode_rapat" value="<?= session()->get('kode_valid') ?>">
+
                 <div class="form-group mb-2">
                     <label for="nik" class="form-label">NIK</label>
                     <input type="text" class="form-control <?= validation_show_error('nik') ? 'is-invalid' : '' ?>" value="<?= old('nik') ?>" id="nik" name="nik" placeholder=" ">

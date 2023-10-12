@@ -1,6 +1,7 @@
 <?php
 
 use CodeIgniter\Router\RouteCollection;
+use JetBrains\PhpStorm\NoReturn;
 
 /**
  * @var RouteCollection $routes
@@ -15,7 +16,9 @@ $routes->group('auth', function ($routes) {
 // Rapat
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode', 'Home::submitKode');
-$routes->match(['get', 'post'], '/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
+// $routes->match(['get', 'post'], '/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
+$routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
+$routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::tamuStore');
 $routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai', ['filter' => 'cekkode']);
 
 // validasi

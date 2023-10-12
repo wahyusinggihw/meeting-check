@@ -38,9 +38,9 @@
                     <a href="/submit-kode/form-absensi/pegawai">
                         <div class="learn-more">Isi Form <i class="fa-solid fa-arrow-right"></i></div>
                     </a>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
 </body>
 <?= $this->endSection() ?>

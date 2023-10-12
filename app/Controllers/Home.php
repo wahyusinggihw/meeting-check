@@ -43,6 +43,7 @@ class Home extends BaseController
             if ($expiredTime < $timeNow) {
                 return redirect()->to('/')->with('error', 'Rapat Sudah Berakhir');
             }
+
             $data = [
                 'title' => 'Submit Kode',
                 'rapat' => $rapat,
@@ -51,7 +52,7 @@ class Home extends BaseController
             ];
 
             session();
-            session()->setFlashdata('kode_valid', true);
+            session()->setFlashdata('kode_valid', $kode);
         }
 
         return view('peran', $data);

@@ -32,7 +32,20 @@ function expiredTime($startTime)
 
 function generateQrCode($linkRapat)
 {
-    $qr = new QRCode;
+    // add logo to qr
+    $options = new QROptions(
+        [
+            'addLogoSpace'  => true,
+            'logoPath'      => FCPATH . 'assets/img/logo.png',
+            'logoSpaceWidth' => 9,
+            'logoSpaceHeight' => 9,
+            'logoSpaceStartX' => 10,
+            'logoSpaceStartY' => 10,
+
+        ]
+    );
+    $options->addLogoSpace    = true;
+    $qr = new QRCode($options);
     $result = $qr->render($linkRapat);
     return $result;
 }

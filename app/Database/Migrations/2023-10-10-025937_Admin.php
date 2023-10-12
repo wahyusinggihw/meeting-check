@@ -47,7 +47,9 @@ class Admin extends Migration
             ],
         ]);
         $this->forge->addKey('id_admin', true);
-        $this->forge->createTable('admins');
+        // $this->forge->addUniqueKey('username');
+        // $this->forge->addForeignKey('username', 'agendarapats', 'pembuat', 'CASCADE', 'CASCADE');
+        return $this->forge->createTable('admins');
     }
 
     public function down()

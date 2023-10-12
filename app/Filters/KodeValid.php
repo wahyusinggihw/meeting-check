@@ -25,10 +25,13 @@ class KodeValid implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        //
-        if ((session()->getFlashdata('kode_valid') == false) || (session()->getFlashdata('kode_valid') == null)) {
-            return redirect()->to('/');
+        //check if user have session kode_valid or not, in post request too
+        $session = session();
+        if (!$session->get('kode_valid')) {
+            return redirect()->to('/'); // Redirect to the login page if the session variable is not as expected
         }
+
+        return $request;
     }
 
     /**

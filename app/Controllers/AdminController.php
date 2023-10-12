@@ -7,17 +7,18 @@ use App\Models\AdminModel;
 use App\Models\PesertaUmumModel;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
-use PhpParser\Node\Stmt\Else_;
 
 class AdminController extends BaseController
 {
     protected $helpers = ['form'];
     protected $adminModel;
     protected $pesertaUmum;
+    protected $slugify;
     public function __construct()
     {
         $this->adminModel = new AdminModel();
         $this->pesertaUmum = new PesertaUmumModel();
+        $this->slugify = new Slugify();
     }
 
     public function index()
@@ -56,7 +57,7 @@ class AdminController extends BaseController
                     ]
                 ],
                 'username' => [
-                    'rules' => 'required|is_unique[admins.username]',
+                    'rules' => 'required|is_unique[admins.username]|alpha_dash',
                     'errors' => [
                         'required' => 'Username harus diisi',
                         'is_unique' => 'Username sudah terdaftar'
@@ -74,10 +75,8 @@ class AdminController extends BaseController
                 return redirect()->back()->withInput();
             }
 
-            $slugify = new Slugify();
-
             $uuid = Uuid::uuid4()->toString();
-            $slug = $slugify->slugify($this->request->getVar('nama'));
+            $slug = $this->slugify->slugify($this->request->getVar('nama'));
 
             $data = [
                 'id_user' => $uuid,
@@ -123,7 +122,7 @@ class AdminController extends BaseController
                 ]
             ],
             'username' => [
-                'rules' => 'required|is_unique[admins.username]',
+                'rules' => 'required|is_unique[admins.username]|alpha_dash',
                 'errors' => [
                     'required' => 'Username harus diisi',
                     'is_unique' => 'Username sudah terdaftar'
@@ -141,8 +140,7 @@ class AdminController extends BaseController
             return redirect()->back()->withInput();
         }
 
-        $slugify = new Slugify();
-        $slug = $slugify->slugify($this->request->getVar('nama'));
+        $slug = $this->slugify->slugify($this->request->getVar('nama'));
         $this->adminModel->update($id, [
             'id_admin' => $id,
             'slug' => $slug,
