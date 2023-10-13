@@ -20,7 +20,7 @@
                         <p class="we-help-identify-the">Pilih Jika Anda Berasal Dari Luar Pegawai Pemkab</p>
                     </div>
                 </div>
-                <div class="learn-more-btn btn">
+                <div class="learn-more-btn">
                     <a href="/submit-kode/form-absensi/tamu">
                         <div class="learn-more">Isi Form <i class="fa-solid fa-arrow-right"></i></div>
                     </a>
@@ -34,7 +34,7 @@
                         <p class="we-help-identify-the">Pilih Jika Anda Sebagai Pegawai Pemkab</p>
                     </div>
                 </div>
-                <div class="learn-more-btn btn">
+                <div class="learn-more-btn">
                     <a href="/submit-kode/form-absensi/pegawai">
                         <div class="learn-more">Isi Form <i class="fa-solid fa-arrow-right"></i></div>
                     </a>
