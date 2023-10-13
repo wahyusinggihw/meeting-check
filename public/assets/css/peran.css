@@ -3,15 +3,15 @@
 }
 .content {
     background-color: #eff2f5;
+    padding: 5px;
 }
 
 .content .frame {
     flex-direction: column;
-    margin: 20px 0px 0px 20px;
-    gap: 45.85px;
+    gap: 20px;
     top: 170px;
     left: 56px;
-    display: inline-flex;
+    display: flex;
     align-items: flex-start;
     -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
         animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -19,10 +19,9 @@
 
 .content .div-1 {
     flex-direction: column;
-    gap: 17.19px;
+    gap: 10px;
     margin-top: 20px;
     margin-left: 20px;
-    position: relative;
     flex: 0 0 auto;
     display: inline-flex;
     align-items: flex-start;
@@ -41,7 +40,7 @@
 }
 
 .content .silahkan-pilih-anda {
-    width: 671px;
+    max-width: 100% ;
     font-family: "Poppins-SemiBold", Helvetica;
     font-weight: 600;
     color: #000000;
@@ -52,12 +51,12 @@
 
 .content .frame-2 {
     gap: 10px;
-    margin-left: 300px;
-    margin-top: 20px;
+    margin: auto;
     top: 270px;
     left: 285px;
-    display: inline-flex;
+    display: flex;
     align-items: flex-start;
+    justify-content: center;   
     -webkit-animation: slide-in-fwd-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
         animation: slide-in-fwd-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -65,25 +64,26 @@
 .content .what-we-do-card {
     display: flex;
     flex-direction: column;
-    width: 435px;
-    height: 475px;
+    width: 400px;
+    height: auto;
     align-items: flex-start;
-    gap: 49.29px;
-    padding: 57.31px 34.39px;
-    position: relative;
+    gap: 20px;
+    padding: 20px;
     background-color: #ffffff;
-    border-radius: 34.39px;
+    border-radius: 20px;
 }
 
 .content .activity {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
+    width: 100px;
+    height: auto;
     gap: 11.46px;
     padding: 30px;
     flex: 0 0 auto;
     background-color: #0466ed;
-    border-radius: 22.93px;
+    border-radius: 20px;
     margin-bottom: 20px;
 }
 
@@ -97,7 +97,6 @@
 }
 
 .content .grow-your-business {
-    position: relative;
     width: fit-content;
     margin-top: -1.15px;
     font-family: "Poppins-SemiBold", Helvetica;
@@ -109,8 +108,7 @@
 }
 
 .content .we-help-identify-the {
-    position: relative;
-    width: 342.73px;
+    width: 100%;
     font-family: "Poppins-Regular", Helvetica;
     font-weight: 400;
     color: #000000;
@@ -120,20 +118,17 @@
 }
 
 .content .learn-more-btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 11.46px;
     padding: 17.19px 22.93px;
-    position: relative;
     flex: 0 0 auto;
     margin-bottom: -0.77px;
     border-radius: 11.46px;
 }
 
 .content .learn-more {
-    position: relative;
     width: fit-content;
-    margin-top: -1.15px;
     font-family: "Poppins-Regular", Helvetica;
     font-weight: 400;
     color: #000000;
@@ -143,23 +138,35 @@
 }
 
 .content .vector {
-    position: relative;
     width: 20.63px;
     height: 18.34px;
     margin-right: -1.15px;
 }
 
 .content .heart {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 11.46px;
-    padding: 34.39px;
-    position: relative;
+    padding: 20px;
     flex: 0 0 auto;
     background-color: #0466ed;
-    border-radius: 22.93px;
+    border-radius: 20px;
+}
+
+@media (max-width: 767px) {
+    .content .frame-2 {
+        margin-left: 0;
+    }
+
+    .content .silahkan-pilih-anda {
+        max-width: 100%;
+    }
+
+    .content .what-we-do-card {
+        width: 100%;
+    }
 }
 
 @-webkit-keyframes slide-in-fwd-top {
@@ -204,7 +211,7 @@
     }
 }
 
-@keyframes slide-in-left {
+ @keyframes slide-in-left {
     0% {
         -webkit-transform: translateX(-1000px);
         transform: translateX(-1000px);
