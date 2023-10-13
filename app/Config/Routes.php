@@ -28,6 +28,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->get('agenda-rapat', 'Dashboard::agenda');
     $routes->get('daftar-hadir', 'Dashboard::daftarHadir');
+    $routes->post('daftar-hadir/cari', 'DaftarHadirController::cariDaftarHadir');
 
     $routes->get('agenda-rapat/tambah-agenda', 'AgendaRapat::tambahAgenda');
     $routes->post('agenda-rapat/tambah-agenda/store', 'AgendaRapat::store');

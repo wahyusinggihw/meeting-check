@@ -52,7 +52,8 @@ class AgendaRapat extends Migration
         ]);
 
         $this->forge->addKey('id_agenda', true);
-        $this->forge->addUniqueKey('kode_rapat');
+        $this->forge->addUniqueKey('id_agenda');
+        // $this->forge->addUniqueKey('kode_rapat');
         // $this->forge->addUniqueKey('id_admin');
         // $this->forge->addForeignKey('id_admin', 'admins', 'id_admin', 'CASCADE', 'CASCADE');
         $this->forge->createTable('agendarapats');

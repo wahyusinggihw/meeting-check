@@ -27,6 +27,7 @@ class AdminController extends BaseController
         if ($currentRole != 'superadmin') {
             $data = [
                 'title' => 'Kelola Peserta',
+                'active' => 'kelola_peserta',
                 'role' => $currentRole,
                 'admins' => $this->pesertaUmum->findAll(),
             ];
@@ -35,6 +36,7 @@ class AdminController extends BaseController
         } else {
             $data = [
                 'title' => 'Kelola Admin',
+                'active' => 'kelola_peserta',
                 'role' => $currentRole,
                 'admins' => $this->adminModel->where('role', 'admin')->findAll(),
             ];

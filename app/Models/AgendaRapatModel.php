@@ -41,4 +41,15 @@ class AgendaRapatModel extends Model
             return $this->paginate(5, 'agenda');
         }
     }
+
+    function getAgendaRapatByID()
+    {
+        $id_admin = session()->get('id_admin');
+        $builder = $this->table('agendarapats');
+        $builder->select('*');
+        $builder->where('id_admin', $id_admin);
+        $query = $builder->get()->getResultArray();
+
+        return $query;
+    }
 }

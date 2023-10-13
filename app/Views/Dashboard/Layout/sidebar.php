@@ -37,7 +37,7 @@ use PhpParser\Node\Stmt\Echo_;
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="<?= base_url('/dashboard') ?>" class="nav-link">
+                    <a href="<?= base_url('/dashboard') ?>" class="nav-link <?= uri_string() == 'dashboard' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Home</p>
                     </a>
@@ -48,22 +48,22 @@ use PhpParser\Node\Stmt\Echo_;
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
-                        <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link">
+                        <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link <?= uri_string() == 'dashboard/kelola-admin' ? 'active' : '' ?>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Kelola Admin</p>
                         </a>
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
-                    <a href="<?= base_url('/dashboard/agenda-rapat') ?>" class="nav-link">
+                    <a href="<?= base_url('/dashboard/agenda-rapat') ?>" class="nav-link <?= uri_string() == "dashboard/agenda-rapat" ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-table"></i>
                         <p>Agenda Rapat</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('/dashboard/daftar-hadir') ?>" class="nav-link">
+                    <a href="<?= base_url('/dashboard/daftar-hadir') ?>" class="nav-link <?= uri_string() == 'dashboard/daftar-hadir' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-table"></i>
-                        <p>Daftar Peserta Rapat</p>
+                        <p>Daftar Hadir</p>
                     </a>
                 </li>
             </ul>

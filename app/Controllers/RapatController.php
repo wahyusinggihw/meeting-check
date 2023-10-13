@@ -118,7 +118,7 @@ class RapatController extends BaseController
             'asal_instansi' => $this->request->getVar('asal_instansi'),
             'signature' => $this->request->getVar('signatureData'),
         ];
-        dd($data);
+        // dd($data);
 
         $uuid = Uuid::uuid4()->toString();
         $uuid2 = Uuid::uuid4()->toString();
@@ -136,7 +136,8 @@ class RapatController extends BaseController
         if (!$validate) {
             return redirect()->back()->withInput()->with('kode_valid', true);
         }
-        if ($cekAbsen == null) {
+        $idAgenda = session()->get('id_agenda');
+        if ($this->daftarHadir->sudahAbsen($this->request->getVar('nik')) == true) {
 
             if ($userExist == null) {
                 // return 'tidak ada';
@@ -152,13 +153,13 @@ class RapatController extends BaseController
                 $this->pesertaRapat->insert([
                     'id_peserta_rapat' => $uuid,
                     'slug' => $slugify->slugify($this->request->getVar('nama')),
-                    'kode_rapat' => $slug,
+                    'id_agenda_rapat' => $idAgenda,
                     'NIK' => $this->request->getVar('nik'),
                 ]);
                 $this->daftarHadir->insert([
                     'id_daftar_hadir' => $uuid2,
                     'slug' => $slug,
-                    'kode_rapat' => $slug,
+                    'id_agenda_rapat' => $idAgenda,
                     'NIK' => $this->request->getVar('nik'),
                     'nama' => $this->request->getVar('nama'),
                     'asal_instansi' => $this->request->getVar('asal_instansi'),
@@ -173,7 +174,7 @@ class RapatController extends BaseController
             $this->daftarHadir->insert([
                 'id_daftar_hadir' => $uuid2,
                 'slug' => $slug,
-                'kode_rapat' => $slug,
+                'id_agenda_rapat' => $idAgenda,
                 'NIK' => $this->request->getVar('nik'),
                 'nama' => $this->request->getVar('nama'),
                 'asal_instansi' => $this->request->getVar('asal_instansi'),

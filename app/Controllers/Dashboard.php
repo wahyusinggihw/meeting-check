@@ -13,12 +13,14 @@ class Dashboard extends BaseController
     {
         $this->agendaRapat = new AgendaRapatModel();
         $this->daftarhadir = new DaftarHadirModel();
+        helper('my_helper');
     }
 
     public function index()
     {
         $data = [
-            'title' => 'Home'
+            'title' => 'Home',
+            'active' => 'home',
         ];
 
         return view('dashboard/home_dashboard', $data);
@@ -27,6 +29,7 @@ class Dashboard extends BaseController
     {
         $data = [
             'title' => 'Agenda Rapat',
+            'active' => 'agenda',
             'agenda' => $this->agendaRapat->getAgendaByRole(),
             'pager' => $this->agendaRapat->pager
         ];
@@ -36,12 +39,16 @@ class Dashboard extends BaseController
 
     public function daftarHadir()
     {
+        $id_agenda = $this->request->getVar('daftar_agenda');
+
         $data = [
             'title' => 'Daftar Peserta Rapat',
-            'data' => $this->daftarhadir->getDaftarHadir()
+            'active' => 'daftar_hadir',
+            'agenda_rapat' => $this->agendaRapat->getAgendaRapatByID(),
+            'daftar_hadir' => $this->daftarhadir->getDaftarHadirByID($id_agenda)
         ];
-        // dd($data);
+        // dd($data['daftar_hadir']);
 
-        return view('dashboard/daftar_peserta', $data);
+        return view('dashboard/daftar_hadir', $data);
     }
 }

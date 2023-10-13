@@ -47,12 +47,14 @@ class Home extends BaseController
             $data = [
                 'title' => 'Submit Kode',
                 'rapat' => $rapat,
-                'kode_rapat' => $kode
+                'kode_rapat' => $kode,
+                'id_agenda' => $rapat['id_agenda'],
 
             ];
 
             session();
             session()->setFlashdata('kode_valid', $kode);
+            session()->set($data);
         }
 
         return view('peran', $data);

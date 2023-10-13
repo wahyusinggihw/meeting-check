@@ -16,7 +16,7 @@ class DaftarHadirModel extends Model
     protected $allowedFields    = [
         'id_daftar_hadir',
         'slug',
-        'kode_rapat',
+        'id_agenda_rapat',
         'NIK',
         'nama',
         'asal_instansi',
@@ -78,10 +78,37 @@ class DaftarHadirModel extends Model
 
     function getDaftarHadir()
     {
+        $id_admin = session()->get('id_admin');
         $builder = $this->table('daftarhadirs');
         $builder->select('*');
-        $builder->join('agendarapats', 'agendarapats.kode_rapat = daftarhadirs.kode_rapat', 'inner');
+        $builder->join('agendarapats', 'agendarapats.id_agenda = daftarhadirs.id_agenda_rapat',);
+        $builder->where('id_admin', $id_admin);
         $query = $builder->get()->getResultArray();
+
         return $query;
+    }
+
+    function getDaftarHadirByID($id_agenda)
+    {
+        $id_admin = session()->get('id_admin');
+        $builder = $this->table('daftarhadirs');
+        $builder->select('*');
+        $builder->join('agendarapats', 'agendarapats.id_agenda = daftarhadirs.id_agenda_rapat',);
+        $builder->where('id_admin', $id_admin);
+        $builder->where('id_agenda_rapat', $id_agenda);
+        $query = $builder->get()->getResultArray();
+
+        return $query;
+    }
+
+    function sudahAbsen($nik)
+    {
+        $data = $this->where('NIK', $nik);
+        // dd($data);
+        if ($data->id_agenda == session()->get('id_agenda')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
