@@ -19,7 +19,12 @@ $routes->post('/submit-kode', 'Home::submitKode');
 // $routes->match(['get', 'post'], '/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
 $routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
 $routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::tamuStore');
-$routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai', ['filter' => 'cekkode']);
+$routes->get('/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai',);
+$routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::pegawaiStore');
+// $routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai', ['filter' => 'cekkode']);
+
+// API
+$routes->resource('api/instansi', ['controller' => 'Api\RapatControllerAPI']);
 
 // validasi
 $routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);

@@ -2,14 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Models\DaftarHadirModel;
-use App\Models\PesertaRapatModel;
-use App\Models\PesertaUmumModel;
-use App\Models\AgendaRapatModel;
+use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
+use App\Models\AgendaRapatModel;
+use App\Models\DaftarHadirModel;
+use App\Models\PesertaUmumModel;
+use App\Models\PesertaRapatModel;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\Instanceof_;
-use Ramsey\Uuid\Uuid;
 
 class RapatController extends BaseController
 {
@@ -64,39 +64,103 @@ class RapatController extends BaseController
 
     public function formPegawai()
     {
-        if ($this->request->is('post')) {
-            $rules = $this->pesertaUmum->getValidationRules();
-            $validate =  $this->validate($rules);
+        $instansi = $this->pesertaRapat->getInstansi();
+        $instansiDecode = json_decode($instansi);
 
-            if (!$validate) {
-                return redirect()->back()->withInput();
-            }
-            // return 'ini post';
-            $data = [
-                'nama' => $this->request->getVar('nama'),
-                'nohp' => $this->request->getVar('no_hp'),
-                'instansi' => $this->request->getVar('asal_instansi'),
-            ];
-        } else {
-            $instansi = $this->pesertaRapat->getInstansi();
-            $instansiDecode = json_decode($instansi);
+        $data = [
+            'title' => 'Form Absensi',
+            'instansi' => $instansiDecode,
+        ];
 
-            $data = [
-                'title' => 'Form Absensi',
-                'instansi' => $instansiDecode,
-            ];
-            return view('form_pegawai', $data);
-        }
+        return view('form_pegawai', $data);
     }
 
-    // public function formTamu()
-    // {
+    public function pegawaiStore()
+    {
+        $rules = [
+            'nip' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'NIK harus diisi',
+                    'numeric' => 'NIK harus berupa angka'
+                ]
+            ],
+            'no_hp' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'No HP harus diisi',
+                    'numeric' => 'No HP harus berupa angka'
+                ]
+            ],
+            'nama' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama harus diisi'
+                ]
+            ],
+            'alamat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Alamat harus diisi'
+                ]
+            ],
+            'asal_instansi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih instansi terlebih dahulu'
+                ]
+            ],
+            'signatureData' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tanda tangan harus diisi'
+                ]
+            ]
+        ];
 
-    //     if ($this->request->is('post')) {
-    //     } else {
+        // return 'ini post';
+        // $data = [
+        //     'nip' => $this->request->getVar('nip'),
+        //     'no_hp' => $this->request->getVar('no_hp'),
+        //     'nama' => $this->request->getVar('nama'),
+        //     'alamat' => $this->request->getVar('alamat'),
+        //     'instansi' => $this->request->getVar('asal_instansi'),
+        //     'signature' => $this->request->getVar('signatureData'),
+        // ];
 
-    //     }
-    // }
+        $uuid2 = Uuid::uuid4()->toString();
+        $kodeRapat = $this->request->getVar('kode_rapat');
+        $validate =  $this->validate($rules);
+        $slugify = new Slugify();
+        $slug = $slugify->slugify($kodeRapat);
+
+        if (!$validate) {
+            return redirect()->back()->withInput()->with('kode_valid', true);
+        }
+        $idAgenda = session()->get('id_agenda');
+        $cekAbsen = $this->daftarHadir->sudahAbsen($this->request->getVar('nip'));
+        if (!$cekAbsen) {
+            // return 'ada';
+            $this->daftarHadir->insert([
+                'id_daftar_hadir' => $uuid2,
+                'slug' => $slug,
+                'id_agenda_rapat' => $idAgenda,
+                'NIK' => $this->request->getVar('nip'),
+                'nama' => $this->request->getVar('nama'),
+                'asal_instansi' => $this->request->getVar('asal_instansi'),
+                'ttd' => 'ttd',
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+        } else {
+            // session()->setFlashdata('gagal', true);
+            return redirect('/')->with('error', 'Anda sudah melakukan absensi!');
+        }
+
+        session()->setFlashdata('berhasil', true);
+        // session()->destroy('kode_valid');
+        return redirect('berhasil')->with('kode_valid', true);
+    }
+
 
     public function formTamu()
     {
@@ -110,6 +174,7 @@ class RapatController extends BaseController
 
     public function tamuStore()
     {
+
         $data = [
             'nik' => $this->request->getVar('nik'),
             'no_hp' => $this->request->getVar('no_hp'),
@@ -119,6 +184,16 @@ class RapatController extends BaseController
             'signature' => $this->request->getVar('signatureData'),
         ];
         // dd($data);
+        // $cekAbsen = $this->daftarHadir->where('NIK', $this->request->getVar('nik'))->first();
+        // // dd($cekAbsen['id_agenda_rapat']);
+        // // dd(session()->get('id_agenda'));
+        // if ($cekAbsen['id_agenda_rapat'] == session()->get('id_agenda')) {
+        //     return 'sudah absen';
+        //     // return redirect('/')->with('error', 'Anda sudah melakukan absensi!');
+        // } else {
+        //     return 'belom';
+        // }
+        // die;
 
         $uuid = Uuid::uuid4()->toString();
         $uuid2 = Uuid::uuid4()->toString();
@@ -128,7 +203,7 @@ class RapatController extends BaseController
         $kodeRapat = $this->request->getVar('kode_rapat');
 
         $userExist = $this->pesertaUmum->cekIfExist($this->request->getVar('nik'));
-        $cekAbsen = $this->daftarHadir->where('NIK', $this->request->getVar('nik'))->first();
+
 
         // dd($userExist);
         $slugify = new Slugify();
@@ -137,7 +212,8 @@ class RapatController extends BaseController
             return redirect()->back()->withInput()->with('kode_valid', true);
         }
         $idAgenda = session()->get('id_agenda');
-        if ($this->daftarHadir->sudahAbsen($this->request->getVar('nik')) == true) {
+        $cekAbsen = $this->daftarHadir->sudahAbsen($this->request->getVar('nik'));
+        if (!$cekAbsen) {
 
             if ($userExist == null) {
                 // return 'tidak ada';
@@ -163,7 +239,8 @@ class RapatController extends BaseController
                     'NIK' => $this->request->getVar('nik'),
                     'nama' => $this->request->getVar('nama'),
                     'asal_instansi' => $this->request->getVar('asal_instansi'),
-                    'ttd' => 'ttd'
+                    'ttd' => 'ttd',
+                    'created_at' => date('Y-m-d H:i:s')
                 ]);
 
                 session()->setFlashdata('berhasil', true);
@@ -178,7 +255,8 @@ class RapatController extends BaseController
                 'NIK' => $this->request->getVar('nik'),
                 'nama' => $this->request->getVar('nama'),
                 'asal_instansi' => $this->request->getVar('asal_instansi'),
-                'ttd' => 'ttd'
+                'ttd' => 'ttd',
+                'created_at' => date('Y-m-d H:i:s')
             ]);
         } else {
             // session()->setFlashdata('gagal', true);

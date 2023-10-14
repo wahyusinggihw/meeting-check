@@ -1,182 +1,181 @@
-
 /* ||============|| CSS FORM ABSENSI ||============|| */
 
 .wrapper {
-    background-color: rgb(255, 255, 255);
-    width: 90%;
-    padding: 20px;
-    border-radius: 35px;
-    margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  padding: 20px;
+  border-radius: 35px;
+  margin: 0 auto;
 }
-.judul-form{
-    -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-        animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+.judul-form {
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .konten .judul-form h1 {
-    font-size: 23px;
-    padding-top: 20px;
-    padding-left: 140px;
-    color: #0466ED;
+  font-size: 23px;
+  padding-top: 20px;
+  padding-left: 140px;
+  color: #0466ed;
 }
 .konten .judul-form h2 {
-    padding-top: 0px;
-    padding-bottom: 20px;
-    padding-left: 140px;
-    font-size: 34px;
-    font-weight: bold;
+  padding-top: 0px;
+  padding-bottom: 20px;
+  padding-left: 140px;
+  font-size: 34px;
+  font-weight: bold;
 }
 .konten .wrapper h3 {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 .konten .wrapper h4 {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .submit {
-    background: #0466ED;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    width: 100px;
-    height: 50px;
-    border-radius: 14px;
-    border: none;
-    cursor: pointer;
+  background: #0466ed;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100px;
+  height: 50px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
 }
 
 .submit:hover {
-    background-color: #3888ff;
-    color: rgb(0, 0, 0);
+  background-color: #3888ff;
+  color: rgb(0, 0, 0);
 }
 
-
 .konten .wrapper .form-group {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 /* responsif */
 @media screen and (min-width: 576px) {
-    .wrapper {
-        width: 65%;
-    }
+  .wrapper {
+    width: 65%;
+  }
 }
 
 @media screen and (min-width: 768px) {
-    .wrapper {
-        width: 50%;
-    }
+  .wrapper {
+    width: 50%;
+  }
 }
 
 @media screen and (min-width: 992px) {
-    .wrapper {
-        width: 40%;
-    }
+  .wrapper {
+    width: 40%;
+  }
 }
 
 @media screen and (min-width: 1200px) {
-    .wrapper {
-        width: 30%;
-    }
+  .wrapper {
+    width: 30%;
+  }
 }
 
-.signature-pad h1{
-    font-size: 14px;
+.signature-pad h1 {
+  font-size: 14px;
 }
 
 .signature-canvas {
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    width: 100%;
-    top: 0;
-    left: 0;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
-.signature-button {
-    margin: 0 5px;
-    background: #0466ED;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    padding: 0px 20px 0px 20px;
+/* .signature-button {
+  margin: 0 5px;
+  background: #0466ed;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 0px 20px 0px 20px;
 }
 
-.signature-button:hover{
-    background-color: #ff7777;
-    color: rgb(0, 0, 0);
-}
+.signature-button:hover {
+  background-color: #dc3545;
+  color: #dc3545;
+} */
 
 /* ||============|| CSS TRANSISI ANIMASI ||============|| */
 
 @-webkit-keyframes slide-in-blurred-top {
-    0% {
-        -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
-        transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-        -webkit-filter: blur(40px);
-        filter: blur(40px);
-        opacity: 0;
-    }
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+    filter: blur(40px);
+    opacity: 0;
+  }
 
-    100% {
-        -webkit-transform: translateY(0) scaleY(1) scaleX(1);
-        transform: translateY(0) scaleY(1) scaleX(1);
-        -webkit-transform-origin: 50% 50%;
-        transform-origin: 50% 50%;
-        -webkit-filter: blur(0);
-        filter: blur(0);
-        opacity: 1;
-    }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+    transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-blurred-top {
-    0% {
-        -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
-        transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
-        -webkit-transform-origin: 50% 0%;
-        transform-origin: 50% 0%;
-        -webkit-filter: blur(40px);
-        filter: blur(40px);
-        opacity: 0;
-    }
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+    filter: blur(40px);
+    opacity: 0;
+  }
 
-    100% {
-        -webkit-transform: translateY(0) scaleY(1) scaleX(1);
-        transform: translateY(0) scaleY(1) scaleX(1);
-        -webkit-transform-origin: 50% 50%;
-        transform-origin: 50% 50%;
-        -webkit-filter: blur(0);
-        filter: blur(0);
-        opacity: 1;
-    }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+    transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes slide-in-left {
-    0% {
-        -webkit-transform: translateX(-1000px);
-        transform: translateX(-1000px);
-        opacity: 0;
-    }
+  0% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
 
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-        opacity: 1;
-    }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-left {
-    0% {
-        -webkit-transform: translateX(-1000px);
-        transform: translateX(-1000px);
-        opacity: 0;
-    }
+  0% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
 
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-        opacity: 1;
-    }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

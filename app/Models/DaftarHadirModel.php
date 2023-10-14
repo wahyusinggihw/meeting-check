@@ -103,12 +103,14 @@ class DaftarHadirModel extends Model
 
     function sudahAbsen($nik)
     {
-        $data = $this->where('NIK', $nik);
-        // dd($data);
-        if ($data->id_agenda == session()->get('id_agenda')) {
-            return true;
-        } else {
-            return false;
+        $data = $this->where('NIK', $nik)->first();
+        if ($data != null) {
+            if ($data['id_agenda_rapat'] == session()->get('id_agenda')) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
     }
 }

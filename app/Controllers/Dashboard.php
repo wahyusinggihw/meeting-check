@@ -51,13 +51,4 @@ class Dashboard extends BaseController
 
         return view('dashboard/daftar_hadir', $data);
     }
-
-    public function agendaKosong(): string
-    {
-        $data = [
-            'title' => 'Agenda Kosong'
-        ];
-
-        return view('dashboard/agenda_kosong', $data);
-    }
 }

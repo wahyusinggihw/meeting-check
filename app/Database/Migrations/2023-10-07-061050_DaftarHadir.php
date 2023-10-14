@@ -48,7 +48,7 @@ class DaftarHadir extends Migration
         ]);
         $this->forge->addKey('id_daftar_hadir', true);
         $this->forge->addForeignKey('id_agenda_rapat', 'agendarapats', 'id_agenda', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('NIK', 'pesertaumums', 'NIK', 'CASCADE', 'CASCADE');
+        // $this->forge->addForeignKey('NIK', 'pesertaumums', 'NIK', 'CASCADE', 'CASCADE');
         $this->forge->createTable('daftarhadirs');
     }
 

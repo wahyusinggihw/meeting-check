@@ -35,7 +35,8 @@ class DaftarHadirController extends BaseController
             'title' => 'Daftar Hadir',
             // 'data' => $this->daftarhadir->getDaftarHadirByID($id_agenda)
             'agenda_rapat' => $this->agendaRapat->getAgendaRapatByID(),
-            'daftar_hadir' => $this->daftarhadir->getDaftarHadirByID($id_agenda)
+            'daftar_hadir' => $this->daftarhadir->getDaftarHadirByID($id_agenda),
+            'pager' => $this->daftarhadir->pager,
 
         ];
 

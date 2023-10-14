@@ -59,8 +59,6 @@
                 <div class="button-container">
                     <button type="button" onclick="clearSignature()" class="signature-button">Clear</button>
                 </div>
-
-
                 <div class="form-group text-end">
                     <button onclick="saveSignature()" type="submit" class="submit">Submit</button>
                 </div>

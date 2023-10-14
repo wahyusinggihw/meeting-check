@@ -24,8 +24,11 @@
     <?php endif; ?>
 
     <div class="login-form">
+        <div class="container">
+            <img src="<?php echo base_url('assets/img/pemkab.png'); ?>" alt="Logo" width="100">
+        </div>
 
-        <h1>Login</h1>
+        <h2>Login</h2>
         <form action="/auth/login" method="post">
             <?= csrf_field() ?>
             <div class="form-group mb-3">
@@ -47,13 +50,7 @@
             <button type="submit">Login</button>
     </div>
 
-    <div class="logo">
-        <img src="<?php echo base_url('assets/img/pemkab.png'); ?>" alt="Logo" width="200">
-    </div>
 
-    <div class="logo-2">
-        <img src="<?php echo base_url('assets/img/2.png'); ?>" alt="Logo" width="200">
-    </div>
 
 </body>
 
