@@ -57,7 +57,7 @@
                     <input type="hidden" id="signatureData" name="signatureData" value="">
                 </div>
                 <div class="button-container">
-                    <button type="button" onclick="clearSignature()" class="signature-button">Clear</button>
+                    <button type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Clear</button>
                 </div>
                 <div class="form-group text-end">
                     <button onclick="saveSignature()" type="submit" class="submit">Submit</button>

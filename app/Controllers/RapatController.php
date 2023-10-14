@@ -43,25 +43,6 @@ class RapatController extends BaseController
         return view('berhasil', $data);
     }
 
-    public function gagal()
-    {
-        $data = [
-            'title' => 'Gagal'
-        ];
-        return view('gagal', $data);
-    }
-
-    public function search()
-    {
-        $nik = $this->request->getVar('nik');
-        $cek = $this->pesertaUmum->cekIfExist($nik);
-        $data = [
-            'title' => 'Search',
-            'data' => $cek
-        ];
-        return view('search', $data);
-    }
-
     public function formPegawai()
     {
         $instansi = $this->pesertaRapat->getInstansi();

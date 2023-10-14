@@ -113,4 +113,16 @@ class DaftarHadirModel extends Model
         }
         return false;
     }
+    function sudahAbsenAPI($nik, $id_agenda)
+    {
+        $data = $this->where('NIK', $nik)->first();
+        if ($data != null) {
+            if ($data['id_agenda_rapat'] == $id_agenda) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 }

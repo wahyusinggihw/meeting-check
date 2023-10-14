@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
+use App\Controllers\BaseController;
 use App\Models\AgendaRapatModel;
 use App\Models\DaftarHadirModel;
 

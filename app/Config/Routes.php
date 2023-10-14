@@ -24,31 +24,33 @@ $routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::pegaw
 // $routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai', ['filter' => 'cekkode']);
 
 // API
-$routes->resource('api/instansi', ['controller' => 'Api\RapatControllerAPI']);
+$routes->resource('api/users', ['controller' => 'Api\UsersControllerAPI']);
+$routes->resource('api/agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
+$routes->resource('api/rapat', ['controller' => 'Api\RapatControllerAPI']);
 
 // validasi
 $routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);
 
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
-    $routes->get('/', 'Dashboard::index');
-    $routes->get('agenda-rapat', 'Dashboard::agenda');
-    $routes->get('daftar-hadir', 'Dashboard::daftarHadir');
-    $routes->post('daftar-hadir/cari', 'DaftarHadirController::cariDaftarHadir');
+    $routes->get('/', 'Dashboard\Dashboard::index');
+    $routes->get('agenda-rapat', 'Dashboard\Dashboard::agenda');
+    $routes->get('daftar-hadir', 'Dashboard\Dashboard::daftarHadir');
+    $routes->post('daftar-hadir/cari', 'Dashboard\DaftarHadirController::cariDaftarHadir');
 
-    $routes->get('agenda-rapat/tambah-agenda', 'AgendaRapat::tambahAgenda');
-    $routes->post('agenda-rapat/tambah-agenda/store', 'AgendaRapat::store');
+    $routes->get('agenda-rapat/tambah-agenda', 'Dashboard\AgendaRapat::tambahAgenda');
+    $routes->post('agenda-rapat/tambah-agenda/store', 'Dashboard\AgendaRapat::store');
 
-    $routes->get('agenda-rapat/view-agenda/(:segment)', 'AgendaRapat::view/$1');
+    $routes->get('agenda-rapat/view-agenda/(:segment)', 'Dashboard\AgendaRapat::view/$1');
 
-    $routes->get('agenda-rapat/edit-agenda/(:segment)', 'AgendaRapat::edit/$1');
-    $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'AgendaRapat::update/$1');
-    $routes->post('delete-agenda/(:segment)', 'AgendaRapat::delete/$1');
+    $routes->get('agenda-rapat/edit-agenda/(:segment)', 'Dashboard\AgendaRapat::edit/$1');
+    $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'Dashboard\AgendaRapat::update/$1');
+    $routes->post('delete-agenda/(:segment)', 'Dashboard\AgendaRapat::delete/$1');
 
-    $routes->get('kelola-admin', 'AdminController::index');
-    $routes->match(['get', 'post'], 'kelola-admin/tambah-admin', 'AdminController::tambahAdmin');
-    $routes->get('kelola-admin/edit-admin/(:segment)', 'AdminController::edit/$1');
-    $routes->post('kelola-admin/edit-admin/(:segment)/update', 'AdminController::update/$1');
-    $routes->post('delete-admin/(:segment)', 'AdminController::delete/$1');
+    $routes->get('kelola-admin', 'Dashboard\AdminController::index');
+    $routes->match(['get', 'post'], 'kelola-admin/tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+    $routes->get('kelola-admin/edit-admin/(:segment)', 'Dashboard\AdminController::edit/$1');
+    $routes->post('kelola-admin/edit-admin/(:segment)/update', 'Dashboard\AdminController::update/$1');
+    $routes->post('delete-admin/(:segment)', 'Dashboard\AdminController::delete/$1');
 });
 
 $routes->get('/home/login', 'Auth::login');

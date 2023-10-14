@@ -11,12 +11,12 @@
         <div class="wrapper">
             <h3>Rapat Koordinasi</h3>
             <h4>Isi sesuai dengan data diri anda</h4>
-            <form action="/submit-kode/form-absensi/pegawai/store" method="post">
+            <form action="/submit-kode/form-absensi/pegawai/store" method="post" id="form_pegawai">
                 <?= csrf_field() ?>
                 <input type="hidden" name="kode_rapat" value="<?= session()->get('kode_valid') ?>">
                 <div class="form-group mb-2">
                     <label for="nip" class="form-label">NIP</label>
-                    <input type="text" class="form-control  <?= validation_show_error('nip') ? 'is-invalid' : '' ?>" value="<?= old('nip') ?>" id="nip" name="nip" placeholder=" " onchange="searchNIP()">
+                    <input type="text" class="form-control  <?= validation_show_error('nip') ? 'is-invalid' : '' ?>" value="<?= old('nip') ?>" id="nip" name="nip" placeholder="Masukkan NIP anda">
                     <div class="invalid-feedback text-start">
                         <?= validation_show_error('nip') ?>
                     </div>
@@ -45,7 +45,7 @@
                 <div class="form-group mb-3">
                     <label for="asal_instansi" class="form-label">Asal Instansi</label>
                     <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
-                    <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>">
+                    <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi">
                         <!-- foreach -->
                         <option value="">Pilih instansi</option>
                         <?php foreach ($instansi->data as $i) : ?>
@@ -76,27 +76,36 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-        function searchNIP() {
-            var nip = $('#nip').val();
+        // function searchNIP() {
+        var nip = $('#nip').val();
+        $("#nip").change(function() {
             getPegawai(event.target.value).then(data => {
-                console.log(data);
-                $('#no_hp').val(data.data.email_ukerja);
-                $('#nama').val(data.data.ket_ukerja);
-                $('#alamat').val(data.data.alamat_ukerja);
-                $('#asal_instansi').val(data.data.ket_ukerja);
+                if (data.status === false) {
+                    console.log(data);
+                    // $('#form_pegawai').get(0).reset(
+                    //     $('#nip').val(nip)
+                    // )
+                    $('#no_hp').val('');
+                    $('#nama').val('');
+                    $('#alamat').val('');
+                    $('#asal_instansi').val('');
+                } else {
+                    console.log(data);
+                    $('#no_hp').val(data.data.email_ukerja).prop('readonly', true);
+                    $('#nama').val(data.data.ket_ukerja).prop('readonly', true);;
+                    $('#alamat').val(data.data.alamat_ukerja).prop('readonly', true);;
+                    $('#asal_instansi').val(data.data.ket_ukerja).prop('readonly', true);;
+                }
             })
-            // })
+        });
 
-            async function getPegawai(nip) {
-                let response = await fetch('/api/instansi/' + nip);
-                let data = await response.json();
-                // console.log(data);
-                return data;
-            }
-            if (nip.length === 8) {
-                // $('#nip').on('change', (event) => {
-            }
+        async function getPegawai(nip) {
+            let response = await fetch('/api/users/' + nip);
+            let data = await response.json();
+            // console.log(data);
+            return data;
         }
+        // }
     </script>
 </body>
 

@@ -52,4 +52,15 @@ class AgendaRapatModel extends Model
 
         return $query;
     }
+
+    // get agenda rapat by kode_rapat
+    function getAgendaRapatByKode($id)
+    {
+        $builder = $this->table('agendarapats');
+        $builder->select('*');
+        $query = $builder->where('kode_rapat', $id)->first();
+        // $query = $builder->get()->getResultArray();
+
+        return $query;
+    }
 }
