@@ -2,8 +2,9 @@
 
 namespace App\Controllers\Api;
 
+use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\RESTful\ResourceController;
+// use CodeIgniter\RESTful\ResourceController;
 use App\Models\PesertaRapatModel;
 use App\Models\DaftarHadirModel;
 use App\Models\AgendaRapatModel;
@@ -12,13 +13,12 @@ use Cocur\Slugify\Slugify;
 
 
 
-class RapatControllerAPI extends ResourceController
+class RapatControllerAPI extends BaseController
 {
     use ResponseTrait;
     protected $helpers = ['form'];
-    protected $pesertaRapat;
     protected $daftarHadir;
-    protected $instansiAPI;
+    protected $instansiAPI; // Akan diganti dengan api pegawai
     protected $agendaRapat;
     public function __construct()
     {
@@ -27,9 +27,8 @@ class RapatControllerAPI extends ResourceController
         $this->agendaRapat = new AgendaRapatModel();
     }
 
-    public function create()
+    protected function  validateForm()
     {
-        // $data = $this->request->getPost();
         $rules = [
             'kode_rapat' => [
                 'rules' => 'required',
@@ -76,41 +75,67 @@ class RapatControllerAPI extends ResourceController
                 ]
             ]
         ];
-        $uuid2 = Uuid::uuid4()->toString();
-        $slugify = new Slugify();
+
+        return $this->validate($rules);
+    }
+
+    public function absenStore()
+    {
+        helper('my_helper');
+
         $kodeRapat = $this->request->getVar('kode_rapat');
-        $id_agenda = $this->agendaRapat->getAgendaRapatByKode($kodeRapat);
-        $validate =  $this->validate($rules);
+        $idRapat = $this->agendaRapat->getAgendaRapatByKode($kodeRapat);
+
+        $validate = $this->validateForm();
 
         if (!$validate) {
-            return $this->failValidationErrors($this->validator->getErrors());
+            return $this->response(false, 'Validasi gagal', $this->validator->getErrors());
         }
-        $slug = $slugify->slugify($kodeRapat);
 
-        $cekAbsen = $this->daftarHadir->sudahAbsenAPI($this->request->getVar('nip'), $id_agenda['id_agenda']);
-        if (!$cekAbsen) {
-            $this->daftarHadir->insert([
-                'id_daftar_hadir' => $uuid2,
+        $slug = (new Slugify())->slugify($kodeRapat);
+        $currentTime = date('H:i');
+
+        $detailRapat = $this->agendaRapat->select()->where('kode_rapat', $kodeRapat)->first();
+
+        if ($detailRapat == null) {
+            return $this->response(false, 'Kode rapat tidak ditemukan.');
+        }
+
+        $expirationTime = expiredTime($detailRapat['jam']);
+
+        if ($expirationTime < $currentTime) {
+            return $this->response(false, 'Rapat kadaluarsa');
+        }
+
+        $riwayatKehadiran = $this->daftarHadir->sudahAbsenAPI($this->request->getVar('nip'), $idRapat['id_agenda']);
+
+        if (!$riwayatKehadiran) {
+            $dataDaftarHadir = [
+                'id_daftar_hadir' => Uuid::uuid4()->toString(),
                 'slug' => $slug,
-                'id_agenda_rapat' => $id_agenda['id_agenda'],
+                'id_agenda_rapat' => $idRapat['id_agenda'],
                 'NIK' => $this->request->getVar('nip'),
                 'nama' => $this->request->getVar('nama'),
                 'asal_instansi' => $this->request->getVar('asal_instansi'),
                 'ttd' => 'ttd',
                 'created_at' => date('Y-m-d H:i:s')
-            ]);
+            ];
 
-            $response = [
-                'status' => true,
-                'message' => 'Berhasil melakukan absen.'
-            ];
-            return $this->respond($response, 200);
+            $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
+            return $this->response(true, 'Berhasil melakukan absen.');
         } else {
-            $response = [
-                'status' => true,
-                'message' => 'Anda sudah melakukan absen.'
-            ];
-            return $this->respond($response, 200);
+            return $this->response(true, 'Anda sudah melakukan absen.');
         }
+    }
+
+    protected function response($status, $message, $data = [])
+    {
+        $response = [
+            'status' => $status,
+            'message' => $message,
+            'data' => $data
+        ];
+
+        return $this->respond($response, 200);
     }
 }

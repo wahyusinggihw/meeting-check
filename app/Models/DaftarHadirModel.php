@@ -127,4 +127,9 @@ class DaftarHadirModel extends Model
         }
         return false;
     }
+
+    public function insertDaftarHadir($data)
+    {
+        return $this->insert($data);
+    }
 }

@@ -17,16 +17,9 @@ $routes->group('auth', function ($routes) {
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode/form-absensi', 'Home::submitKode');
 // revisi
-$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi');
+$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi', ['filter' => 'cekkode']);
 $routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
 
-// $routes->match(['get', 'post'], '/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
-// $routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
-// $routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::tamuStore');
-// $routes->get('/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai',);
-// $routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::pegawaiStore');
-
-// $routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai', ['filter' => 'cekkode']);
 
 // JQUERY PESERTA RAPAT
 $routes->get('api/peserta/(:segment)', 'Api\UsersControllerAPI::getPeserta/$1');
@@ -37,7 +30,8 @@ $routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
     // Route mobile
     $routes->post('login', "Api\LoginControllerAPI::login");
     $routes->resource('agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
-    $routes->resource('rapat', ['controller' => 'Api\RapatControllerAPI']);
+    // $routes->resource('rapat', ['controller' => 'Api\RapatControllerAPI']);
+    $routes->post('rapat', 'Api\RapatControllerAPI::absenStore');
     // route untuk get agenda rapat
     // route untuk post daftar hadir
 });

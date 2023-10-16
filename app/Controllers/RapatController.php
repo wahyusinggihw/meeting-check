@@ -8,8 +8,6 @@ use App\Models\AgendaRapatModel;
 use App\Models\DaftarHadirModel;
 use App\Models\PesertaUmumModel;
 use App\Models\PesertaRapatModel;
-use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Expr\Instanceof_;
 
 class RapatController extends BaseController
 {
@@ -26,14 +24,6 @@ class RapatController extends BaseController
         $this->agendaRapat = new AgendaRapatModel();
     }
 
-    public function peran(): string
-    {
-        $data = [
-            'title' => 'Pemilihan Peran'
-        ];
-
-        return view('peran', $data);
-    }
 
     public function berhasil()
     {
@@ -43,216 +33,9 @@ class RapatController extends BaseController
         return view('berhasil', $data);
     }
 
-    public function formPegawai()
-    {
-        $instansi = $this->pesertaRapat->getInstansi();
-        $instansiDecode = json_decode($instansi);
-
-        $data = [
-            'title' => 'Form Absensi',
-            'instansi' => $instansiDecode,
-        ];
-
-        return view('form_pegawai', $data);
-    }
-
-    public function pegawaiStore()
-    {
-        $rules = [
-            'nip' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'NIK harus diisi',
-                    'numeric' => 'NIK harus berupa angka'
-                ]
-            ],
-            'no_hp' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'No HP harus diisi',
-                    'numeric' => 'No HP harus berupa angka'
-                ]
-            ],
-            'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nama harus diisi'
-                ]
-            ],
-            'alamat' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Alamat harus diisi'
-                ]
-            ],
-            'asal_instansi' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih instansi terlebih dahulu'
-                ]
-            ],
-            'signatureData' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Tanda tangan harus diisi'
-                ]
-            ]
-        ];
-
-        // return 'ini post';
-        // $data = [
-        //     'nip' => $this->request->getVar('nip'),
-        //     'no_hp' => $this->request->getVar('no_hp'),
-        //     'nama' => $this->request->getVar('nama'),
-        //     'alamat' => $this->request->getVar('alamat'),
-        //     'instansi' => $this->request->getVar('asal_instansi'),
-        //     'signature' => $this->request->getVar('signatureData'),
-        // ];
-
-        $uuid2 = Uuid::uuid4()->toString();
-        $kodeRapat = $this->request->getVar('kode_rapat');
-        $validate =  $this->validate($rules);
-        $slugify = new Slugify();
-        $slug = $slugify->slugify($kodeRapat);
-
-        if (!$validate) {
-            return redirect()->back()->withInput()->with('kode_valid', true);
-        }
-        $idAgenda = session()->get('id_agenda');
-        $cekAbsen = $this->daftarHadir->sudahAbsen($this->request->getVar('nip'));
-        if (!$cekAbsen) {
-            // return 'ada';
-            $this->daftarHadir->insert([
-                'id_daftar_hadir' => $uuid2,
-                'slug' => $slug,
-                'id_agenda_rapat' => $idAgenda,
-                'NIK' => $this->request->getVar('nip'),
-                'nama' => $this->request->getVar('nama'),
-                'asal_instansi' => $this->request->getVar('asal_instansi'),
-                'ttd' => 'ttd',
-                'created_at' => date('Y-m-d H:i:s')
-            ]);
-        } else {
-            // session()->setFlashdata('gagal', true);
-            return redirect('/')->with('error', 'Anda sudah melakukan absensi!');
-        }
-
-        session()->setFlashdata('berhasil', true);
-        // session()->destroy('kode_valid');
-        return redirect('berhasil')->with('kode_valid', true);
-    }
-
-
-    public function formTamu()
-    {
-        $data = [
-            'title' => 'Form Absensi',
-            'validation' => \Config\Services::validation()
-        ];
-
-        return view('form_tamu', $data);
-    }
-
-    public function tamuStore()
-    {
-
-        $data = [
-            'nik' => $this->request->getVar('nik'),
-            'no_hp' => $this->request->getVar('no_hp'),
-            'nama' => $this->request->getVar('nama'),
-            'alamat' => $this->request->getVar('alamat'),
-            'asal_instansi' => $this->request->getVar('asal_instansi'),
-            'signature' => $this->request->getVar('signatureData'),
-        ];
-        // dd($data);
-        // $cekAbsen = $this->daftarHadir->where('NIK', $this->request->getVar('nik'))->first();
-        // // dd($cekAbsen['id_agenda_rapat']);
-        // // dd(session()->get('id_agenda'));
-        // if ($cekAbsen['id_agenda_rapat'] == session()->get('id_agenda')) {
-        //     return 'sudah absen';
-        //     // return redirect('/')->with('error', 'Anda sudah melakukan absensi!');
-        // } else {
-        //     return 'belom';
-        // }
-        // die;
-
-        $uuid = Uuid::uuid4()->toString();
-        $uuid2 = Uuid::uuid4()->toString();
-        $uuid4 = Uuid::uuid4()->toString();
-        $rules = $this->pesertaUmum->getValidationRules();
-        $validate =  $this->validate($rules);
-        $kodeRapat = $this->request->getVar('kode_rapat');
-
-        $userExist = $this->pesertaUmum->cekIfExist($this->request->getVar('nik'));
-
-
-        // dd($userExist);
-        $slugify = new Slugify();
-        $slug = $slugify->slugify($kodeRapat);
-        if (!$validate) {
-            return redirect()->back()->withInput()->with('kode_valid', true);
-        }
-        $idAgenda = session()->get('id_agenda');
-        $cekAbsen = $this->daftarHadir->sudahAbsen($this->request->getVar('nik'));
-        if (!$cekAbsen) {
-
-            if ($userExist == null) {
-                // return 'tidak ada';
-                $this->pesertaUmum->insert([
-                    'id_peserta_umum' => $uuid,
-                    'slug' => $slugify->slugify($this->request->getVar('nama')),
-                    'nik' => $this->request->getVar('nik'),
-                    'nama' => $this->request->getVar('nama'),
-                    'alamat' => $this->request->getVar('alamat'),
-                    'no_hp' => $this->request->getVar('no_hp'),
-                    'asal_instansi' => $this->request->getVar('asal_instansi'),
-                ]);
-                $this->pesertaRapat->insert([
-                    'id_peserta_rapat' => $uuid,
-                    'slug' => $slugify->slugify($this->request->getVar('nama')),
-                    'id_agenda_rapat' => $idAgenda,
-                    'NIK' => $this->request->getVar('nik'),
-                ]);
-                $this->daftarHadir->insert([
-                    'id_daftar_hadir' => $uuid2,
-                    'slug' => $slug,
-                    'id_agenda_rapat' => $idAgenda,
-                    'NIK' => $this->request->getVar('nik'),
-                    'nama' => $this->request->getVar('nama'),
-                    'asal_instansi' => $this->request->getVar('asal_instansi'),
-                    'ttd' => 'ttd',
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-
-                session()->setFlashdata('berhasil', true);
-                // session()->destroy('kode_valid');
-                return redirect('berhasil')->with('kode_valid', true);
-            }
-            // return 'ada';
-            $this->daftarHadir->insert([
-                'id_daftar_hadir' => $uuid2,
-                'slug' => $slug,
-                'id_agenda_rapat' => $idAgenda,
-                'NIK' => $this->request->getVar('nik'),
-                'nama' => $this->request->getVar('nama'),
-                'asal_instansi' => $this->request->getVar('asal_instansi'),
-                'ttd' => 'ttd',
-                'created_at' => date('Y-m-d H:i:s')
-            ]);
-        } else {
-            // session()->setFlashdata('gagal', true);
-            return redirect('/')->with('error', 'Anda sudah melakukan absensi!');
-        }
-
-
-        session()->setFlashdata('berhasil', true);
-        // session()->destroy('kode_valid');
-        return redirect('berhasil')->with('kode_valid', true);
-    }
-
     public function formAbsensi()
     {
-        $instansi = $this->pesertaRapat->getInstansi();
+        $instansi = $this->pesertaRapat->getInstansi(); // Akan diganti dengan api pegawai
         $instansiDecode = json_decode($instansi);
 
         $data = [
@@ -263,17 +46,103 @@ class RapatController extends BaseController
         return view('form_absensi', $data);
     }
 
+    protected function handleAbsen($idAgenda, $nip, $statusUser)
+    {
+        $uuid = Uuid::uuid4()->toString();
+        $uuid2 = Uuid::uuid4()->toString();
+        $kodeRapat = $this->request->getVar('kode_rapat');
+        $slugify = new Slugify();
+        $slug = $slugify->slugify($kodeRapat);
+
+        // Handle the absen logic here
+        $userExist = $this->pesertaUmum->cekIfExist($nip);
+        if ($userExist == null && $statusUser == 'tamu') {
+            $dataPesertaUmum = [
+                'id_peserta_umum' => $uuid,
+                'slug' => $slugify->slugify($this->request->getVar('nama')),
+                'nik' => $this->request->getVar('nip'),
+                'nama' => $this->request->getVar('nama'),
+                'alamat' => $this->request->getVar('alamat'),
+                'no_hp' => $this->request->getVar('no_hp'),
+                'asal_instansi' => $this->request->getVar('asal_instansi'),
+            ];
+
+            $dataPesertaRapat = [
+                'id_peserta_rapat' => $uuid,
+                'slug' => $slugify->slugify($this->request->getVar('nama')),
+                'id_agenda_rapat' => $idAgenda,
+                'NIK' => $this->request->getVar('nip'),
+            ];
+
+            $dataDaftarHadir = [
+                'id_daftar_hadir' => $uuid2,
+                'slug' => $slug,
+                'id_agenda_rapat' => $idAgenda,
+                'NIK' => $this->request->getVar('nip'),
+                'nama' => $this->request->getVar('nama'),
+                'asal_instansi' => $this->request->getVar('asal_instansi'),
+                'ttd' => 'ttd',
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+
+
+            $this->pesertaUmum->insertPesertaUmum($dataPesertaUmum);
+            $this->pesertaRapat->insertPesertaRapat($dataPesertaRapat);
+            $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
+
+            session()->setFlashdata('berhasil', true);
+            // session()->destroy('kode_valid');
+            return redirect('berhasil')->with('kode_valid', true);
+        } else {
+            $dataDaftarHadir = [
+                'id_daftar_hadir' => $uuid2,
+                'slug' => $slug,
+                'id_agenda_rapat' => $idAgenda,
+                'NIK' => $this->request->getVar('nip'),
+                'nama' => $this->request->getVar('nama'),
+                'asal_instansi' => $this->request->getVar('asal_instansi'),
+                'ttd' => 'ttd',
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+            $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
+        }
+    }
+
+
     public function absenStore()
     {
-        $nik = $this->request->getVar('nip');
-        $user = $this->pesertaUmum->cariUser($nik);
-        // dd($this->request->getVar('asal_instansi'));
+        $validate = $this->validateForm();
+        $idAgenda = $this->session->get('id_agenda');
+        $statusUser = $this->request->getVar('statusRadio');
+
+        if (!$validate) {
+            return redirect()->back()->withInput()->with('kode_valid', true);
+        }
+        $idAgenda = $this->session->get('id_agenda');
+        $nip = $this->request->getVar('nip');
+
+        if (!$this->daftarHadir->sudahAbsen($nip)) {
+
+            $statusUser = $this->request->getVar('statusRadio');
+
+            $this->handleAbsen($idAgenda, $nip, $statusUser);
+
+            $this->session->remove('id_agenda');
+            session()->setFlashdata('berhasil', true);
+            return redirect('berhasil')->with('kode_valid', true);
+        } else {
+            return redirect('/')->with('error', 'Anda sudah melakukan absensi!');
+        }
+    }
+
+    protected function validateForm()
+    {
         $rules = [
             'nip' => [
                 'rules' => 'required|numeric',
                 'errors' => [
-                    'required' => 'NIK harus diisi',
-                    'numeric' => 'NIK harus berupa angka'
+                    'required' => 'Data harus diisi',
+                    'numeric' => 'Data harus berupa angka'
                 ]
             ],
             'no_hp' => [
@@ -309,80 +178,6 @@ class RapatController extends BaseController
             ]
         ];
 
-        // return 'ini post';
-        // $data = [
-        //     'nip' => $this->request->getVar('nip'),
-        //     'no_hp' => $this->request->getVar('no_hp'),
-        //     'nama' => $this->request->getVar('nama'),
-        //     'alamat' => $this->request->getVar('alamat'),
-        //     'instansi' => $this->request->getVar('asal_instansi'),
-        //     'signature' => $this->request->getVar('signatureData'),
-        // ];
-        $uuid = Uuid::uuid4()->toString();
-        $uuid2 = Uuid::uuid4()->toString();
-        $kodeRapat = $this->request->getVar('kode_rapat');
-        $validate =  $this->validate($rules);
-        $slugify = new Slugify();
-        $slug = $slugify->slugify($kodeRapat);
-
-        if (!$validate) {
-            return redirect()->back()->withInput()->with('kode_valid', true);
-        }
-        $idAgenda = $this->session->get('id_agenda');
-        $cekAbsen = $this->daftarHadir->sudahAbsen($this->request->getVar('nip'));
-        $userExist = $this->pesertaUmum->cekIfExist($this->request->getVar('nik'));
-        // dd('dari rapat' . $idAgenda);
-        if (!$cekAbsen) {
-            if ($userExist == null) {
-                return 'tidak ada';
-                $this->pesertaUmum->insert([
-                    'id_peserta_umum' => $uuid,
-                    'slug' => $slugify->slugify($this->request->getVar('nama')),
-                    'nik' => $this->request->getVar('nik'),
-                    'nama' => $this->request->getVar('nama'),
-                    'alamat' => $this->request->getVar('alamat'),
-                    'no_hp' => $this->request->getVar('no_hp'),
-                    'asal_instansi' => $this->request->getVar('asal_instansi'),
-                ]);
-                $this->pesertaRapat->insert([
-                    'id_peserta_rapat' => $uuid,
-                    'slug' => $slugify->slugify($this->request->getVar('nama')),
-                    'id_agenda_rapat' => $idAgenda,
-                    'NIK' => $this->request->getVar('nik'),
-                ]);
-                $this->daftarHadir->insert([
-                    'id_daftar_hadir' => $uuid2,
-                    'slug' => $slug,
-                    'id_agenda_rapat' => $idAgenda,
-                    'NIK' => $this->request->getVar('nik'),
-                    'nama' => $this->request->getVar('nama'),
-                    'asal_instansi' => $this->request->getVar('asal_instansi'),
-                    'ttd' => 'ttd',
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-
-                session()->setFlashdata('berhasil', true);
-                // session()->destroy('kode_valid');
-                return redirect('berhasil')->with('kode_valid', true);
-            }
-            return 'ada';
-            $this->daftarHadir->insert([
-                'id_daftar_hadir' => $uuid2,
-                'slug' => $slug,
-                'id_agenda_rapat' => $idAgenda,
-                'NIK' => $this->request->getVar('nip'),
-                'nama' => $this->request->getVar('nama'),
-                'asal_instansi' => $this->request->getVar('asal_instansi'),
-                'ttd' => 'ttd',
-                'created_at' => date('Y-m-d H:i:s')
-            ]);
-        } else {
-            // session()->setFlashdata('gagal', true);
-            return redirect('/')->with('error', 'Anda sudah melakukan absensi!');
-        }
-        // remove session
-        $this->session->remove('id_agenda');
-        session()->setFlashdata('berhasil', true);
-        return redirect('berhasil')->with('kode_valid', true);
+        return $this->validate($rules);
     }
 }

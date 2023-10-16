@@ -53,8 +53,8 @@ class PesertaRapatModel extends Model
     public function getInstansi()
     {
         $apiUrl = 'https://egov.bulelengkab.go.id/api/instansi_utama';
-        $username = 'hadir_rapat';
-        $password = '@rapatBuleleng1#';
+        $username = getenv('API_USERNAME');
+        $password = getenv('API_PASSWORD');
         try {
             //code...
             $ch = curl_init($apiUrl);
@@ -70,5 +70,10 @@ class PesertaRapatModel extends Model
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
+    }
+
+    public function insertPesertaRapat($data)
+    {
+        return $this->insert($data);
     }
 }

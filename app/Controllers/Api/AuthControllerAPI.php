@@ -8,7 +8,7 @@ use CodeIgniter\API\ResponseTrait;
 use App\Models\UserModel;
 // use \Firebase\JWT\JWT;
 
-class LoginControllerAPI extends BaseController
+class AuthControllerAPI extends BaseController
 {
     use ResponseTrait;
 
@@ -55,7 +55,7 @@ class LoginControllerAPI extends BaseController
         return $this->respond($response, 200);
     }
 
-    function cariUser($json, $key)
+    protected function cariUser($json, $key)
     {
         foreach ($json->data as $item) {
             if ($item->kode_instansi === $key) {
@@ -66,5 +66,9 @@ class LoginControllerAPI extends BaseController
             }
         }
         return $result;
+    }
+
+    public function gantiPassword()
+    {
     }
 }

@@ -28,7 +28,7 @@ class BasicauthFilter implements FilterInterface
         $username = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : "";
         $password = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : "";
 
-        if ($username != getenv('apiusername') || $password != getenv('apipassword')) {
+        if ($username != getenv('API_USERNAME_FILTER') || $password != getenv('API_PASSWORD_FILTER')) {
 
             header("Content-type: application/json");
 

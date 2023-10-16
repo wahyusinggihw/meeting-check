@@ -13,7 +13,7 @@
                 <h3><?= isset($rapat['judul_rapat']) ? $rapat['judul_rapat'] : 'Rapat'  ?></h3>
                 <h4>Isi sesuai dengan data diri anda</h4>
             </div>
-            <form action="/submit-kode/form-absensi/store" method="post" id="form_pegawai">
+            <form action="<?= base_url('/submit-kode/form-absensi/store') ?>" method="post" id="form_pegawai">
                 <?= csrf_field() ?>
                 <input type="hidden" name="kode_rapat" value="<?= session()->get('kode_valid') ?>">
 

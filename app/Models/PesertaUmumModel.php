@@ -90,14 +90,6 @@ class PesertaUmumModel extends Model
         return $cek;
     }
 
-    //transaction
-    public function insertTransaction($data)
-    {
-        $this->db->transStart();
-        $this->db->table('pesertaumums')->insert($data);
-        $this->db->transComplete();
-    }
-
     function cariUser($key)
     {
         $data = $this->where('NIK', $key)->first();
@@ -107,5 +99,10 @@ class PesertaUmumModel extends Model
             return null;
         }
         return false;
+    }
+
+    public function insertPesertaUmum($data)
+    {
+        $this->insert($data);
     }
 }
