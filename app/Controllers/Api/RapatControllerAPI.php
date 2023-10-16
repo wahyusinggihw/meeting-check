@@ -104,13 +104,13 @@ class RapatControllerAPI extends ResourceController
                 'status' => true,
                 'message' => 'Berhasil melakukan absen.'
             ];
-            return $this->respond($response);
+            return $this->respond($response, 200);
         } else {
             $response = [
                 'status' => true,
                 'message' => 'Anda sudah melakukan absen.'
             ];
-            return $this->respond($response);
+            return $this->respond($response, 200);
         }
     }
 }

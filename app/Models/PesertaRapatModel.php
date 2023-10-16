@@ -55,15 +55,20 @@ class PesertaRapatModel extends Model
         $apiUrl = 'https://egov.bulelengkab.go.id/api/instansi_utama';
         $username = 'hadir_rapat';
         $password = '@rapatBuleleng1#';
-        $ch = curl_init($apiUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error: ' . curl_error($ch);
+        try {
+            //code...
+            $ch = curl_init($apiUrl);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+            $result = curl_exec($ch);
+            if (curl_errno($ch)) {
+                echo 'Error: ' . curl_error($ch);
+            }
+            curl_close($ch);
+            return $result;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
-        curl_close($ch);
-        return $result;
     }
 }

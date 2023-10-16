@@ -97,4 +97,15 @@ class PesertaUmumModel extends Model
         $this->db->table('pesertaumums')->insert($data);
         $this->db->transComplete();
     }
+
+    function cariUser($key)
+    {
+        $data = $this->where('NIK', $key)->first();
+        if ($data != null) {
+            return $data;
+        } else {
+            return null;
+        }
+        return false;
+    }
 }

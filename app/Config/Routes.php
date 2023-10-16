@@ -7,7 +7,7 @@ use JetBrains\PhpStorm\NoReturn;
  * @var RouteCollection $routes
  */
 
-// auth
+// Auth Admin
 $routes->group('auth', function ($routes) {
     $routes->match(['get', 'post'], 'login', 'Auth::login');
     $routes->get('logout', 'Auth::logout');
@@ -15,22 +15,37 @@ $routes->group('auth', function ($routes) {
 
 // Rapat
 $routes->get('/', 'Home::index');
-$routes->post('/submit-kode', 'Home::submitKode');
+$routes->post('/submit-kode/form-absensi', 'Home::submitKode');
+// revisi
+$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi');
+$routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
+
 // $routes->match(['get', 'post'], '/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
-$routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
-$routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::tamuStore');
-$routes->get('/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai',);
-$routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::pegawaiStore');
+// $routes->get('/submit-kode/form-absensi/tamu', 'RapatController::formTamu', ['filter' => 'cekkode']);
+// $routes->post('/submit-kode/form-absensi/tamu/store', 'RapatController::tamuStore');
+// $routes->get('/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai',);
+// $routes->post('/submit-kode/form-absensi/pegawai/store', 'RapatController::pegawaiStore');
+
 // $routes->match(['get', 'post'], '/submit-kode/form-absensi/pegawai', 'RapatController::formPegawai', ['filter' => 'cekkode']);
 
-// API
-$routes->resource('api/users', ['controller' => 'Api\UsersControllerAPI']);
-$routes->resource('api/agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
-$routes->resource('api/rapat', ['controller' => 'Api\RapatControllerAPI']);
+// JQUERY PESERTA RAPAT
+$routes->get('api/peserta/(:segment)', 'Api\UsersControllerAPI::getPeserta/$1');
+$routes->get('api/pegawai/(:segment)', 'Api\UsersControllerAPI::getPegawai/$1');
+
+// API Mobile App
+$routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
+    // Route mobile
+    $routes->post('login', "Api\LoginControllerAPI::login");
+    $routes->resource('agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
+    $routes->resource('rapat', ['controller' => 'Api\RapatControllerAPI']);
+    // route untuk get agenda rapat
+    // route untuk post daftar hadir
+});
 
 // validasi
 $routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);
 
+// Dashboard
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Dashboard\Dashboard::index');
     $routes->get('agenda-rapat', 'Dashboard\Dashboard::agenda');

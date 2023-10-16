@@ -102,7 +102,7 @@
         async function getPegawai(nip) {
             let response = await fetch('/api/users/' + nip);
             let data = await response.json();
-            // console.log(data);
+            console.log(data);
             return data;
         }
         // }

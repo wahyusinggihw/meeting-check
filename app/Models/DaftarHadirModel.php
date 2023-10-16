@@ -104,8 +104,9 @@ class DaftarHadirModel extends Model
     function sudahAbsen($nik)
     {
         $data = $this->where('NIK', $nik)->first();
+        $id_agenda = session()->get('id_agenda');
         if ($data != null) {
-            if ($data['id_agenda_rapat'] == session()->get('id_agenda')) {
+            if ($data['id_agenda_rapat'] == $id_agenda) {
                 return true;
             } else {
                 return false;
@@ -113,6 +114,7 @@ class DaftarHadirModel extends Model
         }
         return false;
     }
+
     function sudahAbsenAPI($nik, $id_agenda)
     {
         $data = $this->where('NIK', $nik)->first();
