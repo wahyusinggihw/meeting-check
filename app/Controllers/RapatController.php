@@ -106,7 +106,7 @@ class RapatController extends BaseController
             return $this->response->setJSON(['message' => 'Failed to save the signature.']);
         }
     }
-    // 
+
 
     protected function handleAbsen($idAgenda, $nip, $statusUser)
     {
