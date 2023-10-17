@@ -6,7 +6,7 @@
     <?php if ($agenda != null) : ?>
         <a href="/dashboard/agenda-rapat/tambah-agenda" class="btn btn-primary mb-2">Tambah Agenda</a>
         <div class="table-container">
-            <table class="participant-table">
+            <table id="example" class="row-border" style="width:100%">
                 <thead>
                     <tr>
                         <!-- <th>id</th> -->
@@ -22,10 +22,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $counter = loopIteration($pager, 'agenda') ?>
                     <?php foreach ($agenda as $item) : ?>
                         <tr>
-                            <td><?= $counter++ ?></td>
+                            <td></td>
                             <td><?= $item['kode_rapat'] ?></td>
                             <td><?= $item['judul_rapat'] ?></td>
                             <td><?= $item['agenda'] ?></td>
@@ -35,9 +34,9 @@
                             <td><?= $item['link_rapat'] ?></td>
                             <td>
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 btn-group">
                                         <a href="<?= base_url('dashboard/agenda-rapat/view-agenda/' . $item['slug']) ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                                        <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['slug']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                                        <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['slug']) ?>" class="btn btn-warning mx-2"><i class="fa-solid fa-pen"></i></a>
                                         <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a>
                                     </div>
                                 </div>
@@ -75,8 +74,7 @@
 
             </table>
         </div>
-        <!-- Pagination -->
-        <?= $pager->links('agenda', 'bs_simple') ?>
+
 
     <?php else : ?>
         <div class="button-container">
@@ -89,6 +87,21 @@
             <a href="/dashboard/agenda-rapat/tambah-agenda" id="tambah-agenda" class="btn btn-primary mb-2">Tambah Agenda</a>
         </div>
     <?php endif; ?>
+
+    <script>
+        let startNumber = 1;
+        new DataTable('#example', {
+            "columnDefs": [{
+                "targets": [7, 8], // Index of the column to disable sorting (zero-based index)
+                "orderable": false,
+
+            }],
+            // Additional DataTables options here
+            createdRow: function(row, data, dataIndex) {
+                $('td:eq(0)', row).html(startNumber++);
+            }
+        });
+    </script>
 </body>
 
 <?= $this->endSection() ?>

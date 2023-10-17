@@ -22,7 +22,7 @@ class AgendaRapatSeed extends Seeder
             $data = [
                 'id_agenda' => $faker->uuid(),
                 'slug' => $faker->slug(),
-                'id_admin' => '8e6a28e3-6b1d-430e-86cd-cfa7435cd843',
+                'id_admin' => '21486571-73f7-4570-b8de-d412aa4c887d',
                 'kode_rapat' => kodeRapat(),
                 'judul_rapat' => $faker->sentence(3),
                 'tempat' => $faker->address(),
