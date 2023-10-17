@@ -1,7 +1,9 @@
 <header>
     <div class="container">
         <div class="logo">
-            <img src="<?php echo base_url('assets/img/pemkabori.png'); ?>" alt="Logo" width="350">
+            <a href="/">
+                <img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Logo" width="100">
+            </a>
         </div>
         <ul class="links">
             <li id="datetime">

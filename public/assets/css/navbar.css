@@ -27,10 +27,12 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: row;
 }
 
 nav li {
-    display: inline;
+    display: flex;
     margin-left: 20px;
 }
 
@@ -49,4 +51,25 @@ nav li a {
 
 nav li a:hover {
     border-bottom: 2px solid white;
+}
+
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+        /* Change to a column layout */
+        align-items: flex-start;
+        /* Align items to the start */
+    }
+
+    nav ul {
+        flex-direction: column;
+        /* Display the items in a column */
+        align-items: flex-start;
+        /* Align items to the start */
+    }
+
+    nav li {
+        margin: 10px 0;
+        /* Adjust margin for smaller spacing */
+    }
 }

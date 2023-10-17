@@ -23,10 +23,11 @@ function formatTime(date) {
 function formatDate(date) {
     const daysOfWeek = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
     const dayOfWeek = daysOfWeek[date.getDay()];
+    // const daysOfMonth = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
     const dayOfMonth = date.getDate();
-    const month = date.toLocaleString('en-US', { month: 'long' });
+    const month = date.toLocaleString('en-US', { month: 'short' });
     const year = date.getFullYear();
-    const formattedDate = `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
+    const formattedDate = `${dayOfMonth} ${month} ${year}`;
     return formattedDate;
 }
 
