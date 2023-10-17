@@ -54,7 +54,10 @@
                             <td><?= $item['NIK'] ?></td>
                             <td><?= $item['nama'] ?></td>
                             <td><?= $item['asal_instansi'] ?></td>
-                            <td><?= $item['ttd'] ?></td>
+                            <td>
+                                <div class="btn btn-secondary show-sweet-alert" data-ttd="<?= $item['ttd'] ?>">Lihat</div>
+                                <!-- <div class="btn btn-secondary" id="showSweetAlertButton">Lihat</div> -->
+                            </td>
                             <td><?= $item['created_at'] ?></td>
                         </tr>
                     <?php endforeach; ?>
@@ -64,5 +67,23 @@
         </div>
     <?php endif; ?>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const showSweetAlertButtons = document.querySelectorAll(".show-sweet-alert");
+
+        showSweetAlertButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const ttd = this.getAttribute("data-ttd");
+
+                Swal.fire({
+                    title: 'Tanda tangan',
+                    html: `<img src="${ttd}" width="300" height="200" alt="Image">`,
+                    confirmButtonText: 'Close',
+                });
+            });
+        });
+    });
+</script>
 
 <?= $this->endSection() ?>

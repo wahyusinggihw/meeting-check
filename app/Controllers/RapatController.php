@@ -46,28 +46,67 @@ class RapatController extends BaseController
         return view('form_absensi', $data);
     }
 
-    protected function saveSignature()
+    // protected function saveSignature()
+    // {
+    //     $signatureData = $this->request->getVar('signatureData');
+
+    //     // Simpan data tanda tangan ke direktori
+    //     $filename = 'signature_' . time() . '.png'; // Nama berkas yang unik
+    //     $pathToSignatureDirectory = WRITEPATH . 'uploads/signatures/'; // Ganti dengan direktori penyimpanan yang sesuai
+    //     $fullPath = $pathToSignatureDirectory . $filename;
+    //     $publicPath = base_url('uploads/signatures/' . $filename);
+    //     // Decode data tanda tangan dan simpan dalam berkas
+    //     $signatureImage = base64_decode(explode(',', $signatureData)[1]);
+    //     file_put_contents($fullPath, $signatureImage);
+
+    //     // Berikan respons sukses atau gagal
+    //     $response = [
+    //         'status' => 'success',
+    //         'message' => 'Tanda tangan berhasil disimpan.',
+    //         'path' => $fullPath
+    //     ];
+
+    //     return $this->response->setJSON($response);
+    // }
+
+    public function saveSignature($kodeRapat)
     {
-        $signatureData = $this->request->getVar('signatureData');
+        helper('filesystem');
 
-        // Simpan data tanda tangan ke direktori
-        $filename = 'signature_' . time() . '.png'; // Nama berkas yang unik
-        $pathToSignatureDirectory = WRITEPATH . 'uploads/signatures/'; // Ganti dengan direktori penyimpanan yang sesuai
-        $fullPath = $pathToSignatureDirectory . $filename;
+        $signatureData = $this->request->getPost('signatureData');
 
-        // Decode data tanda tangan dan simpan dalam berkas
-        $signatureImage = base64_decode(explode(',', $signatureData)[1]);
-        file_put_contents($fullPath, $signatureImage);
+        // Validate and process the uploaded data (convert Data URL to image file)
 
-        // Berikan respons sukses atau gagal
-        $response = [
-            'status' => 'success',
-            'message' => 'Tanda tangan berhasil disimpan.',
-            'path' => $fullPath
-        ];
+        // Get the writable path from the configuration
+        $writablePath = WRITEPATH . 'uploads/signatures/';
 
-        return $this->response->setJSON($response);
+        // Create a unique file name, e.g., using a timestamp
+        $fileName = 'signature_' . $kodeRapat . time() . '.png';
+
+        // Save the file to the writable directory
+        if (write_file($writablePath . $fileName, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureData)))) {
+            // Move the file to the public folder
+            $publicPath = FCPATH . 'uploads/signatures/';
+            if (!is_dir($publicPath)) {
+                mkdir($publicPath, 0777, true);
+            }
+
+            rename($writablePath . $fileName, $publicPath . $fileName);
+
+            // Respond with a success message or other data
+            $response = [
+                'status' => 'success',
+                'message' => 'Tanda tangan berhasil disimpan.',
+                'publicPath' => base_url('uploads/signatures/' . $fileName)
+            ];
+
+            return $this->response->setJSON($response);
+        } else {
+            // Handle the error if the file couldn't be saved
+            return $this->response->setJSON(['message' => 'Failed to save the signature.']);
+        }
     }
+    // 
 
     protected function handleAbsen($idAgenda, $nip, $statusUser)
     {
@@ -77,6 +116,9 @@ class RapatController extends BaseController
         $slugify = new Slugify();
         $slug = $slugify->slugify($kodeRapat);
 
+        $saveTandaTangan = $this->saveSignature($kodeRapat)->getBody();
+        $tandaTanganDecode = json_decode($saveTandaTangan, true);
+        $tandaTangan = $tandaTanganDecode['publicPath'];
 
         $dataDaftarHadir = [
             'id_daftar_hadir' => $uuid2,
@@ -85,7 +127,7 @@ class RapatController extends BaseController
             'NIK' => $this->request->getVar('nip'),
             'nama' => $this->request->getVar('nama'),
             'asal_instansi' => $this->request->getVar('asal_instansi'),
-            'ttd' => 'ttd',
+            'ttd' => $tandaTangan,
             'created_at' => date('Y-m-d H:i:s')
         ];
 
@@ -126,8 +168,10 @@ class RapatController extends BaseController
     public function absenStore()
     {
         // $tandaTangan = $this->request->getVar('signatureData');
-        // $tandaTangan = $this->saveSignature();
-        // dd($tandaTangan);
+        // $tandaTangan = $this->saveSignature()->getBody();
+        // $tandaTangan = json_decode($tandaTangan, true);
+        // dd();
+
         $validate = $this->validateForm();
         $idAgenda = $this->session->get('id_agenda');
         $statusUser = $this->request->getVar('statusRadio');

@@ -157,6 +157,7 @@
             });
         });
     </script> -->
+    <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
     <script>
         $(document).ready(function() {
             $('#nip').on('change', function() {
@@ -201,7 +202,7 @@
             // Trigger the change event on 'nip' input when a radio button is clicked
             $('.statusRadio').on('click', function() {
                 $('#nip, #no_hp, #nama, #alamat, #asal_instansi').val('');
-
+                clearSignature();
                 // Show/hide the 'instansiOption' and 'instansiText' divs based on the selected radio button
                 if ($(this).val() === 'pegawai') {
                     $('#instansiOption').show();
