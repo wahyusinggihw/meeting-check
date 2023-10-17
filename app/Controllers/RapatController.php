@@ -83,6 +83,10 @@ class RapatController extends BaseController
         // Create a unique file name, e.g., using a timestamp
         $fileName = 'signature_' . $kodeRapat . time() . '.png';
 
+        if (!is_dir($writablePath)) {
+            mkdir($writablePath, 0777);
+        }
+
         // Save the file to the writable directory
         if (write_file($writablePath . $fileName, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureData)))) {
             // Move the file to the public folder
