@@ -17,18 +17,20 @@ $routes->group('auth', function ($routes) {
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode/form-absensi', 'Home::submitKode');
 // revisi
-$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi', ['filter' => 'cekkode']);
+$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi');
 $routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
 
 
 // JQUERY PESERTA RAPAT
 $routes->get('api/peserta/(:segment)', 'Api\UsersControllerAPI::getPeserta/$1');
 $routes->get('api/pegawai/(:segment)', 'Api\UsersControllerAPI::getPegawai/$1');
+$routes->post('api/save-signature', 'RapatController::saveSignatureData');
+
 
 // API Mobile App
 $routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
     // Route mobile
-    $routes->post('login', "Api\LoginControllerAPI::login");
+    $routes->post('login', "Api\AuthControllerAPI::login");
     $routes->resource('agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
     // $routes->resource('rapat', ['controller' => 'Api\RapatControllerAPI']);
     $routes->post('rapat', 'Api\RapatControllerAPI::absenStore');

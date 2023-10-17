@@ -10,6 +10,7 @@ use App\Models\DaftarHadirModel;
 use App\Models\AgendaRapatModel;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
+use DateTime;
 
 
 
@@ -101,9 +102,13 @@ class RapatControllerAPI extends BaseController
             return $this->response(false, 'Kode rapat tidak ditemukan.');
         }
 
-        $expirationTime = expiredTime($detailRapat['jam']);
+        $meetingTime = DateTime::createFromFormat('H:i', $detailRapat['jam']);
+        $expirationTime = DateTime::createFromFormat('H:i', $currentTime);
 
-        if ($expirationTime < $currentTime) {
+
+        // $expirationTime = expiredTime($detailRapat['jam']);
+
+        if ($expirationTime > $meetingTime) {
             return $this->response(false, 'Rapat kadaluarsa');
         }
 

@@ -46,6 +46,29 @@ class RapatController extends BaseController
         return view('form_absensi', $data);
     }
 
+    protected function saveSignature()
+    {
+        $signatureData = $this->request->getVar('signatureData');
+
+        // Simpan data tanda tangan ke direktori
+        $filename = 'signature_' . time() . '.png'; // Nama berkas yang unik
+        $pathToSignatureDirectory = WRITEPATH . 'uploads/signatures/'; // Ganti dengan direktori penyimpanan yang sesuai
+        $fullPath = $pathToSignatureDirectory . $filename;
+
+        // Decode data tanda tangan dan simpan dalam berkas
+        $signatureImage = base64_decode(explode(',', $signatureData)[1]);
+        file_put_contents($fullPath, $signatureImage);
+
+        // Berikan respons sukses atau gagal
+        $response = [
+            'status' => 'success',
+            'message' => 'Tanda tangan berhasil disimpan.',
+            'path' => $fullPath
+        ];
+
+        return $this->response->setJSON($response);
+    }
+
     protected function handleAbsen($idAgenda, $nip, $statusUser)
     {
         $uuid = Uuid::uuid4()->toString();
@@ -53,6 +76,18 @@ class RapatController extends BaseController
         $kodeRapat = $this->request->getVar('kode_rapat');
         $slugify = new Slugify();
         $slug = $slugify->slugify($kodeRapat);
+
+
+        $dataDaftarHadir = [
+            'id_daftar_hadir' => $uuid2,
+            'slug' => $slug,
+            'id_agenda_rapat' => $idAgenda,
+            'NIK' => $this->request->getVar('nip'),
+            'nama' => $this->request->getVar('nama'),
+            'asal_instansi' => $this->request->getVar('asal_instansi'),
+            'ttd' => 'ttd',
+            'created_at' => date('Y-m-d H:i:s')
+        ];
 
         // Handle the absen logic here
         $userExist = $this->pesertaUmum->cekIfExist($nip);
@@ -74,18 +109,6 @@ class RapatController extends BaseController
                 'NIK' => $this->request->getVar('nip'),
             ];
 
-            $dataDaftarHadir = [
-                'id_daftar_hadir' => $uuid2,
-                'slug' => $slug,
-                'id_agenda_rapat' => $idAgenda,
-                'NIK' => $this->request->getVar('nip'),
-                'nama' => $this->request->getVar('nama'),
-                'asal_instansi' => $this->request->getVar('asal_instansi'),
-                'ttd' => 'ttd',
-                'created_at' => date('Y-m-d H:i:s')
-            ];
-
-
             $this->pesertaUmum->insertPesertaUmum($dataPesertaUmum);
             $this->pesertaRapat->insertPesertaRapat($dataPesertaRapat);
             $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
@@ -94,16 +117,7 @@ class RapatController extends BaseController
             // session()->destroy('kode_valid');
             return redirect('berhasil')->with('kode_valid', true);
         } else {
-            $dataDaftarHadir = [
-                'id_daftar_hadir' => $uuid2,
-                'slug' => $slug,
-                'id_agenda_rapat' => $idAgenda,
-                'NIK' => $this->request->getVar('nip'),
-                'nama' => $this->request->getVar('nama'),
-                'asal_instansi' => $this->request->getVar('asal_instansi'),
-                'ttd' => 'ttd',
-                'created_at' => date('Y-m-d H:i:s')
-            ];
+            // insert ke daftar hadir jika peserta sudah ada di database / peserta adalah pegawai
             $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
         }
     }
@@ -111,6 +125,9 @@ class RapatController extends BaseController
 
     public function absenStore()
     {
+        // $tandaTangan = $this->request->getVar('signatureData');
+        $tandaTangan = $this->saveSignature();
+        dd($tandaTangan);
         $validate = $this->validateForm();
         $idAgenda = $this->session->get('id_agenda');
         $statusUser = $this->request->getVar('statusRadio');
