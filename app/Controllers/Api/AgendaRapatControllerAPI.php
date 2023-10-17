@@ -24,7 +24,7 @@ class AgendaRapatControllerAPI extends ResourceController
             'status' => true,
             'data' => $agendaRapat
         ];
-        return $this->respond($result);
+        return $this->respond($result, 200);
     }
 
     public function show($id = null)
@@ -35,6 +35,6 @@ class AgendaRapatControllerAPI extends ResourceController
             'status' => true,
             'data' => $agendaRapat
         ];
-        return $this->respond($result);
+        return $this->respond($result, 200);
     }
 }

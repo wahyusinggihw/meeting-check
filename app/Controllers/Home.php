@@ -3,9 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\AgendaRapatModel;
+use App\Models\PesertaRapatModel;
 
 class Home extends BaseController
 {
+    protected $pesertaRapat;
+    protected $helpers = ['form'];
+    public function __construct()
+    {
+        $this->pesertaRapat = new PesertaRapatModel();
+    }
+
     public function index(): string
     {
         $data = [
@@ -26,6 +34,8 @@ class Home extends BaseController
 
         $agendaRapat = new AgendaRapatModel();
         $kode = $this->request->getVar('inputAlphanumeric');
+        $instansi = $this->pesertaRapat->getInstansi();
+        $instansiDecode = json_decode($instansi);
 
         if (!$this->validate([
             'inputAlphanumeric' => 'required'
@@ -48,15 +58,17 @@ class Home extends BaseController
                 'title' => 'Submit Kode',
                 'rapat' => $rapat,
                 'kode_rapat' => $kode,
+                'instansi' => $instansiDecode,
                 'id_agenda' => $rapat['id_agenda'],
 
             ];
 
-            session();
+            // session();
             session()->setFlashdata('kode_valid', $kode);
-            session()->set($data);
+            $this->session->set('id_agenda', $rapat['id_agenda']);
+            // session()->set($data);
         }
-
-        return view('peran', $data);
+        // return redirect('submit-kode/form-absensi');
+        return view('form_absensi', $data);
     }
 }
