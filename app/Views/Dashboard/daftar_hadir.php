@@ -35,7 +35,7 @@
         <!-- foreach php -->
 
         <div class="table-container">
-            <table class="participant-table">
+            <table id="example" class="order-column" style="width:100%">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -47,10 +47,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1 ?>
                     <?php foreach ($daftar_hadir as $item) : ?>
                         <tr>
-                            <td><?= $i++ ?></td>
+                            <td></td>
                             <td><?= $item['NIK'] ?></td>
                             <td><?= $item['nama'] ?></td>
                             <td><?= $item['asal_instansi'] ?></td>
@@ -66,6 +65,35 @@
             </table>
         </div>
     <?php endif; ?>
+    <script>
+        let startNumber = 1;
+        new DataTable('#example', {
+            "columnDefs": [{
+                "targets": [4], // Index of the column to disable sorting (zero-based index)
+                "orderable": false,
+
+            }],
+            dom: 'Bfrtip',
+            buttons: [
+                'print'
+            ],
+            // buttons: [{
+            //     extend: 'print',
+            //     customize: function(win) {
+            //         // Menambahkan nomor pada setiap baris
+            //         $(win.document.body).find('td').each(function(index) {
+            //             $(this).prepend('<td>' + (index + 1) + '</td>');
+            //         });
+            //         // Menambahkan judul kolom nomor
+            //         // $(win.document.body).find('table thead tr').prepend('');
+            //     }
+            // }],
+            // Additional DataTables options here
+            createdRow: function(row, data, dataIndex) {
+                $('td:eq(0)', row).html(startNumber++);
+            }
+        });
+    </script>
 </body>
 
 <script>

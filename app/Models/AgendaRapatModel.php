@@ -36,9 +36,9 @@ class AgendaRapatModel extends Model
     public function getAgendaByRole()
     {
         if (session()->get('role') != 'superadmin') {
-            return $this->where('id_admin', session()->get('id_admin'))->paginate(5, 'agenda');
+            return $this->where('id_admin', session()->get('id_admin'))->findAll();
         } else {
-            return $this->paginate(5, 'agenda');
+            return $this->findAll();
         }
     }
 
