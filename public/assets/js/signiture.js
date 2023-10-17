@@ -1,25 +1,25 @@
-const canvas = document.getElementById('signatureCanvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("signatureCanvas");
+const ctx = canvas.getContext("2d");
 let drawing = false;
 
 const canvasRect = canvas.getBoundingClientRect();
 const scale = {
   x: canvas.width / canvasRect.width,
-  y: canvas.height / canvasRect.height
+  y: canvas.height / canvasRect.height,
 };
 
-canvas.addEventListener('mousedown', () => {
+canvas.addEventListener("mousedown", () => {
   drawing = true;
   ctx.beginPath();
 });
 
-canvas.addEventListener('mouseup', () => {
+canvas.addEventListener("mouseup", () => {
   drawing = false;
   ctx.closePath();
   saveSignatureData();
 });
 
-canvas.addEventListener('mousemove', draw);
+canvas.addEventListener("mousemove", draw);
 
 function draw(e) {
   if (!drawing) return;
@@ -28,8 +28,8 @@ function draw(e) {
   const y = (e.clientY - rect.top) * scale.y;
 
   ctx.lineWidth = 2;
-  ctx.lineCap = 'round';
-  ctx.strokeStyle = '#000';
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "#000";
   ctx.lineTo(x, y);
   ctx.stroke();
   ctx.beginPath();
@@ -42,15 +42,32 @@ function clearSignature() {
 
 function saveSignatureData() {
   const signatureData = canvas.toDataURL(); // Mendapatkan data tanda tangan dalam format base64
-  document.getElementById('signatureData').value = signatureData;
+  document.getElementById("signatureData").value = signatureData;
 }
 
 function saveSignature() {
-  const signatureData = document.getElementById('signatureData').value;
+  const signatureCanvas = document.getElementById("signatureCanvas");
+  const signatureData = signatureCanvas.toDataURL(); // Mengambil gambar tanda tangan dalam bentuk data URL
+
   if (signatureData) {
+    // Simpan data tanda tangan ke server
+    const formData = new FormData();
+    formData.append("signatureData", signatureData);
+
+    fetch("/api/save-signature", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message); // Menampilkan pesan respons dari server
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
     // Simpan data tanda tangan ke server atau lakukan tindakan lain sesuai kebutuhan
-    console.log('Data tanda tangan:', signatureData);
+    console.log("Data tanda tangan:", signatureData);
   } else {
-    alert('Tanda tangan belum dibuat.');
+    alert("Tanda tangan belum dibuat.");
   }
 }

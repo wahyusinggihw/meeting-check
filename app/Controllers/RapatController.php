@@ -126,8 +126,8 @@ class RapatController extends BaseController
     public function absenStore()
     {
         // $tandaTangan = $this->request->getVar('signatureData');
-        $tandaTangan = $this->saveSignature();
-        dd($tandaTangan);
+        // $tandaTangan = $this->saveSignature();
+        // dd($tandaTangan);
         $validate = $this->validateForm();
         $idAgenda = $this->session->get('id_agenda');
         $statusUser = $this->request->getVar('statusRadio');
