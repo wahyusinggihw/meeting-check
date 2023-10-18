@@ -25,7 +25,7 @@ class AgendaRapat extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'judul_rapat' => [
+            'agenda_rapat' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
@@ -41,13 +41,21 @@ class AgendaRapat extends Migration
                 'type' =>  'VARCHAR',
                 'constraint' => 6,
             ],
-            'agenda' => [
+            'deskripsi' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
             'link_rapat' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+            ],
+            'status' => [
+                'type' => 'enum',
+                'constraint' => ['belum-berjalan', 'sedang-berlangsung', 'kadaluarsa'],
+            ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
             ],
         ]);
 

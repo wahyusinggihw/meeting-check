@@ -17,11 +17,11 @@ class AgendaRapatModel extends Model
         'id_agenda',
         'slug',
         'id_admin',
-        'judul_rapat',
+        'agenda_rapat',
         'kode_rapat',
         'tempat',
         'tanggal',
-        'agenda',
+        'deskripsi',
         'jam',
         'link_rapat'
     ];
@@ -56,8 +56,21 @@ class AgendaRapatModel extends Model
     // get agenda rapat by kode_rapat
     function getAgendaRapatByKode($kodeRapat)
     {
-        $query = $this->where('kode_rapat', $kodeRapat)
-            ->first();
+        $query = $this->where('kode_rapat', $kodeRapat)->first();
+        // dd($query);
+        if ($query != null) {
+            return $query;
+        } else {
+            return false;
+        }
+
+        return $query;
+    }
+
+    // get id agenda sementara
+    function getAgendaRapatByField($idAgenda)
+    {
+        $query = $this->where('id_agenda', $idAgenda)->first();
         // dd($query);
         if ($query != null) {
             return $query;

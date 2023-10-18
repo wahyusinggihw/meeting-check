@@ -45,6 +45,20 @@ class AgendaRapat extends BaseController
         return view('dashboard/view_agenda', $data);
     }
 
+    public function informasiRapat($idAgenda)
+    {
+        $agendaRapat  = $this->agendaRapat->getAgendaRapatByField($idAgenda);
+        // dd($agendaRapat);
+        $data = [
+            'title' => 'Informasi Rapat',
+            'qrCode' => generateQrCode($agendaRapat['link_rapat']),
+            'agendaRapat' => $agendaRapat,
+        ];
+
+        $this->session->set('id_agenda', $agendaRapat['id_agenda']);
+        return view('informasi_rapat', $data);
+    }
+
     public function store()
     {
         // dd(session()->get('id_admin'));
@@ -70,12 +84,13 @@ class AgendaRapat extends BaseController
             'slug' => $slugify->slugify($this->request->getVar('judul_rapat')),
             'id_admin' => session()->get('id_admin'), // 'id_admin' => '1
             'kode_rapat' => $kodeRapat,
-            'judul_rapat' => $this->request->getVar('judul_rapat'),
+            'agenda_rapat' => $this->request->getVar('judul_rapat'),
             'tempat' => $this->request->getVar('tempat'),
             'tanggal' => $this->request->getVar('tanggal'),
             'jam' => $this->request->getVar('jam'),
-            'agenda' => $this->request->getVar('agenda'),
-            'link_rapat' => base_url() . '?kode_rapat=' . $kodeRapat,
+            'deskripsi' => $this->request->getVar('agenda'),
+            'link_rapat' => base_url() . 'submit-kode/form-absensi/qr/' . $uuid,
+            'status' => 'belum-berjalan'
         ]);
 
 

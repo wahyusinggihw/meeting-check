@@ -13,13 +13,17 @@ $routes->group('auth', function ($routes) {
     $routes->get('logout', 'Auth::logout');
 });
 
-// Rapat
+// Rapat landing page
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode/form-absensi', 'Home::submitKode');
-// revisi
+
+// revisi form absensi
 $routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi');
 $routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
 
+// share rapat qr code
+$routes->get('/submit-kode/form-absensi/qr/(:segment)', 'RapatController::formAbsensi/$1');
+$routes->get('/informasi-rapat/(:segment)', 'Dashboard\AgendaRapat::informasiRapat/$1');
 
 // JQUERY PESERTA RAPAT
 $routes->get('api/peserta/(:segment)', 'Api\UsersControllerAPI::getPeserta/$1');

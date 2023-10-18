@@ -37,7 +37,7 @@ class AdminSeed extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'id_admin' => $uuid2,
+                'id_admin' => $uuid3,
                 'slug' => 'operator1',
                 'nama' => 'Operator Satu',
                 'role' => 'operator',
@@ -46,7 +46,7 @@ class AdminSeed extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'id_admin' => $uuid3,
+                'id_admin' => $uuid4,
                 'slug' => 'admin2',
                 'nama' => 'Admin Dua',
                 'role' => 'admin',
@@ -55,7 +55,7 @@ class AdminSeed extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'id_admin' => $uuid2,
+                'id_admin' => $uuid5,
                 'slug' => 'operator2',
                 'nama' => 'Operator Dua',
                 'role' => 'operator',
