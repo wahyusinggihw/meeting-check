@@ -19,7 +19,7 @@ class Admin extends Migration
             ],
             'role' => [
                 'type' => 'enum',
-                'constraint' => ['superadmin', 'admin'],
+                'constraint' => ['superadmin', 'admin', 'operator'],
             ],
             'nama' => [
                 'type' => 'VARCHAR',

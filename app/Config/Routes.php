@@ -33,7 +33,7 @@ $routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
     $routes->post('login', "Api\AuthControllerAPI::login");
     $routes->resource('agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
     // $routes->resource('rapat', ['controller' => 'Api\RapatControllerAPI']);
-    $routes->post('rapat', 'Api\RapatControllerAPI::absenStore');
+    $routes->post('form-absensi-store', 'Api\RapatControllerAPI::absenStore');
     // route untuk get agenda rapat
     // route untuk post daftar hadir
 });

@@ -16,7 +16,7 @@ function kodeRapat()
 function expiredTime($startTime)
 {
     // $startTime = $rapat['jam']; // Your initial time
-    $interval = '1 hour'; // The interval you want to add
+    $interval = '4 hour'; // The interval you want to add
 
     // Convert the time to a Unix timestamp
     $timestamp = strtotime($startTime);

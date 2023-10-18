@@ -12,6 +12,9 @@ class AdminSeed extends Seeder
         $uuid = Uuid::uuid4()->toString();
         $uuid2 = Uuid::uuid4()->toString();
         $uuid3 = Uuid::uuid4()->toString();
+        $uuid4 = Uuid::uuid4()->toString();
+        $uuid5 = Uuid::uuid4()->toString();
+
         // user
 
         $data = [
@@ -34,12 +37,30 @@ class AdminSeed extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
+                'id_admin' => $uuid2,
+                'slug' => 'operator1',
+                'nama' => 'Operator Satu',
+                'role' => 'operator',
+                'username' => 'operator1',
+                'password' => password_hash('operator1', PASSWORD_DEFAULT),
+                'created_at' => date('Y-m-d H:i:s'),
+            ],
+            [
                 'id_admin' => $uuid3,
                 'slug' => 'admin2',
                 'nama' => 'Admin Dua',
                 'role' => 'admin',
                 'username' => 'admin2',
                 'password' => password_hash('admin2', PASSWORD_DEFAULT),
+                'created_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'id_admin' => $uuid2,
+                'slug' => 'operator2',
+                'nama' => 'Operator Dua',
+                'role' => 'operator',
+                'username' => 'operator2',
+                'password' => password_hash('operator2', PASSWORD_DEFAULT),
                 'created_at' => date('Y-m-d H:i:s'),
             ],
         ];
