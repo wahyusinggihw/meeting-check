@@ -72,4 +72,20 @@ class Auth extends BaseController
         session()->destroy();
         return redirect()->to('/');
     }
+
+    public function tester()
+    {
+        $data = [
+            'title' => 'Tester'
+        ];
+        return view('auth/tester.php', $data);
+    }
+
+    public function informasiRapat()
+    {
+        $data = [
+            'title' => 'Tester'
+        ];
+        return view('informasi_rapat.php', $data);
+    }
 }

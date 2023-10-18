@@ -72,3 +72,7 @@ $routes->get('/formtamu', 'RapatController::formTamu');
 $routes->get('/berhasil', 'RapatController::berhasil');
 $routes->get('/gagal', 'RapatController::gagal');
 $routes->get('dashboard/agenda-kosong', 'Dashboard::agendaKosong');
+$routes->get('/informasi-rapat', 'Auth::informasiRapat');
+
+// Route View Tester
+$routes->get('/tester', 'Auth::tester');
