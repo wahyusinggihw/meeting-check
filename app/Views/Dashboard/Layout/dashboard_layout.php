@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard <?php isset($title) ? print('| ' . $title) : '' ?></title>
+  <title>Dashboard <?php isset($title) ? print('- ' . $title) : '' ?></title>
   <link rel="stylesheet" href="<?= base_url('assets/css/agendarapat.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/daftarpeserta.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/tableagenda.css') ?>">
@@ -75,7 +75,6 @@
       </section>
       <!-- /.content -->
     </div>
-
     <?= $this->include('Dashboard/Layout/footer'); ?>
 
     <!-- Control Sidebar -->
