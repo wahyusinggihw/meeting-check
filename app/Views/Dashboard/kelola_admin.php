@@ -5,7 +5,7 @@
 <body>
     <a href="kelola-admin/tambah-admin" class="btn btn-primary mb-2">Tambah Admin</a>
     <div class="table-container">
-        <table class="participant-table">
+        <table id="example" class="row-border" style="width:100%">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -66,6 +66,21 @@
 
         </table>
     </div>
+
+    <script>
+        let startNumber = 1;
+        new DataTable('#example', {
+            "columnDefs": [{
+                "targets": [2, 5], // Index of the column to disable sorting (zero-based index)
+                "orderable": false,
+
+            }],
+            // Additional DataTables options here
+            createdRow: function(row, data, dataIndex) {
+                $('td:eq(0)', row).html(startNumber++);
+            }
+        });
+    </script>
 </body>
 
 <?= $this->endSection() ?>
