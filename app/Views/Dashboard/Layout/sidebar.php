@@ -42,11 +42,7 @@ use PhpParser\Node\Stmt\Echo_;
                         <p>Home</p>
                     </a>
                 </li>
-                <?php if (session()->get('role') != 'superadmin') : ?>
-                    <li class="nav-item">
-
-                    </li>
-                <?php else : ?>
+                <?php if (session()->get('role') == 'superadmin') : ?>
                     <li class="nav-item">
                         <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link <?= uri_string() == 'dashboard/kelola-admin' ? 'active' : '' ?>">
                             <i class="nav-icon fas fa-users"></i>
@@ -58,12 +54,6 @@ use PhpParser\Node\Stmt\Echo_;
                     <a href="<?= base_url('/dashboard/agenda-rapat') ?>" class="nav-link <?= uri_string() == "dashboard/agenda-rapat" ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-table"></i>
                         <p>Agenda Rapat</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('/dashboard/daftar-hadir') ?>" class="nav-link <?= uri_string() == 'dashboard/daftar-hadir' ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>Daftar Hadir</p>
                     </a>
                 </li>
             </ul>

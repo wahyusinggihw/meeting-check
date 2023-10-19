@@ -26,15 +26,15 @@ class DaftarHadirController extends BaseController
         return view('dashboard/daftar_hadir', $data);
     }
 
-    public function cariDaftarHadir()
+    public function cariDaftarHadir($slug)
     {
         // dd($this->request->getVar('daftar_agenda'));
-        $id_agenda = $this->request->getVar('daftar_agenda');
+        $id_agenda = $this->agendaRapat->where('slug', $slug)->first()['id_agenda'];
+        // $id_agenda = $this->request->getVar('daftar_agenda');
 
         $data = [
             'title' => 'Daftar Hadir',
             // 'data' => $this->daftarhadir->getDaftarHadirByID($id_agenda)
-            'agenda_rapat' => $this->agendaRapat->getAgendaRapatByID(),
             'daftar_hadir' => $this->daftarhadir->getDaftarHadirByID($id_agenda),
 
         ];

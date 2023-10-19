@@ -33,9 +33,6 @@ class AgendaRapat extends BaseController
     public function view($slug)
     {
         $linkRapat = $this->agendaRapat->where('slug', $slug)->first()['link_rapat'];
-
-
-
         $data = [
             'title' => 'View Agenda Rapat',
             'qrCode' => generateQrCode($linkRapat),

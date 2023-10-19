@@ -17,6 +17,8 @@ class AgendaRapatModel extends Model
         'id_agenda',
         'slug',
         'id_admin',
+        'role',
+        'asal_instansi',
         'agenda_rapat',
         'kode_rapat',
         'tempat',
@@ -39,6 +41,31 @@ class AgendaRapatModel extends Model
             return $this->where('id_admin', session()->get('id_admin'))->findAll();
         } else {
             return $this->findAll();
+        }
+    }
+
+    public function getAgendaByRole2()
+    {
+        $userRole = session()->get('role');
+        $adminModel = new AdminModel();
+        // if (session()->get('role') == 'superadmin') {
+        //     $adminInstansi = $adminModel->find(session()->get('id_admin'));
+        //     $agendas = $adminInstansi->agendas;
+        //     return $agendas;
+        // } else {
+        //     return $this->findAll();
+        // }
+
+        if ($userRole === 'admin') {
+            $query = $this->where('id_admin', session()->get('id_admin'))->findAll();
+            return $query;
+        } elseif ($userRole === 'operator') {
+            $builder = $this->table('agendarapats');
+            $builder->select('*');
+            $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
+            $builder->where('admins.id_instansi', session()->get('id_instansi'));
+            $query = $builder->get()->getResultArray();
+            return $query;
         }
     }
 
