@@ -94,10 +94,9 @@ class DaftarHadirModel extends Model
         $builder = $this->table('daftarhadirs');
         $builder->select('*');
         $builder->join('agendarapats', 'agendarapats.id_agenda = daftarhadirs.id_agenda_rapat',);
-        $builder->where('id_admin', $id_admin);
+        // $builder->where('id_admin', $id_admin);
         $builder->where('id_agenda_rapat', $id_agenda);
         $query = $builder->get()->getResultArray();
-
         return $query;
     }
 

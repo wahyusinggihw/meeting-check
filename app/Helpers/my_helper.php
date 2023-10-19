@@ -33,10 +33,11 @@ function expiredTime($startTime)
 function generateQrCode($linkRapat)
 {
     // add logo to qr
+    // qroptions for qr without padding
     $options = new QROptions(
         [
             'addLogoSpace'  => true,
-            'logoPath'      => FCPATH . 'assets/img/logo.png',
+            'logoPath'      => FCPATH . base_url('assets/img/logo.png'),
             'logoSpaceWidth' => 9,
             'logoSpaceHeight' => 9,
             'logoSpaceStartX' => 10,
