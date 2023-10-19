@@ -25,8 +25,10 @@ class AuthFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        //guest cannot access dashboard
-        if (session()->get('role') != 'admin' && session()->get('role') != 'superadmin') {
+        $allowedRoles = ['admin', 'superadmin', 'operator'];
+        $userRole = session()->get('role');
+
+        if (!in_array($userRole, $allowedRoles)) {
             return redirect()->to('/');
         }
     }

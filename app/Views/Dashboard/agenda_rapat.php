@@ -17,6 +17,7 @@
                         <th>Tempat</th>
                         <th>Jam</th>
                         <th>Tanggal</th>
+                        <th>Status</th>
                         <th>Link Rapat</th>
                         <th>Aksi</th>
                     </tr>
@@ -26,17 +27,19 @@
                         <tr>
                             <td></td>
                             <td><?= $item['kode_rapat'] ?></td>
-                            <td><?= $item['judul_rapat'] ?></td>
-                            <td><?= $item['agenda'] ?></td>
+                            <td><?= $item['agenda_rapat'] ?></td>
+                            <td><?= $item['deskripsi'] ?></td>
                             <td><?= $item['tempat'] ?></td>
                             <td><?= $item['jam'] ?></td>
                             <td><?= $item['tanggal'] ?></td>
+                            <td><?= $item['status'] ?></td>
                             <td><?= $item['link_rapat'] ?></td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-12 btn-group">
-                                        <a href="<?= base_url('dashboard/agenda-rapat/view-agenda/' . $item['slug']) ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                                        <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['slug']) ?>" class="btn btn-warning mx-2"><i class="fa-solid fa-pen"></i></a>
+                                        <a href="<?= base_url('dashboard/agenda-rapat/daftar-hadir/' . $item['slug']) ?>" class="btn btn-info mx-2"><i class="fa-solid fa-list" style="color: white;"></i></a>
+                                        <a href="<?= base_url('dashboard/agenda-rapat/view-agenda/' . $item['slug']) ?>" class="btn btn-info"><i class="fa-solid fa-eye" style="color: white;"></i></a>
+                                        <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['slug']) ?>" class="btn btn-warning mx-2"><i class="fa-solid fa-pen" style="color: white;"></i></a>
                                         <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a>
                                     </div>
                                 </div>
@@ -92,7 +95,7 @@
         let startNumber = 1;
         new DataTable('#example', {
             "columnDefs": [{
-                "targets": [7, 8], // Index of the column to disable sorting (zero-based index)
+                "targets": [8, 9], // Index of the column to disable sorting (zero-based index)
                 "orderable": false,
 
             }],

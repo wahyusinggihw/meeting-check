@@ -13,13 +13,17 @@ $routes->group('auth', function ($routes) {
     $routes->get('logout', 'Auth::logout');
 });
 
-// Rapat
+// Rapat landing page
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode/form-absensi', 'Home::submitKode');
-// revisi
+
+// revisi form absensi
 $routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi');
 $routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
 
+// share rapat qr code
+$routes->get('/submit-kode/form-absensi/qr/(:segment)', 'RapatController::formAbsensi/$1');
+$routes->get('/informasi-rapat/(:segment)', 'Dashboard\AgendaRapat::informasiRapat/$1');
 
 // JQUERY PESERTA RAPAT
 $routes->get('api/peserta/(:segment)', 'Api\UsersControllerAPI::getPeserta/$1');
@@ -33,7 +37,7 @@ $routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
     $routes->post('login', "Api\AuthControllerAPI::login");
     $routes->resource('agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
     // $routes->resource('rapat', ['controller' => 'Api\RapatControllerAPI']);
-    $routes->post('rapat', 'Api\RapatControllerAPI::absenStore');
+    $routes->post('form-absensi-store', 'Api\RapatControllerAPI::absenStore');
     // route untuk get agenda rapat
     // route untuk post daftar hadir
 });
@@ -45,8 +49,8 @@ $routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Dashboard\Dashboard::index');
     $routes->get('agenda-rapat', 'Dashboard\Dashboard::agenda');
-    $routes->get('daftar-hadir', 'Dashboard\Dashboard::daftarHadir');
-    $routes->post('daftar-hadir/cari', 'Dashboard\DaftarHadirController::cariDaftarHadir');
+    // $routes->get('daftar-hadir', 'Dashboard\Dashboard::daftarHadir');
+    $routes->get('agenda-rapat/daftar-hadir/(:segment)', 'Dashboard\DaftarHadirController::cariDaftarHadir/$1');
 
     $routes->get('agenda-rapat/tambah-agenda', 'Dashboard\AgendaRapat::tambahAgenda');
     $routes->post('agenda-rapat/tambah-agenda/store', 'Dashboard\AgendaRapat::store');

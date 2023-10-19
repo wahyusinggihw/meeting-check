@@ -6,7 +6,7 @@ use chillerlan\QRCode\{QRCode, QROptions};
 function kodeRapat()
 {
     $length = 3; // Length of the random string
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+    $characters = '0123456789';
     $segment1 = substr(str_shuffle($characters), 0, $length);
     $segment2 = substr(str_shuffle($characters), 0, $length);
     $kode = $segment1 . '-' . $segment2;
@@ -16,7 +16,7 @@ function kodeRapat()
 function expiredTime($startTime)
 {
     // $startTime = $rapat['jam']; // Your initial time
-    $interval = '1 hour'; // The interval you want to add
+    $interval = '4 hour'; // The interval you want to add
 
     // Convert the time to a Unix timestamp
     $timestamp = strtotime($startTime);

@@ -37,10 +37,18 @@ class RapatController extends BaseController
     {
         $instansi = $this->pesertaRapat->getInstansi(); // Akan diganti dengan api pegawai
         $instansiDecode = json_decode($instansi);
+        // get segment url
+        $idAgenda = $this->request->getUri()->getSegment(4);
+        // $idAgenda = $this->session->get('id_agenda');
+        $rapat  = $this->agendaRapat->getAgendaRapatByField($idAgenda);
+        // dd($rapat);
+        session()->setFlashdata('kode_valid', $rapat['kode_rapat']);
+        $this->session->set('id_agenda', $rapat['id_agenda']);
 
         $data = [
             'title' => 'Form Absensi',
             'instansi' => $instansiDecode,
+            'rapat' => $rapat,
         ];
 
         return view('form_absensi', $data);
@@ -192,7 +200,7 @@ class RapatController extends BaseController
 
             $this->handleAbsen($idAgenda, $nip, $statusUser);
 
-            $this->session->remove('id_agenda');
+            // $this->session->remove('id_agenda');
             session()->setFlashdata('berhasil', true);
             return redirect('berhasil')->with('kode_valid', true);
         } else {

@@ -19,7 +19,11 @@ class Admin extends Migration
             ],
             'role' => [
                 'type' => 'enum',
-                'constraint' => ['superadmin', 'admin'],
+                'constraint' => ['superadmin', 'admin', 'operator'],
+            ],
+            'id_instansi' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
             ],
             'nama' => [
                 'type' => 'VARCHAR',
@@ -47,6 +51,8 @@ class Admin extends Migration
             ],
         ]);
         $this->forge->addKey('id_admin', true);
+        // relation to agendarapats
+        // $this->forge->addForeignKey('id_admin', 'agendarapats', 'id_admin_rapat', 'CASCADE', 'CASCADE');
         return $this->forge->createTable('admins');
     }
 
