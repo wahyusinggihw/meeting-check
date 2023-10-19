@@ -8,7 +8,7 @@ body {
   border-radius: 0px;
   display: flex;
   justify-content: center;
-  background: linear-gradient(to bottom, #e5f0fc, rgb(206, 255, 253));
+  background: #cefffd;
 }
 
 .login-form {
@@ -58,6 +58,23 @@ body {
 
 .login-form button:hover {
   background-color: #0056b3;
+}
+
+
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.password-toggle-btn i {
+  font-size: 1.2em;
 }
 
 .logo {

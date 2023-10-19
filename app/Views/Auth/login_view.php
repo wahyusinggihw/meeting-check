@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meeting Check <?php isset($title) ? print('| ' . $title) : '' ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
     <link rel="stylesheet" href="<?php echo base_url('assets/css/login.css'); ?>">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -40,7 +41,12 @@
             </div>
             <div class="form-group">
                 <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="Masukkan password">
+                <div class="password-input-container">
+                    <input type="password" class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="Masukkan password">
+                    <span class="password-toggle-btn" onclick="togglePasswordVisibility()">
+                        <i id="password-toggle-icon" class="fa fa-eye"></i>
+                    </span>
+                </div>
                 <div class="invalid-feedback text-start">
                     <?= validation_show_error('password') ?>
                 </div>
@@ -54,6 +60,6 @@
 
 </body>
 
-<script src="<?php echo base_url('js/login.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/login.js'); ?>"></script>
 
 </html>
