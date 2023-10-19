@@ -35,13 +35,23 @@ class RapatController extends BaseController
 
     public function formAbsensi()
     {
-        $instansi = $this->pesertaRapat->getInstansi(); // Akan diganti dengan api pegawai
+        $instansi = $this->pesertaRapat->getInstansi();
         $instansiDecode = json_decode($instansi);
-        // get segment url
-        $idAgenda = $this->request->getUri()->getSegment(4);
-        // $idAgenda = $this->session->get('id_agenda');
-        $rapat  = $this->agendaRapat->getAgendaRapatByField($idAgenda);
-        // dd($rapat);
+
+        $idAgenda = $this->session->get('id_agenda');
+
+        $url = current_url();
+
+        if ($url == site_url('submit-kode/form-absensi')) {
+            $idAgenda = $this->session->get('id_agenda');
+        } elseif (strpos($url, site_url('submit-kode/form-absensi/qr/')) === 0) {
+            $idAgenda = $this->request->getUri()->getSegment(4);
+        } else {
+            // Handle the case where the URL doesn't match either pattern
+            return redirect()->to('/');
+        }
+
+        $rapat = $this->agendaRapat->getAgendaRapatByField($idAgenda);
         session()->setFlashdata('kode_valid', $rapat['kode_rapat']);
         $this->session->set('id_agenda', $rapat['id_agenda']);
 
@@ -53,29 +63,6 @@ class RapatController extends BaseController
 
         return view('form_absensi', $data);
     }
-
-    // protected function saveSignature()
-    // {
-    //     $signatureData = $this->request->getVar('signatureData');
-
-    //     // Simpan data tanda tangan ke direktori
-    //     $filename = 'signature_' . time() . '.png'; // Nama berkas yang unik
-    //     $pathToSignatureDirectory = WRITEPATH . 'uploads/signatures/'; // Ganti dengan direktori penyimpanan yang sesuai
-    //     $fullPath = $pathToSignatureDirectory . $filename;
-    //     $publicPath = base_url('uploads/signatures/' . $filename);
-    //     // Decode data tanda tangan dan simpan dalam berkas
-    //     $signatureImage = base64_decode(explode(',', $signatureData)[1]);
-    //     file_put_contents($fullPath, $signatureImage);
-
-    //     // Berikan respons sukses atau gagal
-    //     $response = [
-    //         'status' => 'success',
-    //         'message' => 'Tanda tangan berhasil disimpan.',
-    //         'path' => $fullPath
-    //     ];
-
-    //     return $this->response->setJSON($response);
-    // }
 
     public function saveSignature($kodeRapat)
     {
@@ -179,6 +166,7 @@ class RapatController extends BaseController
 
     public function absenStore()
     {
+        // dd($this->request->getPost());
         // $tandaTangan = $this->request->getVar('signatureData');
         // $tandaTangan = $this->saveSignature()->getBody();
         // $tandaTangan = json_decode($tandaTangan, true);

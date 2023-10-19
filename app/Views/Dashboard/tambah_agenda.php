@@ -34,7 +34,7 @@
             <br>
 
             <label for="jam">Waktu:</label>
-            <input class="form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" type="time" id="jam" name="jam" placeholder="Contoh: 09:00 AM">
+            <input class="form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" type="time" id="jam" name="jam">
             <div class="invalid-feedback">
                 <?= validation_show_error('jam') ?>
             </div>
@@ -50,6 +50,5 @@
         </form>
 
     </div>
-</body>
 
-<?= $this->endSection() ?>
+    <?= $this->endSection() ?>

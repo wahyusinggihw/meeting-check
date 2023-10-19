@@ -49,8 +49,9 @@ class Home extends BaseController
             return redirect()->to('/')->with('error', 'Kode Rapat Tidak Ditemukan');
         } else {
 
-            $expiredTime = expiredTime($rapat['jam']);
-            if ($expiredTime < $timeNow) {
+            $expiredTime = expiredTime($rapat['tanggal'], $rapat['jam']);
+            // dd($expiredTime);
+            if ($expiredTime) {
                 return redirect()->to('/')->with('error', 'Rapat Sudah Berakhir');
             }
 

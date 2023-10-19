@@ -23,17 +23,22 @@ class UsersControllerAPI extends BaseController
         // $nik = $this->request->getVar('nip');
         $data = $this->pesertaUmum->cariUser($nik);
         // check if not null
-        if ($data == null) {
+        if (isset($data)) {
+            $response = [
+                'status' => true,
+                'data' => $data
+            ];
+            // return $this->respond($response, 200);
+        } else {
             $response = [
                 'status' => false,
-                'error' => true,
                 'messages' => 'User not found'
             ];
-            return $this->respond($response, 200);
         }
-        return $this->respond($data, 200);
+        return $this->respond($response);
     }
 
+    // JQUERY
     public function getPegawai($nip)
     {
         $pegawai = $this->instansiAPI->getInstansi();
@@ -52,6 +57,48 @@ class UsersControllerAPI extends BaseController
                 ];
             }
         }
+        return $this->respond($result);
+    }
+
+    public function getPegawaiAsn($nip)
+    {
+        $pegawai = $this->instansiAPI->getAsnByNip($nip);
+        $pegawaiJSON = json_decode($pegawai);
+
+        if (isset($pegawaiJSON->data)) {
+            $result = [
+                'status' => true,
+                'data' => $pegawaiJSON->data
+            ];
+            // break;
+        } else {
+            $result = [
+                'status' => false,
+                'data' => null
+            ];
+        }
+
+        return $this->respond($result);
+    }
+
+    public function getPegawaiNonAsn($nip)
+    {
+        $pegawai = $this->instansiAPI->getNonAsnByNip($nip);
+        $pegawaiJSON = json_decode($pegawai);
+
+        if (isset($pegawaiJSON->data)) {
+            $result = [
+                'status' => true,
+                'data' => $pegawaiJSON->data
+            ];
+            // break;
+        } else {
+            $result = [
+                'status' => false,
+                'data' => null
+            ];
+        }
+
         return $this->respond($result);
     }
 }

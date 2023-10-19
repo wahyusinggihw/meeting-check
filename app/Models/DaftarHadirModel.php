@@ -111,7 +111,7 @@ class DaftarHadirModel extends Model
                 return false;
             }
         }
-        return false;
+        // return false;
     }
 
     function sudahAbsenAPI($nik, $id_agenda)
