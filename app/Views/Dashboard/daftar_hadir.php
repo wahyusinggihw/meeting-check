@@ -31,10 +31,10 @@
     </script>
 
     <?php if ($daftar_hadir != null) : ?>
-        <a href="#" download class="btn btn-primary my-2">Download File</a>
+        <a href="#" download class="btn btn-primary mb-2">Download File</a>
         <!-- foreach php -->
 
-        <div class="table-container">
+        <div class="table-container my-3">
             <table id="example" class="order-column" style="width:100%">
                 <thead>
                     <tr>
