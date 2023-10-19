@@ -5,12 +5,47 @@
 
 .card-info{
     display: flex;
-    justify-content: center ;
-    padding: 30px;
-    max-width: 800px;
+    flex-direction: row-reverse;
+    justify-content: space-between ;
+    padding: 50px;
+    margin-top: 50px;
+    max-width: 1000px;
     text-align: center;
-    border: 10px black;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: white;
+    border: 100px black;
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+    background: #c3e5fa;
+}
+
+.card-qr{
+    background: #ffffff;
+    border-radius: 10px;
+    margin-left: 100px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.card-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    max-width: 400px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 768px) {
+
+}
+
+/* Medium */
+@media (min-width: 992px) {
+    
+}
+
+/* Large */
+@media (min-width: 1200px) {
+    
 }

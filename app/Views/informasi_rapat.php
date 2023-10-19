@@ -8,12 +8,12 @@
     <div class="container-info">
         <div class="card-info">
             <div class="card-qr">
-                <img src="<?php echo base_url('assets/img/pemkab.png'); ?>" alt="Logo" width="500">
+                <img src="<?php echo base_url('assets/img/qr.svg'); ?>" alt="Logo">
             </div>
 
             <div class="card-text">
-                <h1>JUDUL RAPAT TERSERAHKUU DONGGGGGG</h1>
-                <h2>IDMUUUU APAAAAAAAAA</h2>
+                <h1>RAPAT ALA ALA</h1>
+                <h2>RTP-1342</h2>
             </div>
         </div>
     </div>
