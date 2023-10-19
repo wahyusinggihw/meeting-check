@@ -10,7 +10,7 @@
         </div>
         <div class="wrapper">
             <div class="text-center">
-                <h3><?= isset($rapat['judul_rapat']) ? $rapat['judul_rapat'] : 'Rapat'  ?></h3>
+                <h3><?= isset($rapat['agenda_rapat']) ? $rapat['agenda_rapat'] : 'Rapat'  ?></h3>
                 <h4>Isi sesuai dengan data diri anda</h4>
             </div>
             <form action="<?= base_url('/submit-kode/form-absensi/store') ?>" method="post" id="form_pegawai" enctype="multipart/form-data">

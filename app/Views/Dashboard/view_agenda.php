@@ -9,12 +9,12 @@
             <div class="col-sm-6 my-2">
                 <form action="#" method="#">
                     <div class="form-group row"></div>
-                    <button type="submit" id="printButton" class="btn btn-primary" data-judul="<?= substr($data['id_agenda'], 0, 8) . '-' . $data['judul_rapat'] ?>">Cetak Agenda</button>
+                    <button type="submit" id="printButton" class="btn btn-primary" data-judul="<?= substr($data['id_agenda'], 0, 8) . '-' . $data['agenda_rapat'] ?>">Cetak Agenda</button>
 
                     <input type="hidden" id="text" name="id" value="<?= $data['id_agenda'] ?>"><br><br>
 
                     <label for="judul_rapat">Judul Rapat:</label>
-                    <input readonly class="form-control" type="text" id="judul_rapat" name="judul_rapat" placeholder="Judul Rapat" value="<?= $data['judul_rapat'] ?>">
+                    <input readonly class="form-control" type="text" id="judul_rapat" name="judul_rapat" placeholder="Judul Rapat" value="<?= $data['agenda_rapat'] ?>">
                     <br>
 
                     <label for="tempat">Tempat Rapat:</label>
@@ -30,7 +30,7 @@
                     <br>
 
                     <label for="agenda">Agenda Rapat:</label>
-                    <textarea disabled class="form-control" id="agenda" name="agenda" placeholder="Masukkan agenda rapat"><?= $data['agenda'] ?></textarea><br>
+                    <textarea disabled class="form-control" id="agenda" name="agenda" placeholder="Masukkan agenda rapat"><?= $data['deskripsi'] ?></textarea><br>
 
                     <label for="kode_rapat">Kode Rapat:</label>
                     <input readonly class="form-control" type="text" id="kode_rapat" name="kode_rapat" value="<?= $data['kode_rapat'] ?>">
@@ -40,6 +40,7 @@
                     <br>
                     <div class="container mb-3">
                         <img id="qr" width="100px" src="<?= $qrCode ?>" alt="" class="">
+                        <a href="<?= base_url('/informasi-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">share informasi</a>
                     </div>
                     <br>
 

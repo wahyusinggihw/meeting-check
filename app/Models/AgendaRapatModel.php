@@ -17,11 +17,13 @@ class AgendaRapatModel extends Model
         'id_agenda',
         'slug',
         'id_admin',
-        'judul_rapat',
+        'role',
+        'asal_instansi',
+        'agenda_rapat',
         'kode_rapat',
         'tempat',
         'tanggal',
-        'agenda',
+        'deskripsi',
         'jam',
         'link_rapat'
     ];
@@ -42,6 +44,31 @@ class AgendaRapatModel extends Model
         }
     }
 
+    public function getAgendaByRole2()
+    {
+        $userRole = session()->get('role');
+        $adminModel = new AdminModel();
+        // if (session()->get('role') == 'superadmin') {
+        //     $adminInstansi = $adminModel->find(session()->get('id_admin'));
+        //     $agendas = $adminInstansi->agendas;
+        //     return $agendas;
+        // } else {
+        //     return $this->findAll();
+        // }
+
+        if ($userRole === 'admin') {
+            $query = $this->where('id_admin', session()->get('id_admin'))->findAll();
+            return $query;
+        } elseif ($userRole === 'operator') {
+            $builder = $this->table('agendarapats');
+            $builder->select('*');
+            $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
+            $builder->where('admins.id_instansi', session()->get('id_instansi'));
+            $query = $builder->get()->getResultArray();
+            return $query;
+        }
+    }
+
     function getAgendaRapatByID()
     {
         $id_admin = session()->get('id_admin');
@@ -56,8 +83,21 @@ class AgendaRapatModel extends Model
     // get agenda rapat by kode_rapat
     function getAgendaRapatByKode($kodeRapat)
     {
-        $query = $this->where('kode_rapat', $kodeRapat)
-            ->first();
+        $query = $this->where('kode_rapat', $kodeRapat)->first();
+        // dd($query);
+        if ($query != null) {
+            return $query;
+        } else {
+            return false;
+        }
+
+        return $query;
+    }
+
+    // get id agenda sementara
+    function getAgendaRapatByField($idAgenda)
+    {
+        $query = $this->where('id_agenda', $idAgenda)->first();
         // dd($query);
         if ($query != null) {
             return $query;

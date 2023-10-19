@@ -27,7 +27,7 @@ class AgendaRapatSeed extends Seeder
                 'judul_rapat' => $faker->sentence(3),
                 'tempat' => $faker->address(),
                 'tanggal' => $faker->date(),
-                'jam' => $faker->time(),
+                'jam' => $faker->time('H:i'),
                 'agenda' => $faker->sentence(10),
                 'link_rapat' => $faker->url(),
             ];

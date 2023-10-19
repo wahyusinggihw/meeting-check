@@ -31,8 +31,7 @@ class Dashboard extends BaseController
         $data = [
             'title' => 'Agenda Rapat',
             'active' => 'agenda',
-            'agenda' => $this->agendaRapat->getAgendaByRole(),
-            'pager' => $this->agendaRapat->pager
+            'agenda' => $this->agendaRapat->getAgendaByRole2(),
         ];
 
         return view('dashboard/agenda_rapat', $data);
