@@ -30,7 +30,7 @@
         <form action="/dashboard/agenda-rapat/tambah-agenda/store" method="post">
             <?= csrf_field() ?>
             <div class="form-group row"></div>
-            <label for="judul_rapat">Judul Rapat:</label>
+            <label for="judul_rapat">Agenda Rapat:</label>
             <input class="form-control <?= ($validation->hasError('judul_rapat')) ? 'is-invalid' : '' ?>" type="text" id="judul_rapat" name="judul_rapat" placeholder="Judul Rapat" autofocus>
             <div class="invalid-feedback">
                 <?= $validation->getError('judul_rapat') ?>
@@ -58,8 +58,8 @@
             </div>
             <br>
 
-            <label for="agenda">Agenda Rapat:</label>
-            <textarea class="form-control" id="agenda" name="agenda" placeholder="Masukkan agenda rapat"></textarea><br>
+            <label for="agenda">Deskripsi:</label>
+            <textarea class="form-control" id="agenda" name="agenda" placeholder="Masukkan deskripsi rapat"></textarea><br>
 
             <button type="submit" class="btn btn-primary">Tambah Agenda</button>
         </form>
