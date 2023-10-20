@@ -181,8 +181,10 @@
     <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
     <script>
         $(document).ready(function() {
+            $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
             $('#cariNikButton').addClass('disabled-button');
             $('#nip').prop('disabled', true);
+
             $('#cariNikButton').on('click', function() {
                 var nikValue = $('#nip').val();
                 var statusValue = $('input[name="statusRadio"]:checked').val();
@@ -247,11 +249,14 @@
                                     timer: 2000 // Auto-close the toast after 2 seconds (adjust the duration as needed)
                                 });
                                 console.log(data);
-                                $('#no_hp').val(data.data.no_hp).prop('readonly', true);
-                                $('#nama').val(data.data.nama_lengkap).prop('readonly', true);
-                                $('#alamat').val(data.data.alamat).prop('readonly', true);
-                                $('#instansiOption, #asal_instansi').val(data.data.ket_ukerja).prop('readonly', true);
-                                if (statusValue === 'pegawai') {} else {
+
+                                if (statusValue === 'pegawai') {
+                                    $('#no_hp').val(data.data.no_hp).prop('readonly', true);
+                                    $('#nama').val(data.data.nama_lengkap).prop('readonly', true);
+                                    $('#alamat').val(data.data.alamat).prop('readonly', true);
+                                    $('#instansiOption, #asal_instansi').val(data.data.ket_ukerja).prop('readonly', true);
+                                } else {
+                                    $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
                                     // Update the form fields with the fetched data
                                     $('#no_hp').val(data.data.no_hp).prop('readonly', true);
                                     $('#nama').val(data.data.nama).prop('readonly', true);
@@ -276,8 +281,15 @@
             });
             // Trigger the change event on 'nip' input when a radio button is clicked
             $('.statusRadio').on('click', function() {
+
+                var isTamu = $('input[name="statusRadio"]:checked').val();
+                if (isTamu === 'tamu') {
+                    $('#no_hp, #nama, #alamat, #asal_instansi').removeClass('greyed-out-form');
+                } else {
+                    $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
+                }
                 // $('#nip').prop(placeHolder, 'Masukkan NIK');
-                $('#cariNikButton').removeClass('disabled-button');
+                // $('#cariNikButton').removeClass('disabled-button');
 
                 $('.asnNonAsnRadio').prop('checked', false);
                 $(this).prop('checked', true);
@@ -297,6 +309,8 @@
                 }
             });
         });
+
+
 
 
         // $(document).ready(function() {
@@ -361,6 +375,13 @@
             /* Prevents the anchor from being clickable */
             opacity: 0.6;
             /* Reduces the opacity to visually indicate it's disabled */
+        }
+
+        .greyed-out-form {
+            background-color: #f0f0f0;
+            /* Change the background color to grey */
+            pointer-events: none;
+            /* Prevents interactions with the form */
         }
     </style>
 
