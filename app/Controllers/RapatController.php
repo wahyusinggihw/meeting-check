@@ -54,7 +54,6 @@ class RapatController extends BaseController
         $rapat = $this->agendaRapat->getAgendaRapatByField($idAgenda);
         session()->setFlashdata('kode_valid', $rapat['kode_rapat']);
         $this->session->set('id_agenda', $rapat['id_agenda']);
-
         $data = [
             'title' => 'Form Absensi',
             'instansi' => $instansiDecode,
@@ -166,19 +165,29 @@ class RapatController extends BaseController
 
     public function absenStore()
     {
+        // dd($this->request->getVar('g-recaptcha-response'));
         // dd($this->request->getPost());
         // $tandaTangan = $this->request->getVar('signatureData');
         // $tandaTangan = $this->saveSignature()->getBody();
         // $tandaTangan = json_decode($tandaTangan, true);
         // dd();
+        helper('my_helper');
 
         $validate = $this->validateForm();
         $idAgenda = $this->session->get('id_agenda');
         $statusUser = $this->request->getVar('statusRadio');
-
+        $token = $this->request->getVar('g-recaptcha-response');
+        $validateCaptcha  = verifyCaptcha($token);
+        // dd($validateCaptcha);
         if (!$validate) {
             return redirect()->back()->withInput()->with('kode_valid', true);
         }
+
+        if (!$validateCaptcha->success) {
+            $this->session->setFlashdata('error', 'Captcha tidak valid, mohon coba lagi.');
+            return redirect()->back()->withInput()->with('kode_valid', true);
+        }
+
         $idAgenda = $this->session->get('id_agenda');
         $nip = $this->request->getVar('nip');
 
@@ -236,7 +245,7 @@ class RapatController extends BaseController
                 'errors' => [
                     'required' => 'Tanda tangan harus diisi'
                 ]
-            ]
+            ],
         ];
 
         return $this->validate($rules);
