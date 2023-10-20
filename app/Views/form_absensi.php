@@ -113,7 +113,7 @@
                     <?= validation_show_error('signatureData') ?>
                 </div>
                 <div class="button-container ">
-                    <button type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Clear</button>
+                    <button type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</button>
                 </div>
                 <div class="form-group text-end">
                     <button onclick="saveSignature()" type="submit" class="btn btn-primary">Submit</button>
