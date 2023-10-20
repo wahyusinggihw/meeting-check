@@ -14,6 +14,7 @@
         "chillerlan/php-qrcode": "^4.3",
         "cocur/slugify": "^4.5",
         "codeigniter4/framework": "^4.0",
+        "dompdf/dompdf": "^2.0",
         "ramsey/uuid": "^4.7"
     },
     "require-dev": {

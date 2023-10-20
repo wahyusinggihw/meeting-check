@@ -24,6 +24,8 @@ $routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
 // share rapat qr code
 $routes->get('/submit-kode/form-absensi/qr/(:segment)', 'RapatController::formAbsensi/$1');
 $routes->get('/informasi-rapat/(:segment)', 'Dashboard\AgendaRapat::informasiRapat/$1');
+$routes->get('/cetak-rapat/(:segment)', 'Dashboard\AgendaRapat::generatePdf/$1');
+
 
 // JQUERY PESERTA RAPAT
 $routes->get('api/peserta/(:segment)', 'Api\UsersControllerAPI::getPeserta/$1');
@@ -58,6 +60,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('agenda-rapat/tambah-agenda/store', 'Dashboard\AgendaRapat::store');
 
     $routes->get('agenda-rapat/view-agenda/(:segment)', 'Dashboard\AgendaRapat::view/$1');
+    $routes->get('agenda-rapat/view-agenda/(:segment)/generate-pdf', 'Dashboard\AgendaRapat::generatePdf/$1');
 
     $routes->get('agenda-rapat/edit-agenda/(:segment)', 'Dashboard\AgendaRapat::edit/$1');
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'Dashboard\AgendaRapat::update/$1');
