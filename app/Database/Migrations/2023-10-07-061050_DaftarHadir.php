@@ -27,7 +27,7 @@ class DaftarHadir extends Migration
             ],
             'NIK' => [
                 'type' => 'VARCHAR',
-                'constraint' => 16,
+                'constraint' => 255,
             ],
             'nama' => [
                 'type' => 'VARCHAR',

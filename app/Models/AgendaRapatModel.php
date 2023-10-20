@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\AdminModel;
 
 class AgendaRapatModel extends Model
 {
@@ -44,6 +45,14 @@ class AgendaRapatModel extends Model
         }
     }
 
+    public function updateAgenda($idAgenda, $data)
+    {
+        // Filter by id_agenda
+        $this->where('id_agenda', $idAgenda);
+        $this->set($data);
+        $this->update();
+    }
+
     public function getAgendaByRole2()
     {
         $userRole = session()->get('role');
@@ -56,17 +65,35 @@ class AgendaRapatModel extends Model
         //     return $this->findAll();
         // }
 
-        if ($userRole === 'admin') {
-            $query = $this->where('id_admin', session()->get('id_admin'))->findAll();
+        if ($userRole === 'superadmin') {
+            $query = $this->findAll();
             return $query;
-        } elseif ($userRole === 'operator') {
+        } else {
             $builder = $this->table('agendarapats');
-            $builder->select('*');
+            $builder->select('agendarapats.*, admins.slug as admin_slug');
             $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
             $builder->where('admins.id_instansi', session()->get('id_instansi'));
             $query = $builder->get()->getResultArray();
+            // dd($query);
             return $query;
         }
+
+        // if ($userRole === 'admin') {
+        //     // $query = $this->where('id_admin', session()->get('id_admin'))->findAll();
+        //     $builder = $this->table('agendarapats');
+        //     $builder->select('*');
+        //     $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
+        //     $builder->where('admins.id_instansi', session()->get('id_instansi'));
+        //     $query = $builder->get()->getResultArray();
+        //     return $query;
+        // } elseif ($userRole === 'operator') {
+        //     $builder = $this->table('agendarapats');
+        //     $builder->select('*');
+        //     $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
+        //     $builder->where('admins.id_instansi', session()->get('id_instansi'));
+        //     $query = $builder->get()->getResultArray();
+        //     return $query;
+        // }
     }
 
     function getAgendaRapatByID()

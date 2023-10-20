@@ -3,9 +3,19 @@
 <?= $this->section('content') ?>
 
 <body>
+    <?php if (session()->getFlashdata('berhasil')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '<?= session()->getFlashdata('berhasil') ?>',
+            })
+        </script>
+    <?php endif; ?>
+
     <?php if ($agenda != null) : ?>
         <a href="/dashboard/agenda-rapat/tambah-agenda" class="btn btn-primary mb-2">Tambah Agenda</a>
-        <div class="table-container">
+        <div class="table-container my-3">
             <table id="example" class="row-border" style="width:100%">
                 <thead>
                     <tr>

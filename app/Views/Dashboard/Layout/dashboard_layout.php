@@ -51,7 +51,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="<?= base_url('assets/img/logo.png') ?>" alt="AdminLTELogo" width="100">
+      <img class="animation__shake" src="<?= base_url('assets/img/logo.png') ?>" alt="DaftarHadir" width="100">
     </div>
 
     <?= $this->include('dashboard/Layout/navbar'); ?>
@@ -123,8 +123,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
   <script src="<?= base_url('assets/print.js') ?>"></script>
-
-
 
 </body>
 

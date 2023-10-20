@@ -1,7 +1,3 @@
-<?php
-
-use PhpParser\Node\Stmt\Echo_;
-?>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -14,7 +10,10 @@ use PhpParser\Node\Stmt\Echo_;
                 <img src="<?= base_url('assets/dist/img/user2-160x160.jpg') ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block" style="text-decoration: none;"><?= session()->get('nama') ?></a>
+                <div class="col">
+                    <a href="#" class="d-block" style="text-decoration: none;"><?= session()->get('nama') ?></a>
+                    <small class="d-block " style="text-decoration: none;"><?= session()->get('role') ?></sma>
+                </div>
             </div>
 
         </div>
@@ -56,9 +55,12 @@ use PhpParser\Node\Stmt\Echo_;
                         <p>Agenda Rapat</p>
                     </a>
                 </li>
-            </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('/auth/logout') ?>" role="button">
+                        <i class="nav-icon fa-solid fa-right-from-bracket"></i>
+                        <p>Logout</p>
+                    </a>
+                </li>
     </div>
     <!-- /.sidebar -->
 </aside>

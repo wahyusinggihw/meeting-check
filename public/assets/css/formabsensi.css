@@ -13,7 +13,7 @@
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .konten .judul-form h1 {
-  font-size: 23px;
+  font-size: 25px;
   padding-top: 20px;
   padding-left: 140px;
   color: #0466ed;
@@ -22,7 +22,7 @@
   padding-top: 0px;
   padding-bottom: 20px;
   padding-left: 140px;
-  font-size: 34px;
+  font-size: 25px;
   font-weight: bold;
 }
 .konten .wrapper h3 {
@@ -63,19 +63,19 @@
 
 @media screen and (min-width: 768px) {
   .wrapper {
-    width: 50%;
+    width: 55%;
   }
 }
 
 @media screen and (min-width: 992px) {
   .wrapper {
-    width: 40%;
+    width: 45%;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .wrapper {
-    width: 30%;
+    width: 35%;
   }
 }
 

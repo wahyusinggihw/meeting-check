@@ -105,10 +105,15 @@ class AdminController extends BaseController
 
     public function edit($slug)
     {
+
+        // $password = $this->adminModel->where('slug', $slug)->first()['password'];
+        // $password2 = password_hash($password, PASSWORD_DEFAULT);
+
         $data = [
             'title' => 'Edit Admin',
             'data' => $this->adminModel->where('slug', $slug)->first(),
             // 'validation' => \Config\Services::validation(),
+            // 'password' => $password2
         ];
 
         return view('dashboard/edit_admin', $data);

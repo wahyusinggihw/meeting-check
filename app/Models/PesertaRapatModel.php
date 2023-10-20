@@ -72,6 +72,50 @@ class PesertaRapatModel extends Model
         }
     }
 
+    public function getAsnByNip($nip)
+    {
+        $apiUrl = 'https://egov.bulelengkab.go.id/api/getAsnByNip/' . $nip;
+        $username = getenv('API_USERNAME');
+        $password = getenv('API_PASSWORD');
+        try {
+            //code...
+            $ch = curl_init($apiUrl);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+            $result = curl_exec($ch);
+            if (curl_errno($ch)) {
+                echo 'Error: ' . curl_error($ch);
+            }
+            curl_close($ch);
+            return $result;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getNonAsnByNip($nip)
+    {
+        $apiUrl = 'https://egov.bulelengkab.go.id/api/getNonAsnByNip/' . $nip;
+        $username = getenv('API_USERNAME');
+        $password = getenv('API_PASSWORD');
+        try {
+            //code...
+            $ch = curl_init($apiUrl);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+            $result = curl_exec($ch);
+            if (curl_errno($ch)) {
+                echo 'Error: ' . curl_error($ch);
+            }
+            curl_close($ch);
+            return $result;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function insertPesertaRapat($data)
     {
         return $this->insert($data);
