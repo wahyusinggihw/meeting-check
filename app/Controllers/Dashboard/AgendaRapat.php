@@ -63,29 +63,33 @@ class AgendaRapat extends BaseController
         $kodeRapat = kodeRapat();
         $uuid = Uuid::uuid4()->toString();
 
-        if (!$this->validate([
-            'judul_rapat' => 'required',
-            'tempat' => 'required',
-            'tanggal' => 'required',
-            'jam' => 'required',
-            'agenda' => 'required',
+        // if (!$this->validate([
+        //     'judul_rapat' => 'required',
+        //     'tempat' => 'required',
+        //     'tanggal' => 'required',
+        //     'jam' => 'required',
+        //     'agenda' => 'required',
 
-        ])) {
-            $validation = \Config\Services::validation();
-            // return redirect()->to('dashboard/tambah-agenda')->withInput()->with('validation', $validation);
-            return view('dashboard/tambah_agenda', ['validation' => $this->validator,]);
+        // ])) {
+        //     $validation = \Config\Services::validation();
+        //     // return redirect()->to('dashboard/tambah-agenda')->withInput()->with('validation', $validation);
+        //     return view('dashboard/tambah_agenda', ['validation' => $this->validator,]);
+        // }
+        $validate = $this->validateForm();
+        if (!$validate) {
+            return redirect()->back()->withInput();
         }
 
         $this->agendaRapat->insert([
             'id_agenda' => $uuid,
-            'slug' => $slugify->slugify($this->request->getVar('judul_rapat')),
+            'slug' => $slugify->slugify($this->request->getVar('agenda_rapat')),
             'id_admin' => session()->get('id_admin'), // 'id_admin' => '1
             'kode_rapat' => $kodeRapat,
-            'agenda_rapat' => $this->request->getVar('judul_rapat'),
+            'agenda_rapat' => $this->request->getVar('agenda_rapat'),
             'tempat' => $this->request->getVar('tempat'),
             'tanggal' => $this->request->getVar('tanggal'),
             'jam' => $this->request->getVar('jam'),
-            'deskripsi' => $this->request->getVar('agenda'),
+            'deskripsi' => $this->request->getVar('deskripsi'),
             'link_rapat' => base_url() . 'submit-kode/form-absensi/qr/' . $uuid,
             'status' => 'belum-berjalan'
         ]);
@@ -110,36 +114,29 @@ class AgendaRapat extends BaseController
         return view('dashboard/edit_agenda', $data);
     }
 
-    public function update($id)
+    public function update()
     {
         $slugify = new Slugify();
-        // $id = $this->agendaRapat->find($id);
-        // $id = $this->request->getPost('id');
-        if (!$this->validate([
-            'judul_rapat' => 'required',
-            'tempat' => 'required',
-            'tanggal' => 'required',
-            'jam' => 'required',
-            'agenda' => 'required',
 
-        ])) {
-            $validation = \Config\Services::validation();
-            // return redirect()->to('dashboard/tambah-agenda')->withInput()->with('validation', $validation);
-            return view('dashboard/edit_agenda', [
-                'data' => $this->agendaRapat->find($id),
-                'validation' => $this->validator,
-            ]);
+        $validate = $this->validateForm();
+        $idAgenda = $this->request->getVar('id_agenda');
+
+        if (!$validate) {
+            return redirect()->back()->withInput();
         }
-
-        $this->agendaRapat->update($id, [
-            'judul_rapat' => $this->request->getVar('judul_rapat'),
-            'slug' => $slugify->slugify($this->request->getVar('judul_rapat')),
+        $data = [
+            'agenda_rapat' => $this->request->getVar('agenda_rapat'),
+            'slug' => $slugify->slugify($this->request->getVar('agenda_rapat')),
             'tempat' => $this->request->getVar('tempat'),
             'tanggal' => $this->request->getVar('tanggal'),
             'jam' => $this->request->getVar('jam'),
-            'agenda' => $this->request->getVar('agenda'),
-        ]);
-        return redirect()->to('dashboard/agenda-rapat');
+            'deskripsi' => $this->request->getVar('deskripsi'),
+        ];
+
+        $this->agendaRapat->updateAgenda($idAgenda, $data);
+
+        session()->setFlashdata('berhasil', 'Data berhasil diubah.');
+        return redirect('dashboard/agenda-rapat');
     }
 
     public function delete($id)
@@ -149,5 +146,42 @@ class AgendaRapat extends BaseController
             $this->agendaRapat->delete($id);
             return redirect()->to('/dashboard/agenda-rapat');
         }
+    }
+    protected function validateForm()
+    {
+        $rules =
+            [
+                'agenda_rapat' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Agenda Rapat harus diisi.'
+                    ]
+                ],
+                'tempat' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Tempat Rapat harus diisi.'
+                    ]
+                ],
+                'tanggal' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Tanggal Rapat harus diisi.'
+                    ]
+                ],
+                'jam' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Jam Rapat harus diisi.'
+                    ]
+                ],
+                'deskripsi' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Deskripsi Rapat harus diisi.'
+                    ]
+                ],
+            ];
+        return $this->validate($rules);
     }
 }

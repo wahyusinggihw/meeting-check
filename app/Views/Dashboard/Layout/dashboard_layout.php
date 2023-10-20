@@ -124,8 +124,6 @@
 
   <script src="<?= base_url('assets/print.js') ?>"></script>
 
-
-
 </body>
 
 </html>

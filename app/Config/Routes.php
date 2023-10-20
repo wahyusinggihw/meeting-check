@@ -28,6 +28,8 @@ $routes->get('/informasi-rapat/(:segment)', 'Dashboard\AgendaRapat::informasiRap
 // JQUERY PESERTA RAPAT
 $routes->get('api/peserta/(:segment)', 'Api\UsersControllerAPI::getPeserta/$1');
 $routes->get('api/pegawai/(:segment)', 'Api\UsersControllerAPI::getPegawai/$1');
+$routes->get('api/pegawai/asn/(:segment)', 'Api\UsersControllerAPI::getPegawaiAsn/$1');
+$routes->get('api/pegawai/non-asn/(:segment)', 'Api\UsersControllerAPI::getPegawaiNonAsn/$1');
 $routes->post('api/save-signature', 'RapatController::saveSignatureData');
 
 

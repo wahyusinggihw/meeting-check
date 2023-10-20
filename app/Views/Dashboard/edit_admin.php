@@ -18,14 +18,21 @@
             <br>
 
             <label for="username">Username:</label>
-            <input class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= $data['nama'] ?>" type="text" id="username" name="username" placeholder="Username">
+            <input class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= $data['username'] ?>" type="text" id="username" name="username" placeholder="Username">
             <div class="invalid-feedback">
                 <?= validation_show_error('username') ?>
             </div>
             <br>
 
-            <label for="password">password:</label>
-            <input class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" value="<?= $data['nama'] ?>" type="password" id="password" name="password" placeholder="password">
+            <label for="password">Password Baru:</label>
+            <input class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="password">
+            <div class="invalid-feedback">
+                <?= validation_show_error('password') ?>
+            </div>
+            <br>
+
+            <label for="password">Konfirmasi Password:</label>
+            <input class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="password">
             <div class="invalid-feedback">
                 <?= validation_show_error('password') ?>
             </div>

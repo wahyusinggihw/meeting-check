@@ -23,9 +23,6 @@
                  <i class="fas fa-th-large"></i>
              </a>
          </li>
-         <a class="nav-link" href="/auth/logout" role="button">
-             <i class="fa-solid fa-right-from-bracket"></i>
-         </a>
      </ul>
  </nav>
  <!-- /.navbar -->
