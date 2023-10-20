@@ -285,12 +285,22 @@
                 var isTamu = $('input[name="statusRadio"]:checked').val();
                 if (isTamu === 'tamu') {
                     $('#no_hp, #nama, #alamat, #asal_instansi').removeClass('greyed-out-form');
+                    $('#cariNikButton').removeClass('disabled-button');
                 } else {
+                    $('#cariNikButton').addClass('disabled-button');
                     $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
                 }
                 // $('#nip').prop(placeHolder, 'Masukkan NIK');
                 // $('#cariNikButton').removeClass('disabled-button');
+                $('input[name="asnNonAsnRadio"]').on('change', function() {
+                    // Check if one of the radio buttons is selected
+                    if ($('input[name="asnNonAsnRadio"]:checked').length > 0) {
+                        // Enable the "nik" input and the "Cari" button
+                        $('#nip').prop('disabled', false);
+                        $('#cariNikButton').removeClass('disabled-button');
+                    }
 
+                });
                 $('.asnNonAsnRadio').prop('checked', false);
                 $(this).prop('checked', true);
                 $('input[name="asnNonAsnRadio"]').prop('checked', false)
