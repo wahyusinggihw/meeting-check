@@ -22,9 +22,9 @@
                         <!-- <th>id</th> -->
                         <th>No</th>
                         <th>Kode Rapat</th>
-                        <th>Nama</th>
                         <th>Agenda</th>
-                        <th>Tempat</th>
+                        <th>Deskripsi</th>
+                        <!-- <th>Tempat</th> -->
                         <!-- <th>Jam</th> -->
                         <th>Tanggal/Jam</th>
                         <th>Status</th>
@@ -39,10 +39,10 @@
                             <td><?= $item['kode_rapat'] ?></td>
                             <td><?= $item['agenda_rapat'] ?></td>
                             <td><?= $item['deskripsi'] ?></td>
-                            <td><?= $item['tempat'] ?></td>
+                            <!-- <td><?= $item['tempat'] ?></td> -->
                             <!-- <td><?= $item['jam'] ?></td> -->
                             <td><?= $item['tanggal'] . ', ' . $item['jam'] ?></td>
-                            <td><?= $item['status'] ?></td>
+                            <td><span class="badge bg-warning"><?= $item['status'] ?></span></td>
                             <td><?= $item['link_rapat'] ?></td>
                             <td>
                                 <div class="row">
@@ -105,7 +105,7 @@
         let startNumber = 1;
         new DataTable('#example', {
             "columnDefs": [{
-                "targets": [7, 8], // Index of the column to disable sorting (zero-based index)
+                "targets": [6, 7], // Index of the column to disable sorting (zero-based index)
                 "orderable": false,
 
             }],

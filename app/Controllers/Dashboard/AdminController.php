@@ -4,6 +4,7 @@ namespace App\Controllers\Dashboard;
 
 use App\Controllers\BaseController;
 use App\Models\AdminModel;
+use App\Models\PesertaRapatModel;
 use App\Models\PesertaUmumModel;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
@@ -13,11 +14,13 @@ class AdminController extends BaseController
     protected $helpers = ['form'];
     protected $adminModel;
     protected $pesertaUmum;
+    protected $pesertaRapat;
     protected $slugify;
     public function __construct()
     {
         $this->adminModel = new AdminModel();
         $this->pesertaUmum = new PesertaUmumModel();
+        $this->pesertaRapat = new PesertaRapatModel();
         $this->slugify = new Slugify();
     }
 
@@ -26,10 +29,10 @@ class AdminController extends BaseController
         $currentRole = session()->get('role');
         if ($currentRole != 'superadmin') {
             $data = [
-                'title' => 'Kelola Peserta',
-                'active' => 'kelola_peserta',
+                'title' => 'Kelola Operator',
+                'active' => 'kelola_operator',
                 'role' => $currentRole,
-                'admins' => $this->pesertaUmum->findAll(),
+                'admins' => $this->adminModel->getAdminByRole(),
             ];
 
             return view('dashboard/kelola_admin', $data);
@@ -50,7 +53,7 @@ class AdminController extends BaseController
     public function tambahAdmin()
     {
         if ($this->request->is('post')) {
-
+            // dd($this->request->getPost());
             $validate = $this->validate([
                 'nama' => [
                     'rules' => 'required',
@@ -73,17 +76,27 @@ class AdminController extends BaseController
                 ],
             ]);
 
+            $instansi = $this->request->getVar('asal_instansi');
+            $sections = explode('-', $instansi);
+
+            $id_instansi = $sections[0];
+            $nama_instansi = $sections[1];
+
+
             if (!$validate) {
                 return redirect()->back()->withInput();
             }
 
             $uuid = Uuid::uuid4()->toString();
             $slug = $this->slugify->slugify($this->request->getVar('nama'));
+            $role = session()->get('role');
 
             $data = [
-                'id_user' => $uuid,
+                'id_admin' => $uuid,
                 'slug' => $slug,
-                'role' => 'admin',
+                'role' =>  $role == 'admin' ? 'operator' : 'admin',
+                'id_instansi' => $id_instansi,
+                'nama_instansi' => $nama_instansi,
                 'nama' => $this->request->getVar('nama'),
                 'username' => $this->request->getVar('username'),
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
@@ -95,9 +108,12 @@ class AdminController extends BaseController
             $this->adminModel->insert($data);
             return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil ditambahkan');
         } else {
+            $instansi = $this->pesertaRapat->getInstansi();
+            $instansiDecode = json_decode($instansi);
             $data = [
                 'title' => 'Tambah Admin',
-                'validation' => \Config\Services::validation()
+                'validation' => \Config\Services::validation(),
+                'instansi' => $instansiDecode
             ];
             return view('dashboard/tambah_admin', $data);
         }
@@ -121,6 +137,7 @@ class AdminController extends BaseController
 
     public function update($id)
     {
+        // dd($this->request->getPost());
         $validate = $this->validate([
             'nama' => [
                 'rules' => 'required',
@@ -129,18 +146,26 @@ class AdminController extends BaseController
                 ]
             ],
             'username' => [
-                'rules' => 'required|is_unique[admins.username]|alpha_dash',
+                'rules' => 'required|alpha_dash',
                 'errors' => [
                     'required' => 'Username harus diisi',
                     'is_unique' => 'Username sudah terdaftar'
                 ]
             ],
             'password' => [
-                'rules' => 'required',
+                'rules' => 'required|unique[admins.password]',
                 'errors' => [
                     'required' => 'Password harus diisi'
                 ]
             ],
+            'confirm-password' => [
+                'rules' => 'required|matches[password]',
+                'errors' => [
+                    'required' => 'Konfirmasi password harus diisi',
+                    'matches' => 'Konfirmasi password tidak sesuai'
+                ]
+            ]
+
         ]);
 
         if (!$validate) {

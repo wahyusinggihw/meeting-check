@@ -87,7 +87,6 @@ function loopIteration($pager, $group)
 // captcha server side
 function verifyCaptcha($token)
 {
-    $config = config('Recaptcha');
 
     $client = service('curlrequest');
     $secretKey = getenv('RECAPTCHA_SECRET_KEY');

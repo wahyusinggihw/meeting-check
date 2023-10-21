@@ -25,6 +25,10 @@ class Admin extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'nama_instansi' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'nama' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,

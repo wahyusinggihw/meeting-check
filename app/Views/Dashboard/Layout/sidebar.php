@@ -53,6 +53,15 @@
                     </li>
                 <?php endif; ?>
 
+                <?php if (session()->get('role') == 'admin') : ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link <?= uri_string() == 'dashboard/kelola-admin' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Kelola Operator</p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
                 <li class="nav-item">
                     <a href="<?= base_url('/dashboard/agenda-rapat') ?>" class="nav-link <?= uri_string() == "dashboard/agenda-rapat" ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-table"></i>

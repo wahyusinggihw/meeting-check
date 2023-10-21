@@ -27,6 +27,7 @@ class Filters extends BaseConfig
         'auth'          => \App\Filters\AuthFilter::class,
         'cekkode'       => \App\Filters\KodeValid::class,
         'basicAuth'     => \App\Filters\BasicAuthFilter::class,
+        'admin'         => \App\Filters\AdminFilter::class,
     ];
 
     /**

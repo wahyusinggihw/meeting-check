@@ -19,7 +19,8 @@ class AgendaRapatModel extends Model
         'slug',
         'id_admin',
         'role',
-        'asal_instansi',
+        'id_instansi',
+        'nama_instansi',
         'agenda_rapat',
         'kode_rapat',
         'tempat',
@@ -132,6 +133,12 @@ class AgendaRapatModel extends Model
             return false;
         }
 
+        return $query;
+    }
+
+    function getAllAgenda()
+    {
+        $query = $this->findAll();
         return $query;
     }
 }

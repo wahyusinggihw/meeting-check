@@ -17,6 +17,8 @@ class AdminModel extends Model
         'id_admin',
         'slug',
         'role',
+        'id_instansi',
+        'nama_instansi',
         'nama',
         'username',
         'password',
@@ -48,4 +50,14 @@ class AdminModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function getAdminByRole()
+    {
+        if (session()->get('role') != 'superadmin') {
+
+            return $this->where('id_instansi', session()->get('id_instansi'))->where('role', 'operator')->findAll();
+        } else {
+            return $this->findAll();
+        }
+    }
 }

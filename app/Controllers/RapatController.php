@@ -184,7 +184,7 @@ class RapatController extends BaseController
         }
 
         if (!$validateCaptcha->success) {
-            $this->session->setFlashdata('error', 'Captcha tidak valid, mohon coba lagi.');
+            $this->session->setFlashdata('error', 'Terdapat aktifitas tidak wajar, mohon coba lagi.');
             return redirect()->back()->withInput()->with('kode_valid', true);
         }
 
