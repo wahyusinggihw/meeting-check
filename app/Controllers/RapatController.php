@@ -35,6 +35,7 @@ class RapatController extends BaseController
 
     public function formAbsensi()
     {
+        helper('my_helper');
         $instansi = $this->pesertaRapat->getInstansi();
         $instansiDecode = json_decode($instansi);
 
@@ -46,6 +47,12 @@ class RapatController extends BaseController
             $idAgenda = $this->session->get('id_agenda');
         } elseif (strpos($url, site_url('submit-kode/form-absensi/qr/')) === 0) {
             $idAgenda = $this->request->getUri()->getSegment(4);
+            $rapat = $this->agendaRapat->select()->where('id_agenda', $idAgenda)->first();
+            $expiredTime = expiredTime($rapat['tanggal'], $rapat['jam']);
+            // dd($expiredTime);
+            if ($expiredTime) {
+                return redirect()->to('/')->with('error', 'Rapat Sudah Berakhir');
+            }
         } else {
             // Handle the case where the URL doesn't match either pattern
             return redirect()->to('/');
