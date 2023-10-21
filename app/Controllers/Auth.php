@@ -14,16 +14,9 @@ class Auth extends BaseController
         $this->adminModel = new AdminModel();
     }
 
-    // public function index()
-    // {
-    //     $data = [
-    //         'title' => 'Log In',
-    //     ];
-    //     return view('auth/login_view', $data);
-    // }
-
     public function login()
     {
+        helper('my_helper');
         if ($this->request->is('post')) {
             // $nip = $this->request->getVar('username');
             // $password = $this->request->getVar('password');
@@ -35,10 +28,17 @@ class Auth extends BaseController
 
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
+            $token = $this->request->getVar('g-recaptcha-response');
+            $validateCaptcha  = verifyCaptcha($token);
+            if (!$validateCaptcha->success) {
+                $this->session->setFlashdata('error', 'Captcha tidak valid, mohon coba lagi.');
+                return redirect()->back()->withInput()->with('kode_valid', true);
+            }
 
             if (!$this->validate($rules)) {
                 return redirect()->back()->withInput();
             }
+
 
             $admin = $this->adminModel->where('username', $username)->first();
             // dd($user);
