@@ -142,9 +142,51 @@ class AgendaRapatModel extends Model
         return $query;
     }
 
+    // membuat view untuk mengelompokkan id instansi dan nama instansi
+    function viewAgendaRapatByInstansi()
+    {
+        $viewName = 'agendarapatbyinstansi';
+        $viewExists = $this->db->query("SHOW TABLES LIKE '$viewName'")->getRow();
+
+        if (!$viewExists) {
+            $createViewCommand = "CREATE VIEW agendaRapatByInstansi
+            AS SELECT id_instansi, nama_instansi
+            FROM agendarapats";
+
+            $this->db->query($createViewCommand);
+        }
+
+        $builder = $this->table($viewName);
+        $builder->groupBy('id_instansi');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    function viewDetailAgendaRapatByInstansi($id_instansi)
+    {
+        $builder = $this->table('agendarapats');
+        $builder->where('id_instansi', $id_instansi);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    function getAllAgendaByInstansi($id_instansi)
+    {
+        $builder = $this->where('id_instansi', $id_instansi);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
     public function getAgendaByStatus($status)
     {
         $builder = $this->where('status', $status);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function getAgendaByStatusInstansi($status, $id_instansi)
+    {
+        $builder = $this->where('status', $status)->where('id_instansi', $id_instansi);
         $query = $builder->get();
         return $query->getResultArray();
     }

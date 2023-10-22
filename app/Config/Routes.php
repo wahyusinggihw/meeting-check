@@ -53,7 +53,8 @@ $routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Dashboard\Dashboard::index', ['filter' => 'admin']);
     $routes->get('agenda-rapat', 'Dashboard\Dashboard::agenda');
-    // $routes->get('daftar-hadir', 'Dashboard\Dashboard::daftarHadir');
+    $routes->get('view-detail-by-instansi/(:segment)', 'Dashboard\Dashboard::viewDetailAgendaRapatByInstansi/$1');
+    // $routes->get('daftar-hadir', 'Dashboard\Dashboard:daftarHadir');
     $routes->get('agenda-rapat/daftar-hadir/(:segment)', 'Dashboard\DaftarHadirController::cariDaftarHadir/$1');
 
     $routes->get('agenda-rapat/tambah-agenda', 'Dashboard\AgendaRapat::tambahAgenda');

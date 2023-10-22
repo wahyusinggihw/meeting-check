@@ -3,6 +3,45 @@
 <?= $this->section('content') ?>
 
 <?php if (session()->get('role') == 'superadmin') : ?>
+
+    <div>
+        <div class="table-container my-3">
+            <table id="example" class="row-border" style="width:100%">
+                <thead>
+                    <tr>
+                        <!-- <th>id</th> -->
+                        <th>No</th>
+                        <th>ID Instansi</th>
+                        <th>Instansi</th>
+                        <th>Aksi</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php foreach ($agenda as $item) : ?>
+                        <tr>
+                            <td></td>
+                            <td><?= $item['id_instansi'] ?></td>
+                            <td><?= $item['nama_instansi'] ?></td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-lg-12 btn-group">
+                                        <a href="<?= base_url('dashboard/view-detail-by-instansi/' . $item['id_instansi']) ?>" class="btn btn-info"><i class="fa-solid fa-eye" style="color: white;"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                    <?php endforeach ?>
+
+                    <!-- Add more rows as needed -->
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+<?php else : ?>
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -46,119 +85,30 @@
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <!-- <div class="col-lg-3 col-6">
-        
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+    <?php endif; ?>
 
-                <p>Bounce Rate</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-6">
-        
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>44</h3>
-
-                <p>User Registrations</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-6">
-        
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div> -->
-    </div>
-    <!-- /.row -->
-
-    <div>
-        <div class="table-container my-3">
-            <table id="example" class="row-border" style="width:100%">
-                <thead>
-                    <tr>
-                        <!-- <th>id</th> -->
-                        <th>No</th>
-                        <th>Kode Rapat</th>
-                        <th>Instansi</th>
-                        <th>Agenda</th>
-                        <th>Deskripsi</th>
-                        <th>Tempat</th>
-                        <!-- <th>Jam</th> -->
-                        <th>Tanggal/Jam</th>
-                        <th>Status</th>
-                        <!-- <th>Aksi</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php foreach ($agenda as $item) : ?>
-                        <tr>
-                            <td></td>
-                            <td><?= $item['kode_rapat'] ?></td>
-                            <td><?= $item['nama_instansi'] ?></td>
-                            <td><?= $item['agenda_rapat'] ?></td>
-                            <td><?= $item['deskripsi'] ?></td>
-                            <td><?= $item['tempat'] ?></td>
-                            <!-- <td><?= $item['jam'] ?></td> -->
-                            <td><?= $item['tanggal'] . ', ' . $item['jam'] ?></td>
-                            <td><span class="badge bg-warning"><?= $item['status'] ?></span></td>
-                            <!-- <td><?= $item['link_rapat'] ?></td> -->
-
-                        </tr>
-                    <?php endforeach ?>
-
-                    <!-- Add more rows as needed -->
-                </tbody>
-
-            </table>
-        </div>
+    <!-- Small boxes (Stat box) -->
 
 
-    </div>
-<?php endif; ?>
-
-<!-- Small boxes (Stat box) -->
-
-
-<script>
-    // show tables if element clicked
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
+    <script>
+        // show tables if element clicked
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
 
 
-    let startNumber = 1;
-    new DataTable('#example', {
-        "columnDefs": [{
-            "targets": [null], // Index of the column to disable sorting (zero-based index)
-            "orderable": false,
+        let startNumber = 1;
+        new DataTable('#example', {
+            "columnDefs": [{
+                "targets": [null], // Index of the column to disable sorting (zero-based index)
+                "orderable": false,
 
-        }],
-        // Additional DataTables options here
-        createdRow: function(row, data, dataIndex) {
-            $('td:eq(0)', row).html(startNumber++);
-        }
-    });
-</script>
+            }],
+            // Additional DataTables options here
+            createdRow: function(row, data, dataIndex) {
+                $('td:eq(0)', row).html(startNumber++);
+            }
+        });
+    </script>
 
-<?= $this->endSection() ?>
+    <?= $this->endSection() ?>
