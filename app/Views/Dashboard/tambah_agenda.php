@@ -61,7 +61,7 @@
         // $('#jam').timepicker();
         $('.timepicker').timepicker({
             timeFormat: 'HH:mm',
-            interval: 60,
+            interval: 30,
             defaultTime: '6',
             dynamic: true,
             dropdown: true,
