@@ -61,6 +61,7 @@ class AgendaRapat extends BaseController
     public function generatePdf($idAgenda)
     {
         $agendaRapat  = $this->agendaRapat->getAgendaRapatByField($idAgenda);
+        $judul = $agendaRapat['agenda_rapat'];
         $rawData = [
             'agendaRapat' => $agendaRapat,
             'qrCode' => generateQrCode($agendaRapat['link_rapat']),
@@ -83,7 +84,7 @@ class AgendaRapat extends BaseController
         $dompdf->render();
 
         // Output the generated PDF to the browser for download
-        $dompdf->stream('agenda_rapat.pdf', ['Attachment' => 0]);
+        $dompdf->stream($judul . '_' . $idAgenda . '.pdf', ['Attachment' => 0]);
     }
 
     public function store()
@@ -114,6 +115,8 @@ class AgendaRapat extends BaseController
             'id_agenda' => $uuid,
             'slug' => $slugify->slugify($this->request->getVar('agenda_rapat')),
             'id_admin' => session()->get('id_admin'), // 'id_admin' => '1
+            'id_instansi' => session()->get('id_instansi'),
+            'nama_instansi' => session()->get('nama_instansi'),
             'kode_rapat' => $kodeRapat,
             'agenda_rapat' => $this->request->getVar('agenda_rapat'),
             'tempat' => $this->request->getVar('tempat'),

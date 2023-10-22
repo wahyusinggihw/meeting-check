@@ -38,7 +38,12 @@ class Home extends BaseController
         $instansiDecode = json_decode($instansi);
 
         if (!$this->validate([
-            'inputAlphanumeric' => 'required'
+            'inputAlphanumeric' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kode Rapat Harus Diisi',
+                ]
+            ]
         ])) {
 
             return view('home', ['validation' => $this->validator,]);

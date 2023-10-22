@@ -18,6 +18,44 @@
                         <?= validation_show_error('nama') ?>
                     </div>
                     <br>
+                    <?php if (session()->get('role') != 'superadmin') : ?>
+                        <div class="form-group mb-3" id="instansiOption">
+                            <label for="asal_instansi" class="form-label">Bidang</label>
+                            <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
+                            <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi">
+                                <!-- foreach -->
+                                <option value="">Pilih Bidang</option>
+                                <option value="1">Bidang 1</option>
+                                <option value="2">Bidang 2</option>
+                                <option value="3">Bidang 3</option>
+
+                            </select>
+                            <div class="invalid-feedback text-start">
+                                <?= validation_show_error('asal_instansi') ?>
+                            </div>
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group mb-3" id="instansiOption">
+                            <label for="asal_instansi" class="form-label">Asal Instansi</label>
+                            <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
+                            <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi">
+                                <!-- foreach -->
+                                <option value="">Pilih instansi</option>
+                                <?php foreach ($instansi->data as $i) : ?>
+                                    <option value="<?= $i->kode_ukerja . '-' . $i->ket_ukerja ?>"><?= $i->ket_ukerja ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback text-start">
+                                <?= validation_show_error('asal_instansi') ?>
+                            </div>
+                        </div>
+                    <?php endif ?>
+                    <!-- <label for="nama">Instansi :</label>
+                    <input class="form-control <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" type="text" id="asal_instansi" name="asal_instansi" placeholder="Masukkan asal_instansi" autofocus>
+                    <div class="invalid-feedback">
+                        <?= validation_show_error('asal_instansi') ?>
+                    </div>
+                    <br> -->
 
                     <label for="username">Username:</label>
                     <input class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" type="text" id="username" name="username" placeholder="Username">
@@ -38,6 +76,9 @@
             </div>
         </div>
     </div>
+    <script>
+        // ajax
+    </script>
 </body>
 
 <?= $this->endSection() ?>
