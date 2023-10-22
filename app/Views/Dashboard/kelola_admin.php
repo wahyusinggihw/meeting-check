@@ -14,7 +14,7 @@
     <?php endif; ?>
 
     <?php if (session()->get('role') != 'operator') : ?>
-        <a href="<?= base_url('dashboard/kelola-admin/tambah-admin') ?>" class="btn btn-primary mb-2">Tambah Admin</a>
+        <a href="<?= base_url('dashboard/kelola-admin/tambah-admin') ?>" class="btn btn-primary mb-2"><?= (session()->get('role') == 'superadmin') ? 'Tambah Admin' : 'Tambah Operator' ?></a>
     <?php endif; ?>
 
     <div class="table-container my-3">

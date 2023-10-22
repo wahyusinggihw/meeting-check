@@ -1,8 +1,17 @@
-<?= $this->extend('/dashboard/layout/dashboard_layout') ?>
+<?= $this->extend('dashboard/layout/dashboard_layout') ?>
 
 <?= $this->section('content') ?>
 
 <body>
+    <?php if (session()->getFlashdata('error')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?= session()->getFlashdata('error')  ?>',
+            })
+        </script>
+    <?php endif; ?>
     <div class="col-8 my-2">
         <div class="card card-warning">
             <div class="card-header">
@@ -10,24 +19,16 @@
             </div>
 
             <div class="card-body">
-                <form action="<?= base_url('/dashboard/kelola-admin/edit-admin/' . $data['id_admin'] . '/update') ?>" method="post">
+                <form action="<?= base_url('dashboard/profile/edit-profilepassword/' . $data['id_admin']) ?>" method="post">
                     <?= csrf_field() ?>
 
                     <input type="hidden" id="text" name="id" value="<?= $data['id_admin'] ?>">
 
                     <div class="form-group">
-                        <label for="nama">Nama Lengkap:</label>
-                        <input class="form-control <?= validation_show_error('nama') ? 'is-invalid' : '' ?>" value="<?= $data['nama'] ?>" type="text" id="nama" name="nama" placeholder="Masukkan nama" autofocus>
+                        <label for="old-password">Password Lama:</label>
+                        <input class="form-control <?= validation_show_error('old-password') ? 'is-invalid' : '' ?>" value="<?= session()->getFlashdata('error') ? '' : old('old-password') ?>" id="old-password" name="old-password" placeholder="Password lama">
                         <div class="invalid-feedback">
-                            <?= validation_show_error('nama') ?>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= $data['username'] ?>" type="text" id="username" name="username" placeholder="Username">
-                        <div class="invalid-feedback">
-                            <?= validation_show_error('username') ?>
+                            <?= validation_show_error('old-password') ?>
                         </div>
                     </div>
 
@@ -47,6 +48,7 @@
                         </div>
                     </div>
 
+
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
@@ -55,4 +57,4 @@
 
 </body>
 
-<?= $this->endSection() ?>
+<?= $this->endSection(); ?>

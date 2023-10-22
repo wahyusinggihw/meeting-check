@@ -1,7 +1,7 @@
 <?php
 
-use CodeIgniter\Router\RouteCollection;
 use JetBrains\PhpStorm\NoReturn;
+use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
@@ -18,7 +18,7 @@ $routes->get('/', 'Home::index');
 $routes->post('/submit-kode/form-absensi', 'Home::submitKode');
 
 // revisi form absensi
-$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi');
+$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi', ['filter' => 'cekkode']);
 $routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
 
 // share rapat qr code
@@ -65,6 +65,12 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('agenda-rapat/edit-agenda/(:segment)', 'Dashboard\AgendaRapat::edit/$1');
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'Dashboard\AgendaRapat::update/$1');
     $routes->post('delete-agenda/(:segment)', 'Dashboard\AgendaRapat::delete/$1');
+
+    $routes->get('profile', 'Dashboard\UsersController::index');
+    $routes->get('profile/edit-profile/(:segment)', 'Dashboard\UsersController::edit/$1');
+    $routes->post('profile/edit-profile/(:segment)', 'Dashboard\UsersController::update/$1');
+    $routes->get('profile/edit-profilepassword/(:segment)', 'Dashboard\UsersController::editPassword/$1');
+    $routes->post('profile/edit-profilepassword/(:segment)', 'Dashboard\UsersController::updatePassword/$1');
 
     $routes->group('kelola-admin', ['filter' => 'admin'], function ($routes) {
         $routes->get('/', 'Dashboard\AdminController::index');

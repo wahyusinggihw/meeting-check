@@ -186,12 +186,12 @@ class RapatController extends BaseController
         $token = $this->request->getVar('g-recaptcha-response');
         $validateCaptcha  = verifyCaptcha($token);
         // dd($validateCaptcha);
-        if (!$validate) {
+        if (!$validateCaptcha->success) {
+            $this->session->setFlashdata('error', 'Terdapat aktifitas tidak wajar, mohon coba lagi.');
             return redirect()->back()->withInput()->with('kode_valid', true);
         }
 
-        if (!$validateCaptcha->success) {
-            $this->session->setFlashdata('error', 'Terdapat aktifitas tidak wajar, mohon coba lagi.');
+        if (!$validate) {
             return redirect()->back()->withInput()->with('kode_valid', true);
         }
 
@@ -216,7 +216,7 @@ class RapatController extends BaseController
     {
         $rules = [
             'nip' => [
-                'rules' => 'required|numeric',
+                'rules' => 'required|numeric|min_length[18]|max_length[18]',
                 'errors' => [
                     'required' => 'Data harus diisi',
                     'numeric' => 'Data harus berupa angka'

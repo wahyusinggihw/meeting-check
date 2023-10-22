@@ -63,7 +63,7 @@ function generateQrCode($linkRapat)
     $options = new QROptions(
         [
             'addLogoSpace'  => true,
-            'logoPath'      => FCPATH . base_url('assets/img/logo.png'),
+            'logoPath'      => base_url('assets/img/logo.png'),
             'logoSpaceWidth' => 9,
             'logoSpaceHeight' => 9,
             'logoSpaceStartX' => 10,

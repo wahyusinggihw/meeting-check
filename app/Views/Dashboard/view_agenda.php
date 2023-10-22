@@ -57,7 +57,7 @@
                             <div class="container mb-3">
                                 <img id="qr" width="100px" src="<?= $qrCode ?>" alt="" class="">
                             </div>
-                            <a href="<?= base_url('/informasi-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">share informasi</a>
+                            <a href="<?= base_url('/informasi-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">Informasi Rapat</a>
                             <!-- <button type="submit" id="printButton" class="btn btn-primary" data-judul="<?= substr($data['id_agenda'], 0, 8) . '-' . $data['agenda_rapat'] ?>">Cetak Agenda</button> -->
                             <a href="<?= base_url('/cetak-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-outline-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
                         </div>

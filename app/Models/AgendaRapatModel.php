@@ -141,4 +141,11 @@ class AgendaRapatModel extends Model
         $query = $this->findAll();
         return $query;
     }
+
+    public function getAgendaByStatus($status)
+    {
+        $builder = $this->where('status', $status);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
 }

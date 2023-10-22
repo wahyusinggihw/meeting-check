@@ -20,13 +20,17 @@ class Dashboard extends BaseController
     public function index()
     {
         $agendaRapat = $this->agendaRapat->getAllAgenda();
+        $belumBerjalan = $this->agendaRapat->getAgendaByStatus('belum-berjalan');
+        $selesai = $this->agendaRapat->getAgendaByStatus('selesai');
         // count
         $count = count($agendaRapat);
         $data = [
             'title' => 'Home',
             'active' => 'home',
             'agenda' => $agendaRapat,
-            'totalagenda' => $count,
+            'totalagenda' => count($agendaRapat),
+            'totalAgendaBelumBerjalan' => count($belumBerjalan),
+            'totalAgendaSelesai' => count($selesai),
         ];
 
         return view('dashboard/home_dashboard', $data);

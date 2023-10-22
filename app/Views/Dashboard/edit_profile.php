@@ -1,4 +1,4 @@
-<?= $this->extend('/dashboard/layout/dashboard_layout') ?>
+<?= $this->extend('dashboard/layout/dashboard_layout') ?>
 
 <?= $this->section('content') ?>
 
@@ -10,7 +10,7 @@
             </div>
 
             <div class="card-body">
-                <form action="<?= base_url('/dashboard/kelola-admin/edit-admin/' . $data['id_admin'] . '/update') ?>" method="post">
+                <form action="<?= base_url('/dashboard/profile/edit-profile/' . $data['id_admin']) ?>" method="post">
                     <?= csrf_field() ?>
 
                     <input type="hidden" id="text" name="id" value="<?= $data['id_admin'] ?>">
@@ -31,22 +31,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="new-password">Password Baru:</label>
-                        <input class="form-control <?= validation_show_error('new-password') ? 'is-invalid' : '' ?>" id="new-password" name="new-password" placeholder="Password baru">
-                        <div class="invalid-feedback">
-                            <?= validation_show_error('new-password') ?>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirm-password">Konfirmasi Password:</label>
-                        <input class="form-control <?= validation_show_error('confirm-password') ? 'is-invalid' : '' ?>" id="confirm-password" name="confirm-password" placeholder="Konfirmasi password">
-                        <div class="invalid-feedback">
-                            <?= validation_show_error('confirm-password') ?>
-                        </div>
-                    </div>
-
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
@@ -55,4 +39,4 @@
 
 </body>
 
-<?= $this->endSection() ?>
+<?= $this->endSection(); ?>
