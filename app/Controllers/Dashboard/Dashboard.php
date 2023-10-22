@@ -49,6 +49,7 @@ class Dashboard extends BaseController
 
         $data = [
             'title' => 'Agenda Rapat',
+            'subtitle' => $agendaRapat[0]['nama_instansi'],
             'active' => 'home',
             'agenda' => $agendaRapat,
             'totalagenda' => count($agendaRapat),
