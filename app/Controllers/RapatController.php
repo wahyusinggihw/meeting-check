@@ -216,7 +216,7 @@ class RapatController extends BaseController
     {
         $rules = [
             'nip' => [
-                'rules' => 'required|numeric|min_length[18]|max_length[18]',
+                'rules' => 'required|numeric|min_length[15]|max_length[18]',
                 'errors' => [
                     'required' => 'Data harus diisi',
                     'numeric' => 'Data harus berupa angka'
