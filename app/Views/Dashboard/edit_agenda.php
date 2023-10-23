@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label>Jam</label>
-                            <input type="time" class="form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam" name="jam">
+                            <input class="timepicker form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam" name="jam">
                             <div class="invalid-feedback">
                                 <?= validation_show_error('jam') ?>
                             </div>
@@ -56,6 +56,16 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script>
+        $('.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30,
+            // defaultTime: '6',
+            dynamic: true,
+            dropdown: true,
+        });
+    </script>
 </body>
 
 <?= $this->endSection() ?>

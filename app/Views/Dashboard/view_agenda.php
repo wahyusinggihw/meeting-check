@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label>Jam</label>
-                            <input disabled type="time" class="form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam" name="jam">
+                            <input disabled class="timepicker form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam" name="jam">
                             <div class="invalid-feedback">
                                 <?= validation_show_error('jam') ?>
                             </div>
@@ -55,17 +55,28 @@
                         <div class="form-group">
                             <label for="qr">Link Rapat:</label>
                             <div class="container mb-3">
-                                <img id="qr" width="100px" src="<?= $qrCode ?>" alt="" class="">
+                                <div class="row">
+                                    <div class="col">
+
+                                        <img id="qr" width="100px" src="<?= $qrCode ?>" alt="" class="">
+                                    </div>
+                                    <!-- cara agar code "a" menjadi column di dalam row -->
+                                    <div class="col">
+                                        <div class="row mb-4">
+                                            <a href="<?= base_url('/informasi-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">share informasi</a>
+                                        </div>
+                                        <div class="row">
+                                            <a href="<?= base_url('/cetak-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-outline-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="<?= base_url('/informasi-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">share informasi</a>
-                            <!-- <button type="submit" id="printButton" class="btn btn-primary" data-judul="<?= substr($data['id_agenda'], 0, 8) . '-' . $data['agenda_rapat'] ?>">Cetak Agenda</button> -->
-                            <a href="<?= base_url('/cetak-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-outline-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>
     </div>
+
 
     <script>
         // Function to customize print settings
@@ -75,6 +86,14 @@
             const judul = this.getAttribute("data-judul");
             document.title = judul;
             window.print();
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30,
+            // defaultTime: '6',
+            dynamic: true,
+            dropdown: true,
         });
     </script>
 </body>

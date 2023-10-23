@@ -51,6 +51,10 @@ class AdminModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    function getAdminByID()
+    {
+        return $this->where('id_admin', session()->get('id_admin'))->first();
+    }
     function getAdminByRole()
     {
         if (session()->get('role') != 'superadmin') {

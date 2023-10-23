@@ -3,34 +3,36 @@
 .wrapper {
   background-color: rgb(255, 255, 255);
   width: 90%;
-  padding: 20px;
+  padding: 50px;
   border-radius: 35px;
   margin: 0 auto;
 }
 .judul-form {
-  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .konten .judul-form h1 {
   font-size: 25px;
   padding-top: 20px;
-  padding-left: 140px;
+  padding-left: 10%;
   color: #0466ed;
+  font-weight: 600;
 }
 .konten .judul-form h2 {
   padding-top: 0px;
-  padding-bottom: 20px;
-  padding-left: 140px;
+  padding-bottom: 30px;
+  padding-left: 10%;
   font-size: 25px;
-  font-weight: bold;
+  font-weight: 600;
 }
 .konten .wrapper h3 {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: 600;
 }
 .konten .wrapper h4 {
-  font-size: 12px;
+  font-size: 14px;
+  padding-bottom: 25px;
+  font-weight: 600;
 }
 
 .submit {
@@ -51,6 +53,15 @@
 }
 
 .konten .wrapper .form-group {
+  font-size: 14px;
+}
+.konten .wrapper .form-group .form-label {
+  font-weight: 600;
+}
+.konten .wrapper .form-group input {
+  font-size: 14px;
+}
+.konten .wrapper .form-group select {
   font-size: 14px;
 }
 
@@ -81,6 +92,7 @@
 
 .signature-pad h1 {
   font-size: 14px;
+  font-weight: 600;
 }
 
 .signature-canvas {

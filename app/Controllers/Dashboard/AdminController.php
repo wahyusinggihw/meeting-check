@@ -79,8 +79,6 @@ class AdminController extends BaseController
             $instansi = $this->request->getVar('asal_instansi');
             $sections = explode('-', $instansi);
 
-            $id_instansi = $sections[0];
-            $nama_instansi = $sections[1];
 
 
             if (!$validate) {
@@ -90,18 +88,34 @@ class AdminController extends BaseController
             $uuid = Uuid::uuid4()->toString();
             $slug = $this->slugify->slugify($this->request->getVar('nama'));
             $role = session()->get('role');
+            if ($role == 'superadmin') {
+                $id_instansi = $sections[0];
+                $nama_instansi = $sections[1];
 
-            $data = [
-                'id_admin' => $uuid,
-                'slug' => $slug,
-                'role' =>  $role == 'admin' ? 'operator' : 'admin',
-                'id_instansi' => $id_instansi,
-                'nama_instansi' => $nama_instansi,
-                'nama' => $this->request->getVar('nama'),
-                'username' => $this->request->getVar('username'),
-                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                'created_at' => date('Y-m-d H:i:s'),
-            ];
+                $data = [
+                    'id_admin' => $uuid,
+                    'slug' => $slug,
+                    'role' =>  $role == 'admin' ? 'operator' : 'admin',
+                    'id_instansi' => $id_instansi,
+                    'nama_instansi' => $nama_instansi,
+                    'nama' => $this->request->getVar('nama'),
+                    'username' => $this->request->getVar('username'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                    'created_at' => date('Y-m-d H:i:s'),
+                ];
+            } else {
+                $data = [
+                    'id_admin' => $uuid,
+                    'slug' => $slug,
+                    'role' =>  $role == 'admin' ? 'operator' : 'admin',
+                    'id_instansi' => session()->get('id_instansi'),
+                    'nama_instansi' => session()->get('nama_instansi'),
+                    'nama' => $this->request->getVar('nama'),
+                    'username' => $this->request->getVar('username'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                    'created_at' => date('Y-m-d H:i:s'),
+                ];
+            }
 
             // dd($data);
 
@@ -152,14 +166,14 @@ class AdminController extends BaseController
                     'is_unique' => 'Username sudah terdaftar'
                 ]
             ],
-            'password' => [
-                'rules' => 'required|unique[admins.password]',
-                'errors' => [
-                    'required' => 'Password harus diisi'
-                ]
+            'new-password' => [
+                // 'rules' => 'required',
+                // 'errors' => [
+                //     'required' => 'Password harus diisi'
+                // ]
             ],
             'confirm-password' => [
-                'rules' => 'required|matches[password]',
+                'rules' => 'matches[new-password]',
                 'errors' => [
                     'required' => 'Konfirmasi password harus diisi',
                     'matches' => 'Konfirmasi password tidak sesuai'
@@ -178,7 +192,7 @@ class AdminController extends BaseController
             'slug' => $slug,
             'nama' => $this->request->getVar('nama'),
             'username' => $this->request->getVar('username'),
-            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+            'password' => password_hash($this->request->getVar('new-password'), PASSWORD_DEFAULT)
         ]);
 
         return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil diubah');

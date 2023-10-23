@@ -11,8 +11,7 @@
             </div>
             <div class="info">
                 <div class="col">
-                    <a href="#" class="d-block" style="text-decoration: none;"><?= session()->get('nama') ?></a>
-                    <small class="d-block " style="text-decoration: none;"><?= session()->get('role') ?></sma>
+                    <a href="<?= base_url('dashboard/profile') ?>" class="d-block" style="text-decoration: none;"><?= session()->get('nama') ?></a>
                 </div>
             </div>
 

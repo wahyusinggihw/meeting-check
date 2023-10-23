@@ -14,7 +14,7 @@
     <?php endif; ?>
 
     <?php if (session()->get('role') != 'operator') : ?>
-        <a href="<?= base_url('dashboard/kelola-admin/tambah-admin') ?>" class="btn btn-primary mb-2">Tambah Admin</a>
+        <a href="<?= base_url('dashboard/kelola-admin/tambah-admin') ?>" class="btn btn-primary mb-2"><?= (session()->get('role') == 'superadmin') ? 'Tambah Admin' : 'Tambah Operator' ?></a>
     <?php endif; ?>
 
     <div class="table-container my-3">
@@ -43,9 +43,9 @@
                         <td><?= $item['created_at'] ?></td>
                         <td>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 btn-group">
                                     <!-- <a href="<?= base_url('dashboard/kelola-admin/view-agenda/' . $item['slug']) ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a> -->
-                                    <a href="<?= base_url('dashboard/kelola-admin/edit-admin/' . $item['slug']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                                    <a href="<?= base_url('dashboard/kelola-admin/edit-admin/' . $item['slug']) ?>" class="btn btn-warning mx-2"><i class="fa-solid fa-pen"></i></a>
                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a>
                                 </div>
                             </div>
