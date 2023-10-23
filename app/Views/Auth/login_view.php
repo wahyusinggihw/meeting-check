@@ -25,6 +25,7 @@
         </script>
     <?php endif; ?>
 
+
     <div class="login-form">
         <div class="container">
             <img src="<?php echo base_url('assets/img/pemkab.png'); ?>" alt="Logo" width="100">
@@ -55,7 +56,14 @@
                 </div>
                 <button type="submit" class="g-recaptcha" data-sitekey="<?= getenv('RECAPTCHA_SITE_KEY') ?>" data-callback='onSubmit' data-action='submit'>Login</button>
             </div>
+    </div>
+
+
+
+
 </body>
+
+
 
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
@@ -63,6 +71,7 @@
         document.getElementById("form-login").submit();
     }
 </script>
+
 
 <script src="<?php echo base_url('assets/js/login.js'); ?>"></script>
 
