@@ -12,52 +12,29 @@
 </head>
 
 <body>
-    <!--Hey! This is the original version
-of Simple CSS Waves-->
-
-    <div class="header">
-
-        <!--Content before waves-->
-        <div class="card-info">
-            <div class="card-qr">
-                <img src="<?php echo base_url('assets/img/qr.svg'); ?>" alt="Logo">
+    <div class="outer">
+        <div class="prod-logo">
+            <img src="https://github.com/abhinanduN/codepen/blob/master/prod.png?raw=true" class="prod-img" alt="icon" />
+            <ul class="main-nav">
+                <li class="nav-li"><a href="#">Home</a></li>
+                <li class="nav-li"><a href="#">About</a></li>
+                <li class="nav-li"><a href="#">Modules</a></li>
+                <li class="nav-li"><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="inner">
+            <div class="prod-left">
+                <h1 class="prod-head"><span style="color:#0f457f">HELLO</span> MOTO!</h1>
+                <h4 class="prod-head-sub">Lorem ipsum dolor sit amet...</h4>
             </div>
-
-            <div class="card-text">
-                <h1>INFORMASI RAPAT</h1>
-                <ul>
-                    <li>RAPATTTT</li>
-                    <li>DINAS KOMINFOSANTI</li>
-                </ul>
-                <div class="code-rapat">
-                    ID RAPAT : <p id="teksToSalin" onclick="copyText()">3007-1807</p>
-                </div>
+            <div class="prod-right">
+                <img src="https://github.com/abhinanduN/codepen/blob/master/human-image.png?raw=true" class="prod-human-img" alt="prod" />
             </div>
         </div>
-        <!--Waves Container-->
-        <div>
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                <defs>
-                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                </defs>
-                <g class="parallax">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-                </g>
-            </svg>
-        </div>
-        <!--Waves end-->
-
     </div>
-    <!--Header ends-->
-
-    <!--Content starts-->
-    <!--Content ends-->
 </body>
 
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="<?php echo base_url('assets/js/login.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/tester.js'); ?>"></script>
 
 </html>

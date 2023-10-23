@@ -15,26 +15,27 @@
 
   <?php endif; ?>
 
+  <div class="container-info">
+    <div class="info">
+      <h1>Daftar Hadir Rapat</h1>
+      <h2>Pemkab Buleleng</h2>
+      <p>Silahkan Masukan ID yang Telah Di Peroleh</p>
+      <form action="<?= base_url('/submit-kode/form-absensi') ?>" method="post">
+        <div class="formid">
+
+          <input type="text" class="form-control <?= ($validation->hasError('inputAlphanumeric')) ? 'is-invalid' : '' ?>" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX">
+
+          <button>Submit</button>
+        </div>
+        <div class="invalid-feedback">
+          <?= $validation->getError('inputAlphanumeric') ?>
+        </div>
+      </form>
+    </div>
+    <div class="logo"><img src="https://github.com/abhinanduN/codepen/blob/master/human-image.png?raw=true" class="prod-human-img" alt="prod" /></div>
+  </div>
 
   <div class="container">
-    <section class="section">
-      <div class="info">
-        <h1>Daftar Hadir Rapat <br> Pemkab Buleleng</h1>
-        <p>Silahkan Masukan ID yang Telah Di Peroleh</p>
-        <form action="<?= base_url('/submit-kode/form-absensi') ?>" method="post">
-          <div class="formid">
-
-            <input type="text" class="form-control <?= ($validation->hasError('inputAlphanumeric')) ? 'is-invalid' : '' ?>" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX">
-
-            <button>Submit</button>
-          </div>
-          <div class="invalid-feedback">
-            <?= $validation->getError('inputAlphanumeric') ?>
-          </div>
-        </form>
-      </div>
-    </section>
-
     <section class="timeline">
       <div class="container">
 
