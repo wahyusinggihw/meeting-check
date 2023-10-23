@@ -53,7 +53,21 @@ body {
   color: white;
   border: none;
   border-radius: 5px;
+  position: absolute
+  bottom;
   cursor: pointer;
+}
+
+.g-recaptcha {
+  width: 256px;
+  height: 60px;
+  display: block;
+  transition: right 0.3s ease 0s;
+  bottom: -160px;
+  right: -146px;
+  box-shadow: gray 0px 0px 5px;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 .login-form button:hover {
@@ -76,28 +90,6 @@ body {
 .password-toggle-btn i {
   font-size: 1.2em;
 } 
-
-.logo {
-  margin-left: 100px;
-}
-
-.logo img {
-  -webkit-animation: slide-in-elliptic-top-fwd 0.7s
-    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  margin: 0 25px;
-  margin-top: 230px;
-}
-
-.logo-2 img {
-  -webkit-animation: slide-in-elliptic-top-fwd 0.7s
-    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  margin: 0 25px;
-  margin-top: 230px;
-}
 
 /* KeyFrames */
 
