@@ -64,7 +64,10 @@
 .konten .wrapper .form-group select {
   font-size: 14px;
 }
-
+.konten .wrapper .form-group .cari {
+  height: 35px;
+  font-size: 14px;
+}
 /* responsif */
 @media screen and (min-width: 576px) {
   .wrapper {

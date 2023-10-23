@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="col-auto text-end">
-                            <a id="cariNikButton" class="btn btn-primary">Cari</a>
+                            <a id="cariNikButton" class="cari btn btn-primary">Cari</a>
                         </div>
                     </div>
                 </div>
