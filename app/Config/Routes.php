@@ -99,3 +99,4 @@ $routes->get('/informasi-rapat', 'Auth::informasiRapat');
 
 // Route View Tester
 $routes->get('/tester', 'Auth::tester');
+$routes->get('/tester', 'Auth::tester');

@@ -62,15 +62,18 @@ class AgendaRapat extends BaseController
     {
         $agendaRapat  = $this->agendaRapat->getAgendaRapatByField($idAgenda);
         $judul = $agendaRapat['agenda_rapat'];
+        $logo = image_to_base64(base_url("assets/img/logo.png"));
         $rawData = [
             'agendaRapat' => $agendaRapat,
             'qrCode' => generateQrCode($agendaRapat['link_rapat']),
+            'logo'  => $logo
         ];
 
         $html = view('dashboard\pdf_template', $rawData);
 
         // Create a Dompdf instance
         $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
         $dompdf = new Dompdf($options);
 
