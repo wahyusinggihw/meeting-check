@@ -21,19 +21,22 @@
                     <?php if (session()->get('role') != 'superadmin') : ?>
                         <div class="form-group mb-3" id="instansiOption">
                             <label for="asal_instansi" class="form-label">Bidang</label>
-                            <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
                             <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi">
-                                <!-- foreach -->
                                 <option value="">Pilih Bidang</option>
-                                <option value="1">Bidang 1</option>
-                                <option value="2">Bidang 2</option>
-                                <option value="3">Bidang 3</option>
-
+                                <?php foreach ($bidang as $item) : ?>
+                                    <option value="<?= $item['id_bidang'] . '-' . $item['nama_bidang'] ?>"><?= $item['nama_bidang'] ?></option>
+                                <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback text-start">
                                 <?= validation_show_error('asal_instansi') ?>
                             </div>
                         </div>
+                        <!-- <label for="nama_bidang">Bidang Instansi:</label>
+                        <input class="form-control <?= validation_show_error('nama_bidang') ? 'is-invalid' : '' ?>" type="text" id="nama_bidang" name="nama_bidang" placeholder="contoh. Persandian dan Statistik">
+                        <div class="invalid-feedback">
+                            <?= validation_show_error('nama_bidang') ?>
+                        </div>
+                        <br> -->
                     <?php else : ?>
                         <div class="form-group mb-3" id="instansiOption">
                             <label for="asal_instansi" class="form-label">Asal Instansi</label>

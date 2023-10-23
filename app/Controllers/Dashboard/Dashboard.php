@@ -19,23 +19,24 @@ class Dashboard extends BaseController
 
     public function index()
     {
-        if (session()->get('role') == 'superadmin') {
+        $id_instansi = session()->get('id_instansi');
+        $role = session()->get('role');
+
+        if ($role == 'superadmin') {
             $agendaRapat = $this->agendaRapat->viewAgendaRapatByInstansi();
-            $belumBerjalan = $this->agendaRapat->getAgendaByStatus('belum-berjalan');
-            $selesai = $this->agendaRapat->getAgendaByStatus('selesai');
         } else {
-            $agendaRapat = $this->agendaRapat->getAllAgendaByInstansi(session()->get('id_instansi'));
-            $belumBerjalan = $this->agendaRapat->getAgendaByStatusInstansi('belum-berjalan', session()->get('id_instansi'));
-            $selesai = $this->agendaRapat->getAgendaByStatusInstansi('selesai', session()->get('id_instansi'));
+            $agendaRapat = $this->agendaRapat->getAllAgendaByInstansi($id_instansi);
         }
-        $count = count($agendaRapat);
+
+        $status = $this->agendaRapat->getAgendaByStatusandInstansi($id_instansi);
+
         $data = [
             'title' => 'Home',
             'active' => 'home',
             'agenda' => $agendaRapat,
             'totalagenda' => count($agendaRapat),
-            'totalAgendaBelumBerjalan' => count($belumBerjalan),
-            'totalAgendaSelesai' => count($selesai),
+            'totalAgendaTersedia' => count($status['tersedia']),
+            'totalAgendaSelesai' =>  count($status['selesai']),
         ];
 
         return view('dashboard/home_dashboard', $data);
@@ -44,8 +45,7 @@ class Dashboard extends BaseController
     public function viewDetailAgendaRapatByInstansi($id_instansi)
     {
         $agendaRapat = $this->agendaRapat->viewDetailAgendaRapatByInstansi($id_instansi);
-        $belumBerjalan = $this->agendaRapat->getAgendaByStatusInstansi('belum-berjalan', $id_instansi);
-        $selesai = $this->agendaRapat->getAgendaByStatusInstansi('selesai', $id_instansi);
+        $status = $this->agendaRapat->getAgendaByStatus(session()->get('id_instansi'));
 
         $data = [
             'title' => 'Agenda Rapat',
@@ -53,18 +53,20 @@ class Dashboard extends BaseController
             'active' => 'home',
             'agenda' => $agendaRapat,
             'totalagenda' => count($agendaRapat),
-            'totalAgendaBelumBerjalan' => count($belumBerjalan),
-            'totalAgendaSelesai' => count($selesai),
+            'totalAgendaTersedia' => count($status['tersedia']),
+            'totalAgendaSelesai' =>  count($status['selesai']),
         ];
         return view('dashboard/home_dashboard_detail', $data);
     }
 
     public function agenda()
     {
+        $agendaRapat = $this->agendaRapat->getAgendaByBidang();
+
         $data = [
             'title' => 'Agenda Rapat',
             'active' => 'agenda',
-            'agenda' => $this->agendaRapat->getAgendaByRole2(),
+            'agenda' => $agendaRapat,
         ];
 
         return view('dashboard/agenda_rapat', $data);

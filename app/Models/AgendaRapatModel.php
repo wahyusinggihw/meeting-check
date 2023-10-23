@@ -37,13 +37,11 @@ class AgendaRapatModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    public function getAgendaByRole()
+
+    function getAllAgenda()
     {
-        if (session()->get('role') != 'superadmin') {
-            return $this->where('id_admin', session()->get('id_admin'))->findAll();
-        } else {
-            return $this->findAll();
-        }
+        $query = $this->findAll();
+        return $query;
     }
 
     public function updateAgenda($idAgenda, $data)
@@ -54,50 +52,40 @@ class AgendaRapatModel extends Model
         $this->update();
     }
 
-    public function getAgendaByRole2()
+    // QUERY UNTUK DASHBOARD AGENDA RAPAT SEMUA ROLE
+    function getAgendaByBidang()
     {
-        $userRole = session()->get('role');
-        $adminModel = new AdminModel();
-        // if (session()->get('role') == 'superadmin') {
-        //     $adminInstansi = $adminModel->find(session()->get('id_admin'));
-        //     $agendas = $adminInstansi->agendas;
-        //     return $agendas;
-        // } else {
-        //     return $this->findAll();
-        // }
-
-        if ($userRole === 'superadmin') {
-            $query = $this->findAll();
-            return $query;
-        } else {
+        if (session()->get('role') != 'superadmin') {
             $builder = $this->table('agendarapats');
             $builder->select('agendarapats.*, admins.slug as admin_slug');
             $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
-            $builder->where('admins.id_instansi', session()->get('id_instansi'));
+            if (session()->get('role') == 'admin') {
+                $builder->where('admins.id_instansi', session()->get('id_instansi'));
+                $query = $builder->get()->getResultArray();
+                foreach ($query as &$item) {
+                    $item['status'] = statusRapat($item['tanggal'], $item['jam']);
+                }
+                return $query;
+            }
+            $builder->where('admins.id_bidang', session()->get('id_bidang'));
             $query = $builder->get()->getResultArray();
-            // dd($query);
+            foreach ($query as &$item) {
+                $item['status'] = statusRapat($item['tanggal'], $item['jam']);
+            }
+            return $query;
+            # code...
+        } else {
+            $query = $this->findAll();
+
+            // Update the 'status' for each item in the result
+            foreach ($query as &$item) {
+                $item['status'] = statusRapat($item['tanggal'], $item['jam']);
+            }
             return $query;
         }
-
-        // if ($userRole === 'admin') {
-        //     // $query = $this->where('id_admin', session()->get('id_admin'))->findAll();
-        //     $builder = $this->table('agendarapats');
-        //     $builder->select('*');
-        //     $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
-        //     $builder->where('admins.id_instansi', session()->get('id_instansi'));
-        //     $query = $builder->get()->getResultArray();
-        //     return $query;
-        // } elseif ($userRole === 'operator') {
-        //     $builder = $this->table('agendarapats');
-        //     $builder->select('*');
-        //     $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
-        //     $builder->where('admins.id_instansi', session()->get('id_instansi'));
-        //     $query = $builder->get()->getResultArray();
-        //     return $query;
-        // }
     }
 
-    function getAgendaRapatByID()
+    function getAgendaRapatByIDAdmin()
     {
         $id_admin = session()->get('id_admin');
         $builder = $this->table('agendarapats');
@@ -123,7 +111,7 @@ class AgendaRapatModel extends Model
     }
 
     // get id agenda sementara
-    function getAgendaRapatByField($idAgenda)
+    function getAgendaRapatByIdAgenda($idAgenda)
     {
         $query = $this->where('id_agenda', $idAgenda)->first();
         // dd($query);
@@ -136,13 +124,8 @@ class AgendaRapatModel extends Model
         return $query;
     }
 
-    function getAllAgenda()
-    {
-        $query = $this->findAll();
-        return $query;
-    }
-
-    // membuat view untuk mengelompokkan id instansi dan nama instansi
+    // SUPERADMIN 
+    // membuat view untuk mengelompokkan id instansi dan nama instansi (SUPER ADMIN)
     function viewAgendaRapatByInstansi()
     {
         $viewName = 'agendarapatbyinstansi';
@@ -162,14 +145,22 @@ class AgendaRapatModel extends Model
         return $query->getResultArray();
     }
 
+    // membuat detail view dari fungsi view agenda (mysql view) (SUPER ADMIN)
     function viewDetailAgendaRapatByInstansi($id_instansi)
     {
         $builder = $this->table('agendarapats');
-        $builder->where('id_instansi', $id_instansi);
-        $query = $builder->get();
-        return $query->getResultArray();
+        $builder->select('agendarapats.*, admins.slug as admin_slug, admins.id_bidang as admin_id_bidang, admins.nama_bidang as admin_nama_bidang');
+        $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
+        $builder->where('admins.id_instansi', $id_instansi);
+        $query = $builder->get()->getResultArray();
+        foreach ($query as &$item) {
+            $item['status'] = statusRapat($item['tanggal'], $item['jam']);
+        }
+        return $query;
     }
+    // SUPERADMIN END;
 
+    // get semua angea berdasarkan id_instansi
     function getAllAgendaByInstansi($id_instansi)
     {
         $builder = $this->where('id_instansi', $id_instansi);
@@ -177,17 +168,53 @@ class AgendaRapatModel extends Model
         return $query->getResultArray();
     }
 
-    public function getAgendaByStatus($status)
+    // get semua agenda berdasarkan status
+    public function getAgendaByStatus()
     {
-        $builder = $this->where('status', $status);
-        $query = $builder->get();
-        return $query->getResultArray();
+        $agendaItems = $this->findAll(); // Retrieve all agenda items
+
+        $tersediaAgenda = [];
+        $selesaiAgenda = [];
+
+        foreach ($agendaItems as $item) {
+            $status = statusRapat($item['tanggal'], $item['jam']);
+
+            if ($status === 'tersedia') {
+                $tersediaAgenda[] = $item;
+            } elseif ($status === 'selesai') {
+                $selesaiAgenda[] = $item;
+            }
+        }
+
+        // Return arrays of filtered agenda items
+        return [
+            'tersedia' => $tersediaAgenda,
+            'selesai' => $selesaiAgenda,
+        ];
     }
 
-    public function getAgendaByStatusInstansi($status, $id_instansi)
+    // get agenda dengan status tersedia dan selesai berdasarkan id_instansi
+    public function getAgendaByStatusandInstansi($id_instansi)
     {
-        $builder = $this->where('status', $status)->where('id_instansi', $id_instansi);
-        $query = $builder->get();
-        return $query->getResultArray();
+        $agendaItems = $this->findAll(); // Retrieve all agenda items
+
+        $tersediaAgenda = [];
+        $selesaiAgenda = [];
+
+        foreach ($agendaItems as $item) {
+            $status = statusRapat($item['tanggal'], $item['jam']);
+
+            if ($status === 'tersedia' && $item['id_instansi'] == $id_instansi) {
+                $tersediaAgenda[] = $item;
+            } elseif ($status === 'selesai' && $item['id_instansi'] == $id_instansi) {
+                $selesaiAgenda[] = $item;
+            }
+        }
+
+        // Return arrays of filtered agenda items
+        return [
+            'tersedia' => $tersediaAgenda,
+            'selesai' => $selesaiAgenda,
+        ];
     }
 }

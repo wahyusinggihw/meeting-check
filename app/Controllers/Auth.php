@@ -54,6 +54,8 @@ class Auth extends BaseController
                     'role' => $admin['role'],
                     'id_instansi' => $admin['id_instansi'],
                     'nama_instansi' => $admin['nama_instansi'],
+                    'id_bidang' => $admin['id_bidang'],
+                    'nama_bidang' => $admin['nama_bidang'],
                     'logged_in' => TRUE
                 ];
                 session()->set($data);

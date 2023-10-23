@@ -30,68 +30,68 @@ class AdminSeed extends Seeder
 
         $this->db->table('admins')->insert($adminData);
 
-        for ($i = 0; $i < 3; $i++) {
-            # code...
-            $operator = [
-                'id_admin' => $faker->uuid,
-                'slug' => $faker->slug,
-                'nama' => $faker->name,
-                'role' => 'operator',
-                'id_instansi' => 'instansi1',
-                'username' => $faker->userName,
-                'password' => password_hash('operator', PASSWORD_DEFAULT),
-                'created_at' => $faker->date('Y-m-d H:i:s'),
-            ];
-            // Insert Admin Data
-            $this->db->table('admins')->insert($operator);
-        }
-        for ($i = 0; $i < 3; $i++) {
-            # code...
-            $operator = [
-                'id_admin' => $faker->uuid,
-                'slug' => $faker->slug,
-                'nama' => $faker->name,
-                'role' => 'operator',
-                'id_instansi' => 'instansi2',
-                'username' => $faker->userName,
-                'password' => password_hash('operator', PASSWORD_DEFAULT),
-                'created_at' => $faker->date('Y-m-d H:i:s'),
-            ];
-            // Insert Admin Data
-            $this->db->table('admins')->insert($operator);
-        }
-        for ($i = 0; $i < 3; $i++) {
-            # code...
-            $operator = [
-                'id_admin' => $faker->uuid,
-                'slug' => $faker->slug,
-                'nama' => $faker->name,
-                'role' => 'operator',
-                'id_instansi' => 'instansi3',
-                'username' => $faker->userName,
-                'password' => password_hash('operator', PASSWORD_DEFAULT),
-                'created_at' => $faker->date('Y-m-d H:i:s'),
-            ];
-            // Insert Admin Data
-            $this->db->table('admins')->insert($operator);
-        }
+        // for ($i = 0; $i < 3; $i++) {
+        //     # code...
+        //     $operator = [
+        //         'id_admin' => $faker->uuid,
+        //         'slug' => $faker->slug,
+        //         'nama' => $faker->name,
+        //         'role' => 'operator',
+        //         'id_instansi' => 'instansi1',
+        //         'username' => $faker->userName,
+        //         'password' => password_hash('operator', PASSWORD_DEFAULT),
+        //         'created_at' => $faker->date('Y-m-d H:i:s'),
+        //     ];
+        //     // Insert Admin Data
+        //     $this->db->table('admins')->insert($operator);
+        // }
+        // for ($i = 0; $i < 3; $i++) {
+        //     # code...
+        //     $operator = [
+        //         'id_admin' => $faker->uuid,
+        //         'slug' => $faker->slug,
+        //         'nama' => $faker->name,
+        //         'role' => 'operator',
+        //         'id_instansi' => 'instansi2',
+        //         'username' => $faker->userName,
+        //         'password' => password_hash('operator', PASSWORD_DEFAULT),
+        //         'created_at' => $faker->date('Y-m-d H:i:s'),
+        //     ];
+        //     // Insert Admin Data
+        //     $this->db->table('admins')->insert($operator);
+        // }
+        // for ($i = 0; $i < 3; $i++) {
+        //     # code...
+        //     $operator = [
+        //         'id_admin' => $faker->uuid,
+        //         'slug' => $faker->slug,
+        //         'nama' => $faker->name,
+        //         'role' => 'operator',
+        //         'id_instansi' => 'instansi3',
+        //         'username' => $faker->userName,
+        //         'password' => password_hash('operator', PASSWORD_DEFAULT),
+        //         'created_at' => $faker->date('Y-m-d H:i:s'),
+        //     ];
+        //     // Insert Admin Data
+        //     $this->db->table('admins')->insert($operator);
+        // }
 
-        // die;
-        for ($i = 0; $i < 3; $i++) {
-            $adminData = [
-                'id_admin' => $faker->uuid,
-                'slug' => $faker->slug,
-                'nama' => $faker->name,
-                'role' => 'admin',
-                'id_instansi' => 'instansi' . ($i + 1),
-                'username' => $faker->userName,
-                'password' => password_hash('admin', PASSWORD_DEFAULT),
-                'created_at' => $faker->date('Y-m-d H:i:s'),
-            ];
+        // // die;
+        // for ($i = 0; $i < 3; $i++) {
+        //     $adminData = [
+        //         'id_admin' => $faker->uuid,
+        //         'slug' => $faker->slug,
+        //         'nama' => $faker->name,
+        //         'role' => 'admin',
+        //         'id_instansi' => 'instansi' . ($i + 1),
+        //         'username' => $faker->userName,
+        //         'password' => password_hash('admin', PASSWORD_DEFAULT),
+        //         'created_at' => $faker->date('Y-m-d H:i:s'),
+        //     ];
 
-            // Insert Admin Data
-            $this->db->table('admins')->insert($adminData);
-        }
+        // Insert Admin Data
+        // $this->db->table('admins')->insert($adminData);
+        // }
 
 
 

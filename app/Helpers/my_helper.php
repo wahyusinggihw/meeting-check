@@ -56,6 +56,19 @@ function expiredTime($date, $time)
     // return $expiredDateTime;
 }
 
+function statusRapat($date, $time)
+{
+    $expiredCheck = expiredTime($date, $time);
+    // dd($currentDateTime->format('Y-m-d H:i'), $expiredDateTime);
+    if (!$expiredCheck) {
+        // Meeting is still valid
+        return 'tersedia';
+    } else {
+        // Meeting has expired
+        return 'selesai';
+    }
+}
+
 function generateQrCode($linkRapat)
 {
     // add logo to qr

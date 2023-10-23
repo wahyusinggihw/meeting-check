@@ -59,11 +59,11 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-success">
                 <div class="inner">
-                    <h3><?= $totalAgendaBelumBerjalan ?></h3>
+                    <h3><?= $totalAgendaTersedia ?></h3>
 
-                    <p>Agenda Rapat Belum Berjalan</p>
+                    <p>Agenda Rapat Tersedia</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -73,7 +73,7 @@
         </div>
         <div class="col-lg-3 col-6">
 
-            <div class="small-box bg-success">
+            <div class="small-box bg-warning">
                 <div class="inner">
                     <h3><?= $totalAgendaSelesai ?></h3>
 

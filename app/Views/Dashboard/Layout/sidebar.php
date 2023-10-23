@@ -59,6 +59,12 @@
                             <p>Kelola Operator</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('/dashboard/kelola-bidang') ?>" class="nav-link <?= uri_string() == 'dashboard/kelola-bidang' ? 'active' : '' ?>">
+                            <i class="nav-icon fa-solid fa-sitemap"></i>
+                            <p>Kelola Bidang</p>
+                        </a>
+                    </li>
                 <?php endif; ?>
 
                 <li class="nav-item">

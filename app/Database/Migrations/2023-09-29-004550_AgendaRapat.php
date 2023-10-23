@@ -57,10 +57,10 @@ class AgendaRapat extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'status' => [
-                'type' => 'enum',
-                'constraint' => ['belum-berjalan', 'sedang-berlangsung', 'kadaluarsa'],
-            ],
+            // 'status' => [
+            //     'type' => 'enum',
+            //     'constraint' => ['tersedia', 'selesai'],
+            // ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
