@@ -1,7 +1,7 @@
 <?php
 
-use CodeIgniter\Router\RouteCollection;
 use JetBrains\PhpStorm\NoReturn;
+use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
@@ -18,7 +18,7 @@ $routes->get('/', 'Home::index');
 $routes->post('/submit-kode/form-absensi', 'Home::submitKode');
 
 // revisi form absensi
-$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi');
+$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi', ['filter' => 'cekkode']);
 $routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
 
 // share rapat qr code
@@ -51,9 +51,10 @@ $routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);
 
 // Dashboard
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
-    $routes->get('/', 'Dashboard\Dashboard::index');
+    $routes->get('/', 'Dashboard\Dashboard::index', ['filter' => 'admin']);
     $routes->get('agenda-rapat', 'Dashboard\Dashboard::agenda');
-    // $routes->get('daftar-hadir', 'Dashboard\Dashboard::daftarHadir');
+    $routes->get('view-detail-by-instansi/(:segment)', 'Dashboard\Dashboard::viewDetailAgendaRapatByInstansi/$1');
+    // $routes->get('daftar-hadir', 'Dashboard\Dashboard:daftarHadir');
     $routes->get('agenda-rapat/daftar-hadir/(:segment)', 'Dashboard\DaftarHadirController::cariDaftarHadir/$1');
 
     $routes->get('agenda-rapat/tambah-agenda', 'Dashboard\AgendaRapat::tambahAgenda');
@@ -66,11 +67,24 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'Dashboard\AgendaRapat::update/$1');
     $routes->post('delete-agenda/(:segment)', 'Dashboard\AgendaRapat::delete/$1');
 
-    $routes->get('kelola-admin', 'Dashboard\AdminController::index');
-    $routes->match(['get', 'post'], 'kelola-admin/tambah-admin', 'Dashboard\AdminController::tambahAdmin');
-    $routes->get('kelola-admin/edit-admin/(:segment)', 'Dashboard\AdminController::edit/$1');
-    $routes->post('kelola-admin/edit-admin/(:segment)/update', 'Dashboard\AdminController::update/$1');
-    $routes->post('delete-admin/(:segment)', 'Dashboard\AdminController::delete/$1');
+    $routes->get('profile', 'Dashboard\UsersController::index');
+    $routes->get('profile/edit-profile/(:segment)', 'Dashboard\UsersController::edit/$1');
+    $routes->post('profile/edit-profile/(:segment)', 'Dashboard\UsersController::update/$1');
+    $routes->get('profile/edit-profilepassword/(:segment)', 'Dashboard\UsersController::editPassword/$1');
+    $routes->post('profile/edit-profilepassword/(:segment)', 'Dashboard\UsersController::updatePassword/$1');
+
+    $routes->group('kelola-admin', ['filter' => 'admin'], function ($routes) {
+        $routes->get('/', 'Dashboard\AdminController::index');
+        $routes->match(['get', 'post'], 'tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+        $routes->get('edit-admin/(:segment)', 'Dashboard\AdminController::edit/$1');
+        $routes->post('edit-admin/(:segment)/update', 'Dashboard\AdminController::update/$1');
+        $routes->post('delete-admin/(:segment)', 'Dashboard\AdminController::delete/$1');
+    });
+    // $routes->get('kelola-admin', 'Dashboard\AdminController::index');
+    // $routes->match(['get', 'post'], 'kelola-admin/tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+    // $routes->get('kelola-admin/edit-admin/(:segment)', 'Dashboard\AdminController::edit/$1');
+    // $routes->post('kelola-admin/edit-admin/(:segment)/update', 'Dashboard\AdminController::update/$1');
+    // $routes->post('delete-admin/(:segment)', 'Dashboard\AdminController::delete/$1');
 });
 
 $routes->get('/home/login', 'Auth::login');

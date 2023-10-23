@@ -11,8 +11,7 @@
             </div>
             <div class="info">
                 <div class="col">
-                    <a href="#" class="d-block" style="text-decoration: none;"><?= session()->get('nama') ?></a>
-                    <small class="d-block " style="text-decoration: none;"><?= session()->get('role') ?></sma>
+                    <a href="<?= base_url('dashboard/profile') ?>" class="d-block" style="text-decoration: none;"><?= session()->get('nama') ?></a>
                 </div>
             </div>
 
@@ -49,6 +48,15 @@
                         <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link <?= uri_string() == 'dashboard/kelola-admin' ? 'active' : '' ?>">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Kelola Admin</p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (session()->get('role') == 'admin') : ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('/dashboard/kelola-admin') ?>" class="nav-link <?= uri_string() == 'dashboard/kelola-admin' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Kelola Operator</p>
                         </a>
                     </li>
                 <?php endif; ?>

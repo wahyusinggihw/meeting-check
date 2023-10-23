@@ -1,5 +1,7 @@
 <?php
 
+use CodeIgniter\Config\Services;
+use CodeIgniter\HTTP\CURLRequest;
 use chillerlan\QRCode\{QRCode, QROptions};
 
 
@@ -61,7 +63,7 @@ function generateQrCode($linkRapat)
     $options = new QROptions(
         [
             'addLogoSpace'  => true,
-            'logoPath'      => FCPATH . base_url('assets/img/logo.png'),
+            'logoPath'      => base_url('assets/img/logo.png'),
             'logoSpaceWidth' => 9,
             'logoSpaceHeight' => 9,
             'logoSpaceStartX' => 10,
@@ -80,4 +82,26 @@ function loopIteration($pager, $group)
     $counter = $pager->getDetails($group)['currentPage'] === 1 ? 1 : ($pager->getDetails($group)['currentPage'] - 1) * 5 + 1;
 
     return $counter;
+}
+
+// captcha server side
+function verifyCaptcha($token)
+{
+
+    $client = service('curlrequest');
+    $secretKey = getenv('RECAPTCHA_SECRET_KEY');
+
+    $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
+        'form_params' => [
+            'secret'   => $secretKey,
+            'response' => $token,
+        ],
+    ]);
+
+    if ($response->getStatusCode() === 200) {
+        $result = json_decode($response->getBody());
+
+        return $result;
+    }
+    return null;
 }

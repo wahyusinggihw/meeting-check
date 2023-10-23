@@ -3,6 +3,16 @@
 <?= $this->section('content') ?>
 
 <body>
+    <?php if (session()->getFlashdata('error')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?= session()->getFlashdata('error') ?>',
+            })
+        </script>
+    <?php endif; ?>
+
     <div class="konten">
         <div class="judul-form">
             <h1>Form Daftar Hadir</h1>
@@ -13,7 +23,7 @@
                 <h3><?= isset($rapat['agenda_rapat']) ? $rapat['agenda_rapat'] : 'Rapat'  ?></h3>
                 <h4>Isi sesuai dengan data diri anda</h4>
             </div>
-            <form action="<?= base_url('/submit-kode/form-absensi/store') ?>" method="post" id="form_pegawai" enctype="multipart/form-data">
+            <form action="<?= base_url('/submit-kode/form-absensi/store') ?>" method="post" id="form-absensi" name="form-absensi" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <div class="form-group mb-2 mt-4">
                     <label class="form-label">Pilih Status</label>
@@ -113,71 +123,22 @@
                     <?= validation_show_error('signatureData') ?>
                 </div>
                 <div class="button-container ">
-                    <button type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</button>
+                    <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
                 </div>
                 <div class="form-group text-end">
-                    <button onclick="saveSignature()" type="submit" class="btn btn-primary">Submit</button>
+                    <button onclick="saveSignature()" type="submit" class="g-recaptcha btn btn-primary" data-sitekey="<?= getenv('RECAPTCHA_SITE_KEY') ?>" data-callback='onSubmit' data-action='submit'>Submit</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script>
-        $(document).ready(function() {
-            // Add a change event listener to the 'nip' input
-            var nipPlaceholder = $(this).attr('placeholder');
-            $('#nip').on('change', function() {
-                var nipValue = $(this).val();
-                var statusValue = $('input[name="statusRadio"]:checked').val();
-
-                // Determine which API to call based on the 'statusValue'
-                var apiEndpoint = (statusValue === 'pegawai') ? '/api/users/' : '/api/peserta/';
-
-                // Make the AJAX request
-                $.ajax({
-                    url: apiEndpoint + nipValue,
-                    type: 'GET',
-                    success: function(data) {
-                        if (data.status === false) {
-                            // Handle the case where data is not found
-                            $('#no_hp, #nama, #alamat, #asal_instansi').val('').prop('readonly', false);
-                        } else {
-                            if (statusValue === 'pegawai') {
-                                $('#no_hp').val(data.data.email_ukerja).prop('readonly', true);
-                                $('#nama').val(data.data.ket_ukerja).prop('readonly', true);;
-                                $('#alamat').val(data.data.alamat_ukerja).prop('readonly', true);;
-                                $('#asal_instansi').val(data.data.ket_ukerja).prop('readonly', true);;
-                            } else {
-                                // Update the form fields with the fetched data
-                                $('#no_hp').val(data.no_hp).prop('readonly', true);
-                                $('#nama').val(data.nama).prop('readonly', true);
-                                $('#alamat').val(data.alamat).prop('readonly', true);
-                                $('#asal_instansi').val(data.asal_instansi).prop('readonly', true);
-                            }
-                        }
-                    },
-                    error: function() {
-                        // Handle errors if the AJAX request fails
-                        console.log("AJAX Error: " + errorThrown);
-                    }
-                });
-            });
-
-            // Trigger the change event on 'nip' input when a radio button is clicked
-            $('.statusRadio').on('click', function() {
-                $('#nip, #no_hp, #nama, #alamat, #asal_instansi').val('');
-
-                // Show/hide the 'instansiOption' and 'instansiText' divs based on the selected radio button
-                if ($(this).val() === 'pegawai') {
-                    $('#instansiText').hide();
-                } else {
-                    $('#instansiText').show();
-                    $('#instansiOption').hide();
-                }
-            });
-        });
-    </script> -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("form-absensi").submit();
+        }
+    </script>
     <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
     <script>
         $(document).ready(function() {

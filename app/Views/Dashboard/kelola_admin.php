@@ -3,13 +3,28 @@
 <?= $this->section('content') ?>
 
 <body>
-    <a href="kelola-admin/tambah-admin" class="btn btn-primary mb-2">Tambah Admin</a>
+    <?php if (session()->getFlashdata('berhasil')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '<?= session()->getFlashdata('berhasil') ?>',
+            })
+        </script>
+    <?php endif; ?>
+
+    <?php if (session()->get('role') != 'operator') : ?>
+        <a href="<?= base_url('dashboard/kelola-admin/tambah-admin') ?>" class="btn btn-primary mb-2"><?= (session()->get('role') == 'superadmin') ? 'Tambah Admin' : 'Tambah Operator' ?></a>
+    <?php endif; ?>
+
     <div class="table-container my-3">
         <table id="example" class="row-border" style="width:100%">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Nama</th>
+                    <th>Kode Instansi</th>
+                    <th>Nama Instansi</th>
                     <th>Role</th>
                     <th>Username</th>
                     <th>created_at</th>
@@ -21,14 +36,16 @@
                     <tr>
                         <td><?= $item['id_admin'] ?></td>
                         <td><?= $item['nama'] ?></td>
+                        <td><?= $item['id_instansi'] ?></td>
+                        <td><?= $item['nama_instansi'] ?></td>
                         <td><?= $item['role'] ?></td>
                         <td><?= $item['username'] ?></td>
                         <td><?= $item['created_at'] ?></td>
                         <td>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 btn-group">
                                     <!-- <a href="<?= base_url('dashboard/kelola-admin/view-agenda/' . $item['slug']) ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a> -->
-                                    <a href="<?= base_url('dashboard/kelola-admin/edit-admin/' . $item['slug']) ?>" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                                    <a href="<?= base_url('dashboard/kelola-admin/edit-admin/' . $item['slug']) ?>" class="btn btn-warning mx-2"><i class="fa-solid fa-pen"></i></a>
                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a>
                                 </div>
                             </div>
@@ -50,7 +67,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                            <form action="<?= base_url('dashboard/delete-admin/' . $item['id_admin']) ?>" method="post" class="d-inline">
+                                            <form action="<?= base_url('dashboard/kelola-admin/delete-admin/' . $item['id_admin']) ?>" method="post" class="d-inline">
                                                 <button class="btn btn-danger">Delete</button>
                                             </form>
                                         </div>

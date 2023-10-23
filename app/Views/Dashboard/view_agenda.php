@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label>Jam</label>
-                            <input disabled type="time" class="form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam" name="jam">
+                            <input disabled class="timepicker form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam" name="jam">
                             <div class="invalid-feedback">
                                 <?= validation_show_error('jam') ?>
                             </div>
@@ -77,6 +77,7 @@
         </div>
     </div>
 
+
     <script>
         // Function to customize print settings
         document.getElementById("printButton").addEventListener("click", function() {
@@ -85,6 +86,14 @@
             const judul = this.getAttribute("data-judul");
             document.title = judul;
             window.print();
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30,
+            // defaultTime: '6',
+            dynamic: true,
+            dropdown: true,
         });
     </script>
 </body>

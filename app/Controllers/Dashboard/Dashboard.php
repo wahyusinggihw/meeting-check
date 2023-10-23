@@ -19,13 +19,45 @@ class Dashboard extends BaseController
 
     public function index()
     {
+        if (session()->get('role') == 'superadmin') {
+            $agendaRapat = $this->agendaRapat->viewAgendaRapatByInstansi();
+            $belumBerjalan = $this->agendaRapat->getAgendaByStatus('belum-berjalan');
+            $selesai = $this->agendaRapat->getAgendaByStatus('selesai');
+        } else {
+            $agendaRapat = $this->agendaRapat->getAllAgendaByInstansi(session()->get('id_instansi'));
+            $belumBerjalan = $this->agendaRapat->getAgendaByStatusInstansi('belum-berjalan', session()->get('id_instansi'));
+            $selesai = $this->agendaRapat->getAgendaByStatusInstansi('selesai', session()->get('id_instansi'));
+        }
+        $count = count($agendaRapat);
         $data = [
             'title' => 'Home',
             'active' => 'home',
+            'agenda' => $agendaRapat,
+            'totalagenda' => count($agendaRapat),
+            'totalAgendaBelumBerjalan' => count($belumBerjalan),
+            'totalAgendaSelesai' => count($selesai),
         ];
 
         return view('dashboard/home_dashboard', $data);
     }
+
+    public function viewDetailAgendaRapatByInstansi($id_instansi)
+    {
+        $agendaRapat = $this->agendaRapat->viewDetailAgendaRapatByInstansi($id_instansi);
+        $belumBerjalan = $this->agendaRapat->getAgendaByStatusInstansi('belum-berjalan', $id_instansi);
+        $selesai = $this->agendaRapat->getAgendaByStatusInstansi('selesai', $id_instansi);
+
+        $data = [
+            'title' => 'Agenda Rapat',
+            'active' => 'home',
+            'agenda' => $agendaRapat,
+            'totalagenda' => count($agendaRapat),
+            'totalAgendaBelumBerjalan' => count($belumBerjalan),
+            'totalAgendaSelesai' => count($selesai),
+        ];
+        return view('dashboard/home_dashboard_detail', $data);
+    }
+
     public function agenda()
     {
         $data = [

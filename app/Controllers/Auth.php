@@ -14,17 +14,11 @@ class Auth extends BaseController
         $this->adminModel = new AdminModel();
     }
 
-    // public function index()
-    // {
-    //     $data = [
-    //         'title' => 'Log In',
-    //     ];
-    //     return view('auth/login_view', $data);
-    // }
-
     public function login()
     {
+        helper('my_helper');
         if ($this->request->is('post')) {
+            // dd($this->request->getPost());
             // $nip = $this->request->getVar('username');
             // $password = $this->request->getVar('password');
             // dd($nip, $password);
@@ -35,10 +29,17 @@ class Auth extends BaseController
 
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
+            $token = $this->request->getVar('g-recaptcha-response');
+            $validateCaptcha  = verifyCaptcha($token);
+            if (!$validateCaptcha->success) {
+                $this->session->setFlashdata('error', 'Terdapat aktifitas tidak wajar, mohon coba lagi.');
+                return redirect()->back()->withInput()->with('kode_valid', true);
+            }
 
             if (!$this->validate($rules)) {
                 return redirect()->back()->withInput();
             }
+
 
             $admin = $this->adminModel->where('username', $username)->first();
             // dd($user);
@@ -52,10 +53,14 @@ class Auth extends BaseController
                     'nama' => $admin['nama'],
                     'role' => $admin['role'],
                     'id_instansi' => $admin['id_instansi'],
+                    'nama_instansi' => $admin['nama_instansi'],
                     'logged_in' => TRUE
                 ];
                 session()->set($data);
-                return redirect()->to('/dashboard');
+                if ($admin['role'] != 'operator') {
+                    return redirect()->to('/dashboard');
+                }
+                return redirect()->to('/dashboard/agenda-rapat');
             } else {
                 // session()->setFlashdata('error', 'Username atau Password Salah');
                 return redirect()->to('/auth/login')->with('error', 'Username atau Password Salah');

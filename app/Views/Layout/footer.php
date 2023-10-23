@@ -6,7 +6,7 @@
                     <use xlink:href="#bootstrap"></use>
                 </svg>
             </a>
-            <span class="mb-3 mb-md-0 text-body-secondary">© 2023 KOMINFOSANTI, Inc</span>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2023 DaftarHadir</span>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
