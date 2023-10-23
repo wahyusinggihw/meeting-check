@@ -54,7 +54,6 @@
                         <?= validation_show_error('password') ?>
                     </div>
                 </div>
-                <br>
                 <button type="submit" class="g-recaptcha" data-sitekey="<?= getenv('RECAPTCHA_SITE_KEY') ?>" data-callback='onSubmit' data-action='submit'>Login</button>
             </div>
     </div>
