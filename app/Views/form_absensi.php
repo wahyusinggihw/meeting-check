@@ -122,7 +122,7 @@
                 <div class="invalid-feedback text-start">
                     <?= validation_show_error('signatureData') ?>
                 </div>
-                <div class="button-container ">
+                <div class="button-container">
                     <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
                 </div>
                 <div class="form-group text-end">
