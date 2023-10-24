@@ -23,51 +23,56 @@
             <li><a href="#section3">Section 3</a></li>
         </ul>
     </nav>
+    <div class="parallax-container">
+        <div class="parallax-bg" style="background-image: url('<?= base_url('public/assets/images/background.jpg') ?>');">></div>
+        <div class="content">
+            <section id="section1">
+                <h2>Section 1</h2>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
+                <p>Ini adalah konten untuk section pertama.</p>
 
-    <section id="section1">
-        <h2>Section 1</h2>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
-        <p>Ini adalah konten untuk section pertama.</p>
+            </section>
 
-    </section>
+            <section id="section2">
+                <h2>Section 2</h2>
+                <p>Ini adalah konten untuk section kedua.</p>
+                <p>Ini adalah konten untuk section kedua.</p>
+                <p>Ini adalah konten untuk section kedua.</p>
+                <p>Ini adalah konten untuk section kedua.</p>
+                <p>Ini adalah konten untuk section kedua.</p>
+                <p>Ini adalah konten untuk section kedua.</p>
+                <p>Ini adalah konten untuk section kedua.</p>
+                <p>Ini adalah konten untuk section kedua.</p>
+                <p>Ini adalah konten untuk section kedua.</p>
+            </section>
 
-    <section id="section2">
-        <h2>Section 2</h2>
-        <p>Ini adalah konten untuk section kedua.</p>
-        <p>Ini adalah konten untuk section kedua.</p>
-        <p>Ini adalah konten untuk section kedua.</p>
-        <p>Ini adalah konten untuk section kedua.</p>
-        <p>Ini adalah konten untuk section kedua.</p>
-        <p>Ini adalah konten untuk section kedua.</p>
-        <p>Ini adalah konten untuk section kedua.</p>
-        <p>Ini adalah konten untuk section kedua.</p>
-        <p>Ini adalah konten untuk section kedua.</p>
-    </section>
+            <section id="section3">
+                <h2>Section 3</h2>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
+                <p>Ini adalah konten untuk section ketiga.</p>
 
-    <section id="section3">
-        <h2>Section 3</h2>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
-        <p>Ini adalah konten untuk section ketiga.</p>
+            </section>
 
-    </section>
+        </div>
+    </div>
 
     <footer>
         <p>Hak Cipta &copy; 2023 Website Saya</p>
