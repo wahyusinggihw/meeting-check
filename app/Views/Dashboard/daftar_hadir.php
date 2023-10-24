@@ -12,7 +12,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>NIK</th>
+                        <th>NIP/NIK</th>
                         <th>Nama</th>
                         <th>Asal Instansi</th>
                         <th>TTD</th>
