@@ -12,26 +12,67 @@
 </head>
 
 <body>
-    <div class="outer">
-        <div class="prod-logo">
-            <img src="https://github.com/abhinanduN/codepen/blob/master/prod.png?raw=true" class="prod-img" alt="icon" />
-            <ul class="main-nav">
-                <li class="nav-li"><a href="#">Home</a></li>
-                <li class="nav-li"><a href="#">About</a></li>
-                <li class="nav-li"><a href="#">Modules</a></li>
-                <li class="nav-li"><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <div class="inner">
-            <div class="prod-left">
-                <h1 class="prod-head"><span style="color:#0f457f">HELLO</span> MOTO!</h1>
-                <h4 class="prod-head-sub">Lorem ipsum dolor sit amet...</h4>
-            </div>
-            <div class="prod-right">
-                <img src="https://github.com/abhinanduN/codepen/blob/master/human-image.png?raw=true" class="prod-human-img" alt="prod" />
-            </div>
-        </div>
-    </div>
+    <header>
+        <h1>Selamat Datang di Website Saya</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#section1">Section 1</a></li>
+            <li><a href="#section2">Section 2</a></li>
+            <li><a href="#section3">Section 3</a></li>
+        </ul>
+    </nav>
+
+    <section id="section1">
+        <h2>Section 1</h2>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+        <p>Ini adalah konten untuk section pertama.</p>
+
+    </section>
+
+    <section id="section2">
+        <h2>Section 2</h2>
+        <p>Ini adalah konten untuk section kedua.</p>
+        <p>Ini adalah konten untuk section kedua.</p>
+        <p>Ini adalah konten untuk section kedua.</p>
+        <p>Ini adalah konten untuk section kedua.</p>
+        <p>Ini adalah konten untuk section kedua.</p>
+        <p>Ini adalah konten untuk section kedua.</p>
+        <p>Ini adalah konten untuk section kedua.</p>
+        <p>Ini adalah konten untuk section kedua.</p>
+        <p>Ini adalah konten untuk section kedua.</p>
+    </section>
+
+    <section id="section3">
+        <h2>Section 3</h2>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+        <p>Ini adalah konten untuk section ketiga.</p>
+
+    </section>
+
+    <footer>
+        <p>Hak Cipta &copy; 2023 Website Saya</p>
+    </footer>
+</body>
 </body>
 
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
