@@ -26,7 +26,7 @@
     <form action="<?= base_url('/submit-kode/form-absensi') ?>" method="post">
       <div class="formid">
         <div class="form-p">
-          <p>Silahkan Masukan ID yang Telah Di Peroleh</p>
+          <p>Silahkan Masukan Kode Rapat</p>
         </div>
 
         <div class="form-input">
