@@ -42,7 +42,7 @@
                         <?= validation_show_error('username') ?>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="password" class="form-label">Password:</label>
                     <div class="password-input-container">
                         <input type="password" class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="Masukkan password">

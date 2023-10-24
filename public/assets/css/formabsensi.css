@@ -34,22 +34,8 @@
   padding-bottom: 25px;
   font-weight: 600;
 }
-
-.submit {
-  background: #0466ed;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  width: 100px;
-  height: 50px;
-  border-radius: 14px;
-  border: none;
-  cursor: pointer;
-}
-
-.submit:hover {
-  background-color: #3888ff;
-  color: rgb(0, 0, 0);
+.konten .wrapper .form-group button {
+  font-size: 14px;
 }
 
 .konten .wrapper .form-group {
@@ -67,6 +53,10 @@
 .konten .wrapper .form-group .cari {
   height: 35px;
   font-size: 14px;
+  color: white;
+}
+.konten .wrapper .button-container {
+  color: white;
 }
 /* responsif */
 @media screen and (min-width: 576px) {
@@ -105,21 +95,6 @@
   top: 0;
   left: 0;
 }
-
-/* .signature-button {
-  margin: 0 5px;
-  background: #0466ed;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  padding: 0px 20px 0px 20px;
-}
-
-.signature-button:hover {
-  background-color: #dc3545;
-  color: #dc3545;
-} */
 
 /* ||============|| CSS TRANSISI ANIMASI ||============|| */
 

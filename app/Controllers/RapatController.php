@@ -58,7 +58,7 @@ class RapatController extends BaseController
             return redirect()->to('/');
         }
 
-        $rapat = $this->agendaRapat->getAgendaRapatByField($idAgenda);
+        $rapat = $this->agendaRapat->getAgendaRapatByIdAgenda($idAgenda);
         session()->setFlashdata('kode_valid', $rapat['kode_rapat']);
         $this->session->set('id_agenda', $rapat['id_agenda']);
         $data = [
