@@ -31,6 +31,8 @@ class DaftarHadirController extends BaseController
         $id_agenda = $this->agendaRapat->where('slug', $slug)->first()['id_agenda'];
         $daftarHadir = $this->daftarhadir->getDaftarHadirByID($id_agenda);
 
+        // dd($daftarHadir);
+
         $data = [
             'title' => 'Daftar Hadir',
             // 'data' => $this->daftarhadir->getDaftarHadirByID($id_agenda)
@@ -39,5 +41,15 @@ class DaftarHadirController extends BaseController
         ];
 
         return view('dashboard/daftar_hadir', $data);
+    }
+
+    public function delete($id)
+    {
+        $query = $this->daftarhadir->find($id);
+        $uri = previous_url();
+        if ($query) {
+            $this->daftarhadir->delete($id);
+            return redirect()->to($uri)->with('success', 'Data berhasil dihapus');
+        }
     }
 }

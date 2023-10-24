@@ -57,7 +57,7 @@ class AgendaRapatModel extends Model
     {
         if (session()->get('role') != 'superadmin') {
             $builder = $this->table('agendarapats');
-            $builder->select('agendarapats.*, admins.slug as admin_slug');
+            $builder->select('agendarapats.*, admins.slug as admin_slug, admins.id_bidang as admin_id_bidang, admins.nama_bidang as admin_nama_bidang');
             $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
             if (session()->get('role') == 'admin') {
                 $builder->where('admins.id_instansi', session()->get('id_instansi'));

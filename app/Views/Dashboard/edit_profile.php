@@ -31,6 +31,10 @@
                             <?= validation_show_error('username') ?>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="formFile" class="form-label">Foto Profil</label>
+                        <input class="form-control" type="file" id="avatar">
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>

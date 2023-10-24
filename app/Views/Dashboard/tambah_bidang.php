@@ -21,7 +21,6 @@
             <div class="card-body">
                 <form action="<?= base_url('dashboard/kelola-bidang/tambah-bidang') ?>" method="post">
                     <?= csrf_field() ?>
-                    <?= validation_list_errors() ?>
 
                     <label for="nama">Nama Bidang:</label>
                     <input class="form-control <?= validation_show_error('nama_bidang') ? 'is-invalid' : '' ?>" type="text" id="nama_bidang" name="nama_bidang" placeholder="contoh. Persandian dan Statistik">

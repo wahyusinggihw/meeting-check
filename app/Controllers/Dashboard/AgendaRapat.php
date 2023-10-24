@@ -127,6 +127,7 @@ class AgendaRapat extends BaseController
             'jam' => $this->request->getVar('jam'),
             'deskripsi' => $this->request->getVar('deskripsi'),
             'link_rapat' => base_url() . 'submit-kode/form-absensi/qr/' . $uuid,
+            'created_at' => date('Y-m-d H:i:s'),
             // 'status' => 'tersedia'
         ]);
 
@@ -135,8 +136,8 @@ class AgendaRapat extends BaseController
 
         // generateQrCode($kodeRapat, base_url() . '?kode_rapat=' . $kodeRapat);
 
-        session()->setFlashdata('Berhasil', 'Data berhasil ditambahkan.');
-        return redirect('dashboard/agenda-rapat');
+        // session()->setFlashdata('Berhasil', 'Data berhasil ditambahkan.');
+        return redirect('dashboard/agenda-rapat')->with('success', 'Data berhasil ditambahkan.');
     }
 
     public function edit($slug)
@@ -180,7 +181,7 @@ class AgendaRapat extends BaseController
         $query = $this->agendaRapat->find($id);
         if ($query) {
             $this->agendaRapat->delete($id);
-            return redirect()->to('/dashboard/agenda-rapat');
+            return redirect()->to('/dashboard/agenda-rapat')->with('success', 'Data berhasil dihapus.');
         }
     }
     protected function validateForm()
