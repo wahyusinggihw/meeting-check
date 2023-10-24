@@ -92,7 +92,7 @@ class DaftarHadirModel extends Model
     {
         $id_admin = session()->get('id_admin');
         $builder = $this->table('daftarhadirs');
-        $builder->select('*');
+        $builder->select('daftarhadirs.*, daftarhadirs.created_at AS daftarhadirs_created_at, agendarapats.created_at AS agendarapats_created_at');
         $builder->join('agendarapats', 'agendarapats.id_agenda = daftarhadirs.id_agenda_rapat',);
         // $builder->where('id_admin', $id_admin);
         $builder->where('id_agenda_rapat', $id_agenda);

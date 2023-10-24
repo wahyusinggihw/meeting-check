@@ -205,7 +205,7 @@ class AdminController extends BaseController
         $query = $this->adminModel->find($id);
         if ($query) {
             $this->adminModel->delete($id);
-            return redirect()->to('/dashboard/kelola-admin');
+            return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil dihapus');
         }
     }
 

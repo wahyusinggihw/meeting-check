@@ -3,6 +3,16 @@
 <?= $this->section('content') ?>
 
 <body>
+    <?php if (session()->getFlashdata('success')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '<?= session()->getFlashdata('success') ?>',
+            })
+        </script>
+    <?php endif; ?>
+
     <?php if ($daftar_hadir != null) : ?>
         <a href="#" download class="btn btn-primary mb-2">Download File</a>
         <!-- foreach php -->
@@ -17,6 +27,7 @@
                         <th>Asal Instansi</th>
                         <th>TTD</th>
                         <th>Timestamp</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,10 +41,16 @@
                                 <div class="btn btn-secondary show-sweet-alert" data-ttd="<?= $item['ttd'] ?>">Lihat</div>
                                 <!-- <div class="btn btn-secondary" id="showSweetAlertButton">Lihat</div> -->
                             </td>
-                            <td><?= $item['created_at'] ?></td>
+                            <td><?= $item['daftarhadirs_created_at'] ?></td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-lg-12 btn-group">
+                                        <button href="#" class="btn btn-danger delete-button" data-id="<?= $item['id_daftar_hadir'] ?>"><i class=" fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
-                    <!-- Add more rows as needed -->
                 </tbody>
             </table>
         </div>
@@ -53,27 +70,43 @@
             "columnDefs": [{
                 "targets": [4], // Index of the column to disable sorting (zero-based index)
                 "orderable": false,
-
             }],
             dom: 'Bfrtip',
             buttons: [
                 'print'
             ],
-            // buttons: [{
-            //     extend: 'print',
-            //     customize: function(win) {
-            //         // Menambahkan nomor pada setiap baris
-            //         $(win.document.body).find('td').each(function(index) {
-            //             $(this).prepend('<td>' + (index + 1) + '</td>');
-            //         });
-            //         // Menambahkan judul kolom nomor
-            //         // $(win.document.body).find('table thead tr').prepend('');
-            //     }
-            // }],
             // Additional DataTables options here
             createdRow: function(row, data, dataIndex) {
                 $('td:eq(0)', row).html(startNumber++);
             }
+        });
+
+        function showDeleteConfirmation(id) {
+            Swal.fire({
+                title: 'Konfirmasi Hapus',
+                text: 'Anda yakin akan menghapus data?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Trigger the form submission for POST request
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '/dashboard/agenda-rapat/daftar-hadir/delete-peserta/' + id;
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
+
+        // Attach the delete confirmation modal to each delete button
+        document.querySelectorAll('.delete-button').forEach((button) => {
+            const itemId = button.getAttribute('data-id');
+            button.addEventListener('click', () => showDeleteConfirmation(itemId));
         });
     </script>
 </body>

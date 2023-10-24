@@ -45,7 +45,7 @@ class Dashboard extends BaseController
     public function viewDetailAgendaRapatByInstansi($id_instansi)
     {
         $agendaRapat = $this->agendaRapat->viewDetailAgendaRapatByInstansi($id_instansi);
-        $status = $this->agendaRapat->getAgendaByStatus(session()->get('id_instansi'));
+        $status = $this->agendaRapat->getAgendaByStatusandInstansi($id_instansi);
 
         $data = [
             'title' => 'Agenda Rapat',
@@ -62,7 +62,7 @@ class Dashboard extends BaseController
     public function agenda()
     {
         $agendaRapat = $this->agendaRapat->getAgendaByBidang();
-
+        // dd($agendaRapat);
         $data = [
             'title' => 'Agenda Rapat',
             'active' => 'agenda',
