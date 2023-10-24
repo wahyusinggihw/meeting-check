@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AdminModel;
 use App\Models\PesertaRapatModel;
 use App\Models\PesertaUmumModel;
+use App\Models\BidangInstansiModel;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
 
@@ -16,11 +17,13 @@ class AdminController extends BaseController
     protected $pesertaUmum;
     protected $pesertaRapat;
     protected $slugify;
+    protected $bidangModel;
     public function __construct()
     {
         $this->adminModel = new AdminModel();
         $this->pesertaUmum = new PesertaUmumModel();
         $this->pesertaRapat = new PesertaRapatModel();
+        $this->bidangModel = new BidangInstansiModel();
         $this->slugify = new Slugify();
     }
 
@@ -54,40 +57,22 @@ class AdminController extends BaseController
     {
         if ($this->request->is('post')) {
             // dd($this->request->getPost());
-            $validate = $this->validate([
-                'nama' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Nama harus diisi'
-                    ]
-                ],
-                'username' => [
-                    'rules' => 'required|is_unique[admins.username]|alpha_dash',
-                    'errors' => [
-                        'required' => 'Username harus diisi',
-                        'is_unique' => 'Username sudah terdaftar'
-                    ]
-                ],
-                'password' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Password harus diisi'
-                    ]
-                ],
-            ]);
+            $validateAdmin = $this->formValidateAdmin();
+            $validateOperator = $this->formValidateOperator();
 
             $instansi = $this->request->getVar('asal_instansi');
             $sections = explode('-', $instansi);
 
+            $role = session()->get('role');
 
 
-            if (!$validate) {
+            if ($role == 'superadmin' ? !$validateAdmin : !$validateOperator) {
                 return redirect()->back()->withInput();
             }
 
             $uuid = Uuid::uuid4()->toString();
+            $uuid2 = Uuid::uuid4()->toString();
             $slug = $this->slugify->slugify($this->request->getVar('nama'));
-            $role = session()->get('role');
             if ($role == 'superadmin') {
                 $id_instansi = $sections[0];
                 $nama_instansi = $sections[1];
@@ -104,30 +89,47 @@ class AdminController extends BaseController
                     'created_at' => date('Y-m-d H:i:s'),
                 ];
             } else {
+                $nama_bidang = $sections[5];
+
                 $data = [
                     'id_admin' => $uuid,
                     'slug' => $slug,
                     'role' =>  $role == 'admin' ? 'operator' : 'admin',
                     'id_instansi' => session()->get('id_instansi'),
                     'nama_instansi' => session()->get('nama_instansi'),
+                    'id_bidang' => $this->request->getVar('asal_instansi'),
+                    'nama_bidang' => $nama_bidang,
                     'nama' => $this->request->getVar('nama'),
                     'username' => $this->request->getVar('username'),
                     'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                     'created_at' => date('Y-m-d H:i:s'),
                 ];
+
+                // $dataBidang = [
+                //     'id_bidang' => $uuid2,
+                //     'slug' => $this->slugify->slugify($this->request->getVar('nama_bidang')),
+                //     'nama_bidang' => $this->request->getVar('nama_bidang'),
+                //     'id_instansi' => session()->get('id_instansi'),
+                //     // 'created_at' => date('Y-m-d H:i:s'),
+                // ];
+
+                // dd($data);
             }
 
             // dd($data);
 
+            // $this->bidangModel->save($dataBidang);
             $this->adminModel->insert($data);
             return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil ditambahkan');
         } else {
+            $role = session()->get('role');
             $instansi = $this->pesertaRapat->getInstansi();
             $instansiDecode = json_decode($instansi);
             $data = [
-                'title' => 'Tambah Admin',
+                'title' => $role == 'admin' ? 'Tambah Operator' : 'Tambah Admin',
                 'validation' => \Config\Services::validation(),
-                'instansi' => $instansiDecode
+                'instansi' => $instansiDecode,
+                'bidang' => $this->bidangModel->getAllBidangByInstansi($this->session->get('id_instansi'))
             ];
             return view('dashboard/tambah_admin', $data);
         }
@@ -205,5 +207,61 @@ class AdminController extends BaseController
             $this->adminModel->delete($id);
             return redirect()->to('/dashboard/kelola-admin');
         }
+    }
+
+    protected function formValidateOperator()
+    {
+        $validate = [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama harus diisi'
+                ]
+            ],
+            'username' => [
+                'rules' => 'required|is_unique[admins.username]|alpha_dash',
+                'errors' => [
+                    'required' => 'Username harus diisi',
+                    'is_unique' => 'Username sudah terdaftar'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Password harus diisi'
+                ]
+            ],
+        ];
+
+        return $this->validate($validate);
+    }
+
+    protected function formValidateAdmin()
+    {
+        $validate = [
+            'nama' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama harus diisi'
+                ]
+            ],
+            'username' => [
+                'rules' => 'required|is_unique[admins.username]|alpha_dash',
+                'errors' => [
+                    'required' => 'Username harus diisi',
+                    'is_unique' => 'Username sudah terdaftar'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Password harus diisi'
+                ]
+            ],
+        ];
+
+
+
+        return $this->validate($validate);
     }
 }

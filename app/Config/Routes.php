@@ -80,6 +80,12 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
         $routes->post('edit-admin/(:segment)/update', 'Dashboard\AdminController::update/$1');
         $routes->post('delete-admin/(:segment)', 'Dashboard\AdminController::delete/$1');
     });
+
+    $routes->get('kelola-bidang', 'Dashboard\BidangInstansiController::index');
+    $routes->match(['get', 'post'], 'kelola-bidang/tambah-bidang', 'Dashboard\BidangInstansiController::tambahBidang');
+    $routes->get('kelola-bidang/edit-bidang/(:segment)', 'Dashboard\BidangInstansiController::edit/$1');
+    $routes->post('kelola-bidang/edit-bidang/(:segment)/update', 'Dashboard\BidangInstansiController::update/$1');
+    $routes->post('kelola-bidang/delete-bidang/(:segment)', 'Dashboard\BidangInstansiController::delete/$1');
     // $routes->get('kelola-admin', 'Dashboard\AdminController::index');
     // $routes->match(['get', 'post'], 'kelola-admin/tambah-admin', 'Dashboard\AdminController::tambahAdmin');
     // $routes->get('kelola-admin/edit-admin/(:segment)', 'Dashboard\AdminController::edit/$1');

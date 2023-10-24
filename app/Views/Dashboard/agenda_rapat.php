@@ -42,7 +42,7 @@
                             <!-- <td><?= $item['tempat'] ?></td> -->
                             <!-- <td><?= $item['jam'] ?></td> -->
                             <td><?= $item['tanggal'] . ', ' . $item['jam'] ?></td>
-                            <td><span class="badge <?= $item['status'] == 'belum-berjalan' ? 'bg-warning' : 'bg-success' ?>"><?= $item['status'] ?></span></td>
+                            <td><span class="badge <?= $item['status'] == 'selesai' ? 'bg-danger' : 'bg-success' ?>"><?= $item['status'] ?></span></td>
                             <!-- <td><?= $item['link_rapat'] ?></td> -->
                             <td>
                                 <div class="row">

@@ -14,7 +14,7 @@
     <?php endif; ?>
 
     <?php if (session()->get('role') != 'operator') : ?>
-        <a href="<?= base_url('dashboard/kelola-admin/tambah-admin') ?>" class="btn btn-primary mb-2"><?= (session()->get('role') == 'superadmin') ? 'Tambah Admin' : 'Tambah Operator' ?></a>
+        <a href="<?= base_url('dashboard/kelola-bidang/tambah-bidang') ?>" class="btn btn-primary mb-2">Tambah Bidang</a>
     <?php endif; ?>
 
     <div class="table-container my-3">
@@ -22,36 +22,25 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama</th>
-                    <th>Kode Instansi</th>
-                    <th>Nama Instansi</th>
-                    <?php if (session()->get('role') == 'admin') : ?>
-                        <th>Nama Bidang</th>
-                    <?php endif; ?>
-                    <th>Role</th>
-                    <th>Username</th>
-                    <th>created_at</th>
+                    <th>ID Bidang</th>
+                    <th>ID Instansi</th>
+                    <th>Nama Bidang</th>
+                    <!-- <th>created_at</th> -->
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($admins as $item) : ?>
+                <?php foreach ($bidang as $item) : ?>
                     <tr>
-                        <td><?= $item['id_admin'] ?></td>
-                        <td><?= $item['nama'] ?></td>
+                        <td></td>
+                        <td><?= $item['id_bidang'] ?></td>
                         <td><?= $item['id_instansi'] ?></td>
-                        <td><?= $item['nama_instansi'] ?></td>
-                        <?php if (session()->get('role') == 'admin') : ?>
-                            <td><?= $item['nama_bidang'] ?></td>
-                        <?php endif; ?>
-                        <td><?= $item['role'] ?></td>
-                        <td><?= $item['username'] ?></td>
-                        <td><?= $item['created_at'] ?></td>
+                        <td><?= $item['nama_bidang'] ?></td>
                         <td>
                             <div class="row">
                                 <div class="col-lg-12 btn-group">
                                     <!-- <a href="<?= base_url('dashboard/kelola-admin/view-agenda/' . $item['slug']) ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a> -->
-                                    <a href="<?= base_url('dashboard/kelola-admin/edit-admin/' . $item['slug']) ?>" class="btn btn-warning mx-2"><i class="fa-solid fa-pen"></i></a>
+                                    <a href="<?= base_url('dashboard/kelola-bidang/edit-bidang/' . $item['slug']) ?>" class="btn btn-warning mx-2"><i class="fa-solid fa-pen"></i></a>
                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a>
                                 </div>
                             </div>
@@ -73,7 +62,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                            <form action="<?= base_url('dashboard/kelola-admin/delete-admin/' . $item['id_admin']) ?>" method="post" class="d-inline">
+                                            <form action="<?= base_url('dashboard/kelola-bidang/delete-bidang/' . $item['id_bidang']) ?>" method="post" class="d-inline">
                                                 <button class="btn btn-danger">Delete</button>
                                             </form>
                                         </div>
@@ -94,7 +83,7 @@
         let startNumber = 1;
         new DataTable('#example', {
             "columnDefs": [{
-                // "targets": [2, 5], // Index of the column to disable sorting (zero-based index)
+                "targets": [4], // Index of the column to disable sorting (zero-based index)
                 "orderable": false,
 
             }],

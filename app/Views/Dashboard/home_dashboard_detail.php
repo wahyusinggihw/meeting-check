@@ -20,11 +20,11 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-success">
                 <div class="inner">
-                    <h3><?= $totalAgendaBelumBerjalan ?></h3>
+                    <h3><?= $totalAgendaTersedia ?></h3>
 
-                    <p>Agenda Rapat Belum Berjalan</p>
+                    <p>Agenda Rapat Tersedia</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -34,11 +34,11 @@
         </div>
         <div class="col-lg-3 col-6">
 
-            <div class="small-box bg-success">
+            <div class="small-box bg-danger">
                 <div class="inner">
                     <h3><?= $totalAgendaSelesai ?></h3>
 
-                    <p>Agenda Selesai</p>
+                    <p>Agenda Rapat Selesai</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -100,13 +100,12 @@
                         <th>No</th>
                         <th>Kode Rapat</th>
                         <th>Instansi</th>
+                        <th>Bidang</th>
                         <th>Agenda</th>
                         <th>Deskripsi</th>
                         <th>Tempat</th>
-                        <!-- <th>Jam</th> -->
                         <th>Tanggal/Jam</th>
                         <th>Status</th>
-                        <!-- <th>Aksi</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -116,13 +115,12 @@
                             <td></td>
                             <td><?= $item['kode_rapat'] ?></td>
                             <td><?= $item['nama_instansi'] ?></td>
+                            <td><?= $item['admin_nama_bidang'] ?></td>
                             <td><?= $item['agenda_rapat'] ?></td>
                             <td><?= $item['deskripsi'] ?></td>
                             <td><?= $item['tempat'] ?></td>
-                            <!-- <td><?= $item['jam'] ?></td> -->
                             <td><?= $item['tanggal'] . ', ' . $item['jam'] ?></td>
-                            <td><span class="badge bg-warning"><?= $item['status'] ?></span></td>
-                            <!-- <td><?= $item['link_rapat'] ?></td> -->
+                            <td><span class="badge <?= $item['status'] == 'selesai' ? 'bg-danger' : 'bg-success' ?>"><?= $item['status'] ?></td>
 
                         </tr>
                     <?php endforeach ?>

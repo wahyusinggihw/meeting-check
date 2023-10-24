@@ -46,7 +46,7 @@ class AgendaRapat extends BaseController
 
     public function informasiRapat($idAgenda)
     {
-        $agendaRapat  = $this->agendaRapat->getAgendaRapatByField($idAgenda);
+        $agendaRapat  = $this->agendaRapat->getAgendaRapatByIdAgenda($idAgenda);
         // dd($agendaRapat);
         $data = [
             'title' => 'Informasi Rapat',
@@ -60,7 +60,7 @@ class AgendaRapat extends BaseController
 
     public function generatePdf($idAgenda)
     {
-        $agendaRapat  = $this->agendaRapat->getAgendaRapatByField($idAgenda);
+        $agendaRapat  = $this->agendaRapat->getAgendaRapatByIdAgenda($idAgenda);
         $judul = $agendaRapat['agenda_rapat'];
         $logo = image_to_base64(base_url("assets/img/logo.png"));
         $rawData = [
@@ -127,7 +127,7 @@ class AgendaRapat extends BaseController
             'jam' => $this->request->getVar('jam'),
             'deskripsi' => $this->request->getVar('deskripsi'),
             'link_rapat' => base_url() . 'submit-kode/form-absensi/qr/' . $uuid,
-            'status' => 'belum-berjalan'
+            // 'status' => 'tersedia'
         ]);
 
 
