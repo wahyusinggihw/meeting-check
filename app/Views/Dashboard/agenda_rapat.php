@@ -19,16 +19,15 @@
             <table id="example" class="row-border" style="width:100%">
                 <thead>
                     <tr>
-                        <!-- <th>id</th> -->
                         <th>No</th>
                         <th>Kode Rapat</th>
+                        <?php if (session()->get('role') == 'admin') : ?>
+                            <th>Nama Bidang</th>
+                        <?php endif; ?>
                         <th>Agenda</th>
                         <th>Deskripsi</th>
-                        <!-- <th>Tempat</th> -->
-                        <!-- <th>Jam</th> -->
                         <th>Tanggal/Jam</th>
                         <th>Status</th>
-                        <!-- <th>Link Rapat</th> -->
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -37,13 +36,13 @@
                         <tr>
                             <td></td>
                             <td><?= $item['kode_rapat'] ?></td>
+                            <?php if (session()->get('role') == 'admin') : ?>
+                                <td><?= $item['admin_nama_bidang'] ?></td>
+                            <?php endif; ?>
                             <td><?= $item['agenda_rapat'] ?></td>
                             <td><?= $item['deskripsi'] ?></td>
-                            <!-- <td><?= $item['tempat'] ?></td> -->
-                            <!-- <td><?= $item['jam'] ?></td> -->
                             <td><?= $item['tanggal'] . ', ' . $item['jam'] ?></td>
                             <td><span class="badge <?= $item['status'] == 'selesai' ? 'bg-danger' : 'bg-success' ?>"><?= $item['status'] ?></span></td>
-                            <!-- <td><?= $item['link_rapat'] ?></td> -->
                             <td>
                                 <div class="row">
                                     <div class="col-lg-12 btn-group">
@@ -103,9 +102,10 @@
 
     <script>
         let startNumber = 1;
+        let targets = <?php echo (session()->get('role') == 'admin') ? JSON_ENCODE([7]) : JSON_ENCODE([6]); ?>;
         new DataTable('#example', {
             "columnDefs": [{
-                "targets": [6], // Index of the column to disable sorting (zero-based index)
+                "targets": targets, // Index of the column to disable sorting (zero-based index)
                 "orderable": false,
 
             }],

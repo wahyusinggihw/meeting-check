@@ -62,7 +62,7 @@ class Dashboard extends BaseController
     public function agenda()
     {
         $agendaRapat = $this->agendaRapat->getAgendaByBidang();
-
+        // dd($agendaRapat);
         $data = [
             'title' => 'Agenda Rapat',
             'active' => 'agenda',
