@@ -56,6 +56,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('view-detail-by-instansi/(:segment)', 'Dashboard\Dashboard::viewDetailAgendaRapatByInstansi/$1');
     // $routes->get('daftar-hadir', 'Dashboard\Dashboard:daftarHadir');
     $routes->get('agenda-rapat/daftar-hadir/(:segment)', 'Dashboard\DaftarHadirController::cariDaftarHadir/$1');
+    $routes->post('agenda-rapat/daftar-hadir/delete-peserta/(:segment)', 'Dashboard\DaftarHadirController::delete/$1');
 
     $routes->get('agenda-rapat/tambah-agenda', 'Dashboard\AgendaRapat::tambahAgenda');
     $routes->post('agenda-rapat/tambah-agenda/store', 'Dashboard\AgendaRapat::store');
