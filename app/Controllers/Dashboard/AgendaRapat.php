@@ -88,6 +88,8 @@ class AgendaRapat extends BaseController
 
         // Output the generated PDF to the browser for download
         $dompdf->stream($judul . '_' . $idAgenda . '.pdf', ['Attachment' => 0]);
+
+        exit(0);
     }
 
     public function store()

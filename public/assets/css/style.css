@@ -258,11 +258,13 @@ ul {
 }
 .container-timeline p {
   color: #000000;
+  text-align: justify;
 }
 .container-timeline h2 {
   color: #0357AD;
   font-weight: bold;
 }
+
 .connecting-lines.row .col-2 {
   align-self: stretch;
 }
@@ -271,6 +273,7 @@ ul {
   position: absolute;
   border-left: 3px solid #0357AD;
   z-index: 1;
+  /* left: 50%; */
 }
 .connecting-lines.row .col-2.bottom::after {
   height: 50%;
@@ -279,7 +282,13 @@ ul {
 }
 .connecting-lines.row .col-2.full::after {
   height: 100%;
-  left: calc(50% - 3px);
+  /* left: calc(50%); */
+  /* left: 50%; */
+  right: 50%;
+}
+.connecting-lines.row .col-2.full.left::after {
+  height: 100%;
+  left: 50%;
 }
 .connecting-lines.row .col-2.top::after {
   height: 50%;
@@ -310,7 +319,8 @@ ul {
 }
 .timeline .top-right {
   left: 50%;
-  top: -50%;
+  top: -53%;
+
 }
 .timeline .left-bottom {
   left: -50%;
@@ -318,7 +328,7 @@ ul {
 }
 .timeline .top-left {
   left: -50%;
-  top: -50%;
+  top: -53%;
 }
 .timeline .right-bottom {
   left: 50%;

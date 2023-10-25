@@ -43,17 +43,19 @@
   <section class="section-2">
     <div class="container-timeline">
       <h2 class="pb-5 pt-5 text-center mb-5 display-5">Cara Penggunaan</h2>
+
+
       <!-- First Content Section-->
       <div class="row align-items-center connecting-lines d-flex">
         <div class="col-2 text-center bottom d-inline-flex justify-content-center align-items-center">
-          <div class="circle font-weight-bold"><i class="fa fa-check"></i></div>
+          <div class="circle font-weight-bold">1</div>
         </div>
         <div class="col-6">
           <!-- <img src="<?= base_url('assets/img/carousel-1.png') ?>" alt=""> -->
           <div>
 
-            <h4>Langkah pertama</h4>
-            <p>Isikan kolom "XXX-XXX" dengan kode rapat yang sudah di berikan atau di share oleh admin</p>
+            <h4>Masukkan Kode Rapat</h4>
+            <p>Silahkan masukkan kode rapat yang sudah diberikan di kolom diatas, lalu tekan "Submit" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis enim eu erat lacinia pharetra a et mi. Vivamus tincidunt lorem non semper commodo.</p>
           </div>
         </div>
       </div>
@@ -69,6 +71,8 @@
           <div class="corner left-bottom"></div>
         </div>
       </div>
+
+
       <!-- Second Content Section-->
       <div class="row align-items-center justify-content-end connecting-lines d-flex">
         <div class="col-6 text-right">
@@ -79,7 +83,7 @@
           </p>
         </div>
         <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
-          <div class="circle font-weight-bold"><i class="fa fa-check"></i></div>
+          <div class="circle font-weight-bold">2</div>
         </div>
       </div>
       <!-- Path Line -->
@@ -94,10 +98,69 @@
           <div class="corner top-left"></div>
         </div>
       </div>
+
+
+      <!-- Third Content Section -->
+      <div class="row align-items-center connecting-lines d-flex">
+        <div class="col-2 text-center full left d-inline-flex justify-content-center align-items-center">
+          <div class="circle font-weight-bold">3</i></div>
+        </div>
+        <div class="col-6">
+          <h4>Third Step</h4>
+          <p>
+            Aenean in fermentum ante. Praesent tempus lectus sed consectetur rutrum. Nulla imperdiet semper sollicitudin. Quisque consectetur nulla id magna efficitur sodales. Etiam dapibus metus diam, malesuada cursus ligula dapibus non.
+            Duis pellentesque hendrerit orci id congue.
+          </p>
+        </div>
+      </div>
+      <!-- Path Line -->
+      <div class="row timeline">
+        <div class="col-2">
+          <div class="corner top-right"></div>
+        </div>
+        <div class="col-8">
+          <hr />
+        </div>
+        <div class="col-2">
+          <div class="corner left-bottom"></div>
+        </div>
+      </div>
+
+
+
+
+      <!-- Second Content Section-->
+      <div class="row align-items-center justify-content-end connecting-lines d-flex">
+        <div class="col-6 text-right">
+          <!-- <img src="<?= base_url('assets/img/carousel-1.png') ?>" alt=""> -->
+          <h4>Second Step</h4>
+          <p>
+            Pellentesque vehicula urna et sollicitudin tempus. Suspendisse pretium neque id scelerisque semper. Mauris sem metus, rutrum at fermentum vitae, tincidunt a mi. Vestibulum scelerisque lacinia nunc quis iaculis. Proin
+            pellentesque odio dolor, in placerat ex vestibulum eget. Integer sit amet feugiat dolor. Proin convallis viverra erat at euismod.
+          </p>
+        </div>
+        <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
+          <div class="circle font-weight-bold">4</div>
+        </div>
+      </div>
+      <!-- Path Line -->
+      <div class="row timeline">
+        <div class="col-2">
+          <div class="corner right-bottom"></div>
+        </div>
+        <div class="col-8">
+          <hr />
+        </div>
+        <div class="col-2">
+          <div class="corner top-left"></div>
+        </div>
+      </div>
+
+
       <!-- Third Content Section -->
       <div class="row align-items-center connecting-lines d-flex">
         <div class="col-2 text-center top d-inline-flex justify-content-center align-items-center">
-          <div class="circle font-weight-bold"><i class="fa fa-check"></i></div>
+          <div class="circle font-weight-bold">5</i></div>
         </div>
         <div class="col-6">
           <h4>Langkah Ketiga</h4>

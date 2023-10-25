@@ -29,7 +29,6 @@ class Dashboard extends BaseController
         }
 
         $status = $this->agendaRapat->getStatusAgendaInstansi($id_instansi);
-
         $data = [
             'title' => 'Home',
             'active' => 'home',

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 use App\Models\AdminModel;
+use DateTime;
 
 class AgendaRapatModel extends Model
 {
@@ -70,6 +71,7 @@ class AgendaRapatModel extends Model
     private function getAllAgendas()
     {
         $agendas = $this->findAll();
+        $agendas = $this->getAgendasWithEditability($agendas);
         return $this->addStatusToAgendas($agendas);
     }
 
@@ -80,6 +82,7 @@ class AgendaRapatModel extends Model
         $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
         $builder->where('admins.id_instansi', session()->get('id_instansi'));
         $agendas = $builder->get()->getResultArray();
+        $agendas = $this->getAgendasWithEditability($agendas);
         return $this->addStatusToAgendas($agendas);
     }
 
@@ -92,7 +95,9 @@ class AgendaRapatModel extends Model
         $builder->orWhere('admins.id_bidang IS NULL OR admins.id_bidang = ""');
         $builder->where('admins.id_bidang', session()->get('id_bidang'));
         $agendas = $builder->get()->getResultArray();
+        $agendas = $this->getAgendasWithEditability($agendas);
         return $this->addStatusToAgendas($agendas);
+        // return $this->addStatusToAgendas($agendas);
     }
 
     private function addStatusToAgendas($agendas)
@@ -101,6 +106,29 @@ class AgendaRapatModel extends Model
             $item['status'] = statusRapat($item['tanggal'], $item['jam']);
         }
         return $agendas;
+    }
+
+    public function getAgendasWithEditability($agendas)
+    {
+        foreach ($agendas as &$agenda) {
+            $agenda['editable'] = $this->isAgendaEditable($agenda['id_agenda']);
+        }
+        return $agendas;
+    }
+
+    private function isAgendaEditable($agendaId)
+    {
+        $agenda = $this->find($agendaId);
+
+        $agendaDateTime = new DateTime($agenda['tanggal'] . ' ' . $agenda['jam']);
+        $currentDateTime = new DateTime();
+        // dd($agendaDateTime, $currentDateTime);
+
+        if ($currentDateTime > $agendaDateTime) {
+            // The agenda is not editable if its time has passed
+            return true;
+        }
+        return false;
     }
 
     // QUERY UNTUK DASHBOARD AGENDA RAPAT SEMUA ROLE
