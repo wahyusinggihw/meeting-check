@@ -41,14 +41,14 @@
                             <?php endif; ?>
                             <td><?= $item['agenda_rapat'] ?></td>
                             <td><?= $item['deskripsi'] ?></td>
-                            <td><?= $item['tanggal'] . ', ' . $item['jam'] ?></td>
+                            <td><?= $item['tanggal'] . '/ ' . $item['jam'] ?></td>
                             <td><span class="badge <?= $item['status'] == 'selesai' ? 'bg-danger' : 'bg-success' ?>"><?= $item['status'] ?></span></td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-12 btn-group">
                                         <a href="<?= base_url('dashboard/agenda-rapat/daftar-hadir/' . $item['slug']) ?>" class="btn btn-info mx-2"><i class="fa-solid fa-list" style="color: white;"></i></a>
                                         <a href="<?= base_url('dashboard/agenda-rapat/view-agenda/' . $item['slug']) ?>" class="btn btn-info"><i class="fa-solid fa-eye" style="color: white;"></i></a>
-                                        <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['slug']) ?>" class="btn btn-warning mx-2"><i class="fa-solid fa-pen" style="color: white;"></i></a>
+                                        <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['slug']) ?>" class="btn btn-warning mx-2  <?= $item['editable'] == 'false' ? 'disabled' : '' ?>"><i class="fa-solid fa-pen" style="color: white;"></i></a>
                                         <button href="#" class="btn btn-danger delete-button" data-id="<?= $item['id_agenda'] ?>"><i class="fa-solid fa-trash"></i></button>
                                     </div>
                                 </div>
