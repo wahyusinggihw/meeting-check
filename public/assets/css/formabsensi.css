@@ -2,7 +2,8 @@
 
 .wrapper {
   background-color: rgb(255, 255, 255);
-  width: 90%;
+  width: 100%;
+  height: auto;
   padding: 50px;
   border-radius: 35px;
   margin: 0 auto;
@@ -81,6 +82,22 @@
   .wrapper {
     width: 35%;
   }
+}
+
+.form-input {
+  position: relative;
+  margin-top: 20px;
+}
+
+.invalid-feedback {
+  display: block;
+  position: absolute;
+  bottom: -1.5rem;
+  /* Atur jarak di bawah input, misalnya -1.5rem atau sesuai kebutuhan */
+  left: 0;
+  /* Atur posisi horizontal ke kiri */
+  transform: none;
+  /* Hapus transform */
 }
 
 .signature-pad h1 {

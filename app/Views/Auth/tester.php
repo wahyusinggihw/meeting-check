@@ -12,71 +12,21 @@
 </head>
 
 <body>
-    <header>
-        <h1>Selamat Datang di Website Saya</h1>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="#section1">Section 1</a></li>
-            <li><a href="#section2">Section 2</a></li>
-            <li><a href="#section3">Section 3</a></li>
-        </ul>
-    </nav>
-    <div class="parallax-container">
-        <div class="parallax-bg" style="background-image: url('<?= base_url('public/assets/images/background.jpg') ?>');">></div>
-        <div class="content">
-            <section id="section1">
-                <h2>Section 1</h2>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-                <p>Ini adalah konten untuk section pertama.</p>
-
-            </section>
-
-            <section id="section2">
-                <h2>Section 2</h2>
-                <p>Ini adalah konten untuk section kedua.</p>
-                <p>Ini adalah konten untuk section kedua.</p>
-                <p>Ini adalah konten untuk section kedua.</p>
-                <p>Ini adalah konten untuk section kedua.</p>
-                <p>Ini adalah konten untuk section kedua.</p>
-                <p>Ini adalah konten untuk section kedua.</p>
-                <p>Ini adalah konten untuk section kedua.</p>
-                <p>Ini adalah konten untuk section kedua.</p>
-                <p>Ini adalah konten untuk section kedua.</p>
-            </section>
-
-            <section id="section3">
-                <h2>Section 3</h2>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-                <p>Ini adalah konten untuk section ketiga.</p>
-
-            </section>
-
+    <div class="hero">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/96503/parralax1.png" alt="">
+        <div class="layers">
+            <div class="first" data-depth="7"></div>
+            <div class="second" data-depth="6"></div>
+            <div class="secondpoint5" data-depth="4"></div>
+            <div data-depth="5">
+                <h1 class="hero__text">Hiking</h1>
+            </div>
+            <div class="third" data-depth="2"></div>
+            <!-- <div class="fourth" data-depth="0"></div> -->
         </div>
-    </div>
 
-    <footer>
-        <p>Hak Cipta &copy; 2023 Website Saya</p>
-    </footer>
+    </div>
 </body>
 </body>
 

@@ -36,7 +36,6 @@
             <?= $validation->getError('inputAlphanumeric') ?>
           </div>
         </div>
-
       </div>
     </form>
   </section>
@@ -54,7 +53,7 @@
           <div>
 
             <h4>Langkah pertama</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis enim eu erat lacinia pharetra a et mi. Vivamus tincidunt lorem non semper commodo.</p>
+            <p>Isikan kolom "XXX-XXX" dengan kode rapat yang sudah di berikan atau di share oleh admin</p>
           </div>
         </div>
       </div>
@@ -74,10 +73,9 @@
       <div class="row align-items-center justify-content-end connecting-lines d-flex">
         <div class="col-6 text-right">
           <!-- <img src="<?= base_url('assets/img/carousel-1.png') ?>" alt=""> -->
-          <h4>Second Step</h4>
+          <h4>Langkah Kedua</h4>
           <p>
-            Pellentesque vehicula urna et sollicitudin tempus. Suspendisse pretium neque id scelerisque semper. Mauris sem metus, rutrum at fermentum vitae, tincidunt a mi. Vestibulum scelerisque lacinia nunc quis iaculis. Proin
-            pellentesque odio dolor, in placerat ex vestibulum eget. Integer sit amet feugiat dolor. Proin convallis viverra erat at euismod.
+            Jika sudah berhasil maka silahkan anda memilih sebagai tamu atau pegawai. jika pegawai silahkan di pilih apakah anda ASN atau non-ASN
           </p>
         </div>
         <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
@@ -102,10 +100,9 @@
           <div class="circle font-weight-bold"><i class="fa fa-check"></i></div>
         </div>
         <div class="col-6">
-          <h4>Third Step</h4>
+          <h4>Langkah Ketiga</h4>
           <p>
-            Aenean in fermentum ante. Praesent tempus lectus sed consectetur rutrum. Nulla imperdiet semper sollicitudin. Quisque consectetur nulla id magna efficitur sodales. Etiam dapibus metus diam, malesuada cursus ligula dapibus non.
-            Duis pellentesque hendrerit orci id congue.
+            Jika anda sudah memilih peran, jika anda sebagai pegawai cukup isikan NIP/NIPTdan Tanda Tangan. Sedangkan untuk tamu jika baru pertama anda bisa isi semua biodata anda pada form yang sudah di sediakan, jika NIK kalian sudah terdaftar silahkan lanjutkan mengisi Tanda Tangan
           </p>
         </div>
       </div>
