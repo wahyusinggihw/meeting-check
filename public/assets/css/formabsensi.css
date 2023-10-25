@@ -1,11 +1,18 @@
 /* ||============|| CSS FORM ABSENSI ||============|| */
-
+body{
+  background: url("https://iili.io/JKN8Ibj.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
 .wrapper {
-  background-color: rgb(255, 255, 255);
-  width: 100%;
+  background-color: #e6edff;
+  width: 50%;
   height: auto;
   padding: 50px;
   border-radius: 35px;
+  box-shadow: 0px 0px 100px 1px rgba(0, 0, 0, 0.205);
   margin: 0 auto;
 }
 .judul-form {
@@ -41,6 +48,10 @@
 
 .konten .wrapper .form-group {
   font-size: 14px;
+}
+.konten .wrapper .form-group-1 {
+  font-size: 14px;
+  width: 250px;
 }
 .konten .wrapper .form-group .form-label {
   font-weight: 600;
@@ -78,17 +89,28 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 1200px) {
   .wrapper {
     width: 35%;
   }
 }
 
+.container-form{
+  display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
 .form-input {
   position: relative;
-  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
+#notif{
+  padding-left: 15px;
+  width: 500px;
+}
 .invalid-feedback {
   display: block;
   position: absolute;
@@ -106,6 +128,7 @@
 }
 
 .signature-canvas {
+  background-color: white;
   border: 1px solid #dee2e6;
   border-radius: 5px;
   width: 100%;

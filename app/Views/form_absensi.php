@@ -25,6 +25,7 @@
             </div>
             <form action="<?= base_url('/submit-kode/form-absensi/store') ?>" method="post" id="form-absensi" name="form-absensi" enctype="multipart/form-data">
                 <?= csrf_field() ?>
+
                 <div class="form-input">
                     <div class="form-group mb-2 mt-4">
                         <label class="form-label">Pilih Status</label>
@@ -63,7 +64,7 @@
                             <label for="nip" class="form-label">NIP/NIK</label>
                             <div class="col">
                                 <input type="text" class="form-control  <?= validation_show_error('nip') ? 'is-invalid' : '' ?>" value="<?= old('nip') ?>" id="nip" name="nip">
-                                <div class="invalid-feedback text-start">
+                                <div id="notif" class="invalid-feedback text-start">
                                     <?= validation_show_error('nip') ?>
                                 </div>
                             </div>
@@ -74,71 +75,74 @@
                     </div>
                 </div>
 
-                <div class="form-input">
-                    <div class="form-group mb-2">
-                        <label for="no_hp" class="form-label">No. Handphone</label>
-                        <input type="text" class="form-control  <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" value="<?= old('no_hp') ?>" id="no_hp" name="no_hp" placeholder=" ">
+                <div class="container-form">
+                    <div class="form-input">
+                        <div class="form-group-1 mb-2">
+                            <label for="nama" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control  <?= validation_show_error('nama') ? 'is-invalid' : '' ?>" value="<?= old('nama') ?>" id="nama" name="nama" placeholder=" ">
+                            <div class="invalid-feedback text-start">
+                                <?= validation_show_error('nama') ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-input">
+                        <div class="form-group-1 mb-2">
+                            <label for="no_hp" class="form-label">No. Handphone</label>
+                            <input type="text" class="form-control  <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" value="<?= old('no_hp') ?>" id="no_hp" name="no_hp" placeholder=" ">
+                            <div class="invalid-feedback text-start">
+                                <?= validation_show_error('no_hp') ?>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-input">
+                        <div class="form-group-1 mb-2">
+                            <label for="alamat" class="form-label">Alamat</label>
+                            <input type="text" class="form-control  <?= validation_show_error('alamat') ? 'is-invalid' : '' ?>" value="<?= old('alamat') ?>" id="alamat" name="alamat" placeholder=" ">
+                            <div class="invalid-feedback text-start">
+                                <?= validation_show_error('alamat') ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-input"><!-- radio select peran -->
+                        <div class="form-group-1 mb-2" id="instansiOption">
+                            <label for="asal_instansi" class="form-label">Asal Instansi</label>
+                            <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
+                            <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi">
+                                <!-- foreach -->
+                                <option value="">Pilih instansi</option>
+                                <?php foreach ($instansi->data as $i) : ?>
+                                    <option value="<?= $i->ket_ukerja ?>"><?= $i->ket_ukerja ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback text-start">
+                                <?= validation_show_error('asal_instansi') ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-input">
+                        <div class="form-group-1 mb-3" id="instansiText" style="display: none;">
+                            <label for="asal_instansi" class="form-label">Asal Instansi</label>
+                            <input type="text" class="form-control  <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi" placeholder=" ">
+                            <div class="invalid-feedback">
+                                <?= validation_show_error('asal_instansi') ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-input">
+                        <div class="signature-pad <?= validation_show_error('signatureData') ? 'is-invalid' : '' ?>">
+                            <h1>Tempat Tanda Tangan</h1>
+                            <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+                            <input type="hidden" id="signatureData" name="signatureData" value="">
+                        </div>
                         <div class="invalid-feedback text-start">
-                            <?= validation_show_error('no_hp') ?>
+                            <?= validation_show_error('signatureData') ?>
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-input">
-                    <div class="form-group mb-2">
-                        <label for="nama" class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control  <?= validation_show_error('nama') ? 'is-invalid' : '' ?>" value="<?= old('nama') ?>" id="nama" name="nama" placeholder=" ">
-                        <div class="invalid-feedback text-start">
-                            <?= validation_show_error('nama') ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-input">
-                    <div class="form-group mb-2">
-                        <label for="alamat" class="form-label">Alamat</label>
-                        <input type="text" class="form-control  <?= validation_show_error('alamat') ? 'is-invalid' : '' ?>" value="<?= old('alamat') ?>" id="alamat" name="alamat" placeholder=" ">
-                        <div class="invalid-feedback text-start">
-                            <?= validation_show_error('alamat') ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-input"><!-- radio select peran -->
-                    <div class="form-group mb-3" id="instansiOption">
-                        <label for="asal_instansi" class="form-label">Asal Instansi</label>
-                        <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
-                        <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi">
-                            <!-- foreach -->
-                            <option value="">Pilih instansi</option>
-                            <?php foreach ($instansi->data as $i) : ?>
-                                <option value="<?= $i->ket_ukerja ?>"><?= $i->ket_ukerja ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="invalid-feedback text-start">
-                            <?= validation_show_error('asal_instansi') ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-input">
-                    <div class="form-group mb-3" id="instansiText" style="display: none;">
-                        <label for="asal_instansi" class="form-label">Asal Instansi</label>
-                        <input type="text" class="form-control  <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi" placeholder=" ">
-                        <div class="invalid-feedback">
-                            <?= validation_show_error('asal_instansi') ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-input">
-                    <div class="signature-pad <?= validation_show_error('signatureData') ? 'is-invalid' : '' ?>">
-                        <h1>Tempat Tanda Tangan</h1>
-                        <canvas id="signatureCanvas" class="signature-canvas"></canvas>
-                        <input type="hidden" id="signatureData" name="signatureData" value="">
-                    </div>
-                    <div class="invalid-feedback text-start">
-                        <?= validation_show_error('signatureData') ?>
                     </div>
                 </div>
 
