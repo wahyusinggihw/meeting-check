@@ -107,7 +107,16 @@
                         </div>
                     </div>
 
-                    <div class="form-input"><!-- radio select peran -->
+                    <div class="form-input">
+                        <div class="form-group-1 mb-3" id="instansiText" style="display: none;">
+                            <label for="asal_instansi" class="form-label">Asal Instansi</label>
+                            <input type="text" class="form-control  <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi" placeholder=" ">
+                            <div class="invalid-feedback">
+                                <?= validation_show_error('asal_instansi') ?>
+                            </div>
+                        </div>
+
+                        <!-- radio select peran -->
                         <div class="form-group-1 mb-2" id="instansiOption">
                             <label for="asal_instansi" class="form-label">Asal Instansi</label>
                             <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
@@ -119,16 +128,6 @@
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback text-start">
-                                <?= validation_show_error('asal_instansi') ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-input">
-                        <div class="form-group-1 mb-3" id="instansiText" style="display: none;">
-                            <label for="asal_instansi" class="form-label">Asal Instansi</label>
-                            <input type="text" class="form-control  <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi" placeholder=" ">
-                            <div class="invalid-feedback">
                                 <?= validation_show_error('asal_instansi') ?>
                             </div>
                         </div>

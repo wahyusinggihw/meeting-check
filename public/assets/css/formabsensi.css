@@ -51,9 +51,9 @@
 }
 .konten .wrapper .form-group-1 {
   font-size: 14px;
-  width: 250px;
+  width: 225px;
 }
-.konten .wrapper .form-group .form-label {
+.konten .wrapper .form-group-1 .form-label {
   font-weight: 600;
 }
 .konten .wrapper .form-group input {
@@ -85,7 +85,20 @@
 
 @media screen and (min-width: 992px) {
   .wrapper {
-    width: 45%;
+    width: 37%;
+  }
+
+  .konten .wrapper .form-group-1 {
+    font-size: 14px;
+    width: 280px;
+  }
+
+  .container-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 }
 
@@ -99,7 +112,7 @@
   display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-start;
 }
 .form-input {
