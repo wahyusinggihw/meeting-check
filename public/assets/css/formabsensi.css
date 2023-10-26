@@ -8,7 +8,7 @@
 } */
 .wrapper {
   background-color: #e6edff;
-  width: 43%;
+  width: 70%;
   height: auto;
   padding: 50px;
   border-radius: 35px;
@@ -135,7 +135,7 @@
 
 @media screen and (min-width: 768px) {
   .wrapper {
-    width: 55%;
+    width: 80%;
   }
 }
 
@@ -148,10 +148,10 @@
 
 @media screen and (min-width: 1200px) {
   .wrapper {
-    width: 37%;
+    width: 40%;
   }
   .konten .wrapper .form-group-1 {
-    width: 200px;
+    width: 250px;
   }
 }
 
