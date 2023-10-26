@@ -8,7 +8,7 @@
 } */
 .wrapper {
   background-color: #e6edff;
-  width: 50%;
+  width: 43%;
   height: auto;
   padding: 50px;
   border-radius: 35px;
@@ -45,6 +45,14 @@
 .konten .wrapper .form-group button {
   font-size: 14px;
 }
+.radio{
+  display: flex;
+}
+
+#radio-op {
+  display: flex;
+  align-items: center;
+}
 
 .konten .wrapper .form-group {
   font-size: 14px;
@@ -70,42 +78,35 @@
 .konten .wrapper .button-container {
   color: white;
 }
-/* responsif */
-@media screen and (min-width: 576px) {
+/* responsif */ 
+
+/* Media query untuk perangkat mobile */
+@media (max-width: 767px) {
   .wrapper {
-    width: 65%;
-  }
+      width: 55%;
+    }
 }
 
-@media screen and (min-width: 768px) {
+/* Media query untuk tablet */
+@media (min-width: 768px) and (max-width: 991px) {
   .wrapper {
-    width: 55%;
-  }
+      width: 45%;
+    }
 }
 
-@media screen and (min-width: 992px) {
-  .wrapper {
-    width: 37%;
-  }
-
-  .konten .wrapper .form-group-1 {
-    font-size: 14px;
-    width: 280px;
-  }
-
-  .container-form {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
+/* Media query untuk laptop/desktop */
+@media (min-width: 992px) and (max-width: 1365px) {
+  
 }
 
-@media screen and (max-width: 1200px) {
-  .wrapper {
-    width: 35%;
-  }
+/* Media query untuk desktop dengan resolusi 1920 */
+@media (min-width: 1366px) and (max-width: 1920px) {
+  
+}
+
+/* Media query untuk desktop dengan resolusi lebih dari 1920 */
+@media (min-width: 1921px) {
+  
 }
 
 .container-form{

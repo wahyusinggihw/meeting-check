@@ -29,12 +29,12 @@
                 <div class="form-input">
                     <div class="form-group mb-2 mt-4">
                         <label class="form-label">Pilih Status</label>
-                        <div>
-                            <div class="form-check form-check-inline">
+                        <div class="radio">
+                            <div id="radio-op" class="form-check form-check-inline">
                                 <input class="form-check-input statusRadio" type="radio" name="statusRadio" id="statusRadio1" value="pegawai">
                                 <label class="form-check-label" for="statusRadio1">Pegawai</label>
                             </div>
-                            <div class="form-check form-check-inline">
+                            <div id="radio-op" class="form-check form-check-inline">
                                 <input class="form-check-input statusRadio" type="radio" name="statusRadio" id="statusRadio2" value="tamu">
                                 <label class="form-check-label" for="statusRadio2">Tamu</label>
                             </div>
@@ -45,12 +45,12 @@
                 <div class="form-input">
                     <div class="form-group mb-2 mt-2" id="asnNonAsnContainer" style="display: none;">
                         <label class="form-label">Pilih status pegawai</label>
-                        <div>
-                            <div class="form-check form-check-inline">
+                        <div class="radio">
+                            <div id="radio-op" class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="asnNonAsnRadio" id="asnRadio" value="asn">
                                 <label class="form-check-label" for="asnRadio">ASN</label>
                             </div>
-                            <div class="form-check form-check-inline">
+                            <div id="radio-op" class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="asnNonAsnRadio" id="nonAsnRadio" value="nonasn">
                                 <label class="form-check-label" for="nonAsnRadio">Non-ASN</label>
                             </div>
