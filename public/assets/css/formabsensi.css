@@ -59,15 +59,21 @@
 }
 .konten .wrapper .form-group-1 {
   font-size: 14px;
-  width: 225px;
+  width: 300px;
 }
 .konten .wrapper .form-group-1 .form-label {
   font-weight: 600;
 }
+.konten .wrapper .form-group .form-label {
+  font-weight: 600;
+}
+.konten .wrapper .form-group-1 input {
+  font-size: 14px;
+}
 .konten .wrapper .form-group input {
   font-size: 14px;
 }
-.konten .wrapper .form-group select {
+.konten .wrapper .form-group-1 select {
   font-size: 14px;
 }
 .konten .wrapper .form-group .cari {
@@ -78,50 +84,20 @@
 .konten .wrapper .button-container {
   color: white;
 }
-/* responsif */ 
 
-/* Media query untuk perangkat mobile */
-@media (max-width: 767px) {
-  .wrapper {
-      width: 55%;
-    }
-}
-
-/* Media query untuk tablet */
-@media (min-width: 768px) and (max-width: 991px) {
-  .wrapper {
-      width: 45%;
-    }
-}
-
-/* Media query untuk laptop/desktop */
-@media (min-width: 992px) and (max-width: 1365px) {
-  
-}
-
-/* Media query untuk desktop dengan resolusi 1920 */
-@media (min-width: 1366px) and (max-width: 1920px) {
-  
-}
-
-/* Media query untuk desktop dengan resolusi lebih dari 1920 */
-@media (min-width: 1921px) {
-  
-}
-
-.container-form{
+.container-form {
   display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 .form-input {
   position: relative;
   margin-bottom: 30px;
 }
 
-#notif{
+#notif {
   padding-left: 15px;
   width: 500px;
 }
@@ -148,6 +124,35 @@
   width: 100%;
   top: 0;
   left: 0;
+}
+
+/* RESPONSIF */
+@media screen and (min-width: 576px) {
+  .wrapper {
+    width: 65%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    width: 55%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .wrapper {
+    width: 45%;
+  }
+
+}
+
+@media screen and (min-width: 1200px) {
+  .wrapper {
+    width: 37%;
+  }
+  .konten .wrapper .form-group-1 {
+    width: 200px;
+  }
 }
 
 /* ||============|| CSS TRANSISI ANIMASI ||============|| */
