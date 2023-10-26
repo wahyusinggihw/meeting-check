@@ -127,34 +127,52 @@
 }
 
 /* RESPONSIF */
-@media screen and (min-width: 576px) {
+
+/* Media query untuk perangkat mobile */
+@media (max-width: 767px) {
   .wrapper {
-    width: 65%;
-  }
+      width: 80%;
+    }
 }
 
-@media screen and (min-width: 768px) {
+/* Media query untuk tablet */
+@media (min-width: 768px) and (max-width: 991px) {
   .wrapper {
-    width: 80%;
-  }
+      width: 72%;
+    }
 }
 
-@media screen and (min-width: 992px) {
+/* Media query untuk desktop dengan resolusi 1366 */
+@media (min-width: 992px) and (max-width: 1365px) {
   .wrapper {
-    width: 45%;
-  }
-
-}
-
-@media screen and (min-width: 1200px) {
-  .wrapper {
-    width: 40%;
-  }
+      width: 55%;
+    }
   .konten .wrapper .form-group-1 {
-    width: 250px;
+    width: 230px;
   }
 }
 
+/* Media query untuk desktop dengan resolusi 1920 */
+@media (min-width: 1366px) and (max-width: 1920px) {
+  .wrapper {
+    width: 59%;
+  }
+
+  .konten .wrapper .form-group-1 {
+    width: 350px;
+  }
+}
+
+/* Media query untuk desktop dengan resolusi lebih dari 1920 */
+@media (min-width: 1921px) {
+  .wrapper {
+      width: 35%;
+    }
+  
+    .konten .wrapper .form-group-1 {
+      width: 300px;
+    }
+}
 /* ||============|| CSS TRANSISI ANIMASI ||============|| */
 
 @-webkit-keyframes slide-in-blurred-top {
