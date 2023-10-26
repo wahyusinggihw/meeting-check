@@ -131,15 +131,21 @@
 /* Media query untuk perangkat mobile */
 @media (max-width: 767px) {
   .wrapper {
-      width: 80%;
+      width: 55%;
     }
+  .konten .wrapper .form-group-1 {
+    width: 350px;
+  }
 }
 
 /* Media query untuk tablet */
 @media (min-width: 768px) and (max-width: 991px) {
   .wrapper {
-      width: 72%;
+      width: 55%;
     }
+  .konten .wrapper .form-group-1 {
+    width: 350px;
+  }
 }
 
 /* Media query untuk desktop dengan resolusi 1366 */
@@ -148,14 +154,14 @@
       width: 55%;
     }
   .konten .wrapper .form-group-1 {
-    width: 230px;
+    width: 320 px;
   }
 }
 
 /* Media query untuk desktop dengan resolusi 1920 */
 @media (min-width: 1366px) and (max-width: 1920px) {
   .wrapper {
-    width: 59%;
+    width: 55%;
   }
 
   .konten .wrapper .form-group-1 {
@@ -166,7 +172,7 @@
 /* Media query untuk desktop dengan resolusi lebih dari 1920 */
 @media (min-width: 1921px) {
   .wrapper {
-      width: 35%;
+      width: 55%;
     }
   
     .konten .wrapper .form-group-1 {
