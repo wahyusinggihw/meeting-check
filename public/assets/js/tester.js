@@ -1,5 +1,13 @@
-window.addEventListener("scroll", function () {
-    const scrollValue = window.scrollY;
-    const parallaxBg = document.querySelector(".parallax-bg");
-    parallaxBg.style.transform = `translateY(-${scrollValue * 0.5}px)`; /* Sesuaikan faktor 0.5 sesuai kecepatan yang Anda inginkan */
+var hero = document.querySelector(".hero");
+var hero_items = hero.querySelectorAll(".layers div");
+
+window.addEventListener("scroll", function (e) {
+  for (var i = 0; i < hero_items.length; i++) {
+    var depth = hero_items[i].getAttribute("data-depth");
+
+    (function (depth, item) {
+      item.style.transform =
+        "translateY(" + window.pageYOffset * (0.1 * depth) + "px)";
+    })(depth, hero_items[i]);
+  }
 });
