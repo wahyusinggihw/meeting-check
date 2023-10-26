@@ -151,7 +151,7 @@
                     <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
                 </div>
                 <div class="form-group text-end">
-                    <button onclick="saveSignature()" type="submit" class="g-recaptcha btn btn-primary" data-sitekey="<?= getenv('RECAPTCHA_SITE_KEY') ?>" data-callback='onSubmit' data-action='submit'>Submit</button>
+                    <button onclick="saveSignature()" type="submit" class="g-recaptcha btn btn-primary" data-sitekey="<?= getenv('RECAPTCHA_SITE_KEY') ?>" data-callback='onSubmit' data-action='submit'>Kirim</button>
                 </div>
             </form>
         </div>
