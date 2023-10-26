@@ -131,52 +131,52 @@
 /* Media query untuk perangkat mobile */
 @media (max-width: 767px) {
   .wrapper {
-      width: 55%;
+      width: 45%;
     }
   .konten .wrapper .form-group-1 {
-    width: 350px;
+    width: 240px;
   }
 }
 
 /* Media query untuk tablet */
 @media (min-width: 768px) and (max-width: 991px) {
   .wrapper {
-      width: 55%;
+      width: 45%;
     }
   .konten .wrapper .form-group-1 {
-    width: 350px;
+    width: 240px;
   }
 }
 
 /* Media query untuk desktop dengan resolusi 1366 */
 @media (min-width: 992px) and (max-width: 1365px) {
   .wrapper {
-      width: 55%;
+      width: 45%;
     }
   .konten .wrapper .form-group-1 {
-    width: 320 px;
+    width: 240px;
   }
 }
 
 /* Media query untuk desktop dengan resolusi 1920 */
 @media (min-width: 1366px) and (max-width: 1920px) {
   .wrapper {
-    width: 55%;
+    width: 45%;
   }
 
   .konten .wrapper .form-group-1 {
-    width: 350px;
+    width: 240px;
   }
 }
 
 /* Media query untuk desktop dengan resolusi lebih dari 1920 */
 @media (min-width: 1921px) {
   .wrapper {
-      width: 55%;
+      width: 45%;
     }
   
     .konten .wrapper .form-group-1 {
-      width: 300px;
+      width: 240px;
     }
 }
 /* ||============|| CSS TRANSISI ANIMASI ||============|| */
