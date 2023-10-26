@@ -149,7 +149,7 @@
 }
 
 /* Media query untuk desktop dengan resolusi 1366 */
-@media (min-width: 992px) and (max-width: 1365px) {
+@media (min-width: 992px) and (max-width: 1366px) {
   .wrapper {
       width: 45%;
     }
@@ -159,13 +159,13 @@
 }
 
 /* Media query untuk desktop dengan resolusi 1920 */
-@media (min-width: 1366px) and (max-width: 1920px) {
+@media (min-width: 1367px) and (max-width: 1920px) {
   .wrapper {
     width: 45%;
   }
 
   .konten .wrapper .form-group-1 {
-    width: 240px;
+    width: 280px;
   }
 }
 
@@ -176,7 +176,7 @@
     }
   
     .konten .wrapper .form-group-1 {
-      width: 240px;
+      width: 280px;
     }
 }
 /* ||============|| CSS TRANSISI ANIMASI ||============|| */

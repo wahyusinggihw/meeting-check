@@ -108,7 +108,7 @@
                     </div>
 
                     <div class="form-input">
-                        <div class="form-group-1 mb-3" id="instansiText" style="display: none;">
+                        <div class="form-group-1 mb-2" id="instansiText" style="display: none;">
                             <label for="asal_instansi" class="form-label">Asal Instansi</label>
                             <input type="text" class="form-control  <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi" placeholder=" ">
                             <div class="invalid-feedback">
