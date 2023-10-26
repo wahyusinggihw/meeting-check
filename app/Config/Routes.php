@@ -39,7 +39,8 @@ $routes->post('api/save-signature', 'RapatController::saveSignatureData');
 $routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
     // Route mobile
     $routes->post('login', "Api\AuthControllerAPI::login");
-    $routes->resource('agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
+    $routes->get('agenda-rapat/(:segment)', 'Api\AgendaRapatControllerAPI::index/$1');
+    // $routes->resource('agenda-rapat', ['controller' => 'Api\AgendaRapatControllerAPI']);
     // $routes->resource('rapat', ['controller' => 'Api\RapatControllerAPI']);
     $routes->post('form-absensi-store', 'Api\RapatControllerAPI::absenStore');
     // route untuk get agenda rapat

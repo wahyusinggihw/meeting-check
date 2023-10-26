@@ -18,7 +18,7 @@ class UsersControllerAPI extends BaseController
         $this->instansiAPI = new PesertaRapatModel();
     }
 
-    public function getPeserta($nik)
+    public function getPeeserta($nik)
     {
         // $nik = $this->request->getVar('nip');
         $data = $this->pesertaUmum->cariUser($nik);
@@ -39,11 +39,11 @@ class UsersControllerAPI extends BaseController
     }
 
     // JQUERY
-    public function getPegawai($nip)
+    public function getInstansi($nip)
     {
-        $pegawai = $this->instansiAPI->getInstansi();
-        $pegawaiJSON = json_decode($pegawai);
-        foreach ($pegawaiJSON->data as $item) {
+        $instansi = $this->instansiAPI->getInstansi();
+        $instansiJSON = json_decode($instansi);
+        foreach ($instansiJSON->data as $item) {
             if ($item->kode_instansi == $nip) {
                 $result = [
                     'status' => true,
@@ -98,6 +98,24 @@ class UsersControllerAPI extends BaseController
                 'data' => null
             ];
         }
+
+        return $this->respond($result);
+    }
+
+    public function getPegawai($nip)
+    {
+        $pegawaiAsn = $this->instansiAPI->getAsnByNip($nip);
+        $pegawaiNonAsn = $this->instansiAPI->getNonAsnByNip($nip);
+
+        $pegawaiAsnJSON = json_decode($pegawaiAsn);
+        $pegawaiNonAsnJSON = json_decode($pegawaiNonAsn);
+
+        $result = [
+            'pegawai' => [
+                'asn' => isset($pegawaiAsnJSON->data) ? $pegawaiAsnJSON->data : null,
+                'non_asn' => isset($pegawaiNonAsnJSON->data) ? $pegawaiNonAsnJSON->data : null
+            ]
+        ];
 
         return $this->respond($result);
     }

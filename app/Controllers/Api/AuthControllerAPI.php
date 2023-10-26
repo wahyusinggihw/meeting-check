@@ -12,28 +12,67 @@ class AuthControllerAPI extends BaseController
 {
     use ResponseTrait;
 
-    public function Login()
+    protected $userController;
+    protected $userAPI;
+    public function __construct()
     {
-        $userAPI = new PesertaRapatModel();
+        $this->userController = new UsersControllerAPI();
+        $this->userAPI = new PesertaRapatModel();;
+    }
+
+    // public function login()
+    // {
+    //     $username = $this->request->getVar('username');
+    //     $pegawaiData = $userController->getPegawai($username);
+
+    //     // You can now check the "pegawai" data for login purposes
+    //     if (!empty($pegawaiData['pegawai']['asn']) || !empty($pegawaiData['pegawai']['non_asn'])) {
+    //         // User is authenticated, you can proceed with the login
+    //         return $this->respond(['message' => 'Login successful']);
+    //     } else {
+    //         // User is not authenticated
+    //         return $this->respond(['message' => 'Login failed']);
+    //     }
+    // }
+
+    private function getPegawai($nip)
+    {
+        $pegawaiAsn = $this->userAPI->getAsnByNip($nip);
+        $pegawaiNonAsn = $this->userAPI->getNonAsnByNip($nip);
+
+        $pegawaiAsnJSON = json_decode($pegawaiAsn);
+        $pegawaiNonAsnJSON = json_decode($pegawaiNonAsn);
+
+        $pegawaiData = [
+            'asn' => isset($pegawaiAsnJSON->data) ? $pegawaiAsnJSON->data : null,
+            'non_asn' => isset($pegawaiNonAsnJSON->data) ? $pegawaiNonAsnJSON->data : null
+        ];
+
+        return $pegawaiData;
+    }
+
+    public function login()
+    {
+        // $userAPI = new PesertaRapatModel();
+        // $userAPI = $this->userController;
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
 
-        $user = $userAPI->getInstansi();
-        $userJson = json_decode($user);
+        $user = $this->getPegawai($username);
 
-        $userInAPI = $this->cariUser($userJson, $username);
-        // dd($userInAPI->ket_ukerja);
-        if (!$userInAPI) {
-            $response = [
-                'status' => false,
-                'message' => 'Invalid username or password',
+        if (!$user['asn']) {
+            if (!$user['non_asn']) {
+                $response = [
+                    'status' => false,
+                    // 'message' => 'Invalid username or password',
+                    'message' => 'User tidak ada',
 
-            ];
-            return $this->respond($response, 200);
+                ];
+                return $this->respond($response, 200);
+            }
         }
 
-        // dd($userExist->kode_instansi);
-        $hash = password_hash($userInAPI->kode_instansi, PASSWORD_DEFAULT);
+        $hash = password_hash($username, PASSWORD_DEFAULT);
         $pwd_verify = password_verify($password, $hash);
 
         if (!$pwd_verify) {
@@ -44,15 +83,29 @@ class AuthControllerAPI extends BaseController
             ];
             return $this->respond($response, 200);
         }
+        $response = service('response');
 
-        $response = [
-            'status' => true,
-            'message' => 'Login Succesful',
-            'data' => $userInAPI,
-            // 'token' => 
-        ];
+        // Set the content type
+        $response->setContentType('application/json');
 
-        return $this->respond($response, 200);
+        if ($user['non_asn']) {
+            $response = [
+                'status' => true,
+                'message' => 'Login Succesful',
+                'data' => json_decode(json_encode($user['non_asn']), true),
+                // 'token' => 
+            ];
+            return $this->respond($response, 200);
+        } else {
+            $response = [
+                'status' => true,
+                'message' => 'Login Succesful',
+                'data' => json_decode(json_encode($user['asn']), true),
+                // 'token' => 
+            ];
+
+            return $this->respond($response, 200);
+        }
     }
 
     protected function cariUser($json, $key)

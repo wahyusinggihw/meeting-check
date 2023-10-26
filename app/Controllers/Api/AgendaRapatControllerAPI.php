@@ -5,9 +5,8 @@ namespace App\Controllers\Api;
 use App\Controllers\BaseController;
 use App\Models\AgendaRapatModel;
 use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\RESTful\ResourceController;
 
-class AgendaRapatControllerAPI extends ResourceController
+class AgendaRapatControllerAPI extends BaseController
 {
     use ResponseTrait;
     protected $agendaRapat;
@@ -16,9 +15,9 @@ class AgendaRapatControllerAPI extends ResourceController
         $this->agendaRapat = new AgendaRapatModel();
     }
 
-    public function index()
+    public function index($idInstansi = null)
     {
-        $agendaRapat = $this->agendaRapat->findAll();
+        $agendaRapat = $this->agendaRapat->getAllAgendaByInstansi($idInstansi);
         // $agendaRapatJSON = json_decode($agendaRapat);
         $result = [
             'status' => true,
