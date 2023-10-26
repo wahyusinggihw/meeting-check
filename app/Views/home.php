@@ -125,10 +125,6 @@
           <div class="corner left-bottom"></div>
         </div>
       </div>
-
-
-
-
       <!-- Second Content Section-->
       <div class="row align-items-center justify-content-end connecting-lines d-flex">
         <div class="col-6 text-right">
