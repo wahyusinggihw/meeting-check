@@ -22,10 +22,21 @@ class Auth extends BaseController
             // $nip = $this->request->getVar('username');
             // $password = $this->request->getVar('password');
             // dd($nip, $password);
-            $rules = [
-                'username' => 'required',
-                'password' => 'required',
-            ];
+            $rules =
+                [
+                    'username' => [
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => 'Username tidak boleh kosong',
+                        ]
+                    ],
+                    'password' => [
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => 'Password tidak boleh kosong',
+                        ]
+                    ],
+                ];
 
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');

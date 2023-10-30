@@ -10,7 +10,7 @@ use CodeIgniter\Router\RouteCollection;
 // Auth Admin
 $routes->group('auth', function ($routes) {
     $routes->match(['get', 'post'], 'login', 'Auth::login');
-    $routes->get('logout', 'Auth::logout');
+    $routes->post('logout', 'Auth::logout');
 });
 
 // Rapat landing page
