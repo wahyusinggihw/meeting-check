@@ -35,23 +35,28 @@
         <form action="/auth/login" method="post" id="form-login">
             <?= csrf_field() ?>
             <div class="container">
-                <div class="form-group mb-3">
-                    <label for="username" class="form-label">Username:</label>
-                    <input type="text" class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= old('username') ?>" id="username" name="username" placeholder="Masukkan username" autofocus>
-                    <div class="invalid-feedback text-start">
-                        <?= validation_show_error('username') ?>
+                <div class="input-wrapper">
+                    <div class="form-group mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" class="form-control <?= validation_show_error('username') ? 'is-invalid' : '' ?>" value="<?= old('username') ?>" id="username" name="username" placeholder="Masukkan username" autofocus>
+                        <div class="invalid-feedback text-start">
+                            <?= validation_show_error('username') ?>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="password" class="form-label">Password:</label>
-                    <div class="password-input-container">
-                        <input type="password" class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="Masukkan password">
-                        <span class="password-toggle-btn" onclick="togglePasswordVisibility()">
-                            <i id="password-toggle-icon" class="fa fa-eye"></i>
-                        </span>
-                    </div>
-                    <div class="invalid-feedback text-start">
-                        <?= validation_show_error('password') ?>
+
+                <div class="input-wrapper">
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <div class="password-input-container">
+                            <input type="password" class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="Masukkan password">
+                            <span class="password-toggle-btn" onclick="togglePasswordVisibility()">
+                                <i id="password-toggle-icon" class="fa fa-eye"></i>
+                            </span>
+                            <div class="invalid-feedback text-start">
+                                <?= validation_show_error('password') ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="g-recaptcha" data-sitekey="<?= getenv('RECAPTCHA_SITE_KEY') ?>" data-callback='onSubmit' data-action='submit'>Login</button>

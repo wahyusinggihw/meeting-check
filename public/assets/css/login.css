@@ -76,6 +76,8 @@ body {
 }
 
 
+
+
 .password-input-container {
   position: relative;
 }
@@ -88,108 +90,43 @@ body {
   cursor: pointer;
 }
 
+.input-wrapper{
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.invalid-feedback {
+  display: block;
+  position: absolute;
+  bottom: -1.5rem;
+  /* Atur jarak di bawah input, misalnya -1.5rem atau sesuai kebutuhan */
+  left: 0;
+  /* Atur posisi horizontal ke kiri */
+  transform: none;
+  /* Hapus transform */
+}
+
 .password-toggle-btn i {
   font-size: 1.2em;
 } 
 
-/* KeyFrames */
+/* MEDIA QUERRY */
 
-/* @-webkit-keyframes slide-in-elliptic-top-fwd {
-  0% {
-    -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
-    transform: translateY(-600px) rotateX(-30deg) scale(0);
-    -webkit-transform-origin: 50% 100%;
-    transform-origin: 50% 100%;
-    opacity: 0;
-  }
-
-  100% {
-    -webkit-transform: translateY(0) rotateX(0) scale(1);
-    transform: translateY(0) rotateX(0) scale(1);
-    -webkit-transform-origin: 50% 1400px;
-    transform-origin: 50% 1400px;
-    opacity: 1;
-  }
+@media (max-width: 767px) {
+  
 }
 
-@keyframes slide-in-elliptic-top-fwd {
-  0% {
-    -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
-    transform: translateY(-600px) rotateX(-30deg) scale(0);
-    -webkit-transform-origin: 50% 100%;
-    transform-origin: 50% 100%;
-    opacity: 0;
-  }
-
-  100% {
-    -webkit-transform: translateY(0) rotateX(0) scale(1);
-    transform: translateY(0) rotateX(0) scale(1);
-    -webkit-transform-origin: 50% 1400px;
-    transform-origin: 50% 1400px;
-    opacity: 1;
-  }
+/* Media query untuk tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  
 }
 
-@-webkit-keyframes scale-in-tl {
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    -webkit-transform-origin: 0% 0%;
-    transform-origin: 0% 0%;
-    opacity: 1;
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transform-origin: 0% 0%;
-    transform-origin: 0% 0%;
-    opacity: 1;
-  }
+/* Media query untuk desktop dengan resolusi 1366 */
+@media (min-width: 992px) and (max-width: 1366px) {
+  
 }
 
-@keyframes scale-in-tl {
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    -webkit-transform-origin: 0% 0%;
-    transform-origin: 0% 0%;
-    opacity: 1;
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transform-origin: 0% 0%;
-    transform-origin: 0% 0%;
-    opacity: 1;
-  }
+/* Media query untuk desktop dengan resolusi 1920 */
+@media (min-width: 1367px) and (max-width: 1920px) {
+  
 }
-
-@-webkit-keyframes slide-in-bottom {
-  0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
-    opacity: 0;
-  }
-
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-in-bottom {
-  0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
-    opacity: 0;
-  }
-
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-} */
