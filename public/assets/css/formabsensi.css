@@ -7,7 +7,7 @@
     background-attachment: fixed;
 } */
 .wrapper {
-  background-color: #e6edff;
+  background-color: #fdfdfd;
   width: 70%;
   height: auto;
   padding: 50px;
@@ -97,6 +97,13 @@
   margin-bottom: 30px;
 }
 
+.form-input-sg {
+  position: relative;
+  margin-bottom: 30px;
+  max-width: 510px;
+  width: 100%;
+}
+
 #notif {
   padding-left: 15px;
   width: 500px;
@@ -112,6 +119,10 @@
   /* Hapus transform */
 }
 
+.signature-pad{
+  width: 100%;
+  max-width: 510px;
+}
 .signature-pad h1 {
   font-size: 14px;
   font-weight: 600;
@@ -129,12 +140,16 @@
 /* RESPONSIF */
 
 /* Media query untuk perangkat mobile */
-@media (max-width: 767px) {
+@media (min-width: 300px) and (max-width: 767px) {
   .wrapper {
       width: 45%;
     }
   .konten .wrapper .form-group-1 {
     width: 240px;
+  }
+
+  .signature-canvas{
+    width: 410px;
   }
 }
 

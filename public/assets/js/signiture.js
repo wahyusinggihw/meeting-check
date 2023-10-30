@@ -38,7 +38,7 @@ function draw(e) {
 
 function clearSignature() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Menghapus tanda tangan
-}
+} 
 
 function saveSignatureData() {
   const signatureData = canvas.toDataURL(); // Mendapatkan data tanda tangan dalam format base64

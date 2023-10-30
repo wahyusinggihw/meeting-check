@@ -133,7 +133,7 @@
                         </div>
                     </div>
 
-                    <div class="form-input">
+                    <div class="form-input-sg">
                         <div class="signature-pad <?= validation_show_error('signatureData') ? 'is-invalid' : '' ?>">
                             <h1>Tempat Tanda Tangan</h1>
                             <canvas id="signatureCanvas" class="signature-canvas"></canvas>
