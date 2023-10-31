@@ -42,10 +42,10 @@ class RapatController extends BaseController
         $idAgenda = $this->session->get('id_agenda');
 
         $url = current_url();
-
+        // cek apakah form diakses dari landing page atau dari scan qr code
         if ($url == site_url('submit-kode/form-absensi')) {
             $idAgenda = $this->session->get('id_agenda');
-        } elseif (strpos($url, site_url('submit-kode/form-absensi/qr/')) === 0) {
+        } elseif (str_starts_with($url, site_url('submit-kode/form-absensi/qr/'))) {
             $idAgenda = $this->request->getUri()->getSegment(4);
             $rapat = $this->agendaRapat->select()->where('id_agenda', $idAgenda)->first();
             $expiredTime = expiredTime($rapat['tanggal'], $rapat['jam']);
