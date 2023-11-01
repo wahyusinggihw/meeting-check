@@ -69,6 +69,15 @@ function statusRapat($date, $time)
     }
 }
 
+function getCurrentTimeRounded()
+{
+    // Calculate the current time rounded to the nearest 30-minute interval
+    $currentMinutes = date('i');
+    $roundedMinutes = $currentMinutes + (30 - $currentMinutes % 30);
+    $roundedCurrentTime = date('H:') . str_pad($roundedMinutes, 2, '0', STR_PAD_LEFT);
+    return $roundedCurrentTime;
+}
+
 function generateQrCode($linkRapat)
 {
     // add logo to qr

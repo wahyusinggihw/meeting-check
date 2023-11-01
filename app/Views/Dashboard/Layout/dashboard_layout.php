@@ -52,9 +52,9 @@
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="<?= base_url('assets/img/logo.png') ?>" alt="DaftarHadir" width="100">
-    </div>
+    </div> -->
 
     <?= $this->include('dashboard/Layout/navbar'); ?>
     <?= $this->include('dashboard/Layout/sidebar'); ?>
