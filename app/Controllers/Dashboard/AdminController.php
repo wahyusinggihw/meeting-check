@@ -137,82 +137,45 @@ class AdminController extends BaseController
 
     public function edit($slug)
     {
-
-        // $password = $this->adminModel->where('slug', $slug)->first()['password'];
-        // $password2 = password_hash($password, PASSWORD_DEFAULT);
         $currentRole = session()->get('role');
-        if ($currentRole != 'superadmin') {
-            $data = [
-                'title' => 'Edit Operator',
-                'active' => 'kelola_admin',
-                'role' => $currentRole,
-                'data' => $this->adminModel->where('slug', $slug)->first(),
-            ];
+        $title = $currentRole == 'superadmin' ? 'Edit Password Admin' : 'Edit Password Operator';
+        $data = [
+            'title' => $title,
+            'active' => 'kelola_admin',
+            'role' => $currentRole,
+            'data' => $this->adminModel->where('slug', $slug)->first(),
+        ];
 
-            return view('dashboard/edit_admin', $data);
-        } else {
-            $data = [
-                'title' => 'Edit Admin',
-                'active' => 'kelola_admin',
-                'role' => $currentRole,
-                'data' => $this->adminModel->where('slug', $slug)->first(),
-            ];
-
-            return view('dashboard/edit_admin', $data);
-        }
-        // $data = [
-        //     'title' => 'Edit Admin',
-        //     'data' => $this->adminModel->where('slug', $slug)->first(),
-        //     // 'validation' => \Config\Services::validation(),
-        //     // 'password' => $password2
-        // ];
-
-        // return view('dashboard/edit_admin', $data);
+        return view('dashboard/edit_admin', $data);
     }
 
     public function update($id)
     {
         // dd($this->request->getPost());
         $validate = $this->validate([
-            'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nama harus diisi'
-                ]
-            ],
-            'username' => [
-                'rules' => 'required|alpha_dash',
-                'errors' => [
-                    'required' => 'Username harus diisi',
-                    'is_unique' => 'Username sudah terdaftar'
-                ]
-            ],
             'new-password' => [
-                // 'rules' => 'required',
-                // 'errors' => [
-                //     'required' => 'Password harus diisi'
-                // ]
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/]',
+                'errors' => [
+                    'required' => 'Password harus diisi',
+                    'min_length' => 'Password harus terdiri dari minimal 8 karakter',
+                    'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus'
+                ]
             ],
             'confirm-password' => [
-                'rules' => 'matches[new-password]',
+                'rules' => 'required|matches[new-password]',
                 'errors' => [
                     'required' => 'Konfirmasi password harus diisi',
                     'matches' => 'Konfirmasi password tidak sesuai'
                 ]
             ]
-
         ]);
 
         if (!$validate) {
             return redirect()->back()->withInput();
         }
 
-        $slug = $this->slugify->slugify($this->request->getVar('nama'));
         $this->adminModel->update($id, [
             'id_admin' => $id,
-            'slug' => $slug,
-            'nama' => $this->request->getVar('nama'),
-            'username' => $this->request->getVar('username'),
             'password' => password_hash($this->request->getVar('new-password'), PASSWORD_DEFAULT)
         ]);
 

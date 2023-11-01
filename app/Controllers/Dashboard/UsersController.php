@@ -66,15 +66,18 @@ class UsersController extends BaseController
         $validate = $this->validate([
 
             'old-password' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[8]',
                 'errors' => [
-                    'required' => 'Password baru harus diisi'
+                    // 'matches' => 'Password lama tidak cocok dengan password sebelumnya',
+                    'required' => 'Password lama harus diisi'
                 ]
             ],
             'new-password' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/]',
                 'errors' => [
-                    'required' => 'Password baru harus diisi'
+                    'required' => 'Password baru harus diisi',
+                    'min_length' => 'Password baru harus terdiri dari minimal 8 karakter',
+                    'regex_match' => 'Password baru harus terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus'
                 ]
             ],
             'confirm-password' => [
@@ -84,8 +87,8 @@ class UsersController extends BaseController
                     'matches' => 'Konfirmasi password tidak sesuai'
                 ]
             ]
-
         ]);
+
         if (!password_verify($this->request->getVar('old-password'), $profile['password'])) {
             // Old password doesn't match, return an error
             return redirect()->back()->withInput()->with('error', 'Password lama tidak cocok');
@@ -94,7 +97,7 @@ class UsersController extends BaseController
         if (!$validate) {
             return redirect()->back()->withInput();
         }
-
+        die;
         // $slug = $this->slugify->slugify($this->request->getVar('nama'));
         $this->users->update($id, [
             'id_admin' => $id,
