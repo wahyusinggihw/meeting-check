@@ -90,16 +90,18 @@ class AuthControllerAPI extends BaseController
 
         if ($user['non_asn']) {
             $response = [
-                'status' => true,
-                'message' => 'Login Succesful',
+                'status' => 200,
+                'error' => false,
+                'message' => 'Login berhasil',
                 'data' => json_decode(json_encode($user['non_asn']), true),
                 // 'token' => 
             ];
             return $this->respond($response, 200);
         } else {
             $response = [
-                'status' => true,
-                'message' => 'Login Succesful',
+                'status' => 200,
+                'error' => false,
+                'message' => 'Login berhasil',
                 'data' => json_decode(json_encode($user['asn']), true),
                 // 'token' => 
             ];
