@@ -140,15 +140,34 @@ class AdminController extends BaseController
 
         // $password = $this->adminModel->where('slug', $slug)->first()['password'];
         // $password2 = password_hash($password, PASSWORD_DEFAULT);
+        $currentRole = session()->get('role');
+        if ($currentRole != 'superadmin') {
+            $data = [
+                'title' => 'Edit Operator',
+                'active' => 'kelola_admin',
+                'role' => $currentRole,
+                'data' => $this->adminModel->where('slug', $slug)->first(),
+            ];
 
-        $data = [
-            'title' => 'Edit Admin',
-            'data' => $this->adminModel->where('slug', $slug)->first(),
-            // 'validation' => \Config\Services::validation(),
-            // 'password' => $password2
-        ];
+            return view('dashboard/edit_admin', $data);
+        } else {
+            $data = [
+                'title' => 'Edit Admin',
+                'active' => 'kelola_admin',
+                'role' => $currentRole,
+                'data' => $this->adminModel->where('slug', $slug)->first(),
+            ];
 
-        return view('dashboard/edit_admin', $data);
+            return view('dashboard/edit_admin', $data);
+        }
+        // $data = [
+        //     'title' => 'Edit Admin',
+        //     'data' => $this->adminModel->where('slug', $slug)->first(),
+        //     // 'validation' => \Config\Services::validation(),
+        //     // 'password' => $password2
+        // ];
+
+        // return view('dashboard/edit_admin', $data);
     }
 
     public function update($id)
