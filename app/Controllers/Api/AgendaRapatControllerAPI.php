@@ -13,27 +13,55 @@ class AgendaRapatControllerAPI extends BaseController
     public function __construct()
     {
         $this->agendaRapat = new AgendaRapatModel();
+        helper('my_helper');
     }
 
     public function index($idInstansi = null)
     {
         $agendaRapat = $this->agendaRapat->getAllAgendaByInstansi($idInstansi);
         // $agendaRapatJSON = json_decode($agendaRapat);
-        $result = [
-            'status' => true,
-            'data' => $agendaRapat
-        ];
-        return $this->respond($result, 200);
+        // $result = [
+        //     'status' => true,
+        //     'data' => $agendaRapat
+        // ];
+        return $this->response(200, $agendaRapat);
     }
 
-    public function show($id = null)
+    public function getById($id = null)
     {
-        $agendaRapat = $this->agendaRapat->getAgendaRapatByKode($id);
-        // $agendaRapatJSON = json_decode($agendaRapat);
-        $result = [
-            'status' => true,
-            'data' => $agendaRapat
+        $agendaRapat = $this->agendaRapat->getAgendaRapatByIdAgenda($id);
+
+        if (!$agendaRapat) {
+            return $this->errorResponse(500, 'Rapat tidak ditemukan');
+        }
+
+        $expiredTime = expiredTime($agendaRapat['tanggal'], $agendaRapat['jam']);
+
+        if ($expiredTime) {
+            return $this->errorResponse(500, 'Rapat sudah berakhir');
+        }
+        return $this->response(200, $agendaRapat);
+    }
+
+    protected function response($status, $data)
+    {
+        $response = [
+            'status' => $status,
+            'error' => false,
+            'data' => $data
         ];
-        return $this->respond($result, 200);
+
+        return $this->respond($response, 200);
+    }
+
+    protected function errorResponse($status, $message)
+    {
+        $response = [
+            'status' => $status,
+            'error' => true,
+            'message' => $message
+        ];
+
+        return $this->respond($response, 200);
     }
 }

@@ -63,10 +63,10 @@
                                     <!-- cara agar code "a" menjadi column di dalam row -->
                                     <div class="col">
                                         <div class="row mb-4">
-                                            <a href="<?= base_url('/informasi-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">Informasi rapat</a>
+                                            <a href="<?= base_url('dashboard/informasi-rapat/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">Informasi rapat</a>
                                         </div>
                                         <div class="row">
-                                            <a href="<?= base_url('/cetak-rapat' . '/' . $data['id_agenda']) ?>" class="btn btn-outline-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
+                                            <a href="<?= base_url('dashboard/cetak-rapat/' . $data['id_agenda']) ?>" class="btn btn-outline-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
                                         </div>
                                     </div>
                                 </div>

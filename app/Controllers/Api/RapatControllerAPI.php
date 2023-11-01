@@ -28,6 +28,132 @@ class RapatControllerAPI extends BaseController
         $this->agendaRapat = new AgendaRapatModel();
     }
 
+    public function saveSignature($kodeRapat)
+    {
+        helper('filesystem');
+
+        $signatureData = $this->request->getVar('signatureData');
+
+        // Get the writable path from the configuration
+        $writablePath = WRITEPATH . 'uploads/signatures/';
+
+        // Create a unique file name, e.g., using a timestamp
+        $fileName = 'signature_' . $kodeRapat . time() . '.png';
+
+        // Create the writable directory if it doesn't exist
+        if (!is_dir($writablePath)) {
+            mkdir($writablePath, 0777);
+        }
+
+        // Save the file to the writable directory
+        if (write_file($writablePath . $fileName, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureData)))) {
+            // Move the file to the public folder
+            $publicPath = FCPATH . 'uploads/signatures/';
+            // Create the public directory if it doesn't exist
+            if (!is_dir($publicPath)) {
+                mkdir($publicPath, 0777, true);
+            }
+
+            rename($writablePath . $fileName, $publicPath . $fileName);
+
+            // Respond with a success message or other data
+            $response = [
+                'status' => 'success',
+                'message' => 'Tanda tangan berhasil disimpan.',
+                'publicPath' => base_url('uploads/signatures/' . $fileName)
+            ];
+
+            return $this->response->setJSON($response);
+        } else {
+            // Handle the error if the file couldn't be saved
+            return $this->response->setJSON(['message' => 'Failed to save the signature.']);
+        }
+    }
+
+    public function absenStore()
+    {
+        helper('my_helper');
+
+        $kodeRapat = $this->request->getVar('kode_rapat');
+        $idRapat = $this->agendaRapat->getAgendaRapatByKode($kodeRapat);
+
+        $validate = $this->validateForm();
+
+        if (!$validate) {
+            return $this->errorResponse(500, $this->validator->getErrors());
+        }
+
+        $slug = (new Slugify())->slugify($kodeRapat);
+
+        $detailRapat = $this->agendaRapat->select()->where('kode_rapat', $kodeRapat)->first();
+
+        if ($detailRapat == null) {
+            return $this->errorResponse(500, 'Kode rapat tidak ditemukan');
+        }
+
+
+        // $expirationTime = expiredTime($detailRapat['jam']);
+        $expiredTime = expiredTime($idRapat['tanggal'], $idRapat['jam']);
+        if ($expiredTime) {
+            return $this->errorResponse(500, 'Rapat sudah berakhir');
+        }
+
+        $riwayatKehadiran = $this->daftarHadir->sudahAbsenAPI($this->request->getVar('nip'), $idRapat['id_agenda']);
+        // Get the base64-encoded signature data from the mobile app
+        $signatureData = $this->request->getVar('signatureData');
+
+        // Decode the base64 data to binary
+        $saveTandaTangan = $this->saveSignature($kodeRapat)->getBody();
+        $tandaTanganDecode = json_decode($saveTandaTangan, true);
+        $tandaTangan = $tandaTanganDecode['publicPath'];
+
+
+        if (!$riwayatKehadiran) {
+            $dataDaftarHadir = [
+                'id_daftar_hadir' => Uuid::uuid4()->toString(),
+                'slug' => $slug,
+                'id_agenda_rapat' => $idRapat['id_agenda'],
+                'NIK' => $this->request->getVar('nip'),
+                'nama' => $this->request->getVar('nama'),
+                'asal_instansi' => $this->request->getVar('asal_instansi'),
+                'ttd' => $tandaTangan,
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+
+            $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
+            $response = [
+                'status' => 200,
+                'error' => false,
+                'message' => 'Berhasil melakukan absen.',
+            ];
+            return $this->respond($response, 200);
+        } else {
+            return $this->errorResponse(500, 'Anda sudah melakukan absen.');
+        }
+    }
+
+    protected function response($status, $data)
+    {
+        $response = [
+            'status' => $status,
+            'error' => false,
+            'data' => $data
+        ];
+
+        return $this->respond($response, 200);
+    }
+
+    protected function errorResponse($status, $message)
+    {
+        $response = [
+            'status' => $status,
+            'error' => true,
+            'message' => $message
+        ];
+
+        return $this->respond($response, 200);
+    }
+
     protected function  validateForm()
     {
         $rules = [
@@ -78,69 +204,5 @@ class RapatControllerAPI extends BaseController
         ];
 
         return $this->validate($rules);
-    }
-
-    public function absenStore()
-    {
-        helper('my_helper');
-
-        $kodeRapat = $this->request->getVar('kode_rapat');
-        $idRapat = $this->agendaRapat->getAgendaRapatByKode($kodeRapat);
-
-        $validate = $this->validateForm();
-
-        if (!$validate) {
-            return $this->response(false, 'Validasi gagal', $this->validator->getErrors());
-        }
-
-        $slug = (new Slugify())->slugify($kodeRapat);
-        $currentTime = date('H:i');
-
-        $detailRapat = $this->agendaRapat->select()->where('kode_rapat', $kodeRapat)->first();
-
-        if ($detailRapat == null) {
-            return $this->response(false, 'Kode rapat tidak ditemukan.');
-        }
-
-        $meetingTime = DateTime::createFromFormat('H:i', $detailRapat['jam']);
-        $expirationTime = DateTime::createFromFormat('H:i', $currentTime);
-
-
-        // $expirationTime = expiredTime($detailRapat['jam']);
-
-        if ($expirationTime > $meetingTime) {
-            return $this->response(false, 'Rapat kadaluarsa');
-        }
-
-        $riwayatKehadiran = $this->daftarHadir->sudahAbsenAPI($this->request->getVar('nip'), $idRapat['id_agenda']);
-
-        if (!$riwayatKehadiran) {
-            $dataDaftarHadir = [
-                'id_daftar_hadir' => Uuid::uuid4()->toString(),
-                'slug' => $slug,
-                'id_agenda_rapat' => $idRapat['id_agenda'],
-                'NIK' => $this->request->getVar('nip'),
-                'nama' => $this->request->getVar('nama'),
-                'asal_instansi' => $this->request->getVar('asal_instansi'),
-                'ttd' => 'ttd',
-                'created_at' => date('Y-m-d H:i:s')
-            ];
-
-            $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
-            return $this->response(true, 'Berhasil melakukan absen.');
-        } else {
-            return $this->response(true, 'Anda sudah melakukan absen.');
-        }
-    }
-
-    protected function response($status, $message, $data = [])
-    {
-        $response = [
-            'status' => $status,
-            'message' => $message,
-            'data' => $data
-        ];
-
-        return $this->respond($response, 200);
     }
 }
