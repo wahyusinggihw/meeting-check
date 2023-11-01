@@ -150,8 +150,9 @@
                 <div class="button-container">
                     <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
                 </div>
-                <div class="form-group text-end">
-                    <button onclick="saveSignature()" type="submit" class="g-recaptcha btn btn-primary" data-sitekey="<?= getenv('RECAPTCHA_SITE_KEY') ?>" data-callback='onSubmit' data-action='submit'>Kirim</button>
+                <div class="form-group text-end my-2">
+                    <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>"></div>
+                    <button onclick="saveSignature()" type="submit" class="btn btn-primary">Kirim</button>
                 </div>
             </form>
         </div>
@@ -159,11 +160,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script>
-        function onSubmit(token) {
-            document.getElementById("form-absensi").submit();
-        }
-    </script>
     <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
     <script>
         $(document).ready(function() {
@@ -203,8 +199,6 @@
                         // Handle the case when 'statusValuePegawai' is not set
                     }
                 }
-
-
 
                 console.log(apiEndpoint);
 
@@ -305,64 +299,6 @@
                 }
             });
         });
-
-
-
-
-        // $(document).ready(function() {
-        //     $('#nip').on('change', function() {
-        //         var nipValue = $(this).val();
-        //         var statusValue = $('input[name="statusRadio"]:checked').val();
-
-        //         // Determine which API to call based on the 'statusValue'
-        //         var apiEndpoint = (statusValue === 'pegawai') ? '/api/pegawai/' : '/api/peserta/';
-
-        //         // Make the AJAX request
-        //         $.ajax({
-        //             url: apiEndpoint + nipValue,
-        //             type: 'GET',
-        //             success: function(data) {
-        //                 if (data.status === false) {
-        //                     // Handle the case where data is not found
-        //                     $('#no_hp, #nama, #alamat, #asal_instansi').val('').prop('readonly', false);
-        //                 } else {
-        //                     console.log(data);
-        //                     if (statusValue === 'pegawai') {
-        //                         $('#no_hp').val(data.data.email_ukerja).prop('readonly', true);
-        //                         $('#nama').val(data.data.ket_ukerja).prop('readonly', true);
-        //                         $('#alamat').val(data.data.alamat_ukerja).prop('readonly', true);
-        //                         $('#instansiOption, #asal_instansi').val(data.data.ket_ukerja).prop('readonly', true);
-        //                     } else {
-
-        //                         // Update the form fields with the fetched data
-        //                         $('#no_hp').val(data.no_hp).prop('readonly', true);
-        //                         $('#nama').val(data.nama).prop('readonly', true);
-        //                         $('#alamat').val(data.alamat).prop('readonly', true);
-        //                         $('#instansiText, #asal_instansi').val(data.asal_instansi).prop('readonly', true);
-        //                     }
-        //                 }
-        //             },
-        //             error: function(jqXHR, textStatus, errorThrown) {
-        //                 // Handle errors if the AJAX request fails
-        //                 console.log("AJAX Error: " + textStatus);
-        //             }
-        //         });
-        //     });
-
-        //     // Trigger the change event on 'nip' input when a radio button is clicked
-        //     $('.statusRadio').on('click', function() {
-        //         $('#nip, #no_hp, #nama, #alamat, #asal_instansi').val('');
-        //         clearSignature();
-        //         // Show/hide the 'instansiOption' and 'instansiText' divs based on the selected radio button
-        //         if ($(this).val() === 'pegawai') {
-        //             $('#instansiOption').show();
-        //             $('#instansiText').hide();
-        //         } else {
-        //             $('#instansiOption').hide();
-        //             $('#instansiText').show();
-        //         }
-        //     });
-        // });
     </script>
 
     <style>

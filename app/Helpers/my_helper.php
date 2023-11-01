@@ -111,7 +111,7 @@ function verifyCaptcha($token)
 {
 
     $client = service('curlrequest');
-    $secretKey = getenv('RECAPTCHA_SECRET_KEY');
+    $secretKey = env('RECAPTCHA_SECRET_KEY_V2');
 
     $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
         'form_params' => [
@@ -122,7 +122,7 @@ function verifyCaptcha($token)
 
     if ($response->getStatusCode() === 200) {
         $result = json_decode($response->getBody());
-
+        // dd($result);
         return $result;
     }
     return null;

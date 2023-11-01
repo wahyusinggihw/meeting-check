@@ -32,7 +32,7 @@
         </div>
 
         <h2>Login</h2>
-        <form action="/auth/login" method="post" id="form-login">
+        <form action="<?= base_url('/auth/login') ?>" method="post" id="form-login">
             <?= csrf_field() ?>
             <div class="container">
                 <div class="input-wrapper">
@@ -59,8 +59,11 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="g-recaptcha" data-sitekey="<?= getenv('RECAPTCHA_SITE_KEY') ?>" data-callback='onSubmit' data-action='submit'>Login</button>
+                <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>"></div>
+                <br>
+                <button type="submit" data-action='submit'>Login</button>
             </div>
+        </form>
     </div>
 
 
@@ -71,11 +74,6 @@
 
 
 <script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
-    function onSubmit(token) {
-        document.getElementById("form-login").submit();
-    }
-</script>
 
 
 <script src="<?php echo base_url('assets/js/login.js'); ?>"></script>
