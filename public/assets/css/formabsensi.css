@@ -1,4 +1,5 @@
 /* ||============|| CSS FORM ABSENSI ||============|| */
+
 /* body{
   background: url("https://iili.io/JKN8Ibj.png");
     background-size: cover;
@@ -8,8 +9,6 @@
 } */
 .wrapper {
   background-color: #fdfdfd;
-  width: 70%;
-  height: auto;
   padding: 50px;
   border-radius: 35px;
   box-shadow: 0px 0px 100px 1px rgba(0, 0, 0, 0.205);
@@ -98,10 +97,18 @@
 }
 
 .form-input-sg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
   margin-bottom: 30px;
-  max-width: 510px;
+  max-width: 1130px;
   width: 100%;
+}
+
+.button-function{
+  display: flex;
 }
 
 #notif {
@@ -121,7 +128,7 @@
 
 .signature-pad{
   width: 100%;
-  max-width: 510px;
+  max-width: 565px;
 }
 .signature-pad h1 {
   font-size: 14px;
@@ -133,6 +140,7 @@
   border: 1px solid #dee2e6;
   border-radius: 5px;
   width: 100%;
+  height: 200px;
   top: 0;
   left: 0;
 }
@@ -142,7 +150,7 @@
 /* Media query untuk perangkat mobile */
 @media (min-width: 300px) and (max-width: 767px) {
   .wrapper {
-      width: 45%;
+      width: 90%;
     }
   .konten .wrapper .form-group-1 {
     width: 240px;
@@ -156,7 +164,7 @@
 /* Media query untuk tablet */
 @media (min-width: 768px) and (max-width: 991px) {
   .wrapper {
-      width: 45%;
+      width: 90%;
     }
   .konten .wrapper .form-group-1 {
     width: 240px;
@@ -166,28 +174,28 @@
 /* Media query untuk desktop dengan resolusi 1366 */
 @media (min-width: 992px) and (max-width: 1366px) {
   .wrapper {
-      width: 45%;
+      width: 90%;
     }
   .konten .wrapper .form-group-1 {
-    width: 240px;
+    width: 540px;
   }
 }
 
 /* Media query untuk desktop dengan resolusi 1920 */
 @media (min-width: 1367px) and (max-width: 1920px) {
   .wrapper {
-    width: 45%;
+    width: 90%;
   }
 
   .konten .wrapper .form-group-1 {
-    width: 280px;
+    width: 480px;
   }
 }
 
 /* Media query untuk desktop dengan resolusi lebih dari 1920 */
 @media (min-width: 1921px) {
   .wrapper {
-      width: 45%;
+      width: 90%;
     }
   
     .konten .wrapper .form-group-1 {

@@ -42,7 +42,7 @@
 
   <section class="section-2">
     <div class="container-timeline">
-      <h2 class="pb-5 pt-5 text-center mb-5 display-5">Cara Penggunaan</h2>
+      <h2 class="pb-5 pt-5 text-center mb-5 display-5">Cara <br> Penggunaan</h2>
 
 
       <!-- First Content Section-->
