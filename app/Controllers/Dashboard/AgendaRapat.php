@@ -108,13 +108,15 @@ class AgendaRapat extends BaseController
         $currentTime = date('H:i');
         $roundedCurrentTime = getCurrentTimeRounded();
         $selectedTime = $this->request->getVar('jam');
-        if ($selectedTime < $roundedCurrentTime) {
-            return redirect()->back()->withInput()->with('error', 'Waktu rapat harus diatas jam ' . $currentTime . '.');
+        $currentDate = date('Y-m-d');
+        $selectedDate = $this->request->getVar('tanggal');
+        if ($selectedDate == $currentDate) {
+            if ($selectedTime < $roundedCurrentTime) {
+                return redirect()->back()->withInput()->with('error', 'Waktu rapat harus diatas jam ' . $currentTime . '.');
+            }
         }
 
         // Compare the selected date with the current date
-        $currentDate = date('Y-m-d');
-        $selectedDate = $this->request->getVar('tanggal');
         if ($selectedDate < $currentDate) {
             return redirect()->back()->withInput()->with('error', 'Tanggal rapat harus diatas tanggal ' . $currentDate . '.');
         }
@@ -171,16 +173,28 @@ class AgendaRapat extends BaseController
         // Compare the selected time with the rounded current time
         $currentTime = date('H:i');
         $roundedCurrentTime = getCurrentTimeRounded();
-        $selectedTime = $this->request->getVar('jam');
-        if ($selectedTime < $roundedCurrentTime) {
-            return redirect()->back()->withInput()->with('error', 'Waktu rapat harus diatas jam ' . $currentTime . '.');
-        }
+        $selectedTime = $this->request->getVar('jam_default');
 
         // Compare the selected date with the current date
         $currentDate = date('Y-m-d');
         $selectedDate = $this->request->getVar('tanggal');
+        if ($selectedDate == $currentDate) {
+            if ($selectedTime < $roundedCurrentTime) {
+                return redirect()->back()->withInput()->with('error', 'Waktu rapat harus diatas jam ' . $currentTime . '.');
+            }
+        }
+
         if ($selectedDate < $currentDate) {
             return redirect()->back()->withInput()->with('error', 'Tanggal rapat harus diatas tanggal ' . $currentDate . '.');
+        }
+
+        // Determine the name of the "jam" field to use based on the date condition
+        if ($selectedDate < $currentDate || ($selectedDate == $currentDate && $this->request->getVar('jam_default'))) {
+            // Use the "jam_default" field when the date is today and "jam_default" is selected
+            $jamValue = $this->request->getVar('jam_default');
+        } else {
+            // Use the "jam" field for other dates
+            $jamValue = $this->request->getVar('jam');
         }
 
         $data = [
@@ -188,14 +202,14 @@ class AgendaRapat extends BaseController
             'slug' => $slugify->slugify($this->request->getVar('agenda_rapat')),
             'tempat' => $this->request->getVar('tempat'),
             'tanggal' => $this->request->getVar('tanggal'),
-            'jam' => $this->request->getVar('jam'),
+            'jam' => $jamValue,
             'deskripsi' => $this->request->getVar('deskripsi'),
+            // 'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         $this->agendaRapat->updateAgenda($idAgenda, $data);
 
-        session()->setFlashdata('berhasil', 'Data berhasil diubah.');
-        return redirect('dashboard/agenda-rapat');
+        return redirect('dashboard/agenda-rapat')->with('success', 'Data berhasil diubah.');
     }
 
     public function delete($id)
