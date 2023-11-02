@@ -26,16 +26,22 @@
             <form action="<?= base_url('/submit-kode/form-absensi/store') ?>" method="post" id="form-absensi" name="form-absensi" enctype="multipart/form-data">
                 <?= csrf_field() ?>
 
+                <?php
+                // Capture the old value of the status radio input
+                $oldStatusValue = old('statusRadio');
+                $oldAsnNonAsnValue = old('asnNonAsnRadio');
+                ?>
+
                 <div class="form-input">
                     <div class="form-group mb-2 mt-4">
                         <label class="form-label">Pilih Status</label>
                         <div class="radio">
                             <div id="radio-op" class="form-check form-check-inline">
-                                <input class="form-check-input statusRadio" type="radio" name="statusRadio" id="statusRadio1" value="pegawai">
+                                <input class="form-check-input statusRadio" type="radio" name="statusRadio" id="statusRadio1" value="pegawai" <?php if ($oldStatusValue === 'pegawai') echo 'checked'; ?>>
                                 <label class="form-check-label" for="statusRadio1">Pegawai</label>
                             </div>
                             <div id="radio-op" class="form-check form-check-inline">
-                                <input class="form-check-input statusRadio" type="radio" name="statusRadio" id="statusRadio2" value="tamu">
+                                <input class="form-check-input statusRadio" type="radio" name="statusRadio" id="statusRadio2" value="tamu" <?php if ($oldStatusValue === 'tamu') echo 'checked'; ?>>
                                 <label class="form-check-label" for="statusRadio2">Tamu</label>
                             </div>
                         </div>
@@ -47,11 +53,11 @@
                         <label class="form-label">Pilih status pegawai</label>
                         <div class="radio">
                             <div id="radio-op" class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="asnNonAsnRadio" id="asnRadio" value="asn">
+                                <input class="form-check-input asnNonAsnRadio" type="radio" name="asnNonAsnRadio" id="asnRadio" value="asn" <?php if ($oldAsnNonAsnValue === 'asn') echo 'checked'; ?>>
                                 <label class="form-check-label" for="asnRadio">ASN</label>
                             </div>
                             <div id="radio-op" class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="asnNonAsnRadio" id="nonAsnRadio" value="nonasn">
+                                <input class="form-check-input asnNonAsnRadio" type="radio" name="asnNonAsnRadio" id="nonAsnRadio" value="nonasn" <?php if ($oldAsnNonAsnValue === 'nonasn') echo 'checked'; ?>>
                                 <label class="form-check-label" for="nonAsnRadio">Non-ASN</label>
                             </div>
                         </div>
@@ -63,7 +69,7 @@
                         <div class="row">
                             <label for="nip" class="form-label">NIP/NIK</label>
                             <div class="col">
-                                <input type="text" class="form-control  <?= validation_show_error('nip') ? 'is-invalid' : '' ?>" value="<?= old('nip') ?>" id="nip" name="nip">
+                                <input type="text" class="form-control <?= validation_show_error('nip') ? 'is-invalid' : '' ?>" value="<?= old('nip') ?>" id="nip" name="nip">
                                 <div id="notif" class="invalid-feedback text-start">
                                     <?= validation_show_error('nip') ?>
                                 </div>
@@ -120,11 +126,11 @@
                         <div class="form-group-1 mb-2" id="instansiOption">
                             <label for="asal_instansi" class="form-label">Asal Instansi</label>
                             <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
-                            <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi">
-                                <!-- foreach -->
+                            <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" id="asal_instansi">
                                 <option value="">Pilih instansi</option>
                                 <?php foreach ($instansi->data as $i) : ?>
-                                    <option value="<?= $i->ket_ukerja ?>"><?= $i->ket_ukerja ?></option>
+                                    <?php $selected = old('asal_instansi') == $i->ket_ukerja ? 'selected' : ''; ?>
+                                    <option value="<?= $i->ket_ukerja ?>" <?= $selected ?>><?= $i->ket_ukerja ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback text-start">
@@ -147,10 +153,10 @@
 
                 <input type="hidden" name="kode_rapat" value="<?= session()->get('kode_valid') ?>">
 
-                <div class="button-container">
+                <div class="button-container mb-2">
                     <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
                 </div>
-                <div class="form-group text-end my-2">
+                <div class="form-group text-end">
                     <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>"></div>
                     <button onclick="saveSignature()" type="submit" class="btn btn-primary">Kirim</button>
                 </div>
@@ -162,10 +168,39 @@
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
     <script>
+        // Restricts input for the given textbox to the given inputFilter.
+        function setInputFilter(textbox, inputFilter, errMsg) {
+            textbox.addEventListener("input", function() {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.value.length, this.value.length);
+                } else {
+                    this.value = "";
+                }
+
+                if (!inputFilter(this.value)) {
+                    this.classList.add("input-error");
+                    this.setCustomValidity(errMsg);
+                    this.reportValidity();
+                } else {
+                    this.classList.remove("input-error");
+                    this.setCustomValidity("");
+                }
+            });
+        }
+
+        // Install input filters.
+        setInputFilter(document.getElementById("nip"), function(value) {
+            return /^-?\d*$/.test(value);
+        }, "Harus berupa angka");
+
+
         $(document).ready(function() {
             $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
             $('#cariNikButton').addClass('disabled-button');
-            $('#nip').prop('disabled', true);
+            $('#nip').addClass('greyed-out-form');
 
             $('#cariNikButton').on('click', function() {
                 var nikValue = $('#nip').val();
@@ -231,6 +266,7 @@
                                 console.log(data);
 
                                 if (statusValue === 'pegawai') {
+                                    $('#nip').val(data.data.nip).prop('readonly', true);
                                     $('#no_hp').val(data.data.no_hp).prop('readonly', true);
                                     $('#nama').val(data.data.nama_lengkap).prop('readonly', true);
                                     $('#alamat').val(data.data.alamat).prop('readonly', true);
@@ -259,28 +295,41 @@
                     });
                 }
             });
+            // if on error
+            var oldAsnNonAsnValue = '<?= old('asnNonAsnRadio') ?>';
+            if (oldAsnNonAsnValue === 'asn') {
+                $('#asnNonAsnContainer').show();
+            } else if (oldAsnNonAsnValue === 'nonasn') {
+                $('#asnNonAsnContainer').show();
+            } else {
+                // Handle the case when 'asnNonAsnRadio' was not selected before
+            }
+
             // Trigger the change event on 'nip' input when a radio button is clicked
             $('.statusRadio').on('click', function() {
-
+                $('#nip').val('').prop('readonly', false);
                 var isTamu = $('input[name="statusRadio"]:checked').val();
                 if (isTamu === 'tamu') {
                     $('#no_hp, #nama, #alamat, #asal_instansi').removeClass('greyed-out-form');
+                    $('#nip').removeClass('greyed-out-form');
                     $('#cariNikButton').removeClass('disabled-button');
                 } else {
                     $('#cariNikButton').addClass('disabled-button');
                     $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
                 }
-                // $('#nip').prop(placeHolder, 'Masukkan NIK');
-                // $('#cariNikButton').removeClass('disabled-button');
                 $('input[name="asnNonAsnRadio"]').on('change', function() {
                     // Check if one of the radio buttons is selected
                     if ($('input[name="asnNonAsnRadio"]:checked').length > 0) {
                         // Enable the "nik" input and the "Cari" button
-                        $('#nip').prop('disabled', false);
+                        // $('#nip').val('').prop('readonly', false);
+                        $('#nip').removeClass('greyed-out-form');
                         $('#cariNikButton').removeClass('disabled-button');
+                        $('#nip, #no_hp, #nama, #alamat, #asal_instansi').val('').prop('readonly', false);
                     }
-
+                    // $('#no_hp, #nama, #alamat, #asal_instansi').removeClass('greyed-out-form');
                 });
+
+
                 $('.asnNonAsnRadio').prop('checked', false);
                 $(this).prop('checked', true);
                 $('input[name="asnNonAsnRadio"]').prop('checked', false)
