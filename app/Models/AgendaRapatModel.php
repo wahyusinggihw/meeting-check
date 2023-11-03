@@ -28,7 +28,9 @@ class AgendaRapatModel extends Model
         'tanggal',
         'deskripsi',
         'jam',
-        'link_rapat'
+        'link_rapat',
+        'created_at',
+        'updated_at',
     ];
 
     // Dates
