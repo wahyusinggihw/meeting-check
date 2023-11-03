@@ -70,7 +70,7 @@ class RapatController extends BaseController
         return view('form_absensi', $data);
     }
 
-    public function saveSignature($idAgenda)
+    public function saveSignature($idAgenda, $nip)
     {
         helper('filesystem');
 
@@ -80,7 +80,7 @@ class RapatController extends BaseController
         $writablePath = WRITEPATH . 'uploads/signatures/';
 
         // Create a unique file name, e.g., using a timestamp
-        $fileName = $idAgenda . '_' . time() . '.png';
+        $fileName = $idAgenda . '_' . $nip . '_' . '.png';
 
         if (!is_dir($writablePath)) {
             mkdir($writablePath, 0777);
@@ -120,7 +120,7 @@ class RapatController extends BaseController
         $slugify = new Slugify();
         $slug = $slugify->slugify($kodeRapat);
 
-        $saveTandaTangan = $this->saveSignature($idAgenda)->getBody();
+        $saveTandaTangan = $this->saveSignature($idAgenda, $nip)->getBody();
         $tandaTanganDecode = json_decode($saveTandaTangan, true);
         $tandaTangan = $tandaTanganDecode['publicPath'];
         $status = $this->request->getPost('statusRadio');

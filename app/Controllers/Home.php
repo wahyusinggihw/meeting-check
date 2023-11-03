@@ -49,7 +49,7 @@ class Home extends BaseController
             return view('home', ['validation' => $this->validator,]);
         }
 
-        $rapat = $agendaRapat->select()->where('kode_rapat', $kode)->first();
+        $rapat = $agendaRapat->select()->where('kode_rapat', trim($kode))->first();
         if ($rapat == null) {
             return redirect()->to('/')->with('error', 'Kode Rapat Tidak Ditemukan');
         } else {
