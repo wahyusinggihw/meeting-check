@@ -45,11 +45,27 @@ class DaftarHadirController extends BaseController
 
     public function delete($id)
     {
-        $query = $this->daftarhadir->find($id);
+        $daftarHadir = $this->daftarhadir->find($id);
         $uri = previous_url();
-        if ($query) {
+        if ($daftarHadir) {
+            $this->deleteSignatures($daftarHadir['id_agenda_rapat']);
             $this->daftarhadir->delete($id);
             return redirect()->to($uri)->with('success', 'Data berhasil dihapus');
+        }
+    }
+
+    private function deleteSignatures($idAgenda)
+    {
+        helper('filesystem');
+        $signaturePath = FCPATH . 'uploads/signatures/';
+
+        // Use glob to find files matching the kode_rapat
+        $files = glob($signaturePath . $idAgenda . '_*');
+        // dd($files);
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file); // Delete the file
+            }
         }
     }
 }

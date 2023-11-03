@@ -2,13 +2,13 @@
 
 namespace App\Controllers\Dashboard;
 
-use App\Controllers\BaseController;
-use App\Models\AgendaRapatModel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
 use Config\Services\pager;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use App\Models\AgendaRapatModel;
+use App\Controllers\BaseController;
 
 
 class AgendaRapat extends BaseController
@@ -138,12 +138,6 @@ class AgendaRapat extends BaseController
             // 'status' => 'tersedia'
         ]);
 
-
-        // Save the link of the file in the database
-
-        // generateQrCode($kodeRapat, base_url() . '?kode_rapat=' . $kodeRapat);
-
-        // session()->setFlashdata('Berhasil', 'Data berhasil ditambahkan.');
         return redirect('dashboard/agenda-rapat')->with('success', 'Data berhasil ditambahkan.');
     }
 
@@ -214,12 +208,29 @@ class AgendaRapat extends BaseController
 
     public function delete($id)
     {
-        $query = $this->agendaRapat->find($id);
-        if ($query) {
+        $agenda = $this->agendaRapat->find($id);
+        if ($agenda) {
+            $this->deleteSignatures($agenda['id_agenda']);
             $this->agendaRapat->delete($id);
             return redirect()->to('/dashboard/agenda-rapat')->with('success', 'Data berhasil dihapus.');
         }
     }
+
+    private function deleteSignatures($idAgenda)
+    {
+        helper('filesystem');
+        $signaturePath = FCPATH . 'uploads/signatures/';
+
+        // Use glob to find files matching the kode_rapat
+        $files = glob($signaturePath . $idAgenda . '_*');
+        // dd($files);
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file); // Delete the file
+            }
+        }
+    }
+
     protected function validateForm()
     {
         $rules =

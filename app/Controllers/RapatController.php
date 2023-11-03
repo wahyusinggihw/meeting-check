@@ -70,32 +70,31 @@ class RapatController extends BaseController
         return view('form_absensi', $data);
     }
 
-    public function saveSignature($kodeRapat)
+    public function saveSignature($idAgenda)
     {
         helper('filesystem');
 
         $signatureData = $this->request->getPost('signatureData');
 
-        // Validate and process the uploaded data (convert Data URL to image file)
-
         // Get the writable path from the configuration
         $writablePath = WRITEPATH . 'uploads/signatures/';
 
         // Create a unique file name, e.g., using a timestamp
-        $fileName = 'signature_' . $kodeRapat . time() . '.png';
+        $fileName = $idAgenda . '_' . time() . '.png';
 
         if (!is_dir($writablePath)) {
             mkdir($writablePath, 0777);
         }
 
+        $publicPath = FCPATH . 'uploads/signatures/';
+        if (!is_dir($publicPath)) {
+            mkdir($publicPath, 0777, true);
+        }
+
         // Save the file to the writable directory
         if (write_file($writablePath . $fileName, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureData)))) {
-            // Move the file to the public folder
-            $publicPath = FCPATH . 'uploads/signatures/';
-            if (!is_dir($publicPath)) {
-                mkdir($publicPath, 0777, true);
-            }
 
+            // Move the file to the public folder
             rename($writablePath . $fileName, $publicPath . $fileName);
 
             // Respond with a success message or other data
@@ -121,9 +120,12 @@ class RapatController extends BaseController
         $slugify = new Slugify();
         $slug = $slugify->slugify($kodeRapat);
 
-        $saveTandaTangan = $this->saveSignature($kodeRapat)->getBody();
+        $saveTandaTangan = $this->saveSignature($idAgenda)->getBody();
         $tandaTanganDecode = json_decode($saveTandaTangan, true);
         $tandaTangan = $tandaTanganDecode['publicPath'];
+        $status = $this->request->getPost('statusRadio');
+        $instansiPegawai = $this->request->getPost('asal_instansi_option');
+        $instansiTamu = $this->request->getPost('asal_instansi_tamu');
 
         $dataDaftarHadir = [
             'id_daftar_hadir' => $uuid2,
@@ -131,13 +133,34 @@ class RapatController extends BaseController
             'id_agenda_rapat' => $idAgenda,
             'NIK' => $this->request->getVar('nip'),
             'nama' => $this->request->getVar('nama'),
-            'asal_instansi' => $this->request->getVar('asal_instansi'),
+            'asal_instansi' => $status == 'pegawai' ? $instansiPegawai : $instansiTamu,
             'ttd' => $tandaTangan,
             'created_at' => date('Y-m-d H:i:s')
         ];
 
         // Handle the absen logic here
         $userExist = $this->pesertaUmum->cekIfExist($nip);
+        if ($userExist != null && $statusUser == 'tamu') {
+            $dataPesertaUmum = [
+                'id_peserta_umum' => $userExist['id_peserta_umum'],
+                'slug' => $slugify->slugify($this->request->getVar('nama')),
+                // 'nik' => $this->request->getVar('nip'),
+                'nama' => $this->request->getVar('nama'),
+                'alamat' => $this->request->getVar('alamat'),
+                'no_hp' => $this->request->getVar('no_hp'),
+                'asal_instansi' => $instansiTamu,
+            ];
+
+            $dataPesertaRapat = [
+                'id_peserta_rapat' => $userExist['id_peserta_umum'],
+                'slug' => $slugify->slugify($this->request->getVar('nama')),
+                'NIK' => $this->request->getVar('nip'),
+            ];
+            $this->pesertaUmum->insertOrUpdatePesertaUmum($dataPesertaUmum);
+            $this->pesertaRapat->insertOrUpdatePesertaRapat($dataPesertaRapat);
+            $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
+        }
+
         if ($userExist == null && $statusUser == 'tamu') {
             $dataPesertaUmum = [
                 'id_peserta_umum' => $uuid,
@@ -146,7 +169,7 @@ class RapatController extends BaseController
                 'nama' => $this->request->getVar('nama'),
                 'alamat' => $this->request->getVar('alamat'),
                 'no_hp' => $this->request->getVar('no_hp'),
-                'asal_instansi' => $this->request->getVar('asal_instansi'),
+                'asal_instansi' => $instansiTamu,
             ];
 
             $dataPesertaRapat = [
@@ -163,7 +186,7 @@ class RapatController extends BaseController
             session()->setFlashdata('berhasil', true);
             // session()->destroy('kode_valid');
             return redirect('berhasil')->with('kode_valid', true);
-        } else {
+        } elseif ($statusUser == 'pegawai') {
             // insert ke daftar hadir jika peserta sudah ada di database / peserta adalah pegawai
             $this->daftarHadir->insertDaftarHadir($dataDaftarHadir);
         }
@@ -172,12 +195,7 @@ class RapatController extends BaseController
 
     public function absenStore()
     {
-        // dd($this->request->getVar('g-recaptcha-response'));
         // dd($this->request->getPost());
-        // $tandaTangan = $this->request->getVar('signatureData');
-        // $tandaTangan = $this->saveSignature()->getBody();
-        // $tandaTangan = json_decode($tandaTangan, true);
-        // dd();
         helper('my_helper');
 
         $validate = $this->validateForm();
@@ -241,7 +259,7 @@ class RapatController extends BaseController
                     'required' => 'Alamat harus diisi'
                 ]
             ],
-            'asal_instansi' => [
+            'asal_instansi_option' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Pilih instansi terlebih dahulu'
@@ -254,6 +272,27 @@ class RapatController extends BaseController
                 ]
             ],
         ];
+
+        $status = $this->request->getPost('statusRadio');
+        if ($status == 'pegawai') {
+            // For "pegawai" status, use the "asal_instansi_option" field.
+            $rules['asal_instansi_option'] = [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih instansi terlebih dahulu',
+                ],
+            ];
+        }
+        if ($status == 'tamu') {
+            unset($rules['asal_instansi_option']);
+            // For "tamu" status, use the "asal_instansi_text" field.
+            $rules['asal_instansi_tamu'] = [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Asal Instansi harus diisi',
+                ],
+            ];
+        }
 
         return $this->validate($rules);
     }
