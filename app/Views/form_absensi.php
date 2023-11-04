@@ -23,7 +23,7 @@
                 <h3><?= isset($rapat['agenda_rapat']) ? $rapat['agenda_rapat'] : 'Rapat'  ?></h3>
                 <h4>Isi sesuai dengan data diri anda</h4>
             </div>
-            <form action="<?= base_url('/submit-kode/form-absensi/store') ?>" method="post" id="form-absensi" name="form-absensi" enctype="multipart/form-data">
+            <form action="<?= base_url('/submit-kode/form-absensi/store') ?>" method="post" id="form-absensi" name="form-absensi" enctype="multipart/form-data" onsubmit="return validateRecaptcha()">
                 <?= csrf_field() ?>
 
                 <?php
@@ -67,15 +67,22 @@
                 <div class="form-input">
                     <div class="form-group mb-2">
                         <div class="row">
-                            <label for="nip" class="form-label">NIP/NIK</label>
+                            <label style="display: none;" for="nip" class="form-label" id="label-nik">NIK</label>
+                            <label style="display: none;" for="nip" class="form-label" id="label-default">NIP</label>
                             <div class="col">
                                 <input type="text" class="form-control <?= validation_show_error('nip') ? 'is-invalid' : '' ?>" value="<?= old('nip') ?>" id="nip" name="nip">
                                 <div id="notif" class="invalid-feedback text-start">
                                     <?= validation_show_error('nip') ?>
                                 </div>
                             </div>
-                            <div class="col-auto text-end">
-                                <a id="cariNikButton" class="cari btn btn-primary">Cari</a>
+                            <div class="col-auto">
+                                <div class="d-flex align-items-center">
+                                    <div style="display: none; width:30px; height:30px;" class="spinner-border" role="status" id="loadingIndicator">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <!-- <div style="display: none;" id="loadingIndicator" class="col"><img width="25" src="<?= base_url('assets/img/loading.gif') ?>" alt="Loading..."></div> -->
+                                    <a style="display: none;" id="cariNikButton" class="cari btn btn-primary col">Cari</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,7 +102,7 @@
                     <div class="form-input">
                         <div class="form-group-1 mb-2">
                             <label for="no_hp" class="form-label">No. Handphone</label>
-                            <input type="text" class="form-control  <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" value="<?= old('no_hp') ?>" id="no_hp" name="no_hp" placeholder=" ">
+                            <input type="tel" class="form-control  <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" value="<?= old('no_hp') ?>" id="no_hp" name="no_hp" placeholder=" ">
                             <div class="invalid-feedback text-start">
                                 <?= validation_show_error('no_hp') ?>
                             </div>
@@ -115,26 +122,28 @@
 
                     <div class="form-input">
                         <div class="form-group-1 mb-2" id="instansiText" style="display: none;">
-                            <label for="asal_instansi" class="form-label">Asal Instansi</label>
-                            <input type="text" class="form-control  <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi') ?>" id="asal_instansi" name="asal_instansi" placeholder=" ">
+                            <label for="asal_instansi_tamu" class="form-label">Asal Instansi</label>
+                            <input type="text" class="form-control  <?= validation_show_error('asal_instansi_tamu') ? 'is-invalid' : '' ?>" value="<?= old('asal_instansi_tamu') ?>" id="asal_instansi_tamu" name="asal_instansi_tamu" placeholder=" ">
                             <div class="invalid-feedback">
-                                <?= validation_show_error('asal_instansi') ?>
+                                <?= validation_show_error('asal_instansi_tamu') ?>
                             </div>
                         </div>
 
+
+                        <!-- <div class="form-input"> -->
                         <!-- radio select peran -->
                         <div class="form-group-1 mb-2" id="instansiOption">
-                            <label for="asal_instansi" class="form-label">Asal Instansi</label>
+                            <label for="asal_instansi_option" class="form-label">Asal Instansi</label>
                             <!-- <input type="text" class="form-control" id=" " placeholder=" "> -->
-                            <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" id="asal_instansi">
+                            <select name="asal_instansi_option" id="asal_instansi_option" class="form-select <?= validation_show_error('asal_instansi_option') ? 'is-invalid' : '' ?>">
                                 <option value="">Pilih instansi</option>
                                 <?php foreach ($instansi->data as $i) : ?>
-                                    <?php $selected = old('asal_instansi') == $i->ket_ukerja ? 'selected' : ''; ?>
+                                    <?php $selected = old('asal_instansi_option') == $i->ket_ukerja ? 'selected' : ''; ?>
                                     <option value="<?= $i->ket_ukerja ?>" <?= $selected ?>><?= $i->ket_ukerja ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback text-start">
-                                <?= validation_show_error('asal_instansi') ?>
+                                <?= validation_show_error('asal_instansi_option') ?>
                             </div>
                         </div>
                     </div>
@@ -158,197 +167,51 @@
                 </div>
                 <div class="form-group text-end">
                     <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>"></div>
+                    <div class="text text-start text-danger fs-6" id="recaptcha-error"></div>
                     <button onclick="saveSignature()" type="submit" class="btn btn-primary">Kirim</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
     <script>
-        // Restricts input for the given textbox to the given inputFilter.
-        function setInputFilter(textbox, inputFilter, errMsg) {
-            textbox.addEventListener("input", function() {
-                if (inputFilter(this.value)) {
-                    this.oldValue = this.value;
-                } else if (this.hasOwnProperty("oldValue")) {
-                    this.value = this.oldValue;
-                    this.setSelectionRange(this.value.length, this.value.length);
-                } else {
-                    this.value = "";
-                }
+        function validateRecaptcha() {
+            // Use the grecaptcha object to check if the user has checked the reCAPTCHA.
+            var recaptchaResponse = grecaptcha.getResponse();
+            var recaptchaErrorElement = document.getElementById("recaptcha-error");
 
-                if (!inputFilter(this.value)) {
-                    this.classList.add("input-error");
-                    this.setCustomValidity(errMsg);
-                    this.reportValidity();
-                } else {
-                    this.classList.remove("input-error");
-                    this.setCustomValidity("");
-                }
-            });
-        }
-
-        // Install input filters.
-        setInputFilter(document.getElementById("nip"), function(value) {
-            return /^-?\d*$/.test(value);
-        }, "Harus berupa angka");
-
-
-        $(document).ready(function() {
-            $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
-            $('#cariNikButton').addClass('disabled-button');
-            $('#nip').addClass('greyed-out-form');
-
-            $('#cariNikButton').on('click', function() {
-                var nikValue = $('#nip').val();
-                var statusValue = $('input[name="statusRadio"]:checked').val();
-                var statusValuePegawai = $('input[name="asnNonAsnRadio"]:checked').val();
-                console.log(statusValuePegawai);
-                console.log(statusValue);
-
-
-                if (!statusValue) {
-                    // Show an alert using SweetAlert when no radio button is selected
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Pilih Status',
-                        text: 'Pilih status "Pegawai" atau "Tamu" sebelum klik "Cari".',
-                    });
-                    return; // Exit the function
-                }
-
-                var apiEndpoint;
-                if (statusValue === 'tamu') {
-                    apiEndpoint = '/api/peserta/';
-                }
-
-                if (statusValue === 'pegawai') {
-                    if (statusValuePegawai === 'asn') {
-                        apiEndpoint = '/api/pegawai/asn/';
-                    } else if (statusValuePegawai === 'nonasn') {
-                        apiEndpoint = '/api/pegawai/non-asn/';
-                    } else {
-                        // Handle the case when 'statusValuePegawai' is not set
-                    }
-                }
-
-                console.log(apiEndpoint);
-
-                if (nikValue) {
-                    // Perform an AJAX request to check if the NIK exists
-                    $.ajax({
-                        url: apiEndpoint + nikValue, // Replace with your API endpoint
-                        type: 'GET',
-                        success: function(data) {
-                            console.log(data.status);
-                            if (data.status === false) {
-                                // Handle the case where data is not found
-                                $('#no_hp, #nama, #alamat, #asal_instansi').val('').prop('readonly', false);
-                                // Show an alert using SweetAlert when NIK is not found
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'NIP Tidak ditemukan.',
-                                    text: 'NIP tidak ditemukan. Cek kembali NIP anda dan coba lagi.',
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success!',
-                                    toast: 'true',
-                                    position: 'top-end',
-                                    text: 'Silahkan melakukan tanda tangan.',
-                                    showConfirmButton: false, // Optionally, hide the "OK" button
-                                    timer: 2000 // Auto-close the toast after 2 seconds (adjust the duration as needed)
-                                });
-                                console.log(data);
-
-                                if (statusValue === 'pegawai') {
-                                    $('#nip').val(data.data.nip).prop('readonly', true);
-                                    $('#no_hp').val(data.data.no_hp).prop('readonly', true);
-                                    $('#nama').val(data.data.nama_lengkap).prop('readonly', true);
-                                    $('#alamat').val(data.data.alamat).prop('readonly', true);
-                                    $('#instansiOption, #asal_instansi').val(data.data.ket_ukerja).prop('readonly', true);
-                                } else {
-                                    $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
-                                    // Update the form fields with the fetched data
-                                    $('#no_hp').val(data.data.no_hp).prop('readonly', true);
-                                    $('#nama').val(data.data.nama).prop('readonly', true);
-                                    $('#alamat').val(data.data.alamat).prop('readonly', true);
-                                    $('#instansiText, #asal_instansi').val(data.data.asal_instansi).prop('readonly', true);
-                                }
-                            }
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            // Handle errors if the AJAX request fails
-                            console.log("AJAX Error: " + textStatus);
-                        }
-                    });
-                } else {
-                    // Show an alert using SweetAlert when NIK is empty
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'NIK diperlukan',
-                        text: 'Masukkan nik sebelum klik "Cari".',
-                    });
-                }
-            });
-            // if on error
-            var oldAsnNonAsnValue = '<?= old('asnNonAsnRadio') ?>';
-            if (oldAsnNonAsnValue === 'asn') {
-                $('#asnNonAsnContainer').show();
-            } else if (oldAsnNonAsnValue === 'nonasn') {
-                $('#asnNonAsnContainer').show();
-            } else {
-                // Handle the case when 'asnNonAsnRadio' was not selected before
+            if (recaptchaResponse.length === 0) {
+                // User hasn't checked the reCAPTCHA, display an error message.
+                recaptchaErrorElement.textContent = "Mohon centang reCAPTCHA.";
+                return false;
             }
 
-            // Trigger the change event on 'nip' input when a radio button is clicked
-            $('.statusRadio').on('click', function() {
-                $('#nip').val('').prop('readonly', false);
-                var isTamu = $('input[name="statusRadio"]:checked').val();
-                if (isTamu === 'tamu') {
-                    $('#no_hp, #nama, #alamat, #asal_instansi').removeClass('greyed-out-form');
-                    $('#nip').removeClass('greyed-out-form');
-                    $('#cariNikButton').removeClass('disabled-button');
-                } else {
-                    $('#cariNikButton').addClass('disabled-button');
-                    $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
-                }
-                $('input[name="asnNonAsnRadio"]').on('change', function() {
-                    // Check if one of the radio buttons is selected
-                    if ($('input[name="asnNonAsnRadio"]:checked').length > 0) {
-                        // Enable the "nik" input and the "Cari" button
-                        // $('#nip').val('').prop('readonly', false);
-                        $('#nip').removeClass('greyed-out-form');
-                        $('#cariNikButton').removeClass('disabled-button');
-                        $('#nip, #no_hp, #nama, #alamat, #asal_instansi').val('').prop('readonly', false);
-                    }
-                    // $('#no_hp, #nama, #alamat, #asal_instansi').removeClass('greyed-out-form');
-                });
-
-
-                $('.asnNonAsnRadio').prop('checked', false);
-                $(this).prop('checked', true);
-                $('input[name="asnNonAsnRadio"]').prop('checked', false)
-                // Check the clicked radio button
-                $('#nip, #no_hp, #nama, #alamat, #asal_instansi').val('').prop('disabled', false);
-                clearSignature();
-                // Show/hide the 'instansiOption' and 'instansiText' divs based on the selected radio button
-                if ($(this).val() === 'pegawai') {
-                    $('#asnNonAsnContainer').show();
-                    $('#instansiOption').show();
-                    $('#instansiText').hide();
-                } else {
-                    $('#asnNonAsnContainer').hide();
-                    $('#instansiOption').hide();
-                    $('#instansiText').show();
-                }
-            });
-        });
+            // User has checked the reCAPTCHA, clear the error message and continue with form submission.
+            recaptchaErrorElement.textContent = "";
+            return true;
+        }
     </script>
+
+    <script>
+        // if on error
+        /**
+         * This code block checks the value of the 'asnNonAsnRadio' input field and shows/hides the appropriate container based on the value.
+         * If the value is 'asn' or 'nonasn', the '#asnNonAsnContainer' is shown.
+         * If the value is anything else, the '#instansiText' is shown and the '#instansiOption' is hidden.
+         */
+        var oldAsnNonAsnValue = '<?= old('asnNonAsnRadio') ?>';
+        if (oldAsnNonAsnValue === 'asn' || oldAsnNonAsnValue === 'nonasn') {
+            $('#asnNonAsnContainer').show();
+        } else {
+            $('#instansiText').show();
+            $('#instansiOption').hide();
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/form-absensi.js') ?>"></script>
 
     <style>
         .disabled-button {
