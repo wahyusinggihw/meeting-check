@@ -2,11 +2,8 @@
 
 namespace App\Controllers\Dashboard;
 
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Ramsey\Uuid\Uuid;
 use Cocur\Slugify\Slugify;
-use Config\Services\pager;
 use App\Models\AgendaRapatModel;
 use App\Controllers\BaseController;
 
@@ -56,40 +53,6 @@ class AgendaRapat extends BaseController
 
         $this->session->set('id_agenda', $agendaRapat['id_agenda']);
         return view('informasi_rapat', $data);
-    }
-
-    public function generatePdf($idAgenda)
-    {
-        $agendaRapat  = $this->agendaRapat->getAgendaRapatByIdAgenda($idAgenda);
-        $judul = $agendaRapat['agenda_rapat'];
-        $logo = image_to_base64(base_url("assets/img/logo.png"));
-        $rawData = [
-            'agendaRapat' => $agendaRapat,
-            'qrCode' => generateQrCode($agendaRapat['link_rapat']),
-            'logo'  => $logo
-        ];
-
-        $html = view('dashboard\pdf_template', $rawData);
-
-        // Create a Dompdf instance
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
-        $dompdf = new Dompdf($options);
-
-        // Load the HTML content into Dompdf
-        $dompdf->loadHtml($html);
-
-        // Set paper size and rendering options
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the HTML to PDF
-        $dompdf->render();
-
-        // Output the generated PDF to the browser for download
-        $dompdf->stream($judul . '_' . $idAgenda . '.pdf', ['Attachment' => 0]);
-
-        exit(0);
     }
 
     public function store()

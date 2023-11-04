@@ -5,6 +5,7 @@ namespace App\Controllers\Dashboard;
 use App\Controllers\BaseController;
 use App\Models\DaftarHadirModel;
 use App\Models\AgendaRapatModel;
+use TCPDF;
 
 class DaftarHadirController extends BaseController
 {
@@ -35,6 +36,7 @@ class DaftarHadirController extends BaseController
 
         $data = [
             'title' => 'Daftar Hadir',
+            'id_agenda' => $id_agenda,
             // 'data' => $this->daftarhadir->getDaftarHadirByID($id_agenda)
             'daftar_hadir' => $daftarHadir,
 
@@ -65,5 +67,40 @@ class DaftarHadirController extends BaseController
                 unlink($file); // Delete the file
             }
         }
+    }
+
+    public function generatePdf($idAgenda)
+    {
+        $agendaRapat  = $this->agendaRapat->getAgendaRapatByIdAgenda($idAgenda);
+        $daftarHadir = $this->daftarhadir->getDaftarHadirByID($idAgenda);
+        $judul = $agendaRapat['agenda_rapat'];
+        $rawData = [
+            'agendaRapat' => $agendaRapat,
+            'daftarHadir' => $daftarHadir,
+        ];
+
+        $pdf = new TCPDF('P', PDF_UNIT, 'A4', true, 'UTF-8', false);
+
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('DaftarHadir');
+        $pdf->SetTitle('Daftar Hadir ' . $judul);
+        $pdf->SetSubject($judul);
+
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' 011', PDF_HEADER_STRING);
+
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+
+        $pdf->addPage();
+
+        // Load the view file and assign data to it
+        $html = view('dashboard/pdf_template', $rawData);
+
+        // Output the HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $this->response->setContentType('application/pdf');
+        $pdf->Output($judul . '.pdf', 'I');
+        exit(0);
     }
 }

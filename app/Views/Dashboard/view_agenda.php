@@ -76,9 +76,6 @@
                                     <div class="row mb-4">
                                         <a href="<?= base_url('dashboard/informasi-rapat/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">Informasi rapat</a>
                                     </div>
-                                    <div class="row">
-                                        <a href="<?= base_url('dashboard/cetak-rapat/' . $data['id_agenda']) ?>" class="btn btn-outline-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
