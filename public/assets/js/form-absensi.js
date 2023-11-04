@@ -91,7 +91,7 @@ $(".statusRadio").on("click", function () {
                 $("#no_hp, #nama, #alamat, #asal_instansi_tamu")
                   .val("")
                   .prop("readonly", false);
-              } else {
+              } else if (data.status === true) {
                 Swal.fire({
                   icon: "success",
                   title: "Success!",
