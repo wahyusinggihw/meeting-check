@@ -16,32 +16,53 @@
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="/">
-                    <img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Logo" width="100">
-                </a>
+    <div class="informasi">
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <a href="/">
+                        <img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Logo" width="100">
+                    </a>
+                </div>
             </div>
-        </div>
-    </header>
-    <div class="container-info">
-        <div class="card-info">
-            <div class="card-qr">
-                <img src="<?= $qrCode ?>" alt="Logo">
-            </div>
+        </header>
+        <div class="container-info">
+            <div class="card-info">
+                <div class="card-qr">
+                    <img src="<?= $qrCode ?>" alt="Logo">
+                </div>
 
-            <div class="card-text">
-                <h1>INFORMASI RAPAT</h1>
-                <ul>
-                    <li><?= $agendaRapat['agenda_rapat'] ?></li>
-                    <li><?= $agendaRapat['nama_instansi'] ?></li>
-                </ul>
-                <div class="code-rapat">
-                    KODE RAPAT : <p id="teksToSalin" onclick="copyText()"><?= $agendaRapat['kode_rapat'] ?></p>
+                <div class="card-text">
+                    <h1>INFORMASI RAPAT</h1>
+                    <ul>
+                        <li><?= $agendaRapat['agenda_rapat'] ?></li>
+                        <li><?= $agendaRapat['nama_instansi'] ?></li>
+                    </ul>
+                    <div class="code-rapat">
+                        KODE RAPAT : <p id="teksToSalin" onclick="copyText()"><?= $agendaRapat['kode_rapat'] ?></p>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="container-footer">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Dinas Kominfosanti</span>
+            </div>
+
+            <ul class="nav me-md-5 col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            </ul>
+        </footer>
     </div>
 </body>
 
