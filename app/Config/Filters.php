@@ -28,6 +28,7 @@ class Filters extends BaseConfig
         'cekkode'       => \App\Filters\KodeValid::class,
         'basicAuth'     => \App\Filters\BasicAuthFilter::class,
         'admin'         => \App\Filters\AdminFilter::class,
+        'islogin'       => \App\Filters\LoggedInFilter::class,
     ];
 
     /**

@@ -49,7 +49,7 @@ class AdminSeed extends Seeder
             'role' => 'operator',
             'id_instansi' => '75010306',
             'nama_instansi' => 'Kominfosanti',
-            'id_bidang' => $faker->uuid4,
+            'id_bidang' => $faker->uuid,
             'nama_bidang' => 'Persandian dan Statistik',
             'username' => 'sandi',
             'password' => password_hash('sandi', PASSWORD_DEFAULT),
