@@ -195,7 +195,7 @@ $(".statusRadio").on("click", function () {
                 title: "NIP Tidak ditemukan.",
                 text: "NIP tidak ditemukan. Cek kembali NIP anda dan coba lagi.",
               });
-            } else {
+            } else if (data.status === true) {
               $("#loadingIndicator").hide();
               Swal.fire({
                 icon: "success",
@@ -208,7 +208,7 @@ $(".statusRadio").on("click", function () {
               });
               $("#signatureCanvas").removeClass("greyed-out-form");
               console.log(data);
-              $("#nip").val(data.data.nip).prop("readonly", true);
+              // $("#nip").val(data.data.nip).prop("readonly", false);
               $("#no_hp").val(data.data.no_hp).prop("readonly", true);
               $("#nama").val(data.data.nama_lengkap).prop("readonly", true);
               $("#alamat").val(data.data.alamat).prop("readonly", true);
