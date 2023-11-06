@@ -1,95 +1,97 @@
-<!-- app/Views/PdfController/pdf_template.php -->
-
-<!DOCTYPE html>
 <html>
 
 <head>
-    <title><?= $agendaRapat['agenda_rapat'] ?> </title>
     <style>
-        #header {
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #000000;
             text-align: center;
-            margin-bottom: 20px;
+            height: 20px;
+            margin: 8px;
         }
 
-        #header img {
-            max-width: 150px;
-            /* Atur lebar maksimum logo */
-            margin-bottom: 10px;
-            /* Beri jarak antara logo dan alamat */
+        .logo {
+            float: right;
         }
 
-        /* Gaya untuk alamat perusahaan */
-        #header p {
-            margin: 0;
-            /* Hapus margin bawaan dari elemen paragraf */
+        /* Style for header */
+        .table-row {
+            border-collapse: collapse;
+            width: 100%;
         }
 
-        /* Gaya untuk tanggal */
-        #header #tanggal {
-            font-weight: bold;
-            /* Atur tebal font tanggal */
+        .table-row td {
+            padding: 5px;
+            text-align: left;
+            border: none;
         }
 
-        body {
-            margin: 20px;
+        .table-row .column-label {
+            width: 100px;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
+        .table-row .column-divider {
+            width: 30px;
         }
-
-        .title {
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 34px;
-            font-weight: bold;
-        }
-
-        .agenda {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .description {
-            margin-top: 20px;
-        }
-
-        .link {}
     </style>
 </head>
 
-
 <body>
-    <div id="header">
-        <img src="<?= $logo ?>" />
-        <p>Jl. Pahlawan, Banjar Tegal, Kec. Buleleng, Kabupaten Buleleng, Bali 81117</p>
-        <p>Tanggal: <?php echo date('d M Y'); ?></p>
+    <div class="logo">
+        <img width="100" src="assets/img/logo.png" alt="Logo">
     </div>
+    <p>
+        <i>DaftarHadir</i><br>
+        Jl. Pahlawan, Paket Agung, Kec. Buleleng, Kabupaten Buleleng, Bali 81117
+    </p>
+    <hr>
+    <p>
+    <table class="table-row">
+        <tr>
+            <td class="column-label">Agenda Rapat</td>
+            <td class="column-divider">:</td>
+            <td><?= $agendaRapat['agenda_rapat'] ?></td>
+        </tr>
+        <tr>
+            <td class="column-label">Instansi</td>
+            <td class="column-divider">:</td>
+            <td><?= $agendaRapat['nama_instansi'] ?></td>
+        </tr>
+        <tr>
+            <td class="column-label">Kode Rapat</td>
+            <td class="column-divider">:</td>
+            <td><?= $agendaRapat['kode_rapat'] ?></td>
+        </tr>
+        <tr>
+            <td class="column-label">Tanggal</td>
+            <td class="column-divider">:</td>
+            <td><?= date('Y-m-d', strtotime($agendaRapat['created_at'])) ?></td>
+        </tr>
+    </table>
+    </p>
 
-    <div id="content">
-        <div class="header">
-            <div class="title">DETAIL RAPAT</div>
-        </div>
-
-        <div class="agenda">
-            Agenda Rapat: <?= $agendaRapat['agenda_rapat'] ?>
-        </div>
-
-        <div class="description">
-            Deskripsi: <?= $agendaRapat['deskripsi'] ?>
-        </div>
-
-        <div class="ID Rapat">
-            ID: <?= $agendaRapat['kode_rapat'] ?>
-        </div>
-
-        <div class="link">
-            Link Rapat:
-            <div>
-                <img id="qr" width="100px" src="<?= $qrCode ?>" alt="<?= $agendaRapat['id_agenda'] ?>" class="">
-            </div>
-        </div>
-    </div>
+    <table cellpadding="6">
+        <tr>
+            <th><strong>NIP/NIK</strong></th>
+            <th><strong>Nama</strong></th>
+            <th><strong>Asal Instansi</strong></th>
+            <th><strong>Tanggal</strong></th>
+        </tr>
+        <?php foreach ($daftarHadir as $item) : ?>
+            <tr>
+                <td><?= $item['NIK'] ?></td>
+                <td><?= $item['nama'] ?></td>
+                <td><?= $item['asal_instansi'] ?></td>
+                <td><?= $item['created_at'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 </body>
 
 </html>

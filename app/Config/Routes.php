@@ -1,6 +1,5 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -9,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // Auth Admin
 $routes->group('auth', function ($routes) {
-    $routes->match(['get', 'post'], 'login', 'Auth::login');
+    $routes->match(['get', 'post'], 'login', 'Auth::login', ['filter' => 'islogin']);
     $routes->post('logout', 'Auth::logout');
 });
 
@@ -55,13 +54,13 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     // CRUD agenda rapat di semua role
     $routes->get('agenda-rapat/daftar-hadir/(:segment)', 'Dashboard\DaftarHadirController::cariDaftarHadir/$1');
     $routes->post('agenda-rapat/daftar-hadir/delete-peserta/(:segment)', 'Dashboard\DaftarHadirController::delete/$1');
+    $routes->get('cetak-daftar-hadir/(:segment)', 'Dashboard\DaftarHadirController::generatePdf/$1');
 
     $routes->get('agenda-rapat/tambah-agenda', 'Dashboard\AgendaRapat::tambahAgenda');
     $routes->post('agenda-rapat/tambah-agenda/store', 'Dashboard\AgendaRapat::store');
 
     $routes->get('agenda-rapat/view-agenda/(:segment)', 'Dashboard\AgendaRapat::view/$1');
     $routes->get('informasi-rapat/(:segment)', 'Dashboard\AgendaRapat::informasiRapat/$1');
-    $routes->get('cetak-rapat/(:segment)', 'Dashboard\AgendaRapat::generatePdf/$1');
 
     $routes->get('agenda-rapat/edit-agenda/(:segment)', 'Dashboard\AgendaRapat::edit/$1');
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'Dashboard\AgendaRapat::update/$1');

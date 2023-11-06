@@ -18,7 +18,7 @@ class UsersControllerAPI extends BaseController
         $this->instansiAPI = new PesertaRapatModel();
     }
 
-    public function getPeeserta($nik)
+    public function getPeserta($nik)
     {
         // $nik = $this->request->getVar('nip');
         $data = $this->pesertaUmum->cariUser($nik);

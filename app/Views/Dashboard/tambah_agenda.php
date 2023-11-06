@@ -7,7 +7,7 @@
 
     <div class="card card-primary">
         <div class="card-body">
-            <form action="<?= base_url('/dashboard/agenda-rapat/tambah-agenda/store') ?>" method="post">
+            <form action="<?= base_url('dashboard/agenda-rapat/tambah-agenda/store') ?>" method="post">
                 <?= csrf_field() ?>
                 <div class="row">
                     <div class="col-sm-6">
@@ -34,7 +34,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Tanggal</label>
-                            <input type="date" class="form-control <?= validation_show_error('tanggal') ? 'is-invalid' : '' ?>" value="<?= old('tanggal') ?>" id="tanggal" name="tanggal" min="<?= date('Y-m-d') ?>">
+                            <input type="date" class="form-control <?= validation_show_error('tanggal') ? 'is-invalid' : '' ?>" value="<?= old('tanggal', date('Y-m-d')) ?>" id="tanggal" name="tanggal" min="<?= date('Y-m-d') ?>">
                             <div class="invalid-feedback">
                                 <?= validation_show_error('tanggal') ?>
                             </div>
@@ -43,7 +43,8 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Jam</label>
-                            <input class="timepicker form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam') ?>" id="jam" name="jam">
+                            <input class="timepicker-default form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam') ?>" id="jam" name="jam">
+                            <input style="display: none;" class="timepicker form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam') ?>" id="jam" name="jam">
                             <div class="invalid-feedback">
                                 <?= validation_show_error('jam') ?>
                             </div>
@@ -62,6 +63,8 @@
         </div>
     </div>
 
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script>
         // Function to format the current time as 'HH:mm' and round to the nearest 30-minute interval
@@ -86,9 +89,32 @@
             timeFormat: 'HH:mm',
             interval: 30,
             defaultTime: defaultTimeRounded,
-            dynamic: true,
+            dynamic: false,
             dropdown: true,
-            minTime: defaultTimeRounded, // Optionally, you can set minTime to the rounded time as well
+            scrollbar: true,
+            minTime: '00:00', // Set an initial minTime
+        });
+
+        $('.timepicker-default').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30,
+            defaultTime: defaultTimeRounded,
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true,
+            minTime: defaultTimeRounded // Set an initial minTime
+        });
+
+        // show timepicker time based on the selected date
+        $('#tanggal').on('change', function() {
+            const selectedDate = $(this).val();
+            if (selectedDate === '<?= date('Y-m-d') ?>') {
+                $('.timepicker').hide();
+                $('.timepicker-default').show();
+            } else {
+                $('.timepicker-default').hide();
+                $('.timepicker').show();
+            }
         });
     </script>
 </body>

@@ -21,6 +21,8 @@ class PesertaUmumModel extends Model
         'alamat',
         'no_hp',
         'asal_instansi',
+        'created_at',
+        'updated_at'
     ];
 
     // Dates
@@ -104,5 +106,10 @@ class PesertaUmumModel extends Model
     public function insertPesertaUmum($data)
     {
         $this->insert($data);
+    }
+
+    public function insertOrUpdatePesertaUmum($data)
+    {
+        $this->save($data);
     }
 }

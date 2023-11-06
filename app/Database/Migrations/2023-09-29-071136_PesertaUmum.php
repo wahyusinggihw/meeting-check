@@ -41,6 +41,10 @@ class PesertaUmum extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
         $this->forge->addKey('id_peserta_umum', true);
         $this->forge->addUniqueKey('NIK');

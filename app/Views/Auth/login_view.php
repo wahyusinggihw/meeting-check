@@ -32,7 +32,7 @@
         </div>
 
         <h2>Login</h2>
-        <form action="<?= base_url('/auth/login') ?>" method="post" id="form-login">
+        <form action="<?= base_url('/auth/login') ?>" method="post" id="form-login" onsubmit="return validateRecaptcha()">
             <?= csrf_field() ?>
             <div class="container">
                 <div class="input-wrapper">
@@ -56,10 +56,11 @@
                             <div class="invalid-feedback text-start">
                                 <?= validation_show_error('password') ?>
                             </div>
+                            <div class="invalid-feedback text-start" id="recaptcha-error"></div>
                         </div>
                     </div>
                 </div>
-                <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>"></div>
+                <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>" id="recaptcha"></div>
                 <br>
                 <button type="submit" data-action='submit'>Login</button>
             </div>
@@ -74,8 +75,23 @@
 
 
 <script src="https://www.google.com/recaptcha/api.js"></script>
-
-
 <script src="<?php echo base_url('assets/js/login.js'); ?>"></script>
+<script>
+    function validateRecaptcha() {
+        // Use the grecaptcha object to check if the user has checked the reCAPTCHA.
+        var recaptchaResponse = grecaptcha.getResponse();
+        var recaptchaErrorElement = document.getElementById("recaptcha-error");
+
+        if (recaptchaResponse.length === 0) {
+            // User hasn't checked the reCAPTCHA, display an error message.
+            recaptchaErrorElement.textContent = "Mohon centang reCAPTCHA.";
+            return false;
+        }
+
+        // User has checked the reCAPTCHA, clear the error message and continue with form submission.
+        recaptchaErrorElement.textContent = "";
+        return true;
+    }
+</script>
 
 </html>

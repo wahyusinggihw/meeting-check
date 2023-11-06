@@ -14,6 +14,11 @@
     <?php endif; ?>
 
     <?php if ($daftar_hadir != null) : ?>
+<<<<<<< HEAD
+=======
+        <!-- <a href="#" download class="btn btn-primary mb-2">Download File</a> -->
+        <a href="<?= base_url('dashboard/cetak-daftar-hadir/' . $id_agenda) ?>" class="btn btn-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
+>>>>>>> cc90b4197b658ca85908edeea01ce0cd1a399deb
         <!-- foreach php -->
         <div class="table-container my-3">
             <table id="example" class="order-column" style="width:100%">
@@ -69,10 +74,6 @@
                 "targets": [4], // Index of the column to disable sorting (zero-based index)
                 "orderable": false,
             }],
-            dom: 'Bfrtip',
-            buttons: [
-                'print'
-            ],
             // Additional DataTables options here
             createdRow: function(row, data, dataIndex) {
                 $('td:eq(0)', row).html(startNumber++);
