@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use DateTime;
 use CodeIgniter\Model;
 use App\Models\AdminModel;
-use DateTime;
 
 class AgendaRapatModel extends Model
 {
@@ -295,5 +295,27 @@ class AgendaRapatModel extends Model
             'tersedia' => $tersediaAgenda,
             'selesai' => $selesaiAgenda,
         ];
+    }
+
+    // get agendainstansi API untuk mobile app
+    public function getAgendaAPI($id_instansi)
+    {
+        $builder = $this->table('agendarapats');
+        $builder->select('agendarapats.*');
+        $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
+        $builder->where('admins.id_instansi', $id_instansi);
+        $agendas = $builder->get()->getResultArray();
+        // $agendas = $this->getAgendasWithEditability($agendas);
+        $agendas = $this->addStatusToAgendas($agendas);
+        // get the agenda where status avalilable
+        $agendas = array_filter($agendas, function ($agenda) {
+            return $agenda['status'] == 'tersedia';
+        });
+        if (empty($agendas)) {
+            return null;
+            # code...
+        } else {
+            return $agendas;
+        }
     }
 }

@@ -33,7 +33,7 @@ $routes->post('api/save-signature', 'RapatController::saveSignatureData');
 $routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
     $routes->post('login', "Api\AuthControllerAPI::login");
     // get agenda rapat berdasarkan instansi user (Home Screen)
-    $routes->get('agenda-rapat/(:segment)', 'Api\AgendaRapatControllerAPI::index/$1');
+    $routes->get('agenda-rapat/get-by-instansi/(:segment)', 'Api\AgendaRapatControllerAPI::index/$1');
     // get agenda rapat berdasarkan id agenda rapat (Scan QR Code)
     $routes->get('agenda-rapat/get-by-id/(:segment)', 'Api\AgendaRapatControllerAPI::getById/$1');
     // post form absen (Qr code result)
