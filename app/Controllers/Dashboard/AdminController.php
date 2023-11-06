@@ -208,12 +208,37 @@ class AdminController extends BaseController
                 ]
             ],
             'password' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/]',
                 'errors' => [
-                    'required' => 'Password harus diisi'
+                    'required' => 'Password harus diisi',
+                    'min_length' => 'Password harus terdiri dari minimal 8 karakter',
+                    'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus'
                 ]
             ],
         ];
+
+        $role = session()->get('role');
+
+        if ($role == 'superadmin') {
+            $validate = [
+                'asal_instansi' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Instansi Harus dipilih'
+                    ]
+                ],
+            ];
+        }
+        if ($role == 'admin') {
+            $validate = [
+                'asal_instansi' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Bidang Harus dipilih'
+                    ]
+                ],
+            ];
+        }
 
         return $this->validate($validate);
     }
@@ -227,6 +252,12 @@ class AdminController extends BaseController
                     'required' => 'Nama harus diisi'
                 ]
             ],
+            'asal_instansi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Harus dipilih'
+                ]
+            ],
             'username' => [
                 'rules' => 'required|is_unique[admins.username]|alpha_dash',
                 'errors' => [
@@ -235,9 +266,11 @@ class AdminController extends BaseController
                 ]
             ],
             'password' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/]',
                 'errors' => [
-                    'required' => 'Password harus diisi'
+                    'required' => 'Password harus diisi',
+                    'min_length' => 'Password harus terdiri dari minimal 8 karakter',
+                    'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus'
                 ]
             ],
         ];
