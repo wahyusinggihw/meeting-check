@@ -15,7 +15,9 @@ ul {
   padding: 0;
   margin: 0;
 }
-.container {
+
+/* BAGIAN HEADER */
+.container-navbar {
   padding-left: 15px;
   padding-right: 15px;
   margin-left: auto;
@@ -23,21 +25,26 @@ ul {
   background-color: white;
 }
 /* Small */
+@media (min-width: 500px) {
+  .container-navbar {
+    width: 95%;
+  }
+}
 @media (min-width: 768px) {
-  .container {
-    width: 750px;
+  .container-navbar {
+    width: 95%;
   }
 }
 /* Medium */
 @media (min-width: 992px) {
-  .container {
-    width: 970px;
+  .container-navbar {
+    width: 95%;
   }
 }
 /* Large */
 @media (min-width: 1200px) {
-  .container {
-    width: 1170px;
+  .container-navbar {
+    width: 95%;
   }
 }
 /* End Global Rules */
@@ -54,9 +61,9 @@ ul {
     display: flex;
   }
 }
-.landing-page header .container {
+.landing-page header .container-navbar {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
 }
 @media (max-width: 767px) {
@@ -78,21 +85,7 @@ ul {
   }
 }
 
-.landing-page .content .section-1{
-  width: auto;
-  height: 625px;
-  background: url("https://iili.io/JfZ5ubR.png");
-  background-size: 1350px 625px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-}
 
-.landing-page .content .section-2 {
-  width: 1000x;
-  height: auto;
-  background-color: rgb(235, 254, 255);
-}
 .landing-page .content .container {
   display: flex;
   align-items: center;
@@ -109,62 +102,6 @@ ul {
     justify-content: center;
   }
 }
-@media (max-width: 767px) {
-  .landing-page .content .info {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-}
-
-.landing-page .content .container-info{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 30px;
-  padding-left: 120px;
-  padding-right: 100px;
-  margin-bottom: 50px;
-}
-
-.landing-page .content .logo img{
-  width: 250px;
-}
-
-.landing-page .content .info {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-.landing-page .content .info h1 {
-  color: #0357AD;
-  font-size: 60px;
-  font-style: normal;
-  font-weight: bold;
-}
-
-.landing-page .content .info h2 {
-  color: #838383;
-  font-size: 60px;
-  font-style: normal;
-  font-weight: bold;
-}
-.landing-page .content .info p {
-  margin: 0;
-  line-height: 1.6;
-  font-size: 15px;
-  color: #000000;
-}
-.landing-page .content .formid button {
-  border: none;
-  width: 100px;
-  height: 50px;
-  border-radius: 0px 14px 14px 0px;
-  margin-left: 10px;
-  cursor: pointer;
-  color: #fff;
-  background-color: #0466ed;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
 
 .invalid-feedback {
   display: block;
@@ -173,37 +110,6 @@ ul {
     left: 0;
     transform: none;
 }
-
-.formid {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 50px;
-    margin: auto;
-    width: 700px;
-    height: auto;
-    text-align: center;
-    border: 100px black;
-    border-radius: 15px;
-    box-shadow: 0px 0px 100px 1px rgba(0, 0, 0, 0.205);
-    background: rgba(255, 255, 255, 0.900);
-    box-sizing: border-box;
-}
-
-.formid .form-input{
-  display: flex;
-    justify-content: center;
-    flex-direction: row;
-    position: relative;
-}
-
-.formid input {
-  width: 550px;
-  height: 50px;
-  border-radius: 14px 0px 0px 14px;
-}
-
-
 
 @-webkit-keyframes slide-in-blurred-bottom {
   0% {
@@ -248,110 +154,3 @@ ul {
     opacity: 1;
   }
 }
-
-/* bagian timeline */
-
-.circle {
-  padding: 16px 20px;
-  border-radius: 30%;
-  background-color: #004891;
-  color: #fff;
-  max-height: 50px;
-  z-index: 2;
-}
-.container-timeline p {
-  color: #000000;
-  text-align: justify;
-}
-.container-timeline h2 {
-  color: #0357AD;
-  font-weight: bold;
-}
-
-.connecting-lines.row .col-2 {
-  align-self: stretch;
-}
-.connecting-lines.row .col-2::after {
-  content: "";
-  position: absolute;
-  border-left: 3px solid #0357AD;
-  z-index: 1;
-  /* left: 50%; */
-}
-.connecting-lines.row .col-2.bottom::after {
-  height: 50%;
-  left: 50%;
-  top: 50%;
-}
-.connecting-lines.row .col-2.full::after {
-  height: 100%;
-  /* left: calc(50%); */
-  /* left: 50%; */
-  right: 50%;
-}
-.connecting-lines.row .col-2.full.left::after {
-  height: 100%;
-  left: 50%;
-}
-.connecting-lines.row .col-2.top::after {
-  height: 50%;
-  left: 50%;
-  top: 0;
-}
-
-.timeline div {
-  padding: 0;
-  height: 40px;
-  width: 900px;
-}
-.timeline hr {
-  border-top: 3px solid #0357AD;
-  margin: 0;
-  top: 17px;
-  position: relative;
-}
-.timeline .col-2 {
-  display: flex;
-  overflow: hidden;
-}
-.timeline .corner {
-  border: 3px solid #0357AD;
-  width: 100%;
-  position: relative;
-  border-radius: 15px;
-}
-.timeline .top-right {
-  left: 50%;
-  top: -53%;
-
-}
-.timeline .left-bottom {
-  left: -50%;
-  top: calc(50% - 3px);
-}
-.timeline .top-left {
-  left: -50%;
-  top: -53%;
-}
-.timeline .right-bottom {
-  left: 50%;
-  top: calc(50% - 3px);
-}
-
-/*  RESPONSIVE MEDIA QUERRY */
-
-/* RESPONSIVE */
-
-@media (min-width: 768px) {
-}
-
-/* Medium */
-@media (min-width: 992px) {}
-
-/* Large */
-@media (min-width: 1200px) {
-}
-
-
-/* JANGAN DI SCROLLLL */
-/* NANTI PUSINGGGGGGG */
