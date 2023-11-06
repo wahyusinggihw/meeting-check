@@ -24,6 +24,7 @@ class AdminModel extends Model
         'nama',
         'username',
         'password',
+        'avatar',
         'created_at',
         'updated_at',
         'deleted_at',

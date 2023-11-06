@@ -7,7 +7,7 @@
     <div class="col-8 my-2">
         <div class="card card-warning">
             <div class="card-body">
-                <form action="<?= base_url('/dashboard/profile/edit-profile/' . $data['id_admin']) ?>" method="post">
+                <form action="<?= base_url('/dashboard/profile/edit-profile/' . $data['id_admin']) ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field() ?>
 
                     <input type="hidden" id="text" name="id" value="<?= $data['id_admin'] ?>">
@@ -28,8 +28,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="formFile" class="form-label">Foto Profil</label>
-                        <input class="form-control" type="file" id="avatar">
+                        <label for="avatar" class="form-label">Foto Profil</label>
+                        <input class="form-control <?= validation_show_error('avatar') ? 'is-invalid' : '' ?>" value="<?= $data['avatar'] ?>" type="file" id="avatar" name="avatar">
+                        <div class="invalid-feedback">
+                            <?= validation_show_error('avatar') ?>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Update</button>

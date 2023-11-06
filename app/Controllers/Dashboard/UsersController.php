@@ -33,7 +33,7 @@ class UsersController extends BaseController
     {
         $profile = $this->users->where('slug', $slug)->first();
         $data = [
-            'title' => 'Edit Password',
+            'title' => 'Edit Profil',
             'data' => $profile,
             // 'validation' => \Config\Services::validation(),
             // 'password' => $password2
@@ -97,10 +97,11 @@ class UsersController extends BaseController
         if (!$validate) {
             return redirect()->back()->withInput();
         }
-        die;
+        // die;
         // $slug = $this->slugify->slugify($this->request->getVar('nama'));
         $this->users->update($id, [
             'id_admin' => $id,
+            'updated_at' => date('Y-m-d H:i:s'),
             'password' => password_hash($this->request->getVar('new-password'), PASSWORD_DEFAULT)
         ]);
         session()->setFlashdata('success', 'Data berhasil diubah.');
@@ -109,7 +110,7 @@ class UsersController extends BaseController
 
     public function update($id)
     {
-        // dd($this->request->getPost());
+        // dd($this->request->getPost(), $avatar);
         $validate = $this->validate([
             'nama' => [
                 'rules' => 'required',
@@ -118,34 +119,46 @@ class UsersController extends BaseController
                 ]
             ],
             'username' => [
-                'rules' => 'required|alpha_dash|is_unique[admins.username]',
+                'rules' => 'required|alpha_dash',
                 'errors' => [
                     'required' => 'Username harus diisi',
                     'is_unique' => 'Username tidak boleh sama dengan sebelumnya'
                 ]
             ],
-            // 'confirm-password' => [
-            //     'rules' => 'matches[new-password]',
-            //     'errors' => [
-            //         'required' => 'Konfirmasi password harus diisi',
-            //         'matches' => 'Konfirmasi password tidak sesuai'
-            //     ]
-            // ]
-
+            'avatar' => [
+                'rules' => 'max_size[avatar,1024]|is_image[avatar]|mime_in[avatar,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar',
+                    'is_image' => 'File yang anda pilih bukan gambar',
+                    'mime_in' => 'File yang anda pilih bukan gambar'
+                ]
+            ],
         ]);
 
         if (!$validate) {
             return redirect()->back()->withInput();
         }
 
+        $avatar = $this->request->getFile('avatar');
+        if ($avatar->getError() == 4) {
+            $imageName = 'default.jpg';
+        } else {
+            $imageName = $id . '.' . $avatar->getExtension();
+            $avatar->move('uploads/avatars', $imageName);
+        }
+
         $slug = $this->slugify->slugify($this->request->getVar('nama'));
-        $this->users->update($id, [
+        $this->users->save([
             'id_admin' => $id,
             'slug' => $slug,
             'nama' => $this->request->getVar('nama'),
+            'avatar' => $imageName,
             'username' => $this->request->getVar('username'),
+            'updated_at' => date('Y-m-d H:i:s')
             // 'password' => password_hash($this->request->getVar('new-password'), PASSWORD_DEFAULT)
         ]);
+        session()->remove('avatar');
+        session()->set('avatar', $imageName);
 
         return redirect()->to('/dashboard/profile')->with('success', 'Data berhasil diubah');
     }

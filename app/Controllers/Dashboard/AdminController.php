@@ -184,10 +184,24 @@ class AdminController extends BaseController
 
     public function delete($id)
     {
-        $query = $this->adminModel->find($id);
-        if ($query) {
+        $admin = $this->adminModel->find($id);
+        session()->remove('logged_in');
+        if ($admin) {
+            $this->deleteAvatar($admin['id_admin']);
             $this->adminModel->delete($id);
             return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil dihapus');
+        }
+    }
+
+    private function deleteAvatar($id)
+    {
+        helper('filesystem');
+        $avatarPath = FCPATH . 'uploads/avatars/';
+        $files = glob($avatarPath . $id . '.*');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file); // Delete the file
+            }
         }
     }
 
