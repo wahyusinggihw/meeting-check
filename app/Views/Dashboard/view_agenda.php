@@ -4,10 +4,6 @@
 
 <body>
     <div class="card card-info">
-        <div class="card-header">
-            <h3 class="card-title"></h3>
-        </div>
-
         <div class="card-body">
             <form action="#" method="#">
                 <?= csrf_field() ?>

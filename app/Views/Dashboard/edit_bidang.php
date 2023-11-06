@@ -14,10 +14,6 @@
     <?php endif; ?>
     <div class="col-8 my-2">
         <div class="card card-warning">
-            <div class="card-header">
-                <h3 class="card-title"></h3>
-            </div>
-
             <div class="card-body">
                 <form action="<?= base_url('dashboard/kelola-bidang/edit-bidang/' . $data['id_bidang']) . '/update' ?>" method="post">
                     <?= csrf_field() ?>

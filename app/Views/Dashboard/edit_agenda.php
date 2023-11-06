@@ -12,12 +12,8 @@
             })
         </script>
     <?php endif; ?>
-    <div class="col-8 my-2">
+    <div class="">
         <div class="card card-warning">
-            <div class="card-header">
-                <h3 class="card-title"></h3>
-            </div>
-
             <div class="card-body">
                 <form action="<?= base_url('/dashboard/agenda-rapat/edit-agenda/' . $data['id_agenda'] . '/update') ?>" method="post">
                     <?= csrf_field() ?>
@@ -32,33 +28,49 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Tempat Rapat</label>
-                            <input type="text" class="form-control <?= validation_show_error('tempat') ? 'is-invalid' : '' ?>" value="<?= old('tempat', $data['tempat']) ?>" id="tempat" name="tempat">
-                            <div class="invalid-feedback">
-                                <?= validation_show_error('tempat') ?>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Tempat Rapat</label>
+                                <input type="text" class="form-control <?= validation_show_error('tempat') ? 'is-invalid' : '' ?>" value="<?= old('tempat', $data['tempat']) ?>" id="tempat" name="tempat">
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('tempat') ?>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Tanggal</label>
-                            <input type="date" class="form-control <?= validation_show_error('tanggal') ? 'is-invalid' : '' ?>" value="<?= old('tanggal', $data['tanggal']) ?>" id="tanggal" name="tanggal" min="<?= date('Y-m-d') ?>">
-                            <div class="invalid-feedback">
-                                <?= validation_show_error('tanggal') ?>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Tanggal</label>
+                                <input type="date" class="form-control <?= validation_show_error('tanggal') ? 'is-invalid' : '' ?>" value="<?= old('tanggal', $data['tanggal']) ?>" id="tanggal" name="tanggal" min="<?= date('Y-m-d') ?>">
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('tanggal') ?>
+                                </div>
                             </div>
                         </div>
+<<<<<<< HEAD
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Jam</label>
+                                <input class="timepicker form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam" name="jam">
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('jam') ?>
+                                </div>
+=======
                         <div class="form-group">
                             <label>Jam</label>
                             <input class="timepicker-default form-control <?= validation_show_error('jam_default') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam_default" name="jam_default">
                             <input style="display: none;" class="timepicker form-control <?= validation_show_error('jam') ? 'is-invalid' : '' ?>" value="<?= old('jam', $data['jam']) ?>" id="jam" name="jam">
                             <div class="invalid-feedback">
                                 <?= validation_show_error('jam') ?>
+>>>>>>> cc90b4197b658ca85908edeea01ce0cd1a399deb
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Agenda Rapat</label>
-                            <textarea class="form-control <?= validation_show_error('deskripsi') ? 'is-invalid' : '' ?>" rows="5" id="deskripsi" name="deskripsi"><?= old('deskripsi', $data['deskripsi']) ?></textarea>
-                            <div class="invalid-feedback">
-                                <?= validation_show_error('deskripsi') ?>
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label>Agenda Rapat</label>
+                                <textarea class="form-control <?= validation_show_error('deskripsi') ? 'is-invalid' : '' ?>" rows="5" id="deskripsi" name="deskripsi"><?= old('deskripsi', $data['deskripsi']) ?></textarea>
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('deskripsi') ?>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -6,10 +6,6 @@
     <!-- buat agar menjadi di tengah -->
 
     <div class="card card-primary">
-        <div class="card-header">
-            <h3 class="card-title"></h3>
-        </div>
-
         <div class="card-body">
             <form action="<?= base_url('dashboard/agenda-rapat/tambah-agenda/store') ?>" method="post">
                 <?= csrf_field() ?>
