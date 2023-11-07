@@ -77,14 +77,9 @@
                         <p>Agenda Rapat</p>
                     </a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('/auth/logout') ?>" role="button">
-                        <i class="nav-icon fa-solid fa-right-from-bracket"></i>
-                        <p>Logout</p>
-                    </a>
-                </li> -->
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="logout-button" role="button">
+                    <a class="nav-link logout-button" href="#" id="logout-button" role="button">
                         <i class="nav-icon fa-solid fa-right-from-bracket"></i>
                         <p>Logout</p>
                     </a>
@@ -94,27 +89,32 @@
 
     <!-- ajax logout form -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).ready(function() {
-            $('#logout-button').click(function(e) {
-                e.preventDefault(); // Prevent the default behavior of the anchor link
-                $.ajax({
-                    type: 'POST',
-                    url: '<?= base_url('/auth/logout') ?>', // Replace with the actual URL for your logout endpoint
-                    data: {
-                        // Include any data you want to send with the request, such as CSRF tokens
-                        '<?= csrf_token() ?>': '<?= csrf_hash() ?>',
-                    },
-                    success: function(data) {
-                        // Handle the success response, e.g., redirect to the login page
-                        window.location.href = '<?= base_url('/auth/login') ?>';
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle any error that occurs during the AJAX request
-                        console.error(error);
-                    }
-                });
+        function showLogoutConfirmation() {
+            Swal.fire({
+                title: 'Konfirmasi Logout',
+                text: 'Anda yakin ingin logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Logout',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '/auth/logout';
+                    document.body.appendChild(form);
+                    form.submit();
+                }
             });
+        }
+
+        // Attach the delete confirmation modal to each delete button
+        document.querySelectorAll('.logout-button').forEach((button) => {
+            button.addEventListener('click', () => showLogoutConfirmation());
         });
     </script>
 
