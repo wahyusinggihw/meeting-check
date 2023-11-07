@@ -94,8 +94,8 @@ class AgendaRapatModel extends Model
         $builder->select('agendarapats.*, admins.slug as admin_slug, admins.id_bidang as admin_id_bidang, admins.nama_bidang as admin_nama_bidang');
         $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
         $builder->where('admins.id_instansi', session()->get('id_instansi'));
-        $builder->orWhere('admins.id_bidang IS NULL OR admins.id_bidang = ""');
         $builder->where('admins.id_bidang', session()->get('id_bidang'));
+        $builder->orWhere('admins.id_bidang IS NULL OR admins.id_bidang = ""'); //show the admins instansi agenda 
         $agendas = $builder->get()->getResultArray();
         $agendas = $this->getAgendasWithEditability($agendas);
         return $this->addStatusToAgendas($agendas);
@@ -234,6 +234,7 @@ class AgendaRapatModel extends Model
         $builder->select('agendarapats.*, admins.slug as admin_slug, admins.id_bidang as admin_id_bidang, admins.nama_bidang as admin_nama_bidang');
         $builder->join('admins', 'admins.id_admin = agendarapats.id_admin');
         $builder->where('admins.id_instansi', $id_instansi);
+        $builder->where("admins.id_bidang IS NOT NULL AND admins.id_bidang != ''"); //exclude the agendas made by admins instansi
         $query = $builder->get()->getResultArray();
         return $this->addStatusToAgendas($query);
     }
