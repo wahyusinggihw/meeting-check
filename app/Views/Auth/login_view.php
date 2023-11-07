@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body style="background-image:url(<?= base_url('assets/img/bg_home.png') ?>);">
     <!-- modal -->
     <?php if (session()->getFlashdata('error')) : ?>
         <script>
