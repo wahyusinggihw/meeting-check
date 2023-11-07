@@ -56,12 +56,13 @@
                             <div class="invalid-feedback text-start">
                                 <?= validation_show_error('password') ?>
                             </div>
-                            <div class="invalid-feedback text-start" id="recaptcha-error"></div>
                         </div>
                     </div>
+                    <br>
+                    <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>" id="recaptcha"></div>
+                    <div class="invalid-feedback text-start" id="recaptcha-error"></div>
                 </div>
-                <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>" id="recaptcha"></div>
-                <br>
+
                 <button type="submit" data-action='submit'>Login</button>
             </div>
         </form>
