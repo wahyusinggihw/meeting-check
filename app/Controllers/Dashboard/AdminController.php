@@ -184,10 +184,24 @@ class AdminController extends BaseController
 
     public function delete($id)
     {
-        $query = $this->adminModel->find($id);
-        if ($query) {
+        $admin = $this->adminModel->find($id);
+        session()->remove('logged_in');
+        if ($admin) {
+            $this->deleteAvatar($admin['id_admin']);
             $this->adminModel->delete($id);
             return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil dihapus');
+        }
+    }
+
+    private function deleteAvatar($id)
+    {
+        helper('filesystem');
+        $avatarPath = FCPATH . 'uploads/avatars/';
+        $files = glob($avatarPath . $id . '.*');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file); // Delete the file
+            }
         }
     }
 
@@ -208,12 +222,37 @@ class AdminController extends BaseController
                 ]
             ],
             'password' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/]',
                 'errors' => [
-                    'required' => 'Password harus diisi'
+                    'required' => 'Password harus diisi',
+                    'min_length' => 'Password harus terdiri dari minimal 8 karakter',
+                    'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus'
                 ]
             ],
         ];
+
+        $role = session()->get('role');
+
+        if ($role == 'superadmin') {
+            $validate = [
+                'asal_instansi' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Instansi Harus dipilih'
+                    ]
+                ],
+            ];
+        }
+        if ($role == 'admin') {
+            $validate = [
+                'asal_instansi' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Bidang Harus dipilih'
+                    ]
+                ],
+            ];
+        }
 
         return $this->validate($validate);
     }
@@ -227,6 +266,12 @@ class AdminController extends BaseController
                     'required' => 'Nama harus diisi'
                 ]
             ],
+            'asal_instansi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Harus dipilih'
+                ]
+            ],
             'username' => [
                 'rules' => 'required|is_unique[admins.username]|alpha_dash',
                 'errors' => [
@@ -235,9 +280,11 @@ class AdminController extends BaseController
                 ]
             ],
             'password' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/]',
                 'errors' => [
-                    'required' => 'Password harus diisi'
+                    'required' => 'Password harus diisi',
+                    'min_length' => 'Password harus terdiri dari minimal 8 karakter',
+                    'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus'
                 ]
             ],
         ];

@@ -24,6 +24,7 @@ class AdminSeed extends Seeder
             'role' => 'superadmin',
             'id_instansi' => 'superadmin',
             'username' => 'super',
+            'avatar' => 'default.jpg', // 'avatar' => 'default.jpg
             'password' => password_hash('super', PASSWORD_DEFAULT),
             'created_at' => $faker->date('Y-m-d H:i:s'),
         ];
@@ -37,6 +38,7 @@ class AdminSeed extends Seeder
             'id_instansi' => '75010306',
             'nama_instansi' => 'Kominfosanti',
             'username' => 'kominfo',
+            'avatar' => 'default.jpg', // 'avatar' => 'default.jpg
             'password' => password_hash('kominfo', PASSWORD_DEFAULT),
             'created_at' => $faker->date('Y-m-d H:i:s'),
         ];
@@ -52,6 +54,7 @@ class AdminSeed extends Seeder
             'id_bidang' => $faker->uuid,
             'nama_bidang' => 'Persandian dan Statistik',
             'username' => 'sandi',
+            'avatar' => 'default.jpg', // 'avatar' => 'default.jpg
             'password' => password_hash('sandi', PASSWORD_DEFAULT),
             'created_at' => $faker->date('Y-m-d H:i:s'),
         ];

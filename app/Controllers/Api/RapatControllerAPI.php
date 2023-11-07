@@ -28,7 +28,7 @@ class RapatControllerAPI extends BaseController
         $this->agendaRapat = new AgendaRapatModel();
     }
 
-    public function saveSignature($kodeRapat)
+    public function saveSignature($idAgenda, $nip)
     {
         helper('filesystem');
 
@@ -38,7 +38,7 @@ class RapatControllerAPI extends BaseController
         $writablePath = WRITEPATH . 'uploads/signatures/';
 
         // Create a unique file name, e.g., using a timestamp
-        $fileName = 'signature_' . $kodeRapat . time() . '.png';
+        $fileName = $idAgenda . '_' . $nip . '_' . '.png';
 
         // Create the writable directory if it doesn't exist
         if (!is_dir($writablePath)) {
@@ -76,6 +76,8 @@ class RapatControllerAPI extends BaseController
 
         $kodeRapat = $this->request->getVar('kode_rapat');
         $idRapat = $this->agendaRapat->getAgendaRapatByKode($kodeRapat);
+        $idAgenda = $idRapat['id_agenda'];
+        $nip = $this->request->getVar('nip');
 
         $validate = $this->validateForm();
 
@@ -103,7 +105,7 @@ class RapatControllerAPI extends BaseController
         $signatureData = $this->request->getVar('signatureData');
 
         // Decode the base64 data to binary
-        $saveTandaTangan = $this->saveSignature($kodeRapat)->getBody();
+        $saveTandaTangan = $this->saveSignature($idAgenda, $nip)->getBody();
         $tandaTanganDecode = json_decode($saveTandaTangan, true);
         $tandaTangan = $tandaTanganDecode['publicPath'];
 

@@ -18,13 +18,9 @@ class AgendaRapatControllerAPI extends BaseController
 
     public function index($idInstansi = null)
     {
-        $agendaRapat = $this->agendaRapat->getAllAgendaByInstansi($idInstansi);
-        // $agendaRapat = $this->agendaRapat->getStatusAgendaInstansi($idInstansi);
-        // $agendaRapatJSON = json_decode($agendaRapat);
-        // $result = [
-        //     'status' => true,
-        //     'data' => $agendaRapat
-        // ];
+        // $agendaRapat = $this->agendaRapat->getAllAgendaByInstansi($idInstansi);
+        $agendaRapat = $this->agendaRapat->getAgendaAPI($idInstansi);
+
         return $this->response(200, $agendaRapat);
     }
 

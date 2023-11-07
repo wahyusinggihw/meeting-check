@@ -63,9 +63,10 @@ class AuthControllerAPI extends BaseController
         if (!$user['asn']) {
             if (!$user['non_asn']) {
                 $response = [
-                    'status' => false,
-                    // 'message' => 'Invalid username or password',
-                    'message' => 'User tidak ada',
+                    'status' => 200,
+                    'error' => true,
+                    'message' => 'Username atau password salah.',
+                    // 'message' => 'User tidak ada',
 
                 ];
                 return $this->respond($response, 200);
@@ -77,8 +78,9 @@ class AuthControllerAPI extends BaseController
 
         if (!$pwd_verify) {
             $response = [
-                'status' => false,
-                'message' => 'Invalid username or password',
+                'status' => 200,
+                'error' => true,
+                'message' => 'Username atau password salah.',
 
             ];
             return $this->respond($response, 200);
