@@ -54,7 +54,7 @@
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" data-info="" class="small-box-footer info">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -68,7 +68,7 @@
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" data-info="tersedia" class="small-box-footer info">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -82,7 +82,7 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" data-info="selesai" class="small-box-footer info">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
     <?php endif; ?>
@@ -108,6 +108,31 @@
             createdRow: function(row, data, dataIndex) {
                 $('td:eq(0)', row).html(startNumber++);
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const infoElements = document.querySelectorAll('.info');
+
+            infoElements.forEach(function(infoElement) {
+                infoElement.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const base_url = '<?= base_url() ?>';
+                    const dataInfo = this.getAttribute('data-info');
+                    const redirectURL = base_url + 'dashboard/agenda-rapat?data-info=' + dataInfo;
+
+                    if (dataInfo === 'tersedia') {
+                        // Redirect to the URL
+                        window.location.href = redirectURL;
+                        table.search('tersedia').draw();
+                    } else if (dataInfo === 'selesai') {
+                        // Redirect to the URL
+                        window.location.href = redirectURL;
+                    } else {
+                        // Redirect to the URL
+                        window.location.href = redirectURL;
+                    }
+                });
+            });
         });
     </script>
 
