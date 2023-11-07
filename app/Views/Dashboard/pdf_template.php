@@ -16,6 +16,11 @@
             margin: 8px;
         }
 
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
         .logo {
             float: right;
         }
@@ -51,8 +56,13 @@
         Jl. Pahlawan, Paket Agung, Kec. Buleleng, Kabupaten Buleleng, Bali 81117
     </p>
     <hr>
-    <p>
+    <h1>DAFTAR HADIR<br>RAPAT <?= strtoupper($agendaRapat['agenda_rapat']) ?></h1>
     <table class="table-row">
+        <tr>
+            <td class="column-label">Kode Rapat</td>
+            <td class="column-divider">:</td>
+            <td><?= $agendaRapat['kode_rapat'] ?></td>
+        </tr>
         <tr>
             <td class="column-label">Agenda Rapat</td>
             <td class="column-divider">:</td>
@@ -64,14 +74,19 @@
             <td><?= $agendaRapat['nama_instansi'] ?></td>
         </tr>
         <tr>
-            <td class="column-label">Kode Rapat</td>
+            <td class="column-label">Bidang</td>
             <td class="column-divider">:</td>
-            <td><?= $agendaRapat['kode_rapat'] ?></td>
+            <td><?= $bidang ?></td>
         </tr>
         <tr>
             <td class="column-label">Tanggal</td>
             <td class="column-divider">:</td>
             <td><?= date('Y-m-d', strtotime($agendaRapat['created_at'])) ?></td>
+        </tr>
+        <tr>
+            <td class="column-label">Pukul</td>
+            <td class="column-divider">:</td>
+            <td><?= $agendaRapat['jam'] ?></td>
         </tr>
     </table>
     </p>
@@ -82,13 +97,15 @@
             <th><strong>Nama</strong></th>
             <th><strong>Asal Instansi</strong></th>
             <th><strong>Tanggal</strong></th>
+            <th><strong>Jam</strong></th>
         </tr>
         <?php foreach ($daftarHadir as $item) : ?>
             <tr>
                 <td><?= $item['NIK'] ?></td>
                 <td><?= $item['nama'] ?></td>
                 <td><?= $item['asal_instansi'] ?></td>
-                <td><?= $item['created_at'] ?></td>
+                <td><?= date('Y-m-d', strtotime($item['created_at'])) ?></td>
+                <td><?= date('H:i', strtotime($item['created_at'])) ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
