@@ -86,7 +86,9 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
      */
     $routes->group('kelola-admin', ['filter' => 'admin'], function ($routes) {
         $routes->get('/', 'Dashboard\AdminController::index');
-        $routes->match(['get', 'post'], 'tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+        // $routes->match(['get', 'post'], 'tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+        $routes->get('tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+        $routes->post('tambah-admin', 'Dashboard\AdminController::store');
         $routes->get('edit-admin/(:segment)', 'Dashboard\AdminController::edit/$1');
         $routes->post('edit-admin/(:segment)/update', 'Dashboard\AdminController::update/$1');
         $routes->post('delete-admin/(:segment)', 'Dashboard\AdminController::delete/$1');

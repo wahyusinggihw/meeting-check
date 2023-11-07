@@ -108,6 +108,7 @@ class UsersController extends BaseController
         return redirect()->to('/dashboard/profile')->with('success', 'Data berhasil diubah');
     }
 
+    //update profile
     public function update($id)
     {
         // dd($this->request->getPost(), $avatar);
