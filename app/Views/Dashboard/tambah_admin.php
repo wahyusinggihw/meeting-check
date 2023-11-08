@@ -71,14 +71,22 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="password">password:</label>
-                                <div id="message">
+                                <input class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" type="password" id="password" name="password" placeholder="password">
+                                <!-- <div id="message">
                                     <h3>Password must contain the following:</h3>
                                     <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
                                     <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
                                     <p id="number" class="invalid">A <b>number</b></p>
                                     <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                                </div> -->
+                                <div id="requirements-list">
+                                    <ul id="requirements">
+                                        <li><i id="uppercase" class="far fa-check-circle"></i>Uppercase</li>
+                                        <li><i id="number" class="far fa-check-circle"></i>Number</li>
+                                        <li><i id="special" class="far fa-check-circle"></i>Special Characters</li>
+                                        <li><i id="eight-chars" class="far fa-check-circle"></i>8+ Characters</li>
+                                    </ul>
                                 </div>
-                                <input class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" type="password" id="password" name="password" placeholder="password">
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('password') ?>
                                 </div>
