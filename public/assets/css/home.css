@@ -1,9 +1,8 @@
 .landing-page .content .section-1 {
-  /* background-image:url("<?= base_url('assets/img/bg_home.png') ?>"); */
   /* background-image: url("https://iili.io/JfZ5ubR.png"); */
   width: auto;
-  height: 700px;
-  background-size: cover;
+  height: 625px;
+  background-size: 1365px 625px;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
