@@ -171,18 +171,6 @@
                         </div>
                     </div>
                 </div>
-
-                <input type="hidden" name="kode_rapat" value="<?= session()->get('kode_valid') ?>">
-
-                <div class="button-container mb-2">
-                    <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
-                </div>
-                <div class="form-group text-end">
-                    <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>"></div>
-                    <div class="text text-start text-danger fs-6" id="recaptcha-error"></div>
-                    <button onclick="saveSignature()" type="submit" class="btn btn-primary">Kirim</button>
-                </div>
-            </form>
         </div>
     </div>
 
