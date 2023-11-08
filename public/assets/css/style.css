@@ -174,37 +174,6 @@ ul {
     transform: none;
 }
 
-.formid {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 50px;
-    margin: auto;
-    width: 700px;
-    height: auto;
-    text-align: center;
-    border: 100px black;
-    border-radius: 15px;
-    box-shadow: 0px 0px 100px 1px rgba(0, 0, 0, 0.205);
-    background: rgba(255, 255, 255, 0.900);
-    box-sizing: border-box;
-}
-
-.formid .form-input{
-  display: flex;
-    justify-content: center;
-    flex-direction: row;
-    position: relative;
-}
-
-.formid input {
-  width: 550px;
-  height: 50px;
-  border-radius: 14px 0px 0px 14px;
-}
-
-
-
 @-webkit-keyframes slide-in-blurred-bottom {
   0% {
     -webkit-transform: translateY(1000px) scaleY(2.5) scaleX(0.2);

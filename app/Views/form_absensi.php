@@ -142,24 +142,27 @@
                     <div class="form-input-sg">
                         <div class="signature-pad <?= validation_show_error('signatureData') ? 'is-invalid' : '' ?>">
                             <h1>Tempat Tanda Tangan</h1>
-                            <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+                            <canvas id="signatureCanvas" class="signature-canvas" width="600" height="400"></canvas>
                             <input type="hidden" id="signatureData" name="signatureData" value="">
+                            <div class="button-container mb-2">
+                                <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
+                            </div>
                         </div>
-                        <div class="invalid-feedback text-start">
-                            <?= validation_show_error('signatureData') ?>
+
+                        <div class="button-function">
+                            <div class="invalid-feedback text-start">
+                                <?= validation_show_error('signatureData') ?>
+                            </div>
+                            <input type="hidden" name="kode_rapat" value="<?= session()->get('kode_valid') ?>">
+
+                            <div class="form-group text-end">
+                                <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>"></div>
+                                <button onclick="saveSignature()" type="submit" class="btn btn-primary">Kirim</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <input type="hidden" name="kode_rapat" value="<?= session()->get('kode_valid') ?>">
-
-                <div class="button-container mb-2">
-                    <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
-                </div>
-                <div class="form-group text-end">
-                    <div class="g-recaptcha" data-sitekey="<?= env('RECAPTCHA_SITE_KEY_V2') ?>"></div>
-                    <button onclick="saveSignature()" type="submit" class="btn btn-primary">Kirim</button>
-                </div>
             </form>
         </div>
     </div>

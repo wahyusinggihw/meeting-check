@@ -8,16 +8,23 @@
     background-attachment: fixed;
 } */
 .wrapper {
-  background-color: #fdfdfd;
-  padding: 50px;
+  background-color: #d0e3ff;
+  padding: 40px;
   border-radius: 35px;
-  box-shadow: 0px 0px 100px 1px rgba(0, 0, 0, 0.205);
   margin: 0 auto;
+  position: absolute;
+    bottom: -50%;
+    transform: translateX(5%);
 }
 .judul-form {
   -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  position: relative;
+  background-color: #92caf9;
+  height: 300px;
 }
+
+
 .konten .judul-form h1 {
   font-size: 25px;
   padding-top: 20px;
@@ -43,6 +50,9 @@
 }
 .konten .wrapper .form-group button {
   font-size: 14px;
+  width: 300px;
+  height: 35px;
+  margin-top: 5px;
 }
 .radio{
   display: flex;
@@ -80,8 +90,14 @@
   font-size: 14px;
   color: white;
 }
-.konten .wrapper .button-container {
+.konten .wrapper .button-ulangi {
   color: white;
+}
+
+.konten .wrapper .button-ulangi a{
+  color: white;
+  width: 100px;
+  height: 35px;
 }
 
 .container-form {
@@ -102,7 +118,6 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin-bottom: 30px;
   max-width: 1130px;
   width: 100%;
 }
@@ -143,6 +158,45 @@
   height: 200px;
   top: 0;
   left: 0;
+}
+.formid {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px;
+  margin: auto;
+  width: 700px;
+  height: auto;
+  text-align: center;
+  border: 100px black;
+  border-radius: 15px;
+  box-shadow: 0px 0px 100px 1px rgba(0, 0, 0, 0.205);
+  background: rgba(255, 255, 255, 0.900);
+  box-sizing: border-box;
+}
+
+.formid .form-input {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+}
+
+.formid input {
+  width: 550px;
+  height: 50px;
+  border-radius: 14px 0px 0px 14px;
+}
+
+.container-function {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.container-footer {
+  margin-top: 910px;
 }
 
 /* RESPONSIF */
