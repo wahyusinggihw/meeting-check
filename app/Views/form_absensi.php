@@ -157,11 +157,11 @@
                                 <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
                             </div>
                         </div>
+                        <div class="invalid-feedback text-start">
+                            <?= validation_show_error('signatureData') ?>
+                        </div>
 
                         <div class="button-function">
-                            <div class="invalid-feedback text-start">
-                                <?= validation_show_error('signatureData') ?>
-                            </div>
                             <input type="hidden" name="kode_rapat" value="<?= session()->get('kode_valid') ?>">
 
                             <div class="form-group text-end">
