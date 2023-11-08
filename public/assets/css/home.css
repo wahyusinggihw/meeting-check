@@ -2,7 +2,7 @@
   /* background-image: url("https://iili.io/JfZ5ubR.png"); */
   width: auto;
   height: 625px;
-  background-size: 1365px 625px;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
@@ -200,14 +200,67 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .landing-page .content .section-1 {
+    height: 500px;
+  }
   .formid {
     width: 380px;
     padding: 25px;
   }
+  .landing-page .content .info h1 {
+    font-size: 45px;
+  }.landing-page .content .info h2 {
+    font-size: 45px;
+  }
+  .formid input {
+    height: 40px;
+  }
+  .landing-page .content .formid button {
+    height: 40px;
+  }
 }
 @media only screen and (min-width: 600px) {
-
+  .formid {
+    width: 500px;
+    padding: 30px;
+  }
+  .landing-page .content .info h1 {
+    font-size: 50px;
+  }.landing-page .content .info h2 {
+    font-size: 50px;
+  }
+  .landing-page .content .section-1 {
+    height: 550px;
+  }
 }
 @media only screen and (min-width: 768px) {
-
+  .landing-page .content .section-1 {
+    height: 600px;
+  }
+  .landing-page .content .info h1 {
+    font-size: 55px;
+  }.landing-page .content .info h2 {
+    font-size: 55px;
+  }
+  .formid {
+    width: 700x;
+    padding: 50px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .landing-page .content .section-1 {
+    height: 625px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page .content .info h1 {
+    font-size: 60px;
+  }.landing-page .content .info h2 {
+    font-size: 60px;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .landing-page .content .section-1 {
+    height: 700px;
+  }
 }
