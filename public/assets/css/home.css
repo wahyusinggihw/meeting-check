@@ -6,7 +6,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .landing-page .content .section-2 {
@@ -27,8 +27,8 @@
   justify-content: space-around;
   align-items: center;
   padding-top: 30px;
-  padding-left: 120px;
-  padding-right: 100px;
+  padding-left: auto;
+  padding-right: auto;
   margin-bottom: 50px;
 }
 
@@ -200,3 +200,15 @@
     }
 }
 
+@media only screen and (max-width: 600px) {
+  .formid {
+    width: 380px;
+    padding: 25px;
+  }
+}
+@media only screen and (min-width: 600px) {
+
+}
+@media only screen and (min-width: 768px) {
+
+}
