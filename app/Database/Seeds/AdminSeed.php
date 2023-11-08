@@ -24,11 +24,43 @@ class AdminSeed extends Seeder
             'role' => 'superadmin',
             'id_instansi' => 'superadmin',
             'username' => 'super',
+            'avatar' => 'default.jpg', // 'avatar' => 'default.jpg
             'password' => password_hash('super', PASSWORD_DEFAULT),
             'created_at' => $faker->date('Y-m-d H:i:s'),
         ];
 
+        // admin instansi data
+        $adminInstansiData = [
+            'id_admin' => '21486571-73f7-4570-b8de-d412aa4c887f',
+            'slug' => 'kominfo',
+            'nama' => 'Kominfo',
+            'role' => 'admin',
+            'id_instansi' => '75010306',
+            'nama_instansi' => 'Kominfosanti',
+            'username' => 'kominfo',
+            'avatar' => 'default.jpg', // 'avatar' => 'default.jpg
+            'password' => password_hash('kominfo', PASSWORD_DEFAULT),
+            'created_at' => $faker->date('Y-m-d H:i:s'),
+        ];
+
+        // operator data
+        $operatorData = [
+            'id_admin' => '21486571-73f7-4570-b8de-d412aa4c887e',
+            'slug' => 'op-persandian',
+            'nama' => 'Op Persandian',
+            'role' => 'operator',
+            'id_instansi' => '75010306',
+            'nama_instansi' => 'Kominfosanti',
+            'id_bidang' => $faker->uuid,
+            'nama_bidang' => 'Persandian dan Statistik',
+            'username' => 'sandi',
+            'avatar' => 'default.jpg', // 'avatar' => 'default.jpg
+            'password' => password_hash('sandi', PASSWORD_DEFAULT),
+            'created_at' => $faker->date('Y-m-d H:i:s'),
+        ];
         $this->db->table('admins')->insert($adminData);
+        $this->db->table('admins')->insert($adminInstansiData);
+        $this->db->table('admins')->insert($operatorData);
 
         // for ($i = 0; $i < 3; $i++) {
         //     # code...

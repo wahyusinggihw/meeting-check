@@ -26,7 +26,11 @@
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" src="<?= base_url('assets/dist/img/user2-160x160.jpg') ?>" alt="User profile picture">
+                        <?php if ($profile['avatar'] == 'default.jpg') : ?>
+                            <img class="profile-user-img img-fluid img-circle" src="<?= base_url('uploads/avatars/default.jpg') ?>" alt="User profile picture">
+                        <?php else : ?>
+                            <img class="profile-user-img img-fluid img-circle" src="<?= base_url('/uploads/avatars/' . $profile['avatar']) ?>" alt="User profile picture">
+                        <?php endif; ?>
                     </div>
                     <h3 class="profile-username text-center"><?= $profile['nama'] ?></h3>
                     <p class="text-muted text-center"><?= $profile['nama_instansi'] ?></p>
@@ -38,7 +42,7 @@
                         <li class="list-group-item">
                             <b>Password</b> <a href="<?= base_url('dashboard/profile/edit-profilepassword/' . $profile['slug']) ?>" class="float-right" style="text-decoration: none;">Ganti Password</a>
                         </li>
-                        
+
                     </ul>
                     <a href="<?= base_url('dashboard/profile/edit-profile/' . $profile['slug']) ?>" class="btn btn-warning btn-block"><b>Edit Profile</b></a>
                 </div>

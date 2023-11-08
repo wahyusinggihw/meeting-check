@@ -15,14 +15,12 @@ class AdminController extends BaseController
     protected $helpers = ['form'];
     protected $adminModel;
     protected $pesertaUmum;
-    protected $pesertaRapat;
     protected $slugify;
     protected $bidangModel;
     public function __construct()
     {
         $this->adminModel = new AdminModel();
         $this->pesertaUmum = new PesertaUmumModel();
-        $this->pesertaRapat = new PesertaRapatModel();
         $this->bidangModel = new BidangInstansiModel();
         $this->slugify = new Slugify();
     }
@@ -55,84 +53,84 @@ class AdminController extends BaseController
 
     public function tambahAdmin()
     {
-        if ($this->request->is('post')) {
-            // dd($this->request->getPost());
-            $validateAdmin = $this->formValidateAdmin();
-            $validateOperator = $this->formValidateOperator();
+        $role = session()->get('role');
+        $pesertaRapat = new PesertaRapatModel();
+        $instansi = $pesertaRapat->getInstansi();
+        $instansiDecode = json_decode($instansi);
+        $data = [
+            'title' => $role == 'admin' ? 'Tambah Operator' : 'Tambah Admin',
+            'validation' => \Config\Services::validation(),
+            'instansi' => $instansiDecode,
+            'bidang' => $this->bidangModel->getAllBidangByInstansi($this->session->get('id_instansi'))
+        ];
+        return view('dashboard/tambah_admin', $data);
+    }
 
-            $instansi = $this->request->getVar('asal_instansi');
-            $sections = explode('-', $instansi);
+    public function store()
+    {
+        // dd($this->request->getPost());
+        // $validateAdmin = $this->formValidateAdmin();
+        // $validateOperator = $this->formValidateOperator();
 
-            $role = session()->get('role');
+        $instansi = $this->request->getVar('asal_instansi');
+        $sections = explode('-', $instansi);
 
+        $role = session()->get('role');
 
-            if ($role == 'superadmin' ? !$validateAdmin : !$validateOperator) {
-                return redirect()->back()->withInput();
-            }
-
-            $uuid = Uuid::uuid4()->toString();
-            $uuid2 = Uuid::uuid4()->toString();
-            $slug = $this->slugify->slugify($this->request->getVar('nama'));
-            if ($role == 'superadmin') {
-                $id_instansi = $sections[0];
-                $nama_instansi = $sections[1];
-
-                $data = [
-                    'id_admin' => $uuid,
-                    'slug' => $slug,
-                    'role' =>  $role == 'admin' ? 'operator' : 'admin',
-                    'id_instansi' => $id_instansi,
-                    'nama_instansi' => $nama_instansi,
-                    'nama' => $this->request->getVar('nama'),
-                    'username' => $this->request->getVar('username'),
-                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                    'created_at' => date('Y-m-d H:i:s'),
-                ];
-            } else {
-                $nama_bidang = $sections[5];
-
-                $data = [
-                    'id_admin' => $uuid,
-                    'slug' => $slug,
-                    'role' =>  $role == 'admin' ? 'operator' : 'admin',
-                    'id_instansi' => session()->get('id_instansi'),
-                    'nama_instansi' => session()->get('nama_instansi'),
-                    'id_bidang' => $this->request->getVar('asal_instansi'),
-                    'nama_bidang' => $nama_bidang,
-                    'nama' => $this->request->getVar('nama'),
-                    'username' => $this->request->getVar('username'),
-                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                    'created_at' => date('Y-m-d H:i:s'),
-                ];
-
-                // $dataBidang = [
-                //     'id_bidang' => $uuid2,
-                //     'slug' => $this->slugify->slugify($this->request->getVar('nama_bidang')),
-                //     'nama_bidang' => $this->request->getVar('nama_bidang'),
-                //     'id_instansi' => session()->get('id_instansi'),
-                //     // 'created_at' => date('Y-m-d H:i:s'),
-                // ];
-
-                // dd($data);
-            }
-
-            // dd($data);
-
-            // $this->bidangModel->save($dataBidang);
-            $this->adminModel->insert($data);
-            return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil ditambahkan');
-        } else {
-            $role = session()->get('role');
-            $instansi = $this->pesertaRapat->getInstansi();
-            $instansiDecode = json_decode($instansi);
-            $data = [
-                'title' => $role == 'admin' ? 'Tambah Operator' : 'Tambah Admin',
-                'validation' => \Config\Services::validation(),
-                'instansi' => $instansiDecode,
-                'bidang' => $this->bidangModel->getAllBidangByInstansi($this->session->get('id_instansi'))
-            ];
-            return view('dashboard/tambah_admin', $data);
+        $validate = $this->formValidate();
+        if (!$validate) {
+            return redirect()->back()->withInput();
         }
+        // dd($this->request->getPost());
+        $uuid = Uuid::uuid4()->toString();
+        $slug = $this->slugify->slugify($this->request->getVar('nama'));
+        if ($role == 'superadmin') {
+            /* 
+            Sample post
+            asal_instansi = "75010306-Kominfosanti"
+            */
+            $id_instansi = $sections[0];
+            $nama_instansi = $sections[1];
+
+            $data = [
+                'id_admin' => $uuid,
+                'slug' => $slug,
+                'role' =>  $role == 'admin' ? 'operator' : 'admin',
+                'id_instansi' => $id_instansi,
+                'nama_instansi' => $nama_instansi,
+                'nama' => $this->request->getVar('nama'),
+                'username' => $this->request->getVar('username'),
+                'avatar' => 'default.jpg',
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+        } else {
+            /* 
+            Sample post
+            asal_instansi = "7cf5f4d6-c531-4dc6-982a-5bdbaab6cab5-Persandian dan Statistik"
+            id_bidang = "7cf5f4d6-c531-4dc6-982a-5bdbaab6cab5"
+            nama_bidang = "Persandian dan Statistik"
+            */
+            $id_bidang = implode('-', array_slice($sections, 0, 5));
+            $nama_bidang = $sections[5];
+            $data = [
+                'id_admin' => $uuid,
+                'slug' => $slug,
+                'role' =>  $role == 'admin' ? 'operator' : 'admin',
+                'id_instansi' => session()->get('id_instansi'),
+                'nama_instansi' => session()->get('nama_instansi'),
+                'id_bidang' => $id_bidang,
+                'nama_bidang' => $nama_bidang,
+                'nama' => $this->request->getVar('nama'),
+                'username' => $this->request->getVar('username'),
+                'avatar' => 'default.jpg',
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+        }
+
+        $this->adminModel->insert($data);
+        return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($slug)
@@ -154,11 +152,11 @@ class AdminController extends BaseController
         // dd($this->request->getPost());
         $validate = $this->validate([
             'new-password' => [
-                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/]',
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/]',
                 'errors' => [
                     'required' => 'Password harus diisi',
                     'min_length' => 'Password harus terdiri dari minimal 8 karakter',
-                    'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus'
+                    'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil dan angka'
                 ]
             ],
             'confirm-password' => [
@@ -184,20 +182,40 @@ class AdminController extends BaseController
 
     public function delete($id)
     {
-        $query = $this->adminModel->find($id);
-        if ($query) {
+        $admin = $this->adminModel->find($id);
+        session()->remove('logged_in');
+        if ($admin) {
+            $this->deleteAvatar($admin['id_admin']);
             $this->adminModel->delete($id);
             return redirect()->to('/dashboard/kelola-admin')->with('success', 'Data berhasil dihapus');
         }
     }
 
-    protected function formValidateOperator()
+    private function deleteAvatar($id)
+    {
+        helper('filesystem');
+        $avatarPath = FCPATH . 'uploads/avatars/';
+        $files = glob($avatarPath . $id . '.*');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file); // Delete the file
+            }
+        }
+    }
+
+    protected function formValidate()
     {
         $validate = [
             'nama' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Nama harus diisi'
+                ]
+            ],
+            'asal_instansi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Harus dipilih'
                 ]
             ],
             'username' => [
@@ -208,9 +226,11 @@ class AdminController extends BaseController
                 ]
             ],
             'password' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/]',
                 'errors' => [
-                    'required' => 'Password harus diisi'
+                    'required' => 'Password harus diisi',
+                    'min_length' => 'Password harus terdiri dari minimal 8 karakter',
+                    'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil dan angka'
                 ]
             ],
         ];
@@ -218,32 +238,38 @@ class AdminController extends BaseController
         return $this->validate($validate);
     }
 
-    protected function formValidateAdmin()
-    {
-        $validate = [
-            'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nama harus diisi'
-                ]
-            ],
-            'username' => [
-                'rules' => 'required|is_unique[admins.username]|alpha_dash',
-                'errors' => [
-                    'required' => 'Username harus diisi',
-                    'is_unique' => 'Username sudah terdaftar'
-                ]
-            ],
-            'password' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Password harus diisi'
-                ]
-            ],
-        ];
+    // protected function formValidateAdmin()
+    // {
+    //     $validate = [
+    //         'nama' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Nama harus diisi'
+    //             ]
+    //         ],
+    //         'asal_instansi' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Harus dipilih'
+    //             ]
+    //         ],
+    //         'username' => [
+    //             'rules' => 'required|is_unique[admins.username]|alpha_dash',
+    //             'errors' => [
+    //                 'required' => 'Username harus diisi',
+    //                 'is_unique' => 'Username sudah terdaftar'
+    //             ]
+    //         ],
+    //         'password' => [
+    //             'rules' => 'required|min_length[8]|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/]',
+    //             'errors' => [
+    //                 'required' => 'Password harus diisi',
+    //                 'min_length' => 'Password harus terdiri dari minimal 8 karakter',
+    //                 'regex_match' => 'Password harus terdiri dari huruf besar, huruf kecil dan angka'
+    //             ]
+    //         ],
+    //     ];
 
-
-
-        return $this->validate($validate);
-    }
+    //     return $this->validate($validate);
+    // }
 }

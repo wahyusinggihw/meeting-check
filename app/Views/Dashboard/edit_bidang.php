@@ -14,17 +14,13 @@
     <?php endif; ?>
     <div class="col-8 my-2">
         <div class="card card-warning">
-            <div class="card-header">
-                <h3 class="card-title"></h3>
-            </div>
-
             <div class="card-body">
                 <form action="<?= base_url('dashboard/kelola-bidang/edit-bidang/' . $data['id_bidang']) . '/update' ?>" method="post">
                     <?= csrf_field() ?>
                     <?= validation_list_errors() ?>
                     <input type="hidden" value="<?= $data['id_bidang'] ?>" name="id_bidang" id="id_bidang">
 
-                    <div class="form-group mb-3" id="instansiOption">
+                    <!-- <div class="form-group mb-3" id="instansiOption">
                         <label for="asal_instansi" class="form-label">Asal Instansi</label>
                         <select name="asal_instansi" id="asal_instansi" class="form-select <?= validation_show_error('asal_instansi') ? 'is-invalid' : '' ?>" id="asal_instansi" name="asal_instansi" autofocus>
                             <option value="">Pilih instansi</option>
@@ -35,7 +31,7 @@
                         <div class="invalid-feedback text-start">
                             <?= validation_show_error('asal_instansi') ?>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <label for="nama_bidang">Nama Bidang:</label>
@@ -58,7 +54,7 @@
                         </div>
                     </div> -->
 
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

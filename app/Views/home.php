@@ -1,5 +1,9 @@
 <?= $this->extend('layout/page_layout') ?>
 
+<?= $this->section('style') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/home.css') ?>">
+<?= $this->endSection(); ?>
+
 <?= $this->section('content') ?>
 
 <body>
@@ -15,13 +19,13 @@
 
   <?php endif; ?>
 
-  <section class="section-1">
+  <section class="section-1" style="background-image:url(<?= base_url('assets/img/bg_home.png') ?>);">
     <div class="container-info">
       <div class="info">
         <h1>Daftar Hadir Rapat</h1>
         <h2>Pemkab Buleleng</h2>
       </div>
-      <div class="logo"><img src="https://github.com/abhinanduN/codepen/blob/master/human-image.png?raw=true" class="prod-human-img" alt="prod" /></div>
+      <div class="logo justify-content-center d-none d-lg-block"><img src="<?= base_url('assets/img/human-image.png') ?>" class="prod-human-img" alt="prod" /></div>
     </div>
     <form action="<?= base_url('/submit-kode/form-absensi') ?>" method="post">
       <div class="formid">
@@ -165,6 +169,7 @@
       </div>
     </div>
   </section>
+  
 </body>
 
 <?= $this->endSection() ?>

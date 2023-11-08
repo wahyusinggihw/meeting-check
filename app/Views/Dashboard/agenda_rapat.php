@@ -14,7 +14,7 @@
     <?php endif; ?>
 
     <?php if ($agenda != null) : ?>
-        <a href="/dashboard/agenda-rapat/tambah-agenda" class="btn btn-primary mb-2">Tambah Agenda</a>
+        <a href="<?= base_url('/dashboard/agenda-rapat/tambah-agenda') ?>" class="btn btn-primary mb-2">Tambah Agenda</a>
         <div class="table-container my-3">
             <table id="example" class="row-border" style="width:100%">
                 <thead>
@@ -78,7 +78,7 @@
     <script>
         let startNumber = 1;
         let targets = <?php echo (session()->get('role') == 'admin') ? JSON_ENCODE([7]) : JSON_ENCODE([6]); ?>;
-        new DataTable('#example', {
+        let table = new DataTable('#example', {
             "columnDefs": [{
                 "targets": targets, // Index of the column to disable sorting (zero-based index)
                 "orderable": false,
@@ -89,6 +89,20 @@
                 $('td:eq(0)', row).html(startNumber++);
             }
         });
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataInfo = urlParams.get('data-info');
+        // console.log('data-info:', dataInfo);
+        if (dataInfo === 'tersedia') {
+            table.search('tersedia').draw();
+            // Handle the 'tersedia' action
+        } else if (dataInfo === 'selesai') {
+            // Handle the 'selesai' action
+            table.search('selesai').draw();
+        } else {
+            // Handle the default action
+            table.search('').draw();
+        }
 
         function showDeleteConfirmation(id) {
             Swal.fire({

@@ -4,10 +4,6 @@
 
 <body>
     <div class="card card-info">
-        <div class="card-header">
-            <h3 class="card-title"></h3>
-        </div>
-
         <div class="card-body">
             <form action="#" method="#">
                 <?= csrf_field() ?>
@@ -75,9 +71,6 @@
                                 <div class="col">
                                     <div class="row mb-4">
                                         <a href="<?= base_url('dashboard/informasi-rapat/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">Informasi rapat</a>
-                                    </div>
-                                    <div class="row">
-                                        <a href="<?= base_url('dashboard/cetak-rapat/' . $data['id_agenda']) ?>" class="btn btn-outline-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
                                     </div>
                                 </div>
                             </div>

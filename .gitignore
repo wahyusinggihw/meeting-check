@@ -125,4 +125,7 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
-/public/uploads
+/public/uploads/avatars/*
+!/public/uploads/avatars/default.jpg
+!/public/uploads/avatars/index.html
+/public/uploads/signatures

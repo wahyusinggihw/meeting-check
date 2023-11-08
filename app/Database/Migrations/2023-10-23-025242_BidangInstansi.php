@@ -25,6 +25,14 @@ class BidangInstansi extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
             ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
         $this->forge->addKey('id_bidang', true);
         // $this->forge->addForeignKey('id_instansi', 'instansis', 'id_instansi', 'CASCADE', 'CASCADE');

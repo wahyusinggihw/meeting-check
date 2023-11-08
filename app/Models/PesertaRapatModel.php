@@ -18,7 +18,8 @@ class PesertaRapatModel extends Model
         'slug',
         'id_agenda_rapat',
         'NIK',
-        'created_at'
+        'created_at',
+        'updated_at'
     ];
 
     // Dates
@@ -119,5 +120,10 @@ class PesertaRapatModel extends Model
     public function insertPesertaRapat($data)
     {
         return $this->insert($data);
+    }
+
+    public function insertOrUpdatePesertaRapat($data)
+    {
+        $this->save($data);
     }
 }

@@ -15,7 +15,7 @@
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" data-info="" class="small-box-footer info">Filter <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -29,7 +29,7 @@
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" data-info="tersedia" class="small-box-footer info">Filter <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -43,53 +43,10 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" data-info="selesai" class="small-box-footer info">Filter <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
-        <!-- <div class="col-lg-3 col-6">
-        
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Bounce Rate</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <div class="col-lg-3 col-6">
-        
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>44</h3>
-
-                <p>User Registrations</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-6">
-        
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div> -->
-    </div>
-    <!-- /.row -->
 
     <div>
         <div class="table-container my-3">
@@ -131,74 +88,53 @@
             </table>
         </div>
     </div>
-<?php else : ?>
-    <div class="row">
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3><?= $totalagenda ?></h3>
+<?php endif; ?>
 
-                    <p>Total Agenda Rapat</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3><?= $totalAgendaBelumBerjalan ?></h3>
-
-                    <p>Agenda Rapat Belum Berjalan</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-6">
-
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3><?= $totalAgendaSelesai ?></h3>
-
-                    <p>Agenda Selesai</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-    <?php endif; ?>
-
-    <!-- Small boxes (Stat box) -->
+<!-- Small boxes (Stat box) -->
 
 
-    <script>
-        // show tables if element clicked
-        $(document).ready(function() {
-            $('#example').DataTable();
+<script>
+    // show tables if element clicked
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+
+
+    let startNumber = 1;
+    let table = new DataTable('#example', {
+        "columnDefs": [{
+            "targets": [null], // Index of the column to disable sorting (zero-based index)
+            "orderable": false,
+
+        }],
+        // Additional DataTables options here
+        createdRow: function(row, data, dataIndex) {
+            $('td:eq(0)', row).html(startNumber++);
+        }
+    });
+
+    // Set search value programmatically
+    document.addEventListener('DOMContentLoaded', function() {
+        const infoElements = document.querySelectorAll('.info');
+
+        infoElements.forEach(function(infoElement) {
+            infoElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                const dataInfo = this.getAttribute('data-info');
+
+                if (dataInfo === 'tersedia') {
+                    table.search('tersedia').draw();
+                    // Handle the 'tersedia' action
+                } else if (dataInfo === 'selesai') {
+                    // Handle the 'selesai' action
+                    table.search('selesai').draw();
+                } else {
+                    // Handle the default action
+                    table.search('').draw();
+                }
+            });
         });
+    });
+</script>
 
-
-        let startNumber = 1;
-        new DataTable('#example', {
-            "columnDefs": [{
-                "targets": [null], // Index of the column to disable sorting (zero-based index)
-                "orderable": false,
-
-            }],
-            // Additional DataTables options here
-            createdRow: function(row, data, dataIndex) {
-                $('td:eq(0)', row).html(startNumber++);
-            }
-        });
-    </script>
-
-    <?= $this->endSection() ?>
+<?= $this->endSection() ?>

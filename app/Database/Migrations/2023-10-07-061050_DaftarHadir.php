@@ -45,6 +45,10 @@ class DaftarHadir extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
         $this->forge->addKey('id_daftar_hadir', true);
         $this->forge->addForeignKey('id_agenda_rapat', 'agendarapats', 'id_agenda', 'CASCADE', 'CASCADE');

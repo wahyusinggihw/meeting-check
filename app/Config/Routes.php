@@ -1,6 +1,5 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -9,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // Auth Admin
 $routes->group('auth', function ($routes) {
-    $routes->match(['get', 'post'], 'login', 'Auth::login');
+    $routes->match(['get', 'post'], 'login', 'Auth::login', ['filter' => 'islogin']);
     $routes->post('logout', 'Auth::logout');
 });
 
@@ -34,7 +33,7 @@ $routes->post('api/save-signature', 'RapatController::saveSignatureData');
 $routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
     $routes->post('login', "Api\AuthControllerAPI::login");
     // get agenda rapat berdasarkan instansi user (Home Screen)
-    $routes->get('agenda-rapat/(:segment)', 'Api\AgendaRapatControllerAPI::index/$1');
+    $routes->get('agenda-rapat/get-by-instansi/(:segment)', 'Api\AgendaRapatControllerAPI::index/$1');
     // get agenda rapat berdasarkan id agenda rapat (Scan QR Code)
     $routes->get('agenda-rapat/get-by-id/(:segment)', 'Api\AgendaRapatControllerAPI::getById/$1');
     // post form absen (Qr code result)
@@ -55,13 +54,13 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     // CRUD agenda rapat di semua role
     $routes->get('agenda-rapat/daftar-hadir/(:segment)', 'Dashboard\DaftarHadirController::cariDaftarHadir/$1');
     $routes->post('agenda-rapat/daftar-hadir/delete-peserta/(:segment)', 'Dashboard\DaftarHadirController::delete/$1');
+    $routes->get('cetak-daftar-hadir/(:segment)', 'Dashboard\DaftarHadirController::generatePdf/$1');
 
     $routes->get('agenda-rapat/tambah-agenda', 'Dashboard\AgendaRapat::tambahAgenda');
     $routes->post('agenda-rapat/tambah-agenda/store', 'Dashboard\AgendaRapat::store');
 
     $routes->get('agenda-rapat/view-agenda/(:segment)', 'Dashboard\AgendaRapat::view/$1');
     $routes->get('informasi-rapat/(:segment)', 'Dashboard\AgendaRapat::informasiRapat/$1');
-    $routes->get('cetak-rapat/(:segment)', 'Dashboard\AgendaRapat::generatePdf/$1');
 
     $routes->get('agenda-rapat/edit-agenda/(:segment)', 'Dashboard\AgendaRapat::edit/$1');
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'Dashboard\AgendaRapat::update/$1');
@@ -87,7 +86,9 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
      */
     $routes->group('kelola-admin', ['filter' => 'admin'], function ($routes) {
         $routes->get('/', 'Dashboard\AdminController::index');
-        $routes->match(['get', 'post'], 'tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+        // $routes->match(['get', 'post'], 'tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+        $routes->get('tambah-admin', 'Dashboard\AdminController::tambahAdmin');
+        $routes->post('tambah-admin', 'Dashboard\AdminController::store');
         $routes->get('edit-admin/(:segment)', 'Dashboard\AdminController::edit/$1');
         $routes->post('edit-admin/(:segment)/update', 'Dashboard\AdminController::update/$1');
         $routes->post('delete-admin/(:segment)', 'Dashboard\AdminController::delete/$1');
