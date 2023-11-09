@@ -47,6 +47,10 @@ ul {
     width: 95%;
   }
 }
+
+.logo{
+  margin-top: 15px;
+}
 /* End Global Rules */
 
 /* Start Landing Page */

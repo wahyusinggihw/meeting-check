@@ -21,8 +21,7 @@ ul {
     padding: 0;
     margin: 0;
 }
-
-.container-footer{
+.container-footer {
     margin-top: 410px;
 }
 
@@ -53,6 +52,7 @@ ul {
         width: 1170px;
     }
 }
+
 header {
     min-height: 80px;
     height: 200px;
@@ -146,7 +146,7 @@ header .links li a:hover {
     /* Warna teks saat dihover */
 }
 
-.container-info{
+.container-info {
     display: flex;
     justify-content: center;
     position: absolute;
@@ -154,10 +154,10 @@ header .links li a:hover {
     transform: translateX(10.5%);
 }
 
-.card-info{
+.card-info {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: space-between ;
+    justify-content: space-between;
     padding: 50px;
     margin-top: 50px;
     width: 1125px;
@@ -169,11 +169,11 @@ header .links li a:hover {
     box-sizing: border-box;
 }
 
-.card-qr img{
+.card-qr img {
     width: 400px;
 }
 
-.card-text{
+.card-text {
     display: flex;
     flex-direction: column;
     justify-content: flex;
@@ -183,11 +183,11 @@ header .links li a:hover {
     word-wrap: break-word;
 }
 
-.card-text h1{
+.card-text h1 {
     margin-bottom: 100px;
 }
 
-.card-text ul{
+.card-text ul {
     font-size: 30px;
     list-style: none;
 }
@@ -196,7 +196,7 @@ header .links li a:hover {
     margin-top: 10px;
 }
 
-.code-rapat{
+.code-rapat {
     display: flex;
     font-size: 24px;
     padding-top: 20px;
@@ -204,7 +204,7 @@ header .links li a:hover {
     align-items: baseline;
 }
 
-.code-rapat p{
+.code-rapat p {
     background-color: rgb(215, 236, 255);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.267);
     border-radius: 10px;
@@ -212,22 +212,6 @@ header .links li a:hover {
     padding: 10px;
 }
 
-.code-rapat p:hover{
+.code-rapat p:hover {
     background-color: rgb(121, 168, 255);
-}
-
-/* RESPONSIVE */
-
-@media (min-width: 768px) {
-
-}
-
-/* Medium */
-@media (min-width: 992px) {
-    
-}
-
-/* Large */
-@media (min-width: 1200px) {
-    
 }

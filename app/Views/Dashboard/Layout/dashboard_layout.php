@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/css/daftarpeserta.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/tableagenda.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/agendakosong.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/admin.css') ?>">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -125,6 +126,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
   <script src="<?= base_url('assets/print.js') ?>"></script>
+  <script src="<?= base_url('assets/admin.js') ?>"></script>
 
 </body>
 

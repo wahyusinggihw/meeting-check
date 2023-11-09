@@ -71,14 +71,22 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="password">password:</label>
-                                <div id="message">
+                                <input class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" type="password" id="password" name="password" placeholder="password">
+                                <!-- <div id="message">
                                     <h3>Password must contain the following:</h3>
                                     <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
                                     <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
                                     <p id="number" class="invalid">A <b>number</b></p>
                                     <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                                </div> -->
+                                <div id="requirements-list">
+                                    <ul id="requirements">
+                                        <li><i id="uppercase" class="far fa-check-circle"></i>Uppercase</li>
+                                        <li><i id="number" class="far fa-check-circle"></i>Number</li>
+                                        <li><i id="special" class="far fa-check-circle"></i>Special Characters</li>
+                                        <li><i id="eight-chars" class="far fa-check-circle"></i>8+ Characters</li>
+                                    </ul>
                                 </div>
-                                <input class="form-control <?= validation_show_error('password') ? 'is-invalid' : '' ?>" type="password" id="password" name="password" placeholder="password">
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('password') ?>
                                 </div>
@@ -90,67 +98,6 @@
             </div>
         </div>
     </div>
-    <style>
-        /* Style all input fields */
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-top: 6px;
-            margin-bottom: 16px;
-        }
-
-        /* Style the submit button */
-        input[type=submit] {
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        /* Style the container for inputs */
-        .container {
-            background-color: #f1f1f1;
-            padding: 20px;
-        }
-
-        /* The message box is shown when the user clicks on the password field */
-        #message {
-            display: none;
-            background: #f1f1f1;
-            color: #000;
-            position: relative;
-            padding: 20px;
-            margin-top: 10px;
-        }
-
-        #message p {
-            padding: 10px 35px;
-            font-size: 18px;
-        }
-
-        /* Add a green text color and a checkmark when the requirements are right */
-        .valid {
-            color: green;
-        }
-
-        .valid:before {
-            position: relative;
-            left: -35px;
-            content: "&#10004;";
-        }
-
-        /* Add a red text color and an "x" icon when the requirements are wrong */
-        .invalid {
-            color: red;
-        }
-
-        .invalid:before {
-            position: relative;
-            left: -35px;
-            content: "&#10006;";
-        }
-    </style>
     <script>
         var myInput = document.getElementById("password");
         var letter = document.getElementById("letter");
