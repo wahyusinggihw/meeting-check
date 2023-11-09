@@ -13,21 +13,6 @@
 
 <body>
 
-    <div class="hero">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/96503/parralax1.png" alt="">
-        <div class="layers">
-            <div class="first" data-depth="7"></div>
-            <div class="second" data-depth="6"></div>
-            <div class="secondpoint5" data-depth="4"></div>
-            <div data-depth="5">
-                <h1 class="hero__text">Hiking</h1>
-            </div>
-            <div class="third" data-depth="2"></div>
-            <!-- <div class="fourth" data-depth="0"></div> -->
-        </div>
-
-    </div>
-</body>
 </body>
 
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>

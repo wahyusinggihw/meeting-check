@@ -174,44 +174,191 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
     <script>
-        function validateRecaptcha() {
-            // Use the grecaptcha object to check if the user has checked the reCAPTCHA.
-            var recaptchaResponse = grecaptcha.getResponse();
-            var recaptchaErrorElement = document.getElementById("recaptcha-error");
+        // Restricts input for the given textbox to the given inputFilter.
+        function setInputFilter(textbox, inputFilter, errMsg) {
+            textbox.addEventListener("input", function() {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.value.length, this.value.length);
+                } else {
+                    this.value = "";
+                }
 
-            if (recaptchaResponse.length === 0) {
-                // User hasn't checked the reCAPTCHA, display an error message.
-                recaptchaErrorElement.textContent = "Mohon centang reCAPTCHA.";
-                return false;
+                if (!inputFilter(this.value)) {
+                    this.classList.add("input-error");
+                    this.setCustomValidity(errMsg);
+                    this.reportValidity();
+                } else {
+                    this.classList.remove("input-error");
+                    this.setCustomValidity("");
+                }
+            });
+        }
+
+        // Install input filters.
+        setInputFilter(document.getElementById("nip"), function(value) {
+            return /^-?\d*$/.test(value);
+        }, "Harus berupa angka");
+
+
+        $(document).ready(function() {
+            $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
+            $('#cariNikButton').addClass('disabled-button');
+            $('#nip').addClass('greyed-out-form');
+
+            $('#cariNikButton').on('click', function() {
+                var nikValue = $('#nip').val();
+                var statusValue = $('input[name="statusRadio"]:checked').val();
+                var statusValuePegawai = $('input[name="asnNonAsnRadio"]:checked').val();
+                console.log(statusValuePegawai);
+                console.log(statusValue);
+
+
+                if (!statusValue) {
+                    // Show an alert using SweetAlert when no radio button is selected
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Pilih Status',
+                        text: 'Pilih status "Pegawai" atau "Tamu" sebelum klik "Cari".',
+                    });
+                    return; // Exit the function
+                }
+
+                var apiEndpoint;
+                if (statusValue === 'tamu') {
+                    apiEndpoint = '/api/peserta/';
+                }
+
+                if (statusValue === 'pegawai') {
+                    if (statusValuePegawai === 'asn') {
+                        apiEndpoint = '/api/pegawai/asn/';
+                    } else if (statusValuePegawai === 'nonasn') {
+                        apiEndpoint = '/api/pegawai/non-asn/';
+                    } else {
+                        // Handle the case when 'statusValuePegawai' is not set
+                    }
+                }
+
+                console.log(apiEndpoint);
+
+                if (nikValue) {
+                    // Perform an AJAX request to check if the NIK exists
+                    $.ajax({
+                        url: apiEndpoint + nikValue, // Replace with your API endpoint
+                        type: 'GET',
+                        success: function(data) {
+                            console.log(data.status);
+                            if (data.status === false) {
+                                // Handle the case where data is not found
+                                $('#no_hp, #nama, #alamat, #asal_instansi').val('').prop('readonly', false);
+                                // Show an alert using SweetAlert when NIK is not found
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'NIP Tidak ditemukan.',
+                                    text: 'NIP tidak ditemukan. Cek kembali NIP anda dan coba lagi.',
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    toast: 'true',
+                                    position: 'top-end',
+                                    text: 'Silahkan melakukan tanda tangan.',
+                                    showConfirmButton: false, // Optionally, hide the "OK" button
+                                    timer: 2000 // Auto-close the toast after 2 seconds (adjust the duration as needed)
+                                });
+                                console.log(data);
+
+                                if (statusValue === 'pegawai') {
+                                    $('#nip').val(data.data.nip).prop('readonly', true);
+                                    $('#no_hp').val(data.data.no_hp).prop('readonly', true);
+                                    $('#nama').val(data.data.nama_lengkap).prop('readonly', true);
+                                    $('#alamat').val(data.data.alamat).prop('readonly', true);
+                                    $('#instansiOption, #asal_instansi').val(data.data.ket_ukerja).prop('readonly', true);
+                                } else {
+                                    $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
+                                    // Update the form fields with the fetched data
+                                    $('#no_hp').val(data.data.no_hp).prop('readonly', true);
+                                    $('#nama').val(data.data.nama).prop('readonly', true);
+                                    $('#alamat').val(data.data.alamat).prop('readonly', true);
+                                    $('#instansiText, #asal_instansi').val(data.data.asal_instansi).prop('readonly', true);
+                                }
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            // Handle errors if the AJAX request fails
+                            console.log("AJAX Error: " + textStatus);
+                        }
+                    });
+                } else {
+                    // Show an alert using SweetAlert when NIK is empty
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'NIK diperlukan',
+                        text: 'Masukkan nik sebelum klik "Cari".',
+                    });
+                }
+            });
+            // if on error
+            var oldAsnNonAsnValue = '<?= old('asnNonAsnRadio') ?>';
+            if (oldAsnNonAsnValue === 'asn') {
+                $('#asnNonAsnContainer').show();
+            } else if (oldAsnNonAsnValue === 'nonasn') {
+                $('#asnNonAsnContainer').show();
+            } else {
+                // Handle the case when 'asnNonAsnRadio' was not selected before
             }
 
-            // User has checked the reCAPTCHA, clear the error message and continue with form submission.
-            recaptchaErrorElement.textContent = "";
-            return true;
-        }
-    </script>
+            // Trigger the change event on 'nip' input when a radio button is clicked
+            $('.statusRadio').on('click', function() {
+                $('#nip').val('').prop('readonly', false);
+                var isTamu = $('input[name="statusRadio"]:checked').val();
+                if (isTamu === 'tamu') {
+                    $('#no_hp, #nama, #alamat, #asal_instansi').removeClass('greyed-out-form');
+                    $('#nip').removeClass('greyed-out-form');
+                    $('#cariNikButton').removeClass('disabled-button');
+                } else {
+                    $('#cariNikButton').addClass('disabled-button');
+                    $('#no_hp, #nama, #alamat, #asal_instansi').addClass('greyed-out-form');
+                }
+                $('input[name="asnNonAsnRadio"]').on('change', function() {
+                    // Check if one of the radio buttons is selected
+                    if ($('input[name="asnNonAsnRadio"]:checked').length > 0) {
+                        // Enable the "nik" input and the "Cari" button
+                        // $('#nip').val('').prop('readonly', false);
+                        $('#nip').removeClass('greyed-out-form');
+                        $('#cariNikButton').removeClass('disabled-button');
+                        $('#nip, #no_hp, #nama, #alamat, #asal_instansi').val('').prop('readonly', false);
+                    }
+                    // $('#no_hp, #nama, #alamat, #asal_instansi').removeClass('greyed-out-form');
+                });
 
-    <script>
-        // if on error
-        /**
-         * This code block checks the value of the 'asnNonAsnRadio' input field and shows/hides the appropriate container based on the value.
-         * If the value is 'asn' or 'nonasn', the '#asnNonAsnContainer' is shown.
-         * If the value is anything else, the '#instansiText' is shown and the '#instansiOption' is hidden.
-         */
-        var oldAsnNonAsnValue = '<?= old('asnNonAsnRadio') ?>';
-        if (oldAsnNonAsnValue === 'asn' || oldAsnNonAsnValue === 'nonasn') {
-            $('#asnNonAsnContainer').show();
-        } else {
-            $('#instansiText').show();
-            $('#instansiOption').hide();
-        }
-    </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
-    <script type="text/javascript" src="<?= base_url('assets/js/form-absensi.js') ?>"></script>
+                $('.asnNonAsnRadio').prop('checked', false);
+                $(this).prop('checked', true);
+                $('input[name="asnNonAsnRadio"]').prop('checked', false)
+                // Check the clicked radio button
+                $('#nip, #no_hp, #nama, #alamat, #asal_instansi').val('').prop('disabled', false);
+                clearSignature();
+                // Show/hide the 'instansiOption' and 'instansiText' divs based on the selected radio button
+                if ($(this).val() === 'pegawai') {
+                    $('#asnNonAsnContainer').show();
+                    $('#instansiOption').show();
+                    $('#instansiText').hide();
+                } else {
+                    $('#asnNonAsnContainer').hide();
+                    $('#instansiOption').hide();
+                    $('#instansiText').show();
+                }
+            });
+        });
+    </script>
 
     <style>
         .disabled-button {

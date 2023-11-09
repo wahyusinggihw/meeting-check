@@ -36,16 +36,9 @@ function draw(e) {
   ctx.moveTo(x, y);
 }
 
-function changeResetIcon(iconClass) {
-        const resetIcon = document.getElementById('reset-icon');
-        resetIcon.className = iconClass;
-}
-
 function clearSignature() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Menghapus tanda tangan
   document.getElementById("signatureData").value = ""; // Reset the signatureData input to an empty string
-
-  changeResetIcon('fas fa-undo');
 }
 
 function saveSignatureData() {

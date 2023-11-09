@@ -8,20 +8,20 @@
     background-attachment: fixed;
 } */
 .wrapper {
-  background-color: #ffffff;
+  background-color: #90c2f0;
   padding: 40px;
   border-radius: 35px;
   margin: 0 auto;
-  position: absolute;
+  /* position: absolute;
     bottom: -50%;
-    transform: translateX(5%);
+    transform: translateX(5%); */
 }
 .judul-form {
   -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   position: relative;
   background-color: #92caf9;
-  height: 300px;
+  height: 100px;
 }
 
 .konten .judul-form h1 {
