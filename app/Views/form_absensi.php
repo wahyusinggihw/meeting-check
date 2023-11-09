@@ -78,7 +78,7 @@
                 <!-- option -->
                 <div class="input-box" id="instansiOption">
                     <label for="asal_instansi_option">Asal Instansi</label>
-                    <select name="asal_instansi_option" id="asal_instansi_option">
+                    <select class="select-box" name="asal_instansi_option" id="asal_instansi_option">
                         <option value="">Pilih Instansi</option>
                         <option value="saab">Saab</option>
                         <option value="opel">Opel</option>
