@@ -1,4 +1,3 @@
-
 /* * {
   margin: 0;
   padding: 0;
@@ -62,31 +61,31 @@
   display: flex;
   column-gap: 15px;
 }
-.form .gender-box {
+.form .status-box {
   margin-top: 20px;
 }
-.gender-box h3 {
+.status-box h3 {
   color: #333;
   font-size: 1rem;
   font-weight: 400;
   margin-bottom: 8px;
 }
-.form :where(.gender-option, .gender) {
+.form :where(.status-option, .status) {
   display: flex;
   align-items: center;
   column-gap: 50px;
   flex-wrap: wrap;
 }
-.form .gender {
+.form .status {
   column-gap: 5px;
 }
-.gender input {
+.status input {
   accent-color: rgb(130, 106, 251);
 }
-.form :where(.gender input, .gender label) {
+.form :where(.status input, .status label) {
   cursor: pointer;
 }
-.gender label {
+.status label {
   color: #707070;
 }
 
@@ -110,7 +109,7 @@
   .form .column {
     flex-wrap: wrap;
   }
-  .form :where(.gender-option, .gender) {
+  .form :where(.status-option, .status) {
     row-gap: 15px;
   }
 }
@@ -142,6 +141,17 @@
   border-radius: 6px;
   padding: 0 15px;
 }
+
+.invalid-input {
+  border: 1px solid #dc3545;
+}
+
+.invalid-response {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
 .inputcontainer input:focus {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
@@ -217,4 +227,18 @@
   height: 200px;
   top: 0;
   left: 0;
+}
+
+.disabled-button {
+  pointer-events: none;
+  /* Prevents the anchor from being clickable */
+  opacity: 0.6;
+  /* Reduces the opacity to visually indicate it's disabled */
+}
+
+.greyed-out-form {
+  background-color: #f0f0f0;
+  /* Change the background color to grey */
+  pointer-events: none;
+  /* Prevents interactions with the form */
 }

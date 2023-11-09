@@ -11,67 +11,86 @@
         <header>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit maiores in facere voluptatibus, eaque et quaerat architecto vitae nihil dolorum.</header>
         <p>Isi sesuai dengan data diri anda</p>
         <form action="#" class="form">
-            <div class="gender-box">
+            <?= csrf_field() ?>
+
+            <div class="status-box">
                 <h3>Pilih Status</h3>
-                <div class="gender-option">
-                    <div class="gender">
-                        <input type="radio" id="check-male" name="gender" checked />
-                        <label for="check-male">Pegawai</label>
+                <div class="status-option">
+                    <div class="status">
+                        <input class="statusRadio" name="statusRadio" type="radio" id="statusRadio1" value="pegawai" />
+                        <label class="statusRadio" for="statusRadio1">Pegawai</label>
                     </div>
-                    <div class="gender">
-                        <input type="radio" id="check-female" name="gender" />
-                        <label for="check-female">Tamu</label>
+                    <div class="status">
+                        <input class="statusRadio" name="statusRadio" type="radio" id="statusRadio2" value="tamu" />
+                        <label class="statusRadio" for="statusRadio2">Tamu</label>
                     </div>
                 </div>
             </div>
-            <div class="gender-box">
+            <div class="status-box" id="asnNonAsnContainer" style="display: none;">
                 <h3>Pilih Status Pegawai</h3>
-                <div class="gender-option">
-                    <div class="gender">
-                        <input type="radio" id="check-male" name="gender" checked />
-                        <label for="check-male">ASN</label>
+                <div class="status-option">
+                    <div class="status">
+                        <input class="asnNonAsnRadio" type="radio" id="asnRadio" name="asnNonAsnRadio" value="asn" />
+                        <label for="asnRadio">ASN</label>
                     </div>
-                    <div class="gender">
-                        <input type="radio" id="check-female" name="gender" />
-                        <label for="check-female">Non-ASN</label>
+                    <div class="status">
+                        <input class="asnNonAsnRadio" type="radio" id="nonAsnRadio" name="asnNonAsnRadio" value="nonasn" />
+                        <label for="nonAsnRadio">Non-ASN</label>
                     </div>
                 </div>
             </div>
 
             <div class="inputcontainer">
-                <label>NIP</label>
+                <label style="display: none;" for="nip" class="form-label" id="label-nik">NIK</label>
+                <label style="display: none;" for="nip" class="form-label" id="label-default">NIP</label>
                 <div class="icon-container">
                     <i class="loader"></i>
                 </div>
-                <input type="text" placeholder="Masukkan NIP" required />
-            </div>
-
-            <div class="column">
-                <div class="input-box">
-                    <label>Nama Lengkap</label>
-                    <input type="text" placeholder="Masukkan Nama Lengkap" required />
+                <div class="icon-container">
+                    <i class="loader"></i>
                 </div>
-                <div class="input-box">
-                    <label>No. Handphone</label>
-                    <input type="text" placeholder="Masukkan No. Handphone" required />
+                <input class="invalid-input" type="text" placeholder="Masukkan NIP" id="nip" name="nip" required />
+                <div class="invalid-response">
+                    Lorem Ipsum
                 </div>
             </div>
 
             <div class="column">
                 <div class="input-box">
-                    <label>Alamat</label>
-                    <input type="text" placeholder="Masukkan Alamat" required />
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" placeholder="Masukkan Nama Lengkap" id="nama" name="nama" required />
                 </div>
                 <div class="input-box">
-                    <label>Asal Instansi</label>
-                    <input type="text" placeholder="Masukkan Asal Instansi" required />
+                    <label for="no_hp">No. Handphone</label>
+                    <input type="text" placeholder="Masukkan No. Handphone" id="no_hp" name="no_hp" required />
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label for="alamat">Alamat</label>
+                    <input type="text" placeholder="Masukkan Alamat" id="alamat" name="alamat" required />
+                </div>
+                <div class="input-box" id="instansiText" style="display: none;">
+                    <label for=" asal_instansi_tamu">Asal Instansi</label>
+                    <input type="text" placeholder="Masukkan Asal Instansi" id="asal_instansi_tamu" name="asal_instansi_tamu" required />
+                </div>
+                <!-- option -->
+                <div class="input-box" id="instansiOption">
+                    <label for="asal_instansi_option">Asal Instansi</label>
+                    <select name="asal_instansi_option" id="asal_instansi_option">
+                        <option value="">Pilih Instansi</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                    </select>
                 </div>
             </div>
 
             <div class="input-box">
                 <div class="signature-pad <?= validation_show_error('signatureData') ? 'is-invalid' : '' ?>">
                     <h3>Tempat Tanda Tangan</h3>
-                    <canvas id="signatureCanvas" class="signature-canvas" width="600" height="400"></canvas>
+                    <canvas id="signatureCanvas" class="signature-canvas" width="100%" height="100%"></canvas>
                     <input type="hidden" id="signatureData" name="signatureData" value="" />
                     <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger">Ulangi Tanda Tangan</a>
                 </div>
@@ -80,8 +99,9 @@
             <button>Kirim</button>
         </form>
     </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/form-absensi.js') ?>"></script>
 
 
 <?= $this->endSection() ?>
