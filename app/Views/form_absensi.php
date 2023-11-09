@@ -12,7 +12,11 @@
         <p>Isi sesuai dengan data diri anda</p>
         <form action="#" class="form">
             <?= csrf_field() ?>
-
+            <?php
+            // Capture the old value of the status radio input
+            $oldStatusValue = old('statusRadio');
+            $oldAsnNonAsnValue = old('asnNonAsnRadio');
+            ?>
             <div class="status-box">
                 <h3>Pilih Status</h3>
                 <div class="status-option">
@@ -43,16 +47,24 @@
             <div class="inputcontainer">
                 <label style="display: none;" for="nip" class="form-label" id="label-nik">NIK</label>
                 <label style="display: none;" for="nip" class="form-label" id="label-default">NIP</label>
-                <div class="icon-container">
-                    <i class="loader"></i>
-                </div>
-                <div class="icon-container">
+                <!-- 
+                    #loadingIndicator 
+                    -pada tamu
+                    akan muncul jika user mengetikkan nik
+
+                    -pada pegawai
+                    akan muncul jika user klik tombol cari
+                 -->
+
+                <div style="display: none;" id="loadingIndicator" class="icon-container">
                     <i class="loader"></i>
                 </div>
                 <input class="invalid-input" type="text" placeholder="Masukkan NIP" id="nip" name="nip" required />
                 <div class="invalid-response">
                     Lorem Ipsum
                 </div>
+                <!-- Tombol cari yang dimodifikasi menggunakan tag a untuk melakukan ajax request(isi data otomatis), karena dalam 1 form hanya bisa 1 tombol yakni tombol kirim (yang dibawah) -->
+                <a id="cariNikButton" class="cari btn btn-primary col">Cari</a>
             </div>
 
             <div class="column">
@@ -79,10 +91,11 @@
                 <div class="input-box" id="instansiOption">
                     <label for="asal_instansi_option">Asal Instansi</label>
                     <select class="select-box" name="asal_instansi_option" id="asal_instansi_option">
-                        <option value="">Pilih Instansi</option>
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opel</option>
-                        <option value="audi">Audi</option>
+                        <option value="">Pilih instansi</option>
+                        <?php foreach ($instansi->data as $i) : ?>
+                            <?php $selected = old('asal_instansi_option') == $i->ket_ukerja ? 'selected' : ''; ?>
+                            <option value="<?= $i->ket_ukerja ?>" <?= $selected ?>><?= $i->ket_ukerja ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>
