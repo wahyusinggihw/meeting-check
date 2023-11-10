@@ -62,31 +62,32 @@ body {
   display: flex;
   column-gap: 15px;
 }
-.form .gender-box {
+.form .status-box {
   margin-top: 20px;
 }
-.gender-box h3 {
+.status-box h3 {
   color: #333;
   font-size: 1rem;
   font-weight: 400;
   margin-bottom: 8px;
 }
-.form :where(.gender-option, .gender) {
+.form :where(.status-option, .status) {
   display: flex;
   align-items: center;
   column-gap: 50px;
   flex-wrap: wrap;
+  align-items: baseline;
 }
-.form .gender {
+.form .status {
   column-gap: 5px;
 }
-.gender input {
+.status input {
   accent-color: rgb(130, 106, 251);
 }
-.form :where(.gender input, .gender label) {
+.form :where(.status input, .status label) {
   cursor: pointer;
 }
-.gender label {
+.status label {
   color: #707070;
 }
 
@@ -110,7 +111,7 @@ body {
   .form .column {
     flex-wrap: wrap;
   }
-  .form :where(.gender-option, .gender) {
+  .form :where(.status-option, .status) {
     row-gap: 15px;
   }
 }
@@ -132,7 +133,6 @@ body {
   color: #333;
 }
 
-
 /* bagian tanda tangan */
 .signature-pad {
   width: 100%;
@@ -148,7 +148,7 @@ body {
 .input-box .signature-button {
   font-size: 1rem;
   font-weight: 400;
-  position:absolute;
+  position: absolute;
   right: 25px;
 }
 
@@ -168,7 +168,7 @@ body {
   color: #333;
   -webkit-box-align: center;
   align-items: center;
-  background: #ffffff;
+  background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 6px;
   display: -webkit-box;
@@ -198,6 +198,11 @@ body {
   font-size: 23px;
   color: #333;
 }
+
+#loadingIndicator {
+  font-size: 23px;
+  color: #333;
+}
 .search a {
   cursor: pointer;
   padding: 0 0.25em;
@@ -219,4 +224,18 @@ body {
   color: #dc3545;
   font-size: 0.8rem;
   margin-top: 5px;
+}
+
+.disabled-button {
+  pointer-events: none;
+  /* Prevents the anchor from being clickable */
+  opacity: 0.6;
+  /* Reduces the opacity to visually indicate it's disabled */
+}
+
+.greyed-out-form {
+  background-color: #f0f0f0;
+  /* Change the background color to grey */
+  pointer-events: none;
+  /* Prevents interactions with the form */
 }

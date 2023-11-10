@@ -32,19 +32,19 @@ setInputFilter(document.getElementById("nip"), "Harus berupa angka");
 $("#label-default").show();
 $("#cariNikButton").hide();
 $(
-  "#nip, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+  "#search, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
 ).addClass("greyed-out-form");
 
 // handle on validation
 if ($('input[name="statusRadio"]:checked').val() === "tamu") {
   $(
-    "#nip, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu"
+    "#search, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu"
   ).removeClass("greyed-out-form");
   $("#signatureCanvas").removeClass("greyed-out-form");
 }
 
 if ($('input[name="statusRadio"]:checked').val() === "pegawai") {
-  $("#nip").addClass("greyed-out-form");
+  $("#search").addClass("greyed-out-form");
   $("#cariNikButton").show();
   $(
     "#no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu"
@@ -130,7 +130,8 @@ $(".statusRadio").on("click", function () {
     $("#label-default").show();
     $("#label-nik").hide();
     $("#cariNikButton").show();
-    $("#loadingIndicator").hide();
+    $("#cariNikButton i").addClass("fa fa-search");
+    // $("#loadingIndicator").hide();
     $("#nip").off("input"); // Remove the input event for "pegawai"
     $("#nip").attr("maxlength", "18");
     // Handle pegawai
@@ -145,7 +146,8 @@ $(".statusRadio").on("click", function () {
     });
 
     $("#cariNikButton").on("click", function () {
-      $("#loadingIndicator").show();
+      $("#cariNikButton i").removeClass("fa fa-search");
+      $("#cariNikButton i").addClass("fa fa-circle-o-notch fa-spin");
       var nikValue = $("#nip").val();
       var statusValue = $('input[name="statusRadio"]:checked').val();
       var statusValuePegawai = $('input[name="asnNonAsnRadio"]:checked').val();
@@ -190,7 +192,9 @@ $(".statusRadio").on("click", function () {
               $("#no_hp, #nama, #alamat, #asal_instansi_option")
                 .val("")
                 .prop("readonly", false);
-              $("#loadingIndicator").hide();
+              // $("#loadingIndicator").hide();
+              $("#cariNikButton i").addClass("fa fa-search");
+              $("#cariNikButton i").removeClass("fa fa-circle-o-notch fa-spin");
               // Show an alert using SweetAlert when NIK is not found
               Swal.fire({
                 icon: "error",
@@ -198,7 +202,9 @@ $(".statusRadio").on("click", function () {
                 text: "NIP tidak ditemukan. Cek kembali NIP anda dan coba lagi.",
               });
             } else if (data.status === true) {
-              $("#loadingIndicator").hide();
+              // $("#loadingIndicator").hide();
+              $("#cariNikButton i").addClass("fa fa-search");
+              $("#cariNikButton i").removeClass("fa fa-circle-o-notch fa-spin");
               Swal.fire({
                 icon: "success",
                 title: "Success!",
@@ -225,7 +231,9 @@ $(".statusRadio").on("click", function () {
           },
         });
       } else {
-        $("#loadingIndicator").hide();
+        $("#cariNikButton i").removeClass("fa fa-circle-o-notch fa-spin");
+        $("#cariNikButton i").addClass("fa fa-search");
+        // $("#loadingIndicator").hide();
         // Show an alert using SweetAlert when NIK is empty
         Swal.fire({
           icon: "error",
@@ -240,12 +248,13 @@ $(".statusRadio").on("click", function () {
 // Trigger the change event on 'nip' input when a radio button is clicked
 $(".statusRadio").on("click", function () {
   $("#nip").val("").prop("readonly", false);
+  $("#search").addClass("greyed-out-form");
   var isTamu = $('input[name="statusRadio"]:checked').val();
   if (isTamu === "tamu") {
     $(
       "#no_hp, #nama, #alamat, #asal_instansi_tamu, #signatureCanvas"
     ).removeClass("greyed-out-form");
-    $("#nip").removeClass("greyed-out-form");
+    $("#search").removeClass("greyed-out-form");
     $("#cariNikButton").removeClass("disabled-button");
   } else {
     $("#cariNikButton").addClass("disabled-button");
@@ -256,7 +265,7 @@ $(".statusRadio").on("click", function () {
   $('input[name="asnNonAsnRadio"]').on("change", function () {
     // Check if one of the radio buttons is selected
     if ($('input[name="asnNonAsnRadio"]:checked').length > 0) {
-      $("#nip").removeClass("greyed-out-form");
+      $("#search").removeClass("greyed-out-form");
       // $("#cariNikButton").removeClass("disabled-button");
 
       // REMOVE VALUE FORMS ON SWITCHING RADIO BUTTONS ASN/NON ASN
