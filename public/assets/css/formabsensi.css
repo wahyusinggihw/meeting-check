@@ -3,8 +3,8 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-} */
-/* body {
+}
+body {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -46,46 +46,47 @@
   position: relative;
   height: 50px;
   width: 100%;
-  /* outline: none; */
+  outline: none;
   font-size: 1rem;
-  color: #707070;
+  color: #333;
   margin-top: 8px;
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 0 15px;
 }
 .input-box input:focus {
-  box-shadow: 0 1px 0 rgba(222, 0, 0, 0.1);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #007bff;
 }
 .form .column {
   display: flex;
   column-gap: 15px;
 }
-.form .status-box {
+.form .gender-box {
   margin-top: 20px;
 }
-.status-box h3 {
+.gender-box h3 {
   color: #333;
   font-size: 1rem;
   font-weight: 400;
   margin-bottom: 8px;
 }
-.form :where(.status-option, .status) {
+.form :where(.gender-option, .gender) {
   display: flex;
   align-items: center;
   column-gap: 50px;
   flex-wrap: wrap;
 }
-.form .status {
+.form .gender {
   column-gap: 5px;
 }
-.status input {
+.gender input {
   accent-color: rgb(130, 106, 251);
 }
-.form :where(.status input, .status label) {
+.form :where(.gender input, .gender label) {
   cursor: pointer;
 }
-.status label {
+.gender label {
   color: #707070;
 }
 
@@ -109,7 +110,7 @@
   .form .column {
     flex-wrap: wrap;
   }
-  .form :where(.status-option, .status) {
+  .form :where(.gender-option, .gender) {
     row-gap: 15px;
   }
 }
@@ -130,77 +131,7 @@
 .inputcontainer label {
   color: #333;
 }
-.form :where(.inputcontainer input, .select-box) {
-  height: 50px;
-  width: 100%;
-  font-size: 1rem;
-  /* outline: none; */
-  color: #707070;
-  margin-top: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0 15px;
-}
 
-.invalid-input {
-  border: 1px solid #dc3545;
-}
-
-.invalid-response {
-  color: #dc3545;
-  font-size: 0.8rem;
-  margin-top: 5px;
-}
-
-.inputcontainer input:focus {
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-}
-
-.icon-container {
-  position: absolute;
-  right: 10px;
-  top: calc(50% + 10px);
-}
-.loader {
-  position: relative;
-  height: 20px;
-  width: 20px;
-  display: inline-block;
-  animation: around 5.4s infinite;
-}
-
-@keyframes around {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.loader::after,
-.loader::before {
-  content: "";
-  background: white;
-  position: absolute;
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  border-width: 2px;
-  border-color: #333 #333 transparent transparent;
-  border-style: solid;
-  border-radius: 20px;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  animation: around 0.7s ease-in-out infinite;
-}
-
-.loader::after {
-  animation: around 0.7s ease-in-out 0.1s infinite;
-  background: transparent;
-}
-/* bagian loader */
 
 /* bagian tanda tangan */
 .signature-pad {
@@ -217,6 +148,8 @@
 .input-box .signature-button {
   font-size: 1rem;
   font-weight: 400;
+  position:absolute;
+  right: 25px;
 }
 
 .signature-canvas {
@@ -229,16 +162,61 @@
   left: 0;
 }
 
-.disabled-button {
-  pointer-events: none;
-  /* Prevents the anchor from being clickable */
-  opacity: 0.6;
-  /* Reduces the opacity to visually indicate it's disabled */
+/* car yang bari */
+.search {
+  height: 50px;
+  color: #333;
+  -webkit-box-align: center;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  margin: 0.5em 0;
+  padding: 0.5em 0.5em 0.5em 1em;
+  -webkit-transition: border-color 0.3s ease; /* Adjust the duration here */
+  transition: border-color 0.3s ease; /* Adjust the duration here */
+  width: 100%;
 }
 
-.greyed-out-form {
-  background-color: #f0f0f0;
-  /* Change the background color to grey */
-  pointer-events: none;
-  /* Prevents interactions with the form */
+.search a,
+.search input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  outline: 0;
+}
+
+#cariNikButton i {
+  font-size: 23px;
+  color: #333;
+}
+.search a {
+  cursor: pointer;
+  padding: 0 0.25em;
+}
+.search input {
+  -webkit-box-flex: 1;
+  flex: 1;
+  /* font-weight: 500; */
+  font-size: 1rem;
+}
+
+/* tambahan invalid */
+.invalid-input {
+  border: 1px solid #dc3545;
+  /* border-color: 1px solid #dc3545; */
+}
+
+.invalid-response {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 5px;
 }

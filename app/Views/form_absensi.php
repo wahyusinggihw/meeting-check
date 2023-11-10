@@ -44,6 +44,7 @@
                 </div>
             </div>
 
+
             <div class="inputcontainer">
                 <label style="display: none;" for="nip" class="form-label" id="label-nik">NIK</label>
                 <label style="display: none;" for="nip" class="form-label" id="label-default">NIP</label>
@@ -59,12 +60,12 @@
                 <div style="display: none;" id="loadingIndicator" class="icon-container">
                     <i class="loader"></i>
                 </div>
-                <input class="invalid-input" type="text" placeholder="Masukkan NIP" id="nip" name="nip" required />
+                <input class="invalid-input" type="text" placeholder="Masukkan NIP" id="" name="nip" required />
+                <a id="cariNikButton" class="cari btn btn-primary col">Cari</a>
                 <div class="invalid-response">
                     Lorem Ipsum
                 </div>
                 <!-- Tombol cari yang dimodifikasi menggunakan tag a untuk melakukan ajax request(isi data otomatis), karena dalam 1 form hanya bisa 1 tombol yakni tombol kirim (yang dibawah) -->
-                <a id="cariNikButton" class="cari btn btn-primary col">Cari</a>
             </div>
 
             <div class="column">
