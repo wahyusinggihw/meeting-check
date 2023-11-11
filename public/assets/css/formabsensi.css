@@ -82,7 +82,7 @@ body {
   column-gap: 5px;
 }
 .status input {
-  accent-color: rgb(130, 106, 251);
+  accent-color: #0d6efd;
 }
 .form :where(.status input, .status label) {
   cursor: pointer;
@@ -93,6 +93,7 @@ body {
 
 .form button {
   height: 55px;
+  border-radius: 5px;
   width: 100%;
   color: #fff;
   font-size: 1rem;
@@ -101,10 +102,10 @@ body {
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: rgb(130, 106, 251);
+  background: #0d6efd;
 }
 .form button:hover {
-  background: rgb(88, 56, 250);
+  background: #0b5ed7;
 }
 /*Responsive*/
 @media screen and (max-width: 500px) {
@@ -196,12 +197,14 @@ body {
 
 #cariNikButton i {
   font-size: 23px;
-  color: #333;
+  /* color: #333; */
+  color: #0d6efd;
 }
 
 #loadingIndicator {
   font-size: 23px;
-  color: #333;
+  /* color: #333; */
+  color: #0d6efd;
 }
 .search a {
   cursor: pointer;
