@@ -55,6 +55,12 @@ function saveSignature() {
     const formData = new FormData();
     formData.append("signatureData", signatureData);
 
+    // Add CSRF token to the form data
+    const csrfToken = document
+      .querySelector('meta[name="csrf-token"]')
+      .getAttribute("content");
+    formData.append("_token", csrfToken);
+
     fetch("/api/save-signature", {
       method: "POST",
       body: formData,
