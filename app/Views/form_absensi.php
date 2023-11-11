@@ -66,7 +66,7 @@
                 <label style="display: none;" for="nip" class="form-label" id="label-nik">NIK</label>
                 <label style="display: none;" for="nip" class="form-label" id="label-default">NIP</label>
                 <div class="search <?= validation_show_error('nip') ? 'invalid-input' : '' ?>" id="search">
-                    <input value="<?= old('nip') ?>" type="text" placeholder="Masukkan NIP" id="nip" name="nip" />
+                    <input value="<?= old('nip') ?>" type="text" placeholder="Masukkan NIP" id="nip" name="nip" inputmode="numeric" />
                     <a style="display: none;" class="cari" id="cariNikButton"><i class="fa fa-search"></i></a>
                     <i style="display: none;" id="loadingIndicator" class="fa fa-circle-o-notch fa-spin"></i>
                 </div>
@@ -125,11 +125,11 @@
             </div>
 
             <div class="input-box">
-                <div class="signature-pad">
+                <div id="signature-pad" class="signature-pad">
                     <h3>Tempat Tanda Tangan</h3>
-                    <canvas id="signatureCanvas" class="signature-canvas <?= validation_show_error('signatureData') ? 'invalid-input' : '' ?>" width="600" height="400"></canvas>
+                    <canvas id="signatureCanvas" class="signature-canvas <?= validation_show_error('signatureData') ? 'invalid-input' : '' ?>"></canvas>
                     <input type="hidden" id="signatureData" name="signatureData" value="" />
-                    <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-secondary text-white"><i class="fa fa-repeat"></i> Ulangi</a>
+                    <a id="clearButton" class="signature-button btn btn-sm btn-secondary text-white"><i class="fa fa-repeat"></i> Ulangi</a>
                 </div>
                 <div class="invalid-response"><?= validation_show_error('signatureData') ?></div>
             </div>
@@ -149,9 +149,10 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/form-absensi.js') ?>"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script src="<?= base_url('assets/js/signature.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/form-absensi.js') ?>"></script>
 <script>
     function validateRecaptcha() {
         // Use the grecaptcha object to check if the user has checked the reCAPTCHA.
