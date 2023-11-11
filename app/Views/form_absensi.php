@@ -68,7 +68,7 @@
                 <div class="search <?= validation_show_error('nip') ? 'invalid-input' : '' ?>" id="search">
                     <input value="<?= old('nip') ?>" type="text" placeholder="Masukkan NIP" id="nip" name="nip" />
                     <a style="display: none;" class="cari" id="cariNikButton"><i class="fa fa-search"></i></a>
-                    <i style="display: none" id="loadingIndicator" class="fa fa-circle-o-notch fa-spin"></i>
+                    <i style="display: none;" id="loadingIndicator" class="fa fa-circle-o-notch fa-spin"></i>
                 </div>
                 <div class="invalid-response">
                     <?= validation_show_error('nip') ?>
@@ -129,7 +129,7 @@
                     <h3>Tempat Tanda Tangan</h3>
                     <canvas id="signatureCanvas" class="signature-canvas <?= validation_show_error('signatureData') ? 'invalid-input' : '' ?>" width="600" height="400"></canvas>
                     <input type="hidden" id="signatureData" name="signatureData" value="" />
-                    <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-danger"><i class="fa fa-repeat"></i> Ulangi</a>
+                    <a type="button" onclick="clearSignature()" class="signature-button btn btn-sm btn-secondary text-white"><i class="fa fa-repeat"></i> Ulangi</a>
                 </div>
                 <div class="invalid-response"><?= validation_show_error('signatureData') ?></div>
             </div>
