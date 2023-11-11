@@ -90,6 +90,8 @@ class AgendaRapat extends BaseController
             'id_admin' => session()->get('id_admin'), // 'id_admin' => '1
             'id_instansi' => session()->get('id_instansi'),
             'nama_instansi' => session()->get('nama_instansi'),
+            'id_bidang' => session()->get('id_bidang'),
+            'nama_bidang' => session()->get('nama_bidang'),
             'kode_rapat' => $kodeRapat,
             'agenda_rapat' => $this->request->getVar('agenda_rapat'),
             'tempat' => $this->request->getVar('tempat'),

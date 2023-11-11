@@ -22,6 +22,8 @@ class AgendaRapatModel extends Model
         'role',
         'id_instansi',
         'nama_instansi',
+        'id_bidang',
+        'nama_bidang',
         'agenda_rapat',
         'kode_rapat',
         'tempat',

@@ -77,7 +77,6 @@ class DaftarHadirController extends BaseController
         $rawData = [
             'agendaRapat' => $agendaRapat,
             'daftarHadir' => $daftarHadir,
-            'bidang' => session()->get('nama_bidang'),
         ];
 
         $pdf = new TCPDF('P', PDF_UNIT, 'A4', true, 'UTF-8', false);

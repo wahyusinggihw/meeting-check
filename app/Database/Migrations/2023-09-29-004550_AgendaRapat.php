@@ -29,6 +29,14 @@ class AgendaRapat extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'id_bidang' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
+            'nama_bidang' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'kode_rapat' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,

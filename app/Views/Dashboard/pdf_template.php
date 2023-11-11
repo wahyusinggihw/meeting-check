@@ -76,7 +76,7 @@
         <tr>
             <td class="column-label">Bidang</td>
             <td class="column-divider">:</td>
-            <td><?= $bidang ?></td>
+            <td><?= $agendaRapat['nama_bidang'] ?></td>
         </tr>
         <tr>
             <td class="column-label">Tanggal</td>
@@ -96,16 +96,14 @@
             <th><strong>NIP/NIK</strong></th>
             <th><strong>Nama</strong></th>
             <th><strong>Asal Instansi</strong></th>
-            <th><strong>Tanggal</strong></th>
-            <th><strong>Jam</strong></th>
+            <th><strong>Tanggal/Jam Absen</strong></th>
         </tr>
         <?php foreach ($daftarHadir as $item) : ?>
             <tr>
                 <td><?= $item['NIK'] ?></td>
                 <td><?= $item['nama'] ?></td>
                 <td><?= $item['asal_instansi'] ?></td>
-                <td><?= date('Y-m-d', strtotime($item['created_at'])) ?></td>
-                <td><?= date('H:i', strtotime($item['created_at'])) ?></td>
+                <td><?= date('Y-m-d', strtotime($item['created_at'])) . '/' . date('H:i', strtotime($item['created_at'])) ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
