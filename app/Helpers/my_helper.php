@@ -136,3 +136,12 @@ function image_to_base64($path)
     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     return $base64;
 }
+
+function elipsis($str, $length = 80)
+{
+    if (strlen(strip_tags($str)) > $length) {
+        return substr(strip_tags($str), 0, $length) . '...';
+    } else {
+        return strip_tags($str);
+    }
+}

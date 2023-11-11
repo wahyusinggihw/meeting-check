@@ -100,7 +100,7 @@ class AdminController extends BaseController
                 'nama_instansi' => $nama_instansi,
                 'nama' => $this->request->getVar('nama'),
                 'username' => $this->request->getVar('username'),
-                'avatar' => 'default.jpg',
+                'avatar' => 'default.png',
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                 'created_at' => date('Y-m-d H:i:s'),
             ];
@@ -123,7 +123,7 @@ class AdminController extends BaseController
                 'nama_bidang' => $nama_bidang,
                 'nama' => $this->request->getVar('nama'),
                 'username' => $this->request->getVar('username'),
-                'avatar' => 'default.jpg',
+                'avatar' => 'default.png',
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                 'created_at' => date('Y-m-d H:i:s'),
             ];

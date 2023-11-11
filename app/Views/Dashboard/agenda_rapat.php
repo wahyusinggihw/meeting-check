@@ -40,7 +40,7 @@
                                 <td><?= $item['admin_nama_bidang'] ?></td>
                             <?php endif; ?>
                             <td><?= $item['agenda_rapat'] ?></td>
-                            <td><?= $item['deskripsi'] ?></td>
+                            <td><?= elipsis($item['deskripsi']) ?></td>
                             <td><?= $item['tanggal'] . '/ ' . $item['jam'] ?></td>
                             <td><span class="badge <?= $item['status'] == 'selesai' ? 'bg-danger' : 'bg-success' ?>"><?= $item['status'] ?></span></td>
                             <td>

@@ -7,8 +7,8 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <?php if (session()->get('avatar') == 'default.jpg') : ?>
-                    <img src="<?= base_url('/uploads/avatars/default.jpg') ?>" class="img-circle elevation-2" alt="User Image">
+                <?php if (session()->get('avatar') == 'default.png') : ?>
+                    <img src="<?= base_url('/uploads/avatars/default.png') ?>" class="img-circle elevation-2" alt="User Image">
                 <?php else : ?>
                     <img src="<?= base_url('/uploads/avatars/' . session()->get('avatar')) ?>" class="img-circle elevation-2" alt="User Image">
                 <?php endif; ?>
