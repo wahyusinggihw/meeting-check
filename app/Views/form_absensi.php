@@ -129,7 +129,7 @@
                     <h3>Tempat Tanda Tangan</h3>
                     <canvas id="signatureCanvas" class="signature-canvas <?= validation_show_error('signatureData') ? 'invalid-input' : '' ?>"></canvas>
                     <input type="hidden" id="signatureData" name="signatureData" value="" />
-                    <a id="clearButton" class="signature-button btn btn-sm btn-secondary text-white"><i class="fa fa-repeat"></i> Ulangi</a>
+                    <a id="clearButton" data-action="clear" class="signature-button btn btn-sm btn-secondary text-white"><i class="fa fa-repeat"></i> Ulangi</a>
                 </div>
                 <div class="invalid-response"><?= validation_show_error('signatureData') ?></div>
             </div>

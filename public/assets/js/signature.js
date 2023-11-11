@@ -20,7 +20,6 @@ function resizeCanvas() {
 window.onresize = resizeCanvas;
 resizeCanvas();
 
-const clearButton = document.getElementById("clearButton");
 signaturePad.addEventListener(
   "endStroke",
   () => {
@@ -32,7 +31,39 @@ signaturePad.addEventListener(
   }
 );
 
-clearButton.addEventListener("click", clearSignature);
+const clearButton = wrapper.querySelector("[data-action=clear]");
+clearButton.addEventListener("click", () => {
+  console.log("clear");
+  signaturePad.clear();
+  document.getElementById("signatureData").value = "";
+});
+
+// Add touch events for mobile devices
+canvas.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  const touch = e.touches[0];
+  const mouseEvent = new MouseEvent("mousedown", {
+    clientX: touch.clientX,
+    clientY: touch.clientY,
+  });
+  canvas.dispatchEvent(mouseEvent);
+});
+
+// canvas.addEventListener("touchmove", (e) => {
+//   e.preventDefault();
+//   const touch = e.touches[0];
+//   const mouseEvent = new MouseEvent("mousemove", {
+//     clientX: touch.clientX,
+//     clientY: touch.clientY,
+//   });
+//   canvas.dispatchEvent(mouseEvent);
+// });
+
+canvas.addEventListener("touchend", (e) => {
+  e.preventDefault();
+  const mouseEvent = new MouseEvent("mouseup", {});
+  canvas.dispatchEvent(mouseEvent);
+});
 
 function clearSignature() {
   signaturePad.clear();
