@@ -31,62 +31,54 @@ $(document).ready(function () {
   // INITIAL
   $("#label-default").show();
   $("#cariNikButton").hide();
+  // $(
+  //   "#search, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+  // ).addClass("greyed-out-form");
+  signaturePad.off();
   $(
-    "#search, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
-  ).addClass("greyed-out-form");
+    "#search, #nip, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+  ).prop("disabled", true);
+  $("#search, #signatureCanvas").addClass("greyed-out-form");
 
   // handle on error validation
   if ($('input[name="statusRadio"]:checked').val() === "tamu") {
+    signaturePad.on();
     $(
-      "#no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu"
+      "#search, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu"
     ).removeClass("greyed-out-form");
+    $(
+      "#search, #nip, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+    ).prop("disabled", false);
+    $(
+      "#no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+    ).prop("readonly", false);
     $("#signatureCanvas").removeClass("greyed-out-form");
   }
 
   if ($('input[name="statusRadio"]:checked').val() === "pegawai") {
-    $("#search").removeClass("greyed-out-form");
-    $("#cariNikButton").show();
+    $("#nip").attr("maxlength", "18");
+    signaturePad.on();
     $(
       "#no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu"
     ).addClass("greyed-out-form");
+    $("#search").removeClass("greyed-out-form");
+    $("#nip").prop("disabled", false);
+    $("#cariNikButton").show();
+    $(
+      "#search, #nip, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+    ).prop("disabled", false);
+    $(
+      "#no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu"
+    ).prop("readonly", true);
+    $("#asal_instansi_option").prop("readonly", true);
     $("#cariNikButton").addClass("disabled-button");
+
     $("#signatureCanvas").removeClass("greyed-out-form");
   }
   // end handle on validation
 
   $(".statusRadio").on("click", function () {
     var statusValue = $('input[name="statusRadio"]:checked').val();
-
-    // Handle tamu
-    if (statusValue === "tamu") {
-      $("#label-default").hide();
-      $("#label-nik").show();
-      // hide cari
-      $("#nip").attr("maxlength", "16");
-      $("#cariNikButton").hide();
-      var timeoutId; // Store a timeout ID for delayed NIP input
-
-      $("#nip").on("input", function () {
-        var nikValue = $(this).val();
-        clearTimeout(timeoutId); // Clear previous timeout
-
-        if (nikValue.length === 0) {
-          // Handle empty NIP input (clear other fields and hide loading)
-          $("#no_hp, #nama, #alamat, #asal_instansi_tamu")
-            .val("")
-            .prop("readonly", false);
-          $("#loadingIndicator").hide();
-        } else {
-          // Show loading indicator while user is still typing
-          $("#loadingIndicator").show();
-
-          // Set a timeout before making the AJAX request
-          timeoutId = setTimeout(function () {
-            tamuAjax(nikValue);
-          }, 1000); // Adjust the delay (in milliseconds) as needed
-        }
-      });
-    }
 
     // Handle pegawai
     if (statusValue === "pegawai") {
@@ -159,29 +151,87 @@ $(document).ready(function () {
           }
         });
     }
+
+    // Handle tamu
+    if (statusValue === "tamu") {
+      $(
+        "#search, #nip, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+      ).prop("disabled", false);
+      $(
+        "#search, #nip, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+      ).prop("readonly", false);
+      $("#search, #signatureCanvas").addClass("greyed-out-form");
+      $("#signatureCanvas").removeClass("greyed-out-form");
+      signaturePad.on();
+      $("#label-default").hide();
+      $("#label-nik").show();
+      // hide cari
+      $("#nip").attr("maxlength", "16");
+      $("#cariNikButton").hide();
+      var timeoutId; // Store a timeout ID for delayed NIP input
+
+      $("#nip").on("input", function () {
+        var nikValue = $(this).val();
+        clearTimeout(timeoutId); // Clear previous timeout
+
+        if (nikValue.length === 0) {
+          // Handle empty NIP input (clear other fields and hide loading)
+          $("#no_hp, #nama, #alamat, #asal_instansi_tamu")
+            .val("")
+            .prop("readonly", false);
+          $("#loadingIndicator").hide();
+        } else {
+          // Show loading indicator while user is still typing
+          $("#loadingIndicator").show();
+
+          // Set a timeout before making the AJAX request
+          timeoutId = setTimeout(function () {
+            tamuAjax(nikValue);
+          }, 1000); // Adjust the delay (in milliseconds) as needed
+        }
+      });
+    }
   });
 
   // Trigger the change event on 'nip' input when a radio button is clicked
   $(".statusRadio").on("click", function () {
-    $("#nip").val("").prop("readonly", false);
+    $("#nip, #no_hp, #nama, #alamat, #asal_instansi_tamu")
+      .val("")
+      .prop("readonly", false);
     $("#search").addClass("greyed-out-form");
     var isTamu = $('input[name="statusRadio"]:checked').val();
     if (isTamu === "tamu") {
       $(
         "#no_hp, #nama, #alamat, #asal_instansi_tamu, #signatureCanvas"
       ).removeClass("greyed-out-form");
+      $("#no_hp, #nama, #alamat, #asal_instansi_tamu, #signatureCanvas").prop(
+        "disabled",
+        false
+      );
       $("#search").removeClass("greyed-out-form");
       $("#cariNikButton").removeClass("disabled-button");
+      $("#signatureCanvas").removeClass("greyed-out-form");
     } else {
+      $(
+        "#search, #nip, #no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu, #signatureCanvas"
+      ).prop("disabled", false);
       $("#cariNikButton").addClass("disabled-button");
       $(
         "#no_hp, #nama, #alamat, #asal_instansi_option, #signatureCanvas"
       ).addClass("greyed-out-form");
+      $("#no_hp, #nama, #alamat, #asal_instansi_option, #signatureCanvas").prop(
+        "readonly",
+        true
+      );
     }
     $('input[name="asnNonAsnRadio"]').on("change", function () {
+      // $("#cariNikButton").removeClass("disabled-button");
       // Check if one of the radio buttons is selected
       if ($('input[name="asnNonAsnRadio"]:checked').length > 0) {
         $("#search").removeClass("greyed-out-form");
+        // search read only false
+        $("#nip").prop("disabled", false);
+        $("#nip").prop("readonly", false);
       }
     });
 
@@ -189,9 +239,7 @@ $(document).ready(function () {
     $(this).prop("checked", true);
     $('input[name="asnNonAsnRadio"]').prop("checked", false);
     // Check the clicked radio button
-    $("#nip, #no_hp, #nama, #alamat, #asal_instansi_tamu")
-      .val("")
-      .prop("disabled", false);
+
     clearSignature();
     // Show/hide the 'instansiOption' and 'instansiText' divs based on the selected radio button
     if ($(this).val() === "pegawai") {
@@ -285,6 +333,7 @@ function pegawaiAjax(apiEndpoint, nikValue) {
           timer: 4000, // Auto-close the toast after 2 seconds (adjust the duration as needed)
         });
         $("#signatureCanvas").removeClass("greyed-out-form");
+        signaturePad.on();
         console.log(data);
         // $("#nip").val(data.data.nip).prop("readonly", false);
         $("#no_hp").val(data.data.no_hp).prop("readonly", true);
@@ -297,7 +346,53 @@ function pegawaiAjax(apiEndpoint, nikValue) {
     },
     error: function (jqXHR, textStatus, errorThrown) {
       // Handle errors if the AJAX request fails
-      console.log("AJAX Error: " + textStatus);
+      console.log("AJAX Error: " + textStatus, errorThrown, jqXHR);
     },
   });
 }
+
+function validateRecaptcha() {
+  // Use the grecaptcha object to check if the user has checked the reCAPTCHA.
+  var recaptchaResponse = grecaptcha.getResponse();
+  var recaptchaErrorElement = document.getElementById("recaptcha-error");
+
+  if (recaptchaResponse.length === 0) {
+    // User hasn't checked the reCAPTCHA, display an error message.
+    recaptchaErrorElement.textContent = "Mohon centang reCAPTCHA.";
+    return false;
+  }
+
+  // User has checked the reCAPTCHA, clear the error message and continue with form submission.
+  recaptchaErrorElement.textContent = "";
+  return true;
+}
+
+// custom invalid effect input nip
+// function load() {
+//     $("#cariNikButton i").removeClass("fa fa-search");
+//     $("#cariNikButton i").addClass("fa fa-circle-o-notch fa-spin");
+
+//     setTimeout(function() {
+//         $("#cariNikButton i").removeClass("fa fa-circle-o-notch fa-spin");
+//         $("#cariNikButton i").addClass("fa fa-search");
+//     });
+// }
+
+// $(document).ready(function() {
+//     $("#cariNikButton").on("click", load);
+
+//     $("#input").on("keydown", function() {
+//         if (event.keyCode == 13) load();
+//     });
+// });
+
+var searchElement = document.getElementsByClassName("search")[0];
+searchElement.addEventListener("focusin", function () {
+  this.style.borderColor = "#007bff";
+  this.style.boxShadow = "0 0 0 0.2rem rgba(0,123,255,.25)";
+});
+
+searchElement.addEventListener("focusout", function () {
+  this.style.borderColor = "#ddd";
+  this.style.boxShadow = "none";
+});

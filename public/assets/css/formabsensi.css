@@ -238,7 +238,7 @@ body {
 }
 
 .greyed-out-form {
-  background-color: #f0f0f0;
+  background-color: #efefef4d;
   /* Change the background color to grey */
   pointer-events: none;
   /* Prevents interactions with the form */

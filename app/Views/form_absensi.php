@@ -126,7 +126,7 @@
 
             <div class="input-box">
                 <div id="signature-pad" class="signature-pad">
-                    <h3>Tempat Tanda Tangan</h3>
+                    <label>Tempat Tanda Tangan</label>
                     <canvas id="signatureCanvas" class="signature-canvas <?= validation_show_error('signatureData') ? 'invalid-input' : '' ?>"></canvas>
                     <input type="hidden" id="signatureData" name="signatureData" value="" />
                     <a id="clearButton" data-action="clear" class="signature-button btn btn-sm btn-secondary text-white"><i class="fa fa-repeat"></i> Ulangi</a>
@@ -142,7 +142,7 @@
                 </div>
             </div>
             <div class="invalid-response" id="recaptcha-error"></div>
-            <button onclick="saveSignature()" type="submit">Kirim</button>
+            <button type="submit">Kirim</button>
         </form>
     </section>
 </body>
@@ -151,25 +151,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-<script src="<?= base_url('assets/js/signature.js') ?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/form-absensi.js') ?>"></script>
-<script>
-    function validateRecaptcha() {
-        // Use the grecaptcha object to check if the user has checked the reCAPTCHA.
-        var recaptchaResponse = grecaptcha.getResponse();
-        var recaptchaErrorElement = document.getElementById("recaptcha-error");
-
-        if (recaptchaResponse.length === 0) {
-            // User hasn't checked the reCAPTCHA, display an error message.
-            recaptchaErrorElement.textContent = "Mohon centang reCAPTCHA.";
-            return false;
-        }
-
-        // User has checked the reCAPTCHA, clear the error message and continue with form submission.
-        recaptchaErrorElement.textContent = "";
-        return true;
-    }
-</script>
+<script type="text/javascript" src="<?= base_url('assets/js/signature.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/form-absensi-2.js') ?>"></script>
 <script>
     // if on error
     /**
@@ -184,36 +167,6 @@
         $('#instansiText').show();
         $('#instansiOption').hide();
     }
-</script>
-<script>
-    // function load() {
-    //     $("#cariNikButton i").removeClass("fa fa-search");
-    //     $("#cariNikButton i").addClass("fa fa-circle-o-notch fa-spin");
-
-    //     setTimeout(function() {
-    //         $("#cariNikButton i").removeClass("fa fa-circle-o-notch fa-spin");
-    //         $("#cariNikButton i").addClass("fa fa-search");
-    //     });
-    // }
-
-    // $(document).ready(function() {
-    //     $("#cariNikButton").on("click", load);
-
-    //     $("#input").on("keydown", function() {
-    //         if (event.keyCode == 13) load();
-    //     });
-    // });
-
-    var searchElement = document.getElementsByClassName("search")[0];
-    searchElement.addEventListener("focusin", function() {
-        this.style.borderColor = "#007bff";
-        this.style.boxShadow = "0 0 0 0.2rem rgba(0,123,255,.25)";
-    });
-
-    searchElement.addEventListener("focusout", function() {
-        this.style.borderColor = "#ddd";
-        this.style.boxShadow = "none";
-    });
 </script>
 
 <?= $this->endSection() ?>
