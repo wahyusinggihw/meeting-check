@@ -31,12 +31,15 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="new-password">Password Baru:</label>
-                                <div id="message">
-                                    <h3>Password must contain the following:</h3>
-                                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-                                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-                                    <p id="number" class="invalid">A <b>number</b></p>
-                                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                                <div id="requirements-list">
+                                    <ul id="requirements-1">
+                                        <li><i id="capital" class="far fa-times-circle"></i>Huruf Kapital</li>
+                                        <li><i id="number" class="far fa-times-circle"></i>Angka</li>
+                                    </ul>
+                                    <ul id="requirements-2">
+                                        <li><i id="letter" class="far fa-times-circle"></i>Huruf kecil</li>
+                                        <li><i id="length" class="far fa-times-circle"></i>Berisi 8 karakter</li>
+                                    </ul>
                                 </div>
                                 <input class="form-control <?= validation_show_error('new-password') ? 'is-invalid' : '' ?>" value="<?= old('new-password') ?>" id="new-password" name="new-password" placeholder="Password baru" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                                 <div class="invalid-feedback">
@@ -60,68 +63,7 @@
             </div>
         </div>
     </div>
-    <style>
-        /* Style all input fields */
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-top: 6px;
-            margin-bottom: 16px;
-        }
-
-        /* Style the submit button */
-        input[type=submit] {
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        /* Style the container for inputs */
-        .container {
-            background-color: #f1f1f1;
-            padding: 20px;
-        }
-
-        /* The message box is shown when the user clicks on the password field */
-        #message {
-            display: none;
-            background: #f1f1f1;
-            color: #000;
-            position: relative;
-            padding: 20px;
-            margin-top: 10px;
-        }
-
-        #message p {
-            padding: 10px 35px;
-            font-size: 18px;
-        }
-
-        /* Add a green text color and a checkmark when the requirements are right */
-        .valid {
-            color: green;
-        }
-
-        .valid:before {
-            position: relative;
-            left: -35px;
-            content: "&#10004;";
-        }
-
-        /* Add a red text color and an "x" icon when the requirements are wrong */
-        .invalid {
-            color: red;
-        }
-
-        .invalid:before {
-            position: relative;
-            left: -35px;
-            content: "&#10006;";
-        }
-    </style>
-    <script>
+    <!-- <script>
         var myInput = document.getElementById("new-password");
         var letter = document.getElementById("letter");
         var capital = document.getElementById("capital");
@@ -179,7 +121,7 @@
                 length.classList.add("invalid");
             }
         }
-    </script>
+    </script> -->
 </body>
 
 <?= $this->endSection() ?>
