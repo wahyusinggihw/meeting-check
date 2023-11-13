@@ -224,6 +224,10 @@ body {
   /* border-color: 1px solid #dc3545; */
 }
 
+.invalid-input-radio {
+  color: #dc3545 !important;
+}
+
 .invalid-response {
   color: #dc3545;
   font-size: 0.8rem;

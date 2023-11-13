@@ -26,6 +26,7 @@
             // Capture the old value of the status radio input
             $oldStatusValue = old('statusRadio');
             $oldAsnNonAsnValue = old('asnNonAsnRadio');
+            // d(validation_list_errors());
             ?>
             <div class="status-box">
                 <h3>Pilih Status</h3>
@@ -39,6 +40,9 @@
                         <label class="statusRadio" for="statusRadio2">Tamu</label>
                     </div>
                 </div>
+                <div class="invalid-response">
+                    <?= validation_show_error('statusRadio') ?>
+                </div>
             </div>
             <div class="status-box" id="asnNonAsnContainer" style="display: none;">
                 <h3>Pilih Status Pegawai</h3>
@@ -51,6 +55,9 @@
                         <input class="asnNonAsnRadio" type="radio" id="nonAsnRadio" name="asnNonAsnRadio" value="nonasn" <?php if ($oldAsnNonAsnValue === 'nonasn') echo 'checked'; ?> />
                         <label for="nonAsnRadio">Non-ASN</label>
                     </div>
+                </div>
+                <div class="invalid-response">
+                    <?= validation_show_error('asnNonAsnRadio') ?>
                 </div>
             </div>
 

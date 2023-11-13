@@ -26,7 +26,7 @@ $(document).ready(function () {
   if (oldStatus === "pegawai") {
     onErrorHndlePegawaiStatus();
   } else if (oldStatus === "tamu") {
-    handleTamuStatus();
+    onErrorHndleTamuStatus();
   } else {
     // Initialization
     initializePage();
@@ -54,23 +54,33 @@ function initializePage() {
   );
   $("#cariNikButton").addClass("disabled-button");
   $("#label-default").show();
-  $("#cariNikButton").hide();
-  $("#label-default").show();
+  $("#cariNikButton").show();
+  $("#instansiOption").show();
+  $("#instansiText").hide();
   signaturePad.off();
   // disableFormFields();
 }
 
 function onErrorHndlePegawaiStatus() {
   signaturePad.on();
+  $("#asnNonAsnContainer").show();
   $("#cariNikButton").addClass("disabled-button");
   $("#cariNikButton").show();
   $("#label-default").show();
+  $("#instansiOption").show();
+  $("#instansiText").hide();
   $("#signatureCanvas").removeClass("greyed-out-form");
   $("#nip").attr("maxlength", "18");
   readonlyFormFields(
     "#no_hp, #nama, #alamat, #asal_instansi_option, #asal_instansi_tamu"
   );
   handlePegawaiNipInput();
+}
+
+function onErrorHndleTamuStatus() {
+  // $("#instansiOption").hide();
+  // $("#instansiText").show();
+  handleTamuNipInput();
 }
 
 // Function to handle status radio button click
@@ -185,6 +195,7 @@ function handlePegawaiNipInput() {
 function handleTamuNipInput() {
   var timeoutId;
   $("#nip").on("input", function () {
+    $("#nip").attr("maxlength", "16");
     var nikValue = $(this).val();
     clearTimeout(timeoutId);
 

@@ -259,12 +259,6 @@ class RapatController extends BaseController
                     'required' => 'Alamat harus diisi'
                 ]
             ],
-            'asal_instansi_option' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih instansi terlebih dahulu'
-                ]
-            ],
             'signatureData' => [
                 'rules' => 'required',
                 'errors' => [
@@ -272,28 +266,59 @@ class RapatController extends BaseController
                 ]
             ],
         ];
+        $validation = \Config\Services::validation();
+        $validationResult = $this->validate($rules);
 
-        $status = $this->request->getPost('statusRadio');
-        if ($status == 'pegawai') {
-            // For "pegawai" status, use the "asal_instansi_option" field.
+        $status = $this->request->getVar('statusRadio');
+
+        if (!$this->request->getVar('statusRadio')) {
+            $validation->setError('statusRadio', 'Wajib dipilih');
             $rules['asal_instansi_option'] = [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Pilih instansi terlebih dahulu',
                 ],
             ];
+            $validationResult = false;
         }
+
+
+        if ($status == 'pegawai') {
+            if (!$this->request->getVar('asnNonAsnRadio')) {
+                $validation->setError('asnNonAsnRadio', 'Wajib dipilih');
+                $validationResult = false;
+            }
+            $rules['asal_instansi_option'] = [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih instansi terlebih dahulu',
+                ],
+            ];
+            // Apply additional rules for "pegawai" status
+            $rules['nip'] = [
+                'rules' => 'required|numeric|min_length[15]|max_length[18]',
+                'errors' => [
+                    'required' => 'Data harus diisi',
+                    'numeric' => 'Data harus berupa angka'
+                ]
+            ];
+            // Add any other rules specific to "pegawai" status
+        }
+
         if ($status == 'tamu') {
             unset($rules['asal_instansi_option']);
-            // For "tamu" status, use the "asal_instansi_text" field.
+            // Apply additional rules for "tamu" status
             $rules['asal_instansi_tamu'] = [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Asal Instansi harus diisi',
                 ],
             ];
+            // Add any other rules specific to "tamu" status
         }
 
-        return $this->validate($rules);
+        $validationResult = $validation->setRules($rules)->run();
+
+        return $validationResult;
     }
 }
