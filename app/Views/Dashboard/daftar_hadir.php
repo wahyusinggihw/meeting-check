@@ -17,7 +17,7 @@
         <!-- <a href="#" download class="btn btn-primary mb-2">Download File</a> -->
         <a href="<?= base_url('dashboard/cetak-daftar-hadir/' . $id_agenda) ?>" class="btn btn-secondary" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cetak Agenda</a>
         <!-- foreach php -->
-        <div class="table-container my-3">
+        <div class="table-container my-3" style="background-color:white; padding: 20px;">
             <table id="example" class="order-column" style="width:100%">
                 <thead>
                     <tr>
@@ -67,6 +67,7 @@
     <script>
         let startNumber = 1;
         new DataTable('#example', {
+            responsive: true,
             "columnDefs": [{
                 "targets": [4], // Index of the column to disable sorting (zero-based index)
                 "orderable": false,

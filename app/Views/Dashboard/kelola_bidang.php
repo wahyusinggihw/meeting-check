@@ -17,7 +17,7 @@
         <a href="<?= base_url('dashboard/kelola-bidang/tambah-bidang') ?>" class="btn btn-primary mb-2">Tambah Bidang</a>
     <?php endif; ?>
 
-    <div class="table-container my-3">
+    <div class="table-container my-3" style="background-color:white; padding: 20px;">
         <table id="example" class="row-border" style="width:100%">
             <thead>
                 <tr>
@@ -57,6 +57,7 @@
     <script>
         let startNumber = 1;
         new DataTable('#example', {
+            responsive: true,
             "columnDefs": [{
                 "targets": [4], // Index of the column to disable sorting (zero-based index)
                 "orderable": false,
