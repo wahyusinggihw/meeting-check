@@ -69,15 +69,15 @@
       <img class="animation__shake" src="<?= base_url('assets/img/logo.png') ?>" alt="DaftarHadir" width="100">
     </div> -->
 
-    <?= $this->include('dashboard/Layout/navbar'); ?>
-    <?= $this->include('dashboard/Layout/sidebar'); ?>
+    <?= $this->include('dashboard/layout/navbar'); ?>
+    <?= $this->include('dashboard/layout/sidebar'); ?>
 
 
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-      <?= $this->include('Dashboard/Layout/header'); ?>
+      <?= $this->include('dashboard/layout/header'); ?>
 
       <!-- Main content -->
       <section class="content">
@@ -90,7 +90,7 @@
       </section>
       <!-- /.content -->
     </div>
-    <?= $this->include('Dashboard/Layout/footer'); ?>
+    <?= $this->include('dashboard/layout/footer'); ?>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

@@ -101,17 +101,3 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('kelola-bidang/edit-bidang/(:segment)/update', 'Dashboard\BidangInstansiController::update/$1');
     $routes->post('kelola-bidang/delete-bidang/(:segment)', 'Dashboard\BidangInstansiController::delete/$1');
 });
-
-$routes->get('/home/login', 'Auth::login');
-$routes->get('/home/peran', 'RapatController::peran');
-$routes->get('/formpegawai', 'RapatController::formPegawai');
-$routes->get('/formtamu', 'RapatController::formTamu');
-
-$routes->get('/berhasil', 'RapatController::berhasil');
-$routes->get('/gagal', 'RapatController::gagal');
-$routes->get('dashboard/agenda-kosong', 'Dashboard::agendaKosong');
-$routes->get('/informasi-rapat', 'Auth::informasiRapat');
-
-// Route View Tester
-$routes->get('/tester', 'Auth::tester');
-$routes->get('/tester', 'Auth::tester');
