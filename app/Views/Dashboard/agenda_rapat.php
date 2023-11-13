@@ -71,7 +71,7 @@
             <div class="data-kosong">
                 Data Agenda Kosong
             </div>
-            <a href="/dashboard/agenda-rapat/tambah-agenda" id="tambah-agenda" class="btn btn-primary mb-2">Tambah Agenda</a>
+            <a href="<?= base_url('/dashboard/agenda-rapat/tambah-agenda') ?>" id="tambah-agenda" class="btn btn-primary mb-2">Tambah Agenda</a>
         </div>
     <?php endif; ?>
 
@@ -115,12 +115,13 @@
                 confirmButtonText: 'Hapus',
                 cancelButtonText: 'Batal',
             }).then((result) => {
+                base_url = '<?= base_url() ?>';
                 if (result.isConfirmed) {
                     // Trigger the form submission for POST request
                     console.log(id);
                     const form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = '/dashboard/delete-agenda/' + id;
+                    form.action = base_url + '/dashboard/delete-agenda/' + id;
                     document.body.appendChild(form);
                     form.submit();
                 }

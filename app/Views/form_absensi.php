@@ -167,6 +167,8 @@
         $('#instansiText').show();
         $('#instansiOption').hide();
     }
+
+    const base_url = '<?= base_url() ?>';
 </script>
 
 <?= $this->endSection() ?>

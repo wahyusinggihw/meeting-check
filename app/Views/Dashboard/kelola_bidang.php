@@ -79,12 +79,13 @@
                 confirmButtonText: 'Hapus',
                 cancelButtonText: 'Batal',
             }).then((result) => {
+                base_url = '<?= base_url() ?>';
                 if (result.isConfirmed) {
                     // Trigger the form submission for POST request
                     console.log(id);
                     const form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = '/dashboard/kelola-bidang/delete-bidang/' + id;
+                    form.action = base_url + '/dashboard/kelola-bidang/delete-bidang/' + id;
                     document.body.appendChild(form);
                     form.submit();
                 }

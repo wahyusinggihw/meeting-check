@@ -102,10 +102,11 @@
                 confirmButtonText: 'Logout',
                 cancelButtonText: 'Batal',
             }).then((result) => {
+                base_url = '<?= base_url() ?>';
                 if (result.isConfirmed) {
                     const form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = '/auth/logout';
+                    form.action = base_url + '/auth/logout';
                     document.body.appendChild(form);
                     form.submit();
                 }

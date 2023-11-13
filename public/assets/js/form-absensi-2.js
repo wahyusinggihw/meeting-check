@@ -301,7 +301,7 @@ function restoreSavedValues(key) {
 
 function tamuAjax(nikValue) {
   $.ajax({
-    url: "/api/peserta/" + nikValue, // Replace with your API endpoint
+    url: base_url + "/api/peserta/" + nikValue, // Replace with your API endpoint
     type: "GET",
     success: function (data) {
       console.log(data);
@@ -345,7 +345,7 @@ function tamuAjax(nikValue) {
 function pegawaiAjax(apiEndpoint, nikValue) {
   var initialClasses = "fa fa-search";
   $.ajax({
-    url: apiEndpoint + nikValue, // Replace with your API endpoint
+    url: base_url + apiEndpoint + nikValue, // Replace with your API endpoint
     type: "GET",
     success: function (data) {
       console.log(data.status);

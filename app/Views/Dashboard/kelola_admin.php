@@ -92,9 +92,10 @@
                 if (result.isConfirmed) {
                     console.log(id);
                     // Trigger the form submission for POST request
+                    base_url = '<?= base_url() ?>';
                     const form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = '/dashboard/kelola-admin/delete-admin/' + id;
+                    form.action = base_url + '/dashboard/kelola-admin/delete-admin/' + id;
                     document.body.appendChild(form);
                     form.submit();
                 }
