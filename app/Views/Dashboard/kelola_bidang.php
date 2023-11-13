@@ -94,9 +94,9 @@
         }
 
         // Attach the delete confirmation modal to each delete button
-        document.querySelectorAll('.delete-button').forEach((button) => {
-            const itemId = button.getAttribute('data-id');
-            button.addEventListener('click', () => showDeleteConfirmation(itemId));
+        $(document).on('click', '.delete-button', function() {
+            const itemId = $(this).data('id');
+            showDeleteConfirmation(itemId);
         });
     </script>
 </body>

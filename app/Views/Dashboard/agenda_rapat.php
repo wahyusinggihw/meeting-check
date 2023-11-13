@@ -50,7 +50,7 @@
                                         <a href="<?= base_url('dashboard/agenda-rapat/view-agenda/' . $item['slug']) ?>" class="btn btn-info"><i class="fa-solid fa-eye" style="color: white;"></i></a>
                                         <?php if ($item['status'] != 'selesai') : ?>
                                             <a href="<?= base_url('dashboard/agenda-rapat/edit-agenda/' . $item['slug']) ?>" class="btn btn-warning mx-2  <?= $item['editable'] == 'false' ? 'disabled' : '' ?>"><i class="fa-solid fa-pen" style="color: white;"></i></a>
-                                            <button href="#" class="btn btn-danger delete-button" data-id="<?= $item['id_agenda'] ?>"><i class="fa-solid fa-trash"></i></button>
+                                            <button class="btn btn-danger delete-button" data-id="<?= $item['id_agenda'] ?>"><i class="fa-solid fa-trash"></i></button>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -130,9 +130,9 @@
         }
 
         // Attach the delete confirmation modal to each delete button
-        document.querySelectorAll('.delete-button').forEach((button) => {
-            const itemId = button.getAttribute('data-id');
-            button.addEventListener('click', () => showDeleteConfirmation(itemId));
+        $(document).on('click', '.delete-button', function() {
+            const itemId = $(this).data('id');
+            showDeleteConfirmation(itemId);
         });
     </script>
 </body>

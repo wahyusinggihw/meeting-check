@@ -45,7 +45,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-lg-12 btn-group">
-                                        <button href="#" class="btn btn-danger delete-button" data-id="<?= $item['id_daftar_hadir'] ?>"><i class=" fa-solid fa-trash"></i></button>
+                                        <button class="btn btn-danger delete-button" data-id="<?= $item['id_daftar_hadir'] ?>"><i class=" fa-solid fa-trash"></i></button>
                                     </div>
                                 </div>
                             </td>
@@ -89,11 +89,12 @@
                 confirmButtonText: 'Hapus',
                 cancelButtonText: 'Batal',
             }).then((result) => {
+                base_url = '<?= base_url() ?>';
                 if (result.isConfirmed) {
                     // Trigger the form submission for POST request
                     const form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = '/dashboard/agenda-rapat/daftar-hadir/delete-peserta/' + id;
+                    form.action = base_url + '/dashboard/agenda-rapat/daftar-hadir/delete-peserta/' + id;
                     document.body.appendChild(form);
                     form.submit();
                 }
@@ -101,9 +102,14 @@
         }
 
         // Attach the delete confirmation modal to each delete button
-        document.querySelectorAll('.delete-button').forEach((button) => {
-            const itemId = button.getAttribute('data-id');
-            button.addEventListener('click', () => showDeleteConfirmation(itemId));
+        // document.querySelectorAll('.delete-button').forEach((button) => {
+        //     const itemId = button.getAttribute('data-id');
+        //     button.addEventListener('click', () => showDeleteConfirmation(itemId));
+        // });
+
+        $(document).on('click', '.delete-button', function() {
+            const itemId = $(this).data('id');
+            showDeleteConfirmation(itemId);
         });
     </script>
 </body>
@@ -112,15 +118,18 @@
     document.addEventListener("DOMContentLoaded", function() {
         const showSweetAlertButtons = document.querySelectorAll(".show-sweet-alert");
 
-        showSweetAlertButtons.forEach(button => {
-            button.addEventListener("click", function() {
-                const ttd = this.getAttribute("data-ttd");
+        const showSignature = function(ttd) {
+            Swal.fire({
+                title: 'Tanda tangan',
+                html: `<img src="${ttd}" width="300" height="200" alt="Image">`,
+                confirmButtonText: 'Close',
+            });
+        };
 
-                Swal.fire({
-                    title: 'Tanda tangan',
-                    html: `<img src="${ttd}" width="300" height="200" alt="Image">`,
-                    confirmButtonText: 'Close',
-                });
+        showSweetAlertButtons.forEach(button => {
+            $(document).on('click', '.show-sweet-alert', function() {
+                const ttd = this.getAttribute("data-ttd");
+                showSignature(ttd);
             });
         });
     });
