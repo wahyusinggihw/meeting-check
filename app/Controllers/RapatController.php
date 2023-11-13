@@ -33,21 +33,19 @@ class RapatController extends BaseController
         return view('berhasil', $data);
     }
 
-    public function formAbsensi()
+    public function formAbsensi($kodeRapat)
     {
         helper('my_helper');
         $instansi = $this->pesertaRapat->getInstansi();
         $instansiDecode = json_decode($instansi);
 
-        $idAgenda = $this->session->get('id_agenda');
+        $kodeRapat = $this->session->get('id_agenda');
 
         $url = current_url();
         // cek apakah form diakses dari landing page atau dari scan qr code
-        if ($url == site_url('submit-kode/form-absensi')) {
-            $idAgenda = $this->session->get('id_agenda');
-        } elseif (str_starts_with($url, site_url('submit-kode/form-absensi/qr/'))) {
-            $idAgenda = $this->request->getUri()->getSegment(4);
-            $rapat = $this->agendaRapat->select()->where('id_agenda', $idAgenda)->first();
+        if (str_starts_with($url, site_url('/rapat/daftar-hadir/'))) {
+            $kodeRapat = $this->request->getUri()->getSegment(3);
+            $rapat = $this->agendaRapat->getAgendaRapatByKode($kodeRapat);
             $expiredTime = expiredTime($rapat['tanggal'], $rapat['jam']);
             // dd($expiredTime);
             if ($expiredTime) {
@@ -58,7 +56,7 @@ class RapatController extends BaseController
             return redirect()->to('/');
         }
 
-        $rapat = $this->agendaRapat->getAgendaRapatByIdAgenda($idAgenda);
+        $rapat = $this->agendaRapat->getAgendaRapatByKode($kodeRapat);
         session()->setFlashdata('kode_valid', $rapat['kode_rapat']);
         $this->session->set('id_agenda', $rapat['id_agenda']);
         $data = [

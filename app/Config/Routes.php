@@ -15,7 +15,7 @@ $routes->group('auth', function ($routes) {
 // SLnding page
 $routes->get('/', 'Home::index');
 $routes->post('/submit-kode/form-absensi', 'Home::submitKode');
-$routes->get('/submit-kode/form-absensi', 'RapatController::formAbsensi', ['filter' => 'cekkode']);
+$routes->get('/rapat/daftar-hadir/(:segment)', 'RapatController::formAbsensi/$1');
 $routes->post('/submit-kode/form-absensi/store', 'RapatController::absenStore');
 
 // Route untuk akses form absensi menggunakan link qr code
@@ -40,8 +40,15 @@ $routes->group('api', ['filter' => 'basicAuth'], function ($routes) {
     $routes->post('form-absensi-store', 'Api\RapatControllerAPI::absenStore');
 });
 
-// validasi
+// berhasil page
 $routes->get('berhasil', 'RapatController::berhasil', ['filter' => 'cekkode']);
+
+/**
+ * Route for displaying information about a meeting.
+ * 
+ * $1 The segment containing the meeting ID.
+ */
+$routes->get('/rapat/informasi/(:segment)', 'Dashboard\AgendaRapat::informasiRapat/$1');
 
 // Dashboard
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
@@ -60,7 +67,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('agenda-rapat/tambah-agenda/store', 'Dashboard\AgendaRapat::store');
 
     $routes->get('agenda-rapat/view-agenda/(:segment)', 'Dashboard\AgendaRapat::view/$1');
-    $routes->get('informasi-rapat/(:segment)', 'Dashboard\AgendaRapat::informasiRapat/$1');
+
 
     $routes->get('agenda-rapat/edit-agenda/(:segment)', 'Dashboard\AgendaRapat::edit/$1');
     $routes->post('agenda-rapat/edit-agenda/(:segment)/update', 'Dashboard\AgendaRapat::update/$1');

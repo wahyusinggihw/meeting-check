@@ -34,10 +34,10 @@
         </div>
 
         <div class="form-input">
-          <input type="text" class="form-control <?= ($validation->hasError('inputAlphanumeric')) ? 'is-invalid' : '' ?>" id="inputAlphanumeric" name="inputAlphanumeric" placeholder="XXX-XXX">
+          <input type="text" class="form-control <?= (validation_show_error('id_rapat')) ? 'is-invalid' : '' ?>" id="id_rapat" name="id_rapat" placeholder="XXX-XXX">
           <button>Masuk</button>
           <div class="invalid-feedback">
-            <?= $validation->getError('inputAlphanumeric') ?>
+            <?= validation_show_error('id_rapat') ?>
           </div>
         </div>
       </div>

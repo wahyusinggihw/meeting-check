@@ -14,7 +14,7 @@ class Home extends BaseController
         $this->pesertaRapat = new PesertaRapatModel();
     }
 
-    public function index(): string
+    public function index()
     {
         $data = [
             'title' => 'Home',
@@ -26,30 +26,26 @@ class Home extends BaseController
 
     public function submitKode()
     {
-        // session()->destroy();
         helper('my_helper');
 
-        $dateNow = date('Y-m-d');
-        $timeNow = date('H:i');
-
         $agendaRapat = new AgendaRapatModel();
-        $kode = $this->request->getVar('inputAlphanumeric');
+        $kode = $this->request->getVar('id_rapat');
         $instansi = $this->pesertaRapat->getInstansi();
         $instansiDecode = json_decode($instansi);
-
-        if (!$this->validate([
-            'inputAlphanumeric' => [
+        $rule = [
+            'id_rapat' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kode Rapat Harus Diisi',
                 ]
             ]
-        ])) {
+        ];
 
-            return view('home', ['validation' => $this->validator,]);
+        if (!$this->validate($rule)) {
+            return redirect()->to('/')->withInput();
         }
 
-        $rapat = $agendaRapat->select()->where('kode_rapat', trim($kode))->first();
+        $rapat = $agendaRapat->getAgendaRapatByKode(trim($kode));
         if ($rapat == null) {
             return redirect()->to('/')->with('error', 'Kode Rapat Tidak Ditemukan');
         } else {
@@ -69,12 +65,9 @@ class Home extends BaseController
 
             ];
 
-            // session();
             session()->setFlashdata('kode_valid', $kode);
             $this->session->set('id_agenda', $rapat['id_agenda']);
-            // session()->set($data);
+            return redirect()->to('/rapat/daftar-hadir/' . $kode)->with('data', $data);
         }
-        // return redirect('submit-kode/form-absensi');
-        return view('form_absensi', $data);
     }
 }

@@ -70,7 +70,7 @@
                                 <!-- cara agar code "a" menjadi column di dalam row -->
                                 <div class="col">
                                     <div class="row mb-4">
-                                        <a href="<?= base_url('dashboard/informasi-rapat/' . $data['id_agenda']) ?>" class="btn btn-primary" target="_blank">Informasi rapat</a>
+                                        <a href="<?= base_url('rapat/informasi/' . $data['kode_rapat']) ?>" class="btn btn-primary" target="_blank">Informasi rapat</a>
                                     </div>
                                 </div>
                             </div>

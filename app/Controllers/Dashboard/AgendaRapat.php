@@ -41,9 +41,9 @@ class AgendaRapat extends BaseController
         return view('dashboard/view_agenda', $data);
     }
 
-    public function informasiRapat($idAgenda)
+    public function informasiRapat($kodeRapat)
     {
-        $agendaRapat  = $this->agendaRapat->getAgendaRapatByIdAgenda($idAgenda);
+        $agendaRapat  = $this->agendaRapat->getAgendaRapatByKode($kodeRapat);
         // dd($agendaRapat);
         $data = [
             'title' => 'Informasi Rapat',
@@ -98,7 +98,7 @@ class AgendaRapat extends BaseController
             'tanggal' => $this->request->getVar('tanggal'),
             'jam' => $this->request->getVar('jam'),
             'deskripsi' => $this->request->getVar('deskripsi'),
-            'link_rapat' => base_url() . 'submit-kode/form-absensi/qr/' . $uuid,
+            'link_rapat' => base_url() . 'rapat/daftar-hadir/' . $kodeRapat,
             'created_at' => date('Y-m-d H:i:s'),
             // 'status' => 'tersedia'
         ]);
