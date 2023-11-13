@@ -15,7 +15,7 @@
 
     <?php if ($agenda != null) : ?>
         <a href="<?= base_url('/dashboard/agenda-rapat/tambah-agenda') ?>" class="btn btn-primary mb-2">Tambah Agenda</a>
-        <div class="table-container my-3">
+        <div class="table-container my-3" style="background-color:white; padding: 20px;">
             <table id="example" class="row-border" style="width:100%">
                 <thead>
                     <tr>
@@ -79,6 +79,7 @@
         let startNumber = 1;
         let targets = <?php echo (session()->get('role') == 'admin') ? JSON_ENCODE([7]) : JSON_ENCODE([6]); ?>;
         let table = new DataTable('#example', {
+            responsive: true,
             "columnDefs": [{
                 "targets": targets, // Index of the column to disable sorting (zero-based index)
                 "orderable": false,

@@ -5,7 +5,7 @@
 <?php if (session()->get('role') == 'superadmin') : ?>
 
     <div>
-        <div class="table-container my-3">
+        <div class="table-container my-3" style="background-color:white; padding: 20px;">
             <table id="example" class="row-border" style="width:100%">
                 <thead>
                     <tr>
@@ -99,6 +99,7 @@
 
         let startNumber = 1;
         new DataTable('#example', {
+            responsive: true,
             "columnDefs": [{
                 "targets": [null], // Index of the column to disable sorting (zero-based index)
                 "orderable": false,

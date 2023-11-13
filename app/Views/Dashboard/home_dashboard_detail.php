@@ -4,7 +4,7 @@
 
 <?php if (session()->get('role') == 'superadmin') : ?>
     <div class="row">
-        <div class="col-lg-3 col-6">
+        <div class="col-sm-4">
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
@@ -18,7 +18,7 @@
                 <a href="#" data-info="" class="small-box-footer info">Filter <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
+        <div class="col-sm-4">
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
@@ -32,8 +32,7 @@
                 <a href="#" data-info="tersedia" class="small-box-footer info">Filter <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-6">
-
+        <div class="col-sm-4">
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h3><?= $totalAgendaSelesai ?></h3>
@@ -46,10 +45,11 @@
                 <a href="#" data-info="selesai" class="small-box-footer info">Filter <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
+
     </div>
 
     <div>
-        <div class="table-container my-3">
+        <div class="table-container my-3" style="background-color:white; padding: 20px;">
             <table id="example" class="row-border" style="width:100%">
                 <thead>
                     <tr>
@@ -102,6 +102,7 @@
 
     let startNumber = 1;
     let table = new DataTable('#example', {
+        responsive: true,
         "columnDefs": [{
             "targets": [null], // Index of the column to disable sorting (zero-based index)
             "orderable": false,
